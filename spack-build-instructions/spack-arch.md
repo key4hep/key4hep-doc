@@ -5,7 +5,7 @@
 To build the Key4HEP software stack, it is advised to use the following system packages:
 
 ```
-gcc cmake make root xrootd delphes hepmc pythia8 python cern-vdt boost libpng xz
+gcc cmake make root xrootd delphes hepmc pythia8 python cern-vdt boost libpng xz intel-tbb
 ```
 
 This results in the following `packages.yaml` file for spack:
