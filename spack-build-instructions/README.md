@@ -1,19 +1,43 @@
 # Using Spack to build Key4HEP software
 
-The [spack](https://spack.io) package manager can be used to build the Key4HEP software stack.
+The [spack](https://spack.io) package manager can be  used to build the Key4HEP software packages.
+This is part of a software R&D program, so some parts are still somewhat experimental
+
+A central installation is provided on cvmfs, and can be used without spack by sourcing:
+
+```
+source /cvmfs/sw.hsf.org/key4hep/views/key4hep-stack-0.1/linux-centos7-broadwell/gcc-8.3.0/setup.sh
+```
+
+Using spack can give a more fine-grained control over loaded packages.
 
 Spack can be installed by simply cloning it with git. The spack repository for key4hep packages is installed the same way:
 
 ```bash
 git clone https://github.com/spack/spack.git
+source spack/share/spack/setup-env.sh
 git clone https://github.com/key4hep/k4-spack.git
-alias spack='python $PWD/spack/bin/spack'
 
 spack repo add k4-spack
 
+```
+
+The cvmfs installation can now be used as an "upstream installation", by adding the following configuration:
+
+```
+cat <<EOT >> $HOME/.spack/linux/upstreams.yaml
+upstreams:
+  spack-instance-1:
+      install_tree: /cvmfs/sw.hsf.org/spackages/
+EOT
+
+```
+
+Alternatively, the full stack can be installed locally by simply doing:
+
+```
 # install the meta-package for the key4hep-stack
 spack install key4hep-stack
-
 ```
 
 ### Using a central buildcache
