@@ -2,14 +2,14 @@
 # Spack Usage and Further Technical Topics
 
 This page collects a few known workarounds for issues and areas of development in spack.
-Check also the issues in [k4-spack](https://github.com/key4hep/k4-spack) for up to date information.
+Check also the issues in [k4-spack](https://github.com/key4hep/k4-spack/issues) for up to date information.
 
 ## Concretizing before Installation
 
 Spack often needs to be forced to use existing packages as dependencies when installing a new package.
 The best way to make sure that spack does not unnecessarily re-install is to 'preview' what will be installed with the command:
 
-```
+```bash
 ~$ spack spec -I whizard
 Input spec
 --------------------------------
@@ -62,7 +62,7 @@ The 'concretizer' is one of the areas of development in spack.
 ## System Dependencies
 
 Although spack can use externally installed packages (and even automatically find them), this is strongly discouraged.
-This is because the dependency resolution will not work as intended,
+This is because the dependency resolution will not work as intended.
 
 
 ## Target Architectures

@@ -5,7 +5,7 @@ This is part of a software R&D program, so some parts are still somewhat experim
 
 A central installation is provided on cvmfs, and can be used without spack by sourcing:
 
-```
+```bash
 source /cvmfs/sw.hsf.org/key4hep/views/key4hep-stack-0.1/linux-centos7-broadwell/gcc-8.3.0/setup.sh
 ```
 
@@ -24,7 +24,7 @@ spack repo add k4-spack
 
 The cvmfs installation can now be used as an "upstream installation", by adding the following configuration:
 
-```
+```bash
 cat <<EOT >> $HOME/.spack/linux/upstreams.yaml
 upstreams:
   spack-instance-1:
@@ -35,7 +35,7 @@ EOT
 
 Alternatively, the full stack can be installed locally by simply doing:
 
-```
+```bash
 # install the meta-package for the key4hep-stack
 spack install key4hep-stack
 ```
@@ -88,4 +88,3 @@ For read-only access on machines without `eos`, these files are served also over
 ```
 spack mirror add key4hep-web http://key4hep.web.cern.ch/key4hep/spack_build/mirror/spackages/
 ```
-
