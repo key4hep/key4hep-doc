@@ -10,7 +10,11 @@ Spack often needs to be forced to use existing packages as dependencies when ins
 The best way to make sure that spack does not unnecessarily re-install is to 'preview' what will be installed with the command:
 
 ```bash
-~$ spack spec -I whizard
+spack spec -I whizard
+```
+
+```bash
+
 Input spec
 --------------------------------
  -   whizard
@@ -32,15 +36,21 @@ Concretized
 ```
 In this example, you could check for an existing ocaml installation and use it via its hash:
 
+```bash
+
+spack find -l ocaml
 ```
 
-~$ spack find -l ocaml
+```bash
+
 ==> 2 installed packages
 -- linux-centos7-broadwell / gcc@8.3.0 --------------------------
 2aolgjw ocaml@4.08.1  ycqhz3l ocaml@4.10.0
-~$
+```
 
-~$ spack spec -I whizard ^/ycqhz3l
+```bash
+
+spack spec -I whizard ^/ycqhz3l
 
 --------------------------------
  -   whizard@3.0.0_alpha%gcc@9.3.0~fastjet+hepmc~latex~lcio~lhapdf~openmp+pythia8 arch=linux-ubuntu20.04-broadwell
@@ -132,4 +142,4 @@ Nightly builds can still be done with spack
 
 ## Spack-Installed LCG releases
 
-A spack install of the whole lcg release is work in progress, see https://gitlab.cern.ch/sft/sft-spack-repo.
+A spack  install of the whole lcg release is work in progress, see https://gitlab.cern.ch/sft/sft-spack-repo.
