@@ -66,7 +66,7 @@ spack spec -I whizard ^/ycqhz3l
 
 ```
 
-The 'concretizer' is one of the areas of development in spack.
+This 'concretizer' is one of the areas of development in spack, so the commands might frequently change or the behaviour differ from what is described here.
 
 
 ## System Dependencies
