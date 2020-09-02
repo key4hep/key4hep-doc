@@ -149,7 +149,7 @@ in `$HOME/.spack/linux/packages.yaml`
 ## Bundle Packages and Environments
 
 Right now, key4hep is installed via a `BundlePackage`, that depends on all other relevant packages.
-An alternative would be to use [spack environments](https://spack-tutorial.readthedocs.io/en/latest/tutorial_environments.html#creating-and-activating-environments\). This alternative is still under investigation.
+An alternative would be to use [spack environments](https://spack-tutorial.readthedocs.io/en/latest/tutorial_environments.html#creating-and-activating-environments). This alternative is still under investigation.
 
 
 ## Setting Up Runtime Environments 
