@@ -2,9 +2,9 @@
 # Here it is useful to allow the configuration to be maintained elsewhere
 from starterkit_ci.sphinx_config import *  # NOQA
 
-project = 'FCC Starterkit Lessons'
-copyright = '2020, FCC Starterkit'
-author = 'FCC Starterkit'
+project = 'Key4HEP'
+copyright = '2020, Key4HEP'
+author = 'Key4HEP'
 html_logo = 'starterkit.png'
 
 exclude_patterns += [
@@ -14,8 +14,8 @@ exclude_patterns += [
 
 html_context = {
     'display_github': True,
-    'github_user': 'HEP-FCC',
-    'github_repo': 'fcc-tutorials',
+    'github_user': 'key4hep',
+    'github_repo': 'key4hep-doc',
     'github_version': 'master',
     'conf_py_path': '/',
 }
@@ -30,11 +30,11 @@ html_static_path += [
 ]
 
 linkcheck_ignore += [
-    # FIXME: The URLs have changed
-    r'https://research\.cs\.wisc\.edu/htcondor/.*',
 ]
+
 
 def starterkit_ci_setup(app):
     app.add_stylesheet('starterkit.css')
+
 
 setup.extra_setup_funcs += [starterkit_ci_setup]
