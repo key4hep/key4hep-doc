@@ -49,8 +49,15 @@ Now we need to modify the ``clicReconstruction.py`` file to point to the ``ttbar
 Config.OverlayFalse`` and ``# Config.TrackingConformal`` should be enabled by uncommenting their line in the ``algList``
 at the end of the file.
 
-```
-sed ...
+```bash
+sed -i 's;read.Files = \["/run/simulation/with/ctest/to/create/a/file.slcio"\];read.Files = \["ttbar.slcio"\];' clicReconstruction.py
+sed -i 's;EvtMax   = 10,;EvtMax   = 3,;' clicReconstruction.py
+sed -i 's;"MaxRecordNumber", "10", END_TAG,;"MaxRecordNumber", "3", END_TAG,;' clicReconstruction.py
+sed -i 's;# algList.append(OverlayFalse);algList.append(OverlayFalse);' clicReconstruction.py
+sed -i 's;# algList.append(MyConformalTracking);algList.append(MyConformalTracking);' clicReconstruction.py
+sed -i 's;# algList.append(ClonesAndSplitTracksFinder);algList.append(ClonesAndSplitTracksFinder);' clicReconstruction.py
+sed -i 's;# algList.append(RenameCollection);algList.append(RenameCollection);' clicReconstruction.py
+sed -i 's;"DD4hepXMLFile", "/cvmfs/clicdp.cern.ch/iLCSoft/builds/nightly/x86_64-slc6-gcc62-opt/lcgeo/HEAD/CLIC/compact/CLIC_o3_v14/CLIC_o3_v14.xml",; "DD4hepXMLFile", "/cvmfs/sw.hsf.org/spackages/linux-centos7-broadwell/gcc-8.3.0/lcgeo-0.16.6-n2cn5dmwe4zttcgltxamnbfzq26kofie/share/lcgeo/compact/CLIC/compact/CLIC_o3_v14/CLIC_o3_v14.xml",;' clicReconstruction.py
 
 ```
 
