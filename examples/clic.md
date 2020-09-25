@@ -32,7 +32,7 @@ ddsim --compactFile $LCGEO/CLIC/compact/CLIC_o3_v14/CLIC_o3_v14.xml \
 To run the reconstruction with ``Marlin``
 ```bash
 Marlin clicReconstruction.xml \
-       --InitDD4hep.DD4hepXMLFile=$LCGEO/CLIC/compact/CLIC_o3_v14/CLIC_o3_v14 \
+       --InitDD4hep.DD4hepXMLFile=$LCGEO/CLIC/compact/CLIC_o3_v14/CLIC_o3_v14.xml \
        --global.LCIOInputFiles=ttbar.slcio \
        --global.MaxRecordNumber=3
 ```
