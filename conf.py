@@ -25,6 +25,10 @@ extensions = [
     'recommonmark',
 ]
 
+source_suffix = {
+    '.md': 'markdown',
+}
+
 html_static_path += [
     f'_static',
 ]
