@@ -55,7 +55,7 @@ Config.OverlayFalse`` and ``# Config.TrackingConformal`` should be enabled by un
 at the end of the file.
 
 ```bash
-sed -i 's;read.Files = \["/run/simulation/with/ctest/to/create/a/file.slcio"\];read.Files = \["ttbar.slcio"\];' clicReconstruction.py
+sed -i 's;read.Files = \[".*"\];read.Files = \["ttbar.slcio"\];' clicReconstruction.py
 sed -i 's;EvtMax   = 10,;EvtMax   = 3,;' clicReconstruction.py
 sed -i 's;"MaxRecordNumber", "10", END_TAG,;"MaxRecordNumber", "3", END_TAG,;' clicReconstruction.py
 sed -i 's;# algList.append(OverlayFalse);algList.append(OverlayFalse);' clicReconstruction.py
