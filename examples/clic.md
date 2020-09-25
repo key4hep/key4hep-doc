@@ -62,7 +62,7 @@ sed -i 's;# algList.append(OverlayFalse);algList.append(OverlayFalse);' clicReco
 sed -i 's;# algList.append(MyConformalTracking);algList.append(MyConformalTracking);' clicReconstruction.py
 sed -i 's;# algList.append(ClonesAndSplitTracksFinder);algList.append(ClonesAndSplitTracksFinder);' clicReconstruction.py
 sed -i 's;# algList.append(RenameCollection);algList.append(RenameCollection);' clicReconstruction.py
-sed -i 's;"DD4hepXMLFile", "/cvmfs/clicdp.cern.ch/iLCSoft/builds/nightly/x86_64-slc6-gcc62-opt/lcgeo/HEAD/CLIC/compact/CLIC_o3_v14/CLIC_o3_v14.xml",; "DD4hepXMLFile", "/cvmfs/sw.hsf.org/spackages/linux-centos7-broadwell/gcc-8.3.0/lcgeo-0.16.6-n2cn5dmwe4zttcgltxamnbfzq26kofie/share/lcgeo/compact/CLIC/compact/CLIC_o3_v14/CLIC_o3_v14.xml",;' clicReconstruction.py
+sed -i 's;"DD4hepXMLFile", ".*",; "DD4hepXMLFile", "os.environ["LCGEO"]+"/compact/CLIC/compact/CLIC_o3_v14/CLIC_o3_v14.xml",;' clicReconstruction.py
 
 ```
 
