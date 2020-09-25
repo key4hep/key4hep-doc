@@ -2,6 +2,11 @@
 
 
 This assumes that you have access to an installation of the Key4hep-stack, either via ``CVMFS`` or ``spack install``.
+To setup the installation on cvmfs, do:
+
+```bash
+source /cvmfs/sw.hsf.org/key4hep/setup.sh
+```
 
 These commands will explain how one can run the CLIC detector simulation and reconstruction using the Key4hep-Stack.
 First we will obtain all the necessary steering and input files for CLIC, simulate a few events and run the
