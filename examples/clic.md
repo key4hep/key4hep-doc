@@ -46,7 +46,7 @@ Marlin clicReconstruction.xml \
 
 We can convert the ``xml`` steering file to a Gaudi steering file
 ```bash
-convertMarlinSteeringToGaudi.py clicReconstruction.xml  > clicReconstruction.py
+convertMarlinSteeringToGaudi.py clicReconstruction.xml
 ```
 
 Now we need to modify the ``clicReconstruction.py`` file to point to the ``ttbar.slcio`` input file, and change the
