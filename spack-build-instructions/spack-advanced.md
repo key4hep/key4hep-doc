@@ -5,9 +5,6 @@ This page collects a few known workarounds for issues and areas of development i
 Check also the issues in [k4-spack](https://github.com/key4hep/k4-spack/issues) for up-to-date information.
 
 
-
-
-
 ## Concretizing before Installation
 
 Spack often needs to be forced to use existing packages as dependencies when installing a new package.
@@ -79,7 +76,7 @@ This 'concretizer' is one of the areas of development in spack, so the commands 
 Currently the default settings for some of the packages here do not work due to
 known [short comings of the spack
 concretizer](https://spack.readthedocs.io/en/latest/known_issues.html#variants-are-not-properly-forwarded-to-dependencies).
-For example `spack install K4FWCore` will most probably fail with the following error
+For example `spack install k4fwcore` will most probably fail with the following error
 
 ```
 1. "cxxstd=11" conflicts with "root+root7" [root7 requires at least C++14]
@@ -95,12 +92,12 @@ The simplest solution to the above problem is to simply require a `root` version
 with the appropriate requirements, e.g.
 
 ```bash
-spack install K4FWCore ^root cxxstd=17
+spack install k4fwcore ^root cxxstd=17
 ```
 
 will tell spack to use `cxxstd=17` also for building `root` and get rid of the
 conflict above. If using this, make sure to use the same value for `cxxstd` for
-`K4FWCore` and `root`.
+`k4fwcore` and `root`.
 
 #### Requiring certain variants globally
 
@@ -154,10 +151,11 @@ An alternative would be to use [spack environments](https://spack-tutorial.readt
 
 ## Setting Up Runtime Environments 
 
-Spack can create "filesystem views" of several packages, resulting in a directory structure similar what you would find in `/usr/local`.
-However, there is no good way to set up the runtime environments for the packages installed there -- an issue that should be adressed in spack.
+The simplest way to set the environment to use spack installed packages is to use the `spack load` command.
+In order for users not to have to set up spack when it is not needed, the `key4hep-stack` bundle package includes a script that will automatically generate a bash setup script and install it into its prefix.
 
-The setup scripts on cvmfs are created by manually editing `spack load --sh gcc > setup.sh; spack load --sh key4hep-stack >> setup.sh` so that the user environment is left intact.
+Spack can also create "filesystem views" of several packages, resulting in a directory structure similar what you would find in `/usr/local`.
+This simplifies library and include paths, but the setup generation for views still has to be developed.
 
 ## Compiler Dependencies and Data Packages
 
@@ -180,6 +178,8 @@ The distribution on cvmfs is an exact copy of the spack installation on the buil
 rsync -axv --inplace --delete    --verbose -e "ssh -T  -o Compression=no -o StrictHostKeyChecking=no -o GSSAPIAuthentication=yes -o GSSAPITrustDNS=yes" user@build-machine:/cvmfs/sw.hsf.org/spackages/ /cvmfs/sw.hsf.org/spackages/
 ```
 
+The `--delete` option can be omitted in order to preserve already installed packages, regardless of the state of the build machine.
+
 
 
 ## Compiler Wrappers
@@ -189,16 +189,9 @@ For packages like whizard, which register the compiler path to use during runtim
 For these packages, the current workaround is to force spack to use the actual compilers during build (see the build recipe of `whizard`).
 
 
-## Nightly Builds and Using Git Commits as Versions
-
-Spack can build specific git commits and branches, but only if they are mentioned explicitly in the recipe.
-Branches like "master" do not point to the latest commit, so `package@master` will not be re-installed if master changes.
-Nightly builds can still be done with spack
-
-
 ## Spack-Installed LCG releases
 
-A spack  install of the whole lcg release is work in progress, see https://gitlab.cern.ch/sft/sft-spack-repo.
+A spack installation that contains all packages in the LCG releases is work in progress, see https://gitlab.cern.ch/sft/sft-spack-repo.
 
 
 

@@ -1,31 +1,82 @@
 # Using Spack to build Key4HEP software
 
-The [spack](https://spack.io) package manager can be  used to build the Key4HEP software packages.
-This is part of a software R&D program, so some parts are still somewhat experimental
+Key4HEP comprises a fairly large number of software and depends on even more externals, so some tooling is needed to efficiently build the whole software stack. The [spack](https://spack.io) package manager can be used to build scientific software at scale, and is part of the Key4HEP software R&D program.
 
-A central installation is provided on cvmfs, and can be used without spack by sourcing:
+
+A spack install of Key4HEP is regularly deployed to `/cvmfs/sw.hsf.org/`, and can be used on lxplus/centos7 just by sourcing the following setup script:
 
 ```bash
 source /cvmfs/sw.hsf.org/key4hep/setup.sh
 ```
 
-Using spack can give a more fine-grained control over loaded packages.
+Using the spack commands can give a more fine-grained control over loaded packages.
 
-Spack can be installed by simply cloning it with git. The spack repository for key4hep packages is installed the same way:
+## Setting up Spack
+
+
+### Downloading a pre-configured instance (lxplus)
+
+On centos7 machines with cvmfs, the easiest way to set up spack is to download a pre-configured instance that is created automatically from the current key4hep/key4hep-spack repository.
 
 ```bash
-git clone https://github.com/spack/spack.git
+curl -L -o spack.zip https://gitlab.cern.ch/key4hep/k4-deploy/-/jobs/artifacts/master/raw/key4hep-spack_centos7-cvmfs.zip
+unzip spack.zip && rm spack.zip
 source spack/share/spack/setup-env.sh
-git clone https://github.com/key4hep/k4-spack.git
-spack repo add k4-spack
-cp k4-spack/config/packages.yaml spack/etc/spack
+```
+
+This sets up spack with a suitable compiler from cvmfs, the key4hep package recipes and the location of the upstream installation on cvmfs so packages can be installed on top:
+
+```
+# list already installed ("upstream") packages
+spack find -p
+# install a package locally, using suitable upstream packages as dependencies
+spack install edm4hep@master
+# load individual packages in the environment
+spack load cmake
+spack load gcc
+# load the whole software 
+spack load key4hep-stack
 
 ```
 
-The cvmfs installation can now be used as an "upstream installation", by adding the following configuration:
+
+### Configuring Spack
+
+Alternatively, and for other platforms, spack can be configured in a few steps.
+
+#### Installing Spack
+Spack itself is very easy to install -  simply clone the repository with git.
 
 ```bash
-cat <<EOT >> $HOME/.spack/linux/upstreams.yaml
+git clone https://github.com/key4hep/spack.git
+source spack/share/spack/setup-env.sh
+```
+
+#### Installing the key4hep package recipes
+
+ The spack repository for key4hep packages is installed the same way:
+
+```
+git clone https://github.com/key4hep/k4-spack.git
+spack repo add k4-spack
+```
+
+### Configuring `packages.yaml`
+
+In order to choose the right package versions and build options, spack sometimes needs a few [hints and nudges](https://spack.readthedocs.io/en/latest/build_settings.html).
+key4hep-spack ships a spack config file that should give a good build customization out of the box, but can also be customized further. It just needs to be copied to the configuration where spack searches for configurations:
+
+```
+cp k4-spack/config/packages.yaml spack/etc/spack/
+```
+
+
+#### Configuring `upstreams.yaml`
+
+The cvmfs installation can be used as an "upstream installation", by adding the following configuration:
+
+```bash
+cat <<EOT >> spack/etc/spack/upstreams.yaml
 upstreams:
   spack-instance-1:
       install_tree: /cvmfs/sw.hsf.org/spackages/
@@ -40,51 +91,3 @@ Alternatively, the full stack can be installed locally by simply doing:
 spack install key4hep-stack
 ```
 
-### Using a central buildcache
-
-{% callout "Spack documentation" %}
-
-For more information refer to the [spack documentation](https://spack.readthedocs.io/en/latest/binary_caches.html).
-
-{% endcallout %}
-
-It is possible to relocate and  re-use  binaries with the so-called buildcache. 
-Some central buildcaches are on the key4hep `eos` space under:
-
-```
-/eos/project/k/key4hep/www/key4hep/spack_build/mirror/spackages
-```
-`spackages` is intended as the central buildcache for key4hep packages built from scratch,
-but there exist other buildcaches for packages built against the LCG releases, and rolling builds that are using the branchname `master` or other moving targets.
-All packages versioned `package@master` are treated by spack as the same version, even if master points to different commits, thus they must be installed to separate directories, ideally indicating the date.
-A buildcache called `contrib` is intended for build tools such as compilers.
-Spack automatically creates subdirectory for different platforms and compiler versions.
-
-For write permissions to this space, subscribe to the egroup `cernbox-project-key4hep-writers`.
-
-The following command can be used to put packages into the buildcache:
-
-```
-# key4hep-stack was already installed with 'spack install key4hep-stack'
-spack mirror add key4hep /eos/project/k/key4hep/www/key4hep/spack_build/mirror/spackages
-spack buildcache create -m key4hep -u -a -f key4hep-stack
-```
-
-Since the packages need to be relocated as well as copied, this might take up to an hour.
-
-
-
-
-In order to install packages from the  buildcache, use:
-
-```
-spack buildcache install -u -a key4hep-stack
-
-```
-Spack will then search all added mirrors for `key4hep-stack`.
-For read-only access on machines without `eos`, these files are served also over http:
-
-
-```
-spack mirror add key4hep-web http://key4hep.web.cern.ch/key4hep/spack_build/mirror/spackages/
-```
