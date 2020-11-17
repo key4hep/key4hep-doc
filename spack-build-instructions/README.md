@@ -19,8 +19,8 @@ Using the spack commands can give a more fine-grained control over loaded packag
 On centos7 machines with cvmfs, the easiest way to set up spack is to download a pre-configured instance that is created automatically from the current key4hep/key4hep-spack repository.
 
 ```bash
-curl -L -o spack.zip https://gitlab.cern.ch/key4hep/k4-deploy/-/jobs/artifacts/master/raw/key4hep-spack_centos7-cvmfs.zip
-unzip spack.zip && rm spack.zip
+curl -L -o spack.tar.gz https://gitlab.cern.ch/key4hep/k4-deploy/-/jobs/artifacts/master/raw/key4hep-spack_centos7-cvmfs.tar.gz?job=build-spack-nightlies
+tar xfz spack.tar.gz && rm spack.tar.gz
 source spack/share/spack/setup-env.sh
 ```
 
