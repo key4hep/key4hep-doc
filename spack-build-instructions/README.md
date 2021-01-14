@@ -57,8 +57,8 @@ source spack/share/spack/setup-env.sh
  The spack repository for key4hep packages is installed the same way:
 
 ```
-git clone https://github.com/key4hep/k4-spack.git
-spack repo add k4-spack
+git clone https://github.com/key4hep/key4hep-spack.git
+spack repo add key4hep-spack
 ```
 
 ### Configuring `packages.yaml`
@@ -67,7 +67,7 @@ In order to choose the right package versions and build options, spack sometimes
 key4hep-spack ships a spack config file that should give a good build customization out of the box, but can also be customized further. It just needs to be copied to the configuration where spack searches for configurations:
 
 ```
-cp k4-spack/config/packages.yaml spack/etc/spack/
+cp key4hep-spack/config/packages.yaml spack/etc/spack/
 ```
 
 

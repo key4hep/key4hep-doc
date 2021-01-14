@@ -2,7 +2,7 @@
 # Spack Usage and Further Technical Topics
 
 This page collects a few known workarounds for issues and areas of development in spack.
-Check also the issues in [k4-spack](https://github.com/key4hep/k4-spack/issues) for up-to-date information.
+Check also the issues in [key4hep-spack](https://github.com/key4hep/key4hep-spack/issues) for up-to-date information.
 
 
 ## Concretizing before Installation
@@ -165,7 +165,7 @@ Spack cannot yet handle this gracefully, but an ongoing development tries to tre
 
 ## Duplicating Recipes in Downstream Repositories
 
-Although it is possible to "patch" spack build recipes by overriding them in another repository (k4-spack, for example), this is discouraged.
+Although it is possible to "patch" spack build recipes by overriding them in another repository (key4hep-spack, for example), this is discouraged.
 The central repo is one of the strenghts of spack, with many contributors ensuring that packages build smoothly.
 Also, packages are installed in different namespaces, so it is not possible to deprecate changed recipes and use the upstream ones without re-installing the packages.
 
