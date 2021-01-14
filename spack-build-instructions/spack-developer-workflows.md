@@ -109,3 +109,50 @@ Hence, it will not recompile everything again, but simply install all the build 
 `spack find -lv lcio` can be used to check if the installation was successful.
 
 **NOTE: You are probably still in the build environment at this stage. To return back to you original shell simply type `exit`.**
+
+## Developing multiple packages or dependencies of other packages
+
+Developing on many packages simultaneously using the `dev-build` command can become cumbersome and doesn't really scale.
+
+### Using an environment to setup all dependencies
+One way to develop on multiple packages simultaneously can be to setup an [environment](https://spack.readthedocs.io/en/latest/environments.html) that contains the dependencies of all packages.
+
+As an example the following definition of an environment has been used to develop on
+[`podio`](https://github.com/AIDASoft/podio), [`EDM4HEP`](https://github.com/key4hep/EDM4HEP) and some other packages.
+```yaml
+spack:
+  specs:
+    - python
+    - root@6.20.04 +davix+gsl+math~memstat+minuit+mlp~mysql+opengl~postgres~pythia6+pythia8+python~qt4+r+root7+rootfit+rpath~shadow+sqlite+ssl~table+tbb+threads+tmva+unuran+vc+vdt+vmc+x+xml+xrootd build_type=RelWithDebInfo cxxstd=17 patches=22af3471f3fd87c0fe8917bf9c811c6d806de6c8b9867d30a1e3d383a1b929d7
+    - dd4hep +geant4
+    - geant4
+    - heppdt
+    - hepmc@2.06.10
+    - tricktrack
+    - py-pyyaml
+    - py-jinja2
+    - cmake
+    - pythia8
+    - evtgen
+  concretization: together
+  view: true
+  packages:
+    all:
+      compiler: [gcc@9.3.0]
+      variants: cxxstd=17
+```
+
+Assuming this is the content of `edm4hep_devel.yaml` an environment can be created, activated, concretized and installed with the following commands:
+```bash
+spack env create edm4hep-devel edm4hep_devel.yaml
+spack env activate -p edm4hep-devel
+spack concretize
+spack install
+```
+
+After an environment has been installed, it can easily be activated via
+```bash
+spack env activate -p edm4hep-devel
+```
+which immediately drops you in an environment with all the packages stated in the environment file above available and properly set up. 
+Developing packages that depend on these should then be straight forward, especially for properly setup CMake based projects that can automatically find and configure their dependencies.
