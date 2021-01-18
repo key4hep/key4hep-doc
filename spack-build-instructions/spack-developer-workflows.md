@@ -224,3 +224,34 @@ Once all your development is done and you want to install the package `spack ins
 This means that all the (local) development packages in your environment will only be recompiled as far as necessary, while all other packages that depend on the development packages will be re-built from scratch.
 
 Once you are done developing, this environment can be used like any other environment simply by running `spack env activate my-development-env` to activate it.
+
+#### Adding another package to develop
+If you now realize that your changes to `podio` or `edm4hep` broke `k4simdelphes` and you need to also implement some changes there, you do not have to define a new environment.
+Instead it is possible to add `k4simdelphes` to the `develop` section via `spack develop` (assuming you are still in the activated environment and in the same directory where also the `podio` and `edm4hep` sources live)
+```bash
+git clone https://github.com/key4hep/k4SimDelphes
+spack develop --no-clone --path ../../../../../k4SimDelphes k4simdelphes@main
+```
+Here, the `--path` is again either relative to the environment directory inside spack. It could also be an absolute path.
+You now have to concretize the environment again before you can install the packages.
+```bash
+spack concretize -f
+spack install
+```
+
+Now you can work on `k4simdelphes` in the same way as you can for `podio` or `edm4hep`.
+You can also check that the environment now indeed uses your local version of `k4simdelphes` via
+```
+spack find -lv k4simdelphes
+```
+which should now yield something along the lines of
+```
+==> In environment my-development-env
+==> Root specs
+------- k4simdelphes@main 
+
+==> 1 installed package
+-- linux-ubuntu20.04-broadwell / gcc@9.3.0 ----------------------
+m5khm2w k4simdelphes@main~ipo build_type=RelWithDebInfo dev_path=/home/tmadlener/work/spack/var/spack/environments/test-devel-env/../../../../../k4SimDelphes
+```
+where the path to the local source files has now again become part of the spec as can be seen by the `dev_path=...` part of the spec.
