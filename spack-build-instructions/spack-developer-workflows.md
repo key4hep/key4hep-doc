@@ -156,3 +156,71 @@ spack env activate -p edm4hep-devel
 ```
 which immediately drops you in an environment with all the packages stated in the environment file above available and properly set up. 
 Developing packages that depend on these should then be straight forward, especially for properly setup CMake based projects that can automatically find and configure their dependencies.
+
+The disadvantage of this approach is that the packages you want to develop on have to be on the top of the stack and if they depend on each other, you still have to properly handle these dependencies on your own.
+
+### Environments and a development workflow
+
+Recently spack gained the ability to setup environments and specify multiple packages that you would like to develop on (See [spack/spack#256](https://github.com/spack/spack/pull/15256).
+It is not yet really documented and it is not yet fully optimized, but it allows for a decent development experience if your package is not too deep down in the stack.
+It is not impossible to develop on packages deep down the software stack, but this can imply frequently recompiling large parts of the software stack, since spack does not yet handle this in the best way, but instead builds all packages that you are not developing on from scratch. Hence, even if a simple relinking would have done the trick, spack will still build a lot of packages again.
+Nevertheless, the feature is in a usable state and this section briefly describes how to use it.
+Especially if you mainly develop on one package but sometimes want to check whether the rest of the stack, that depends on this package still compiles with the latest version, this can be a very useful workflow.
+
+Similar to the usual environments an easy starting point is from an environment yaml file. For this example it has the following content
+```yaml
+spack:
+  spec: 
+    - podio@master +sio
+    - edm4hep@master
+    - k4simdelphes
+  concretization: together
+  view: false
+  packages:
+     all:
+       compiler: [gcc@9.3.0]
+       variants: cxxstd=17
+  develop:
+    podio:
+      spec: podio@master +sio
+      path: ../../../../../podio
+    edm4hep:
+      spec: edm4hep@master
+      path: ../../../../../EDM4hep
+```
+
+The first part is the same as previously, but a new `develop` section containing information about the packages that should be developed on has been added.
+For each package there is a `spec` and a `path` field. The `spec` field tells spack which spec to build, while the `path` field tells spack where the source files are located. 
+**The path is relative to the `$(prefix)/var/spack/environments/${environment-name}` directory or an absolute path.**
+
+Assuming that you are currently in the directory that contains local `spack` installation, the following steps are necessary to create the development environment
+```bash
+git clone https://github.com/AIDASoft/podio
+git clone https://github.com/key4hep/EDM4hep
+spack env create my-development-env development_env_packages.yaml
+```
+where `development_env_packages.yaml` is the yaml file with the contents just described above.
+
+It is now possible to activate this environment via
+```bash
+spack env activate -p my-development-env
+```
+
+To install all the packages, including the local versions of `podio` and `edm4hep` it is now enough to simply do `spack install`**in the activated environment**.
+This will build your local copies of `podio` and `edm4hep` and use these versions as dependencies for the `k4simdelphes` package.
+Changes can also be made to either of the two packages.
+To compile only one package without installing it yet, it is easiest to simply go to the directory where the sources are.
+There should now be a few spack related files and a spack build folder among the other source files
+```
+[...]
+spack-configure-args.txt
+spack-build-env.txt
+spack-build-out.txt
+spack-build-${hash}
+```
+Here `${hash}` is the same that you get from `spack find -l package`.
+After you have done all the necessary changes you can simply change into this build directory and run `make` to compile the package again.
+Once all your development is done and you want to install the package `spack install` will run the whole build chain again.
+This means that all the (local) development packages in your environment will only be recompiled as far as necessary, while all other packages that depend on the development packages will be re-built from scratch.
+
+Once you are done developing, this environment can be used like any other environment simply by running `spack env activate my-development-env` to activate it.
