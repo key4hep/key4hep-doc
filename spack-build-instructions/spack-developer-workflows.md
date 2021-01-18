@@ -161,18 +161,18 @@ The disadvantage of this approach is that the packages you want to develop on ha
 
 ### Environments and a development workflow
 
-Recently spack gained the ability to setup environments and specify multiple packages that you would like to develop on (See [spack/spack#256](https://github.com/spack/spack/pull/15256).
+Recently spack gained the ability to setup environments and specify multiple packages that you would like to develop on (See [spack/spack#256](https://github.com/spack/spack/pull/15256)).
 It is not yet really documented and it is not yet fully optimized, but it allows for a decent development experience if your package is not too deep down in the stack.
 It is not impossible to develop on packages deep down the software stack, but this can imply frequently recompiling large parts of the software stack, since spack does not yet handle this in the best way, but instead builds all packages that you are not developing on from scratch. Hence, even if a simple relinking would have done the trick, spack will still build a lot of packages again.
 Nevertheless, the feature is in a usable state and this section briefly describes how to use it.
 Especially if you mainly develop on one package but sometimes want to check whether the rest of the stack, that depends on this package still compiles with the latest version, this can be a very useful workflow.
 
-Similar to the usual environments an easy starting point is from an environment yaml file. For this example it has the following content
+As an example we will be using the `k4simdelphes` package that depends on `edm4hep`, which in turn depens again on `podio`. 
+Suppose we want to change `podio` and `edm4hep` and see if `k4simdelphes` still compiles and works.
+We would then use an environment definition file similar to the usual environments. For this example it has the following content
 ```yaml
 spack:
   spec: 
-    - podio@master +sio
-    - edm4hep@master
     - k4simdelphes
   concretization: together
   view: false
