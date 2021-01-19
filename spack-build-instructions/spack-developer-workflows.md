@@ -9,6 +9,7 @@ Hence, this page tries to collect some of the experiences the Key4HEP developers
 
 When only developing on a single package it is possible to use the [`dev-build`](https://spack.readthedocs.io/en/latest/command_index.html#spack-dev-build) command of spack.
 A brief tutorial can be found in [the spack documentation](https://spack-tutorial.readthedocs.io/en/lanl19/tutorial_developer_workflows.html).
+There is also a dedicated channel on slack (https://spackpm.herokuapp.com/) where questions regarding the development workflow can be discussed. 
 It allows to build a given package directly from local sources in the same way as spack does it, and even makes this package available to other packages in the same way it does packages that have been installed by spack directly.
 Here we will use [LCIO](https://github.com/iLCSoft/LCIO) as an example since it can be installed without (or with only one) dependency.
 
