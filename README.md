@@ -11,6 +11,7 @@
     spack-build-instructions/README.md
     spack-build-instructions/spack-nightlies.md
     spack-build-instructions/spack-advanced.md
+    spack-build-instructions/spack-developer-workflows.md
     spack-build-instructions/spack-buildcache.md
     examples/clic.md
     talks-and-presentations/README.md
