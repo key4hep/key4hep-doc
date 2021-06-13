@@ -22,6 +22,7 @@ html_context = {
 
 extensions = [
     'sphinx_copybutton',
+    'sphinx_markdown_tables',
     'recommonmark',
 ]
 
@@ -37,8 +38,3 @@ linkcheck_ignore += [
 ]
 
 
-def starterkit_ci_setup(app):
-    app.add_stylesheet('starterkit.css')
-
-
-setup.extra_setup_funcs += [starterkit_ci_setup]
