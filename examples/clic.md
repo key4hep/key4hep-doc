@@ -68,7 +68,7 @@ cd CLICPerformance/clicConfig
 
 sed -i 's;read.Files = \[".*"\];read.Files = \["ttbar.slcio"\];' clicReconstruction.py
 sed -i 's;EvtMax   = 10,;EvtMax   = 3,;' clicReconstruction.py
-sed -i 's;"MaxRecordNumber", "10", END_TAG,;"MaxRecordNumber", "3", END_TAG,;' clicReconstruction.py
+sed -i 's;"MaxRecordNumber": ["10"],;"MaxRecordNumber": ["3"],;' clicReconstruction.py
 sed -i 's;# algList.append(OverlayFalse);algList.append(OverlayFalse);' clicReconstruction.py
 sed -i 's;# algList.append(MyConformalTracking);algList.append(MyConformalTracking);' clicReconstruction.py
 sed -i 's;# algList.append(ClonesAndSplitTracksFinder);algList.append(ClonesAndSplitTracksFinder);' clicReconstruction.py
