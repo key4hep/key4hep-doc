@@ -1,9 +1,9 @@
-# Using Spack to build Key4HEP software
+# Using Spack to build Key4hep software
 
-Key4HEP comprises a fairly large number of software and depends on even more externals, so some tooling is needed to efficiently build the whole software stack. The [spack](https://spack.io) package manager can be used to build scientific software at scale, and is part of the Key4HEP software R&D program.
+Key4hep comprises a fairly large number of software and depends on even more externals, so some tooling is needed to efficiently build the whole software stack. The [spack](https://spack.io) package manager can be used to build scientific software at scale, and is part of the Key4hep software R&D program.
 
 
-A spack install of Key4HEP is regularly deployed to `/cvmfs/sw.hsf.org/`, and can be used on lxplus/centos7 just by sourcing the following setup script:
+A spack install of Key4hep is regularly deployed to `/cvmfs/sw.hsf.org/`, and can be used on lxplus/centos7 just by sourcing the following setup script:
 
 ```bash
 source /cvmfs/sw.hsf.org/key4hep/setup.sh

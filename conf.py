@@ -2,9 +2,9 @@
 # Here it is useful to allow the configuration to be maintained elsewhere
 from starterkit_ci.sphinx_config import *  # NOQA
 
-project = 'Key4HEP'
-copyright = '2020, Key4HEP'
-author = 'Key4HEP'
+project = 'Key4hep'
+copyright = '2020, Key4hep'
+author = 'Key4hep'
 html_logo = 'starterkit.png'
 
 exclude_patterns += [

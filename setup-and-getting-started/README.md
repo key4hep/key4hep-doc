@@ -1,8 +1,8 @@
 
 
-# Getting started with Key4HEP software
+# Getting started with Key4hep software
 
-## Setting up the Key4HEP Software Stack
+## Setting up the Key4hep Software Stack
 
 ### Using central installations on cvmfs
 
@@ -21,9 +21,9 @@ The instructions above should work in any CentOS7 virtual machine or Docker cont
 
 #### CernVM Virtual Appliance
 
-The CernVM project provides a convenient tool to start VMs, [cernvm-launch](https://cernvm.cern.ch/portal/launch), and a [public repository](https://github.com/cernvm/public-contexts) of contexts to be used with `cernvm-launch` to configure the VM at your needs. A context dedicated to Key4HEP is available in the repository. The [cernvm-launch](https://cernvm.cern.ch/portal/launch) works with [VirtualBox](https://www.virtualbox.org/), virtualization manager available for free for all platforms.
+The CernVM project provides a convenient tool to start VMs, [cernvm-launch](https://cernvm.cern.ch/portal/launch), and a [public repository](https://github.com/cernvm/public-contexts) of contexts to be used with `cernvm-launch` to configure the VM at your needs. A context dedicated to Key4hep is available in the repository. The [cernvm-launch](https://cernvm.cern.ch/portal/launch) works with [VirtualBox](https://www.virtualbox.org/), virtualization manager available for free for all platforms.
 
-To create and use a CernVM virtual machine for Key4HEP please follow the following steps:
+To create and use a CernVM virtual machine for Key4hep please follow the following steps:
 
    * Make sure [VirtualBox](https://www.virtualbox.org/) is installed (details installing instructions from the product web page).
    * Download the `cernvm-launch` binary for your platform either from the [dedicated download page](https://ecsft.cern.ch/dist/cernvm/launch/bin/) or from the following links:

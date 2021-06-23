@@ -1,4 +1,4 @@
-# Key4HEP 
+# Key4hep
 
 
 ```eval_rst

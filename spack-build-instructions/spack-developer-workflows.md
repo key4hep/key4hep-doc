@@ -1,9 +1,9 @@
-# Spack workflows for developing Key4HEP software
+# Spack workflows for developing Key4hep software
 
 Using spack to develop software is somewhat pushing its intended usage to its limits.
 However, it is not impossible and this is an area of spack that is currently under active development.
 Unfortunately, this also means that the spack documentation might not be fully up-to-date on these topics.
-Hence, this page tries to collect some of the experiences the Key4HEP developers have made.
+Hence, this page tries to collect some of the experiences the Key4hep developers have made.
 
 ## Developing a single package
 

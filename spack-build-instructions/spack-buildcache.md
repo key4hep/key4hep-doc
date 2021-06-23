@@ -3,7 +3,7 @@
 
 {% callout "Spack documentation" %}
 
-Buildcaches were investigated, but are no longer supported for Key4HEP software, due to the difficulty of relocating some packages.
+Buildcaches were investigated, but are no longer supported for Key4hep software, due to the difficulty of relocating some packages.
 
 For more information refer to the [spack documentation](https://spack.readthedocs.io/en/latest/binary_caches.html).
 
