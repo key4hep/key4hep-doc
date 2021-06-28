@@ -1,0 +1,531 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Spack Usage and Further Technical Topics &mdash; Key4hep  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/panels.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="../_static/panels.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Spack workflows for developing Key4hep software" href="spack-developer-workflows.html" />
+    <link rel="prev" title="Nightly Builds with Spack" href="spack-nightlies.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Key4hep
+          
+
+          
+            
+            <img src="../_static/starterkit.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../setup-and-getting-started/README.html">Getting started with Key4hep software</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../setup-and-getting-started/README.html#setting-up-the-key4hep-software-stack">Setting up the Key4hep Software Stack</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../setup-and-getting-started/README.html#using-central-installations-on-cvmfs">Using central installations on cvmfs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../setup-and-getting-started/README.html#using-virtual-machines-or-docker-containers">Using Virtual Machines or Docker containers</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../setup-and-getting-started/README.html#cernvm-virtual-appliance">CernVM Virtual Appliance</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="README.html">Using Spack to build Key4hep software</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="README.html#setting-up-spack">Setting up Spack</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="README.html#downloading-a-pre-configured-instance-lxplus">Downloading a pre-configured instance (lxplus)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="README.html#configuring-spack">Configuring Spack</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="README.html#installing-spack">Installing Spack</a></li>
+<li class="toctree-l4"><a class="reference internal" href="README.html#installing-the-key4hep-package-recipes">Installing the key4hep package recipes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="README.html#configuring-packages-yaml">Configuring <code class="docutils literal notranslate"><span class="pre">packages.yaml</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="README.html#configuring-upstreams-yaml">Configuring <code class="docutils literal notranslate"><span class="pre">upstreams.yaml</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="README.html#setting-up-an-upstream-compiler">Setting up an upstream compiler</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="spack-nightlies.html">Nightly Builds with Spack</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="spack-nightlies.html#usage-of-the-nightly-builds-on-cvmfs">Usage of the nightly builds on CVMFS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spack-nightlies.html#technical-information">Technical Information</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Spack Usage and Further Technical Topics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#concretizing-before-installation">Concretizing before Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#working-around-spack-concretizer-problems">Working around spack concretizer problems</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#requiring-a-specific-package-version">Requiring a specific package version</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#requiring-certain-variants-globally">Requiring certain variants globally</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#system-dependencies">System Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#target-architectures">Target Architectures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#bundle-packages-and-environments">Bundle Packages and Environments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#setting-up-runtime-environments">Setting Up Runtime Environments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#compiler-dependencies-and-data-packages">Compiler Dependencies and Data Packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#duplicating-recipes-in-downstream-repositories">Duplicating Recipes in Downstream Repositories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#cvmfs-installation-workflow">CVMFS Installation Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#compiler-wrappers">Compiler Wrappers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#spack-installed-lcg-releases">Spack-Installed LCG releases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#using-spack-installed-gcc">Using Spack-installed GCC</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="spack-developer-workflows.html">Spack workflows for developing Key4hep software</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="spack-developer-workflows.html#developing-a-single-package">Developing a single package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="spack-developer-workflows.html#installing-a-local-version-with-dev-build">Installing a local version with <code class="docutils literal notranslate"><span class="pre">dev-build</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="spack-developer-workflows.html#using-the-local-version-as-dependency">Using the local version as dependency</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spack-developer-workflows.html#more-advanced-usage">More advanced usage</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="spack-developer-workflows.html#developing-multiple-packages-or-dependencies-of-other-packages">Developing multiple packages or dependencies of other packages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="spack-developer-workflows.html#using-an-environment-to-setup-all-dependencies">Using an environment to setup all dependencies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spack-developer-workflows.html#environments-and-a-development-workflow">Environments and a development workflow</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="spack-developer-workflows.html#adding-another-package-to-develop">Adding another package to develop</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="spack-buildcache.html">Spack Buildcaches</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/clic.html">Using the Key4hep-Stack for CLIC Simulation and Reconstruction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../examples/clic.html#simulation">Simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/clic.html#reconstruction">Reconstruction</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../examples/clic.html#reconstruction-with-marlin">Reconstruction with Marlin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/clic.html#reconstruction-with-with-gaudi">Reconstruction with with Gaudi</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developing-key4hep-software/README.html">Developing Key4hep</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../developing-key4hep-software/Key4hepSoftwareGit.html">Github workflow and contribution guide</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../developing-key4hep-software/Key4hepSoftwareGit.html#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-key4hep-software/Key4hepSoftwareGit.html#first-time-setup-of-git">First time setup of git</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-key4hep-software/Key4hepSoftwareGit.html#generate-and-set-up-ssh-keys-for-github">Generate and set up ssh keys for github</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-key4hep-software/Key4hepSoftwareGit.html#improving-your-git-experience">Improving your git experience</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-key4hep-software/Key4hepSoftwareGit.html#development-workflow">Development workflow</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../developing-key4hep-software/Key4hepSoftwareGit.html#keeping-your-local-repository-up-to-date">Keeping your local repository up to date</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../developing-key4hep-software/Key4hepSoftwareGit.html#contributing-code">Contributing code</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-key4hep-software/Key4hepSoftwareGit.html#recommendations">Recommendations</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../developing-key4hep-software/Key4hepSoftwareGit.html#general-recommendations">General recommendations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../developing-key4hep-software/Key4hepSoftwareGit.html#commit-comments">Commit comments</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../developing-key4hep-software/Key4hepSoftwareGit.html#cleaning-history">Cleaning history</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../developing-key4hep-software/Key4hepSoftwareGit.html#pull-requests">Pull requests</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-key4hep-software/Key4hepSoftwareGit.html#trouble-shooting">Trouble-shooting</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../developing-key4hep-software/Key4hepSoftwareGit.html#when-i-try-to-push-to-the-repository-i-get-an-authentication-error">When I try to push to the repository, I get an authentication error</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../developing-key4hep-software/Key4hepSoftwareGit.html#i-have-cloned-with-https-and-now-i-can-t-push-my-changes-what-do-i-do">I have cloned with https and now I can’t push my changes, what do I do?</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-key4hep-software/Key4hepSoftwareGit.html#need-help">Need help?</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../developing-key4hep-software/Key4hepCMakeGuide.html">CMake guide for Key4hep software</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../developing-key4hep-software/Key4hepCMakeGuide.html#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-key4hep-software/Key4hepCMakeGuide.html#quick-start-into-building-key4hep-software">Quick start into building Key4hep Software</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../developing-key4hep-software/Key4hepCMakeGuide.html#set-up-the-environment">Set up the environment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../developing-key4hep-software/Key4hepCMakeGuide.html#running-cmake">Running CMake</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../developing-key4hep-software/Key4hepCMakeGuide.html#using-your-local-installation">Using your local installation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-key4hep-software/Key4hepCMakeGuide.html#cmake-example-packages">CMake example packages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-key4hep-software/Key4hepCMakeGuide.html#changing-the-cmake-configuration">Changing the CMake Configuration</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../developing-key4hep-software/Key4hepCMakeGuide.html#runtime-environment">Runtime Environment</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-key4hep-software/Key4hepCMakeGuide.html#ctest-in-key4hep">CTest in Key4hep</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../developing-key4hep-software/Key4hepCMakeGuide.html#customizing-how-cmake-is-run">Customizing how CMake is run</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../developing-key4hep-software/WritingAlgorithms.html">Writing Gaudi Algorithms</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../developing-key4hep-software/WritingAlgorithms.html#getting-started">Getting Started</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-key4hep-software/WritingAlgorithms.html#exercise-adding-an-algorithm">Exercise: Adding an Algorithm</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../talks-and-presentations/README.html">Talks and Presentations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../talks-and-presentations/README.html#upcoming-talks-and-workshops">Upcoming Talks and Workshops</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../call-for-logos/README.html">Call for logos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CONTRIBUTING.html">Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CONTRIBUTING.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../CONTRIBUTING.html#dependencies">Dependencies</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../CONDUCT.html">Contributor Code of Conduct</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../LICENSE.html">Instructional Material</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../LICENSE.html#software">Software</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">External links:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://cern.ch/fccsw">FCC software</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://twiki.cern.ch/twiki/bin/view/CLIC/CLICSoftwareComputing">CLIC software</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://ilcsoft.desy.de/portal">ILC software</a></li>
+<li class="toctree-l1"><a class="reference external" href="http://cepcsoft.ihep.ac.cn/">CEPC software</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Key4hep</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Spack Usage and Further Technical Topics</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            
+              <a href="https://github.com/key4hep/key4hep-doc/blob/master/spack-build-instructions/spack-advanced.md" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <section id="spack-usage-and-further-technical-topics">
+<h1>Spack Usage and Further Technical Topics<a class="headerlink" href="#spack-usage-and-further-technical-topics" title="Permalink to this headline">¶</a></h1>
+<p>This page collects a few known workarounds for issues and areas of development in spack.
+Check also the issues in <a class="reference external" href="https://github.com/key4hep/key4hep-spack/issues">key4hep-spack</a> for up-to-date information.</p>
+<section id="concretizing-before-installation">
+<h2>Concretizing before Installation<a class="headerlink" href="#concretizing-before-installation" title="Permalink to this headline">¶</a></h2>
+<p>Spack often needs to be forced to use existing packages as dependencies when installing a new package.
+The best way to make sure that spack does not unnecessarily re-install is to ‘preview’ what will be installed with the command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>spack spec -I whizard
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Input spec
+--------------------------------
+ -   whizard
+
+Concretized
+--------------------------------
+ -   whizard@3.0.0_alpha%gcc@9.3.0~fastjet+hepmc~latex~lcio~lhapdf~openmp+pythia8 <span class="nv">arch</span><span class="o">=</span>linux-ubuntu20.04-broadwell
+<span class="o">[</span>+<span class="o">]</span>      ^hepmc@2.06.10%gcc@9.3.0 <span class="nv">build_type</span><span class="o">=</span>RelWithDebInfo <span class="nv">arch</span><span class="o">=</span>linux-ubuntu20.04-broadwell
+<span class="o">[</span>+<span class="o">]</span>          ^cmake@3.16.3%gcc@9.3.0~doc+ncurses+openssl+ownlibs~qt <span class="nv">patches</span><span class="o">=</span>1c540040c7e203dd8e27aa20345ecb07fe06570d56410a24a266ae570b1c4c39 <span class="nv">arch</span><span class="o">=</span>linux-ubuntu20.04-broadwell
+ -       ^ocaml@4.10.0%gcc@9.3.0+force-safe-string <span class="nv">arch</span><span class="o">=</span>linux-ubuntu20.04-broadwell
+<span class="o">[</span>+<span class="o">]</span>          ^ncurses@6.2%gcc@9.3.0~symlinks+termlib <span class="nv">arch</span><span class="o">=</span>linux-ubuntu20.04-broadwell
+<span class="o">[</span>+<span class="o">]</span>              ^pkgconf@1.7.3%gcc@9.3.0 <span class="nv">arch</span><span class="o">=</span>linux-ubuntu20.04-broadwell
+<span class="o">[</span>+<span class="o">]</span>      ^pythia8@8244%gcc@9.3.0~evtgen~fastjet+hepmc~root+shared <span class="nv">arch</span><span class="o">=</span>linux-ubuntu20.04-broadwell
+<span class="o">[</span>+<span class="o">]</span>          ^rsync@3.1.3%gcc@9.3.0 <span class="nv">arch</span><span class="o">=</span>linux-ubuntu20.04-broadwell
+<span class="o">[</span>+<span class="o">]</span>              ^popt@1.16%gcc@9.3.0 <span class="nv">arch</span><span class="o">=</span>linux-ubuntu20.04-broadwell
+<span class="o">[</span>+<span class="o">]</span>              ^zlib@1.2.11%gcc@9.3.0+optimize+pic+shared <span class="nv">arch</span><span class="o">=</span>linux-ubuntu20.04-broadwell
+</pre></div>
+</div>
+<p>In this example, you could check for an existing <code class="docutils literal notranslate"><span class="pre">ocaml</span></code> installation and use it via its hash:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>spack find -l ocaml
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">==</span>&gt; <span class="m">2</span> installed packages
+-- linux-centos7-broadwell / gcc@8.3.0 --------------------------
+2aolgjw ocaml@4.08.1  ycqhz3l ocaml@4.10.0
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>spack spec -I whizard ^/ycqhz3l
+
+--------------------------------
+ -   whizard@3.0.0_alpha%gcc@9.3.0~fastjet+hepmc~latex~lcio~lhapdf~openmp+pythia8 <span class="nv">arch</span><span class="o">=</span>linux-ubuntu20.04-broadwell
+<span class="o">[</span>+<span class="o">]</span>      ^hepmc@2.06.10%gcc@9.3.0 <span class="nv">build_type</span><span class="o">=</span>RelWithDebInfo <span class="nv">arch</span><span class="o">=</span>linux-ubuntu20.04-broadwell
+<span class="o">[</span>+<span class="o">]</span>          ^cmake@3.16.3%gcc@9.3.0~doc+ncurses+openssl+ownlibs~qt <span class="nv">patches</span><span class="o">=</span>1c540040c7e203dd8e27aa20345ecb07fe06570d56410a24a266ae570b1c4c39 <span class="nv">arch</span><span class="o">=</span>linux-ubuntu20.04-broadwell
+<span class="o">[</span>+<span class="o">]</span>       ^ocaml@4.10.0%gcc@9.3.0+force-safe-string <span class="nv">arch</span><span class="o">=</span>linux-ubuntu20.04-broadwell
+<span class="o">[</span>+<span class="o">]</span>          ^ncurses@6.2%gcc@9.3.0~symlinks+termlib <span class="nv">arch</span><span class="o">=</span>linux-ubuntu20.04-broadwell
+<span class="o">[</span>+<span class="o">]</span>              ^pkgconf@1.7.3%gcc@9.3.0 <span class="nv">arch</span><span class="o">=</span>linux-ubuntu20.04-broadwell
+<span class="o">[</span>+<span class="o">]</span>      ^pythia8@8244%gcc@9.3.0~evtgen~fastjet+hepmc~root+shared <span class="nv">arch</span><span class="o">=</span>linux-ubuntu20.04-broadwell
+<span class="o">[</span>+<span class="o">]</span>          ^rsync@3.1.3%gcc@9.3.0 <span class="nv">arch</span><span class="o">=</span>linux-ubuntu20.04-broadwell
+<span class="o">[</span>+<span class="o">]</span>              ^popt@1.16%gcc@9.3.0 <span class="nv">arch</span><span class="o">=</span>linux-ubuntu20.04-broadwell
+<span class="o">[</span>+<span class="o">]</span>              ^zlib@1.2.11%gcc@9.3.0+optimize+pic+shared <span class="nv">arch</span><span class="o">=</span>linux-ubuntu20.04-broadwell
+</pre></div>
+</div>
+<p>This ‘concretizer’ is one of the areas of development in spack, so the commands might frequently change or the behaviour differ from what is described here.</p>
+<section id="working-around-spack-concretizer-problems">
+<h3>Working around spack concretizer problems<a class="headerlink" href="#working-around-spack-concretizer-problems" title="Permalink to this headline">¶</a></h3>
+<p>Currently the default settings for some of the packages here do not work due to
+known <a class="reference external" href="https://spack.readthedocs.io/en/latest/known_issues.html#variants-are-not-properly-forwarded-to-dependencies">short comings of the spack
+concretizer</a>.
+For example <code class="docutils literal notranslate"><span class="pre">spack</span> <span class="pre">install</span> <span class="pre">k4fwcore</span></code> will most probably fail with the following error</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>1. &quot;cxxstd=11&quot; conflicts with &quot;root+root7&quot; [root7 requires at least C++14]
+</pre></div>
+</div>
+<p>Instead of fixing all the packages to deal with these issues, one of the
+following workarounds can be used. The issues in spack are planned to be fixed
+with the next spack release which would hopefully make these obsolete.</p>
+<section id="requiring-a-specific-package-version">
+<h4>Requiring a specific package version<a class="headerlink" href="#requiring-a-specific-package-version" title="Permalink to this headline">¶</a></h4>
+<p>The simplest solution to the above problem is to simply require a <code class="docutils literal notranslate"><span class="pre">root</span></code> version
+with the appropriate requirements, e.g.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>spack install k4fwcore ^root <span class="nv">cxxstd</span><span class="o">=</span><span class="m">17</span>
+</pre></div>
+</div>
+<p>will tell spack to use <code class="docutils literal notranslate"><span class="pre">cxxstd=17</span></code> also for building <code class="docutils literal notranslate"><span class="pre">root</span></code> and get rid of the
+conflict above. If using this, make sure to use the same value for <code class="docutils literal notranslate"><span class="pre">cxxstd</span></code> for
+<code class="docutils literal notranslate"><span class="pre">k4fwcore</span></code> and <code class="docutils literal notranslate"><span class="pre">root</span></code>.</p>
+</section>
+<section id="requiring-certain-variants-globally">
+<h4>Requiring certain variants globally<a class="headerlink" href="#requiring-certain-variants-globally" title="Permalink to this headline">¶</a></h4>
+<p>spack can be configured using some <a class="reference external" href="https://spack.readthedocs.io/en/latest/configuration.html">configuration
+files</a>. Specifically
+using <code class="docutils literal notranslate"><span class="pre">packages.yaml</span></code> which is read from the user directory, i.e. <code class="docutils literal notranslate"><span class="pre">~/.spack</span></code> (or
+<code class="docutils literal notranslate"><span class="pre">/.spack/linux</span></code>) can be used to enforce the value of certain default variants
+globally. To solve the above problem it is enough to put the following into
+<code class="docutils literal notranslate"><span class="pre">packages.yaml</span></code>:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">packages</span><span class="p">:</span>
+  <span class="nt">all</span><span class="p">:</span>
+  <span class="nt">variants</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">cxxstd=17</span>
+</pre></div>
+</div>
+<p>It is still possible to override this for certain packages either by
+individually configuring them in <code class="docutils literal notranslate"><span class="pre">packages.yaml</span></code> or via the command line which
+take precedence over all configuration files.</p>
+</section>
+</section>
+</section>
+<section id="system-dependencies">
+<h2>System Dependencies<a class="headerlink" href="#system-dependencies" title="Permalink to this headline">¶</a></h2>
+<p>Although spack can use externally installed packages (and even automatically find them), this is strongly discouraged.
+This is because the dependency resolution may not work as intended, and changes to the external packages can break the installation</p>
+</section>
+<section id="target-architectures">
+<h2>Target Architectures<a class="headerlink" href="#target-architectures" title="Permalink to this headline">¶</a></h2>
+<p>Since HEP software is usually deployed on a variety of machines via cvmfs, installations need to pick a target architecture. <code class="docutils literal notranslate"><span class="pre">broadwell</span></code> is for now the default choice, and can be set with:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>packages:
+  all:
+    target: [broadwell]
+</pre></div>
+</div>
+<p>in <code class="docutils literal notranslate"><span class="pre">$HOME/.spack/linux/packages.yaml</span></code></p>
+</section>
+<section id="bundle-packages-and-environments">
+<h2>Bundle Packages and Environments<a class="headerlink" href="#bundle-packages-and-environments" title="Permalink to this headline">¶</a></h2>
+<p>Right now, key4hep is installed via a <code class="docutils literal notranslate"><span class="pre">BundlePackage</span></code>, that depends on all other relevant packages.
+An alternative would be to use <a class="reference external" href="https://spack-tutorial.readthedocs.io/en/latest/tutorial_environments.html#creating-and-activating-environments">spack environments</a>. This alternative is still under investigation.</p>
+</section>
+<section id="setting-up-runtime-environments">
+<h2>Setting Up Runtime Environments<a class="headerlink" href="#setting-up-runtime-environments" title="Permalink to this headline">¶</a></h2>
+<p>The simplest way to set the environment to use spack installed packages is to use the <code class="docutils literal notranslate"><span class="pre">spack</span> <span class="pre">load</span></code> command.
+In order for users not to have to set up spack when it is not needed, the <code class="docutils literal notranslate"><span class="pre">key4hep-stack</span></code> bundle package includes a script that will automatically generate a bash setup script and install it into its prefix.</p>
+<p>Spack can also create “filesystem views” of several packages, resulting in a directory structure similar what you would find in <code class="docutils literal notranslate"><span class="pre">/usr/local</span></code>.
+This simplifies library and include paths, but the setup generation for views still has to be developed.</p>
+</section>
+<section id="compiler-dependencies-and-data-packages">
+<h2>Compiler Dependencies and Data Packages<a class="headerlink" href="#compiler-dependencies-and-data-packages" title="Permalink to this headline">¶</a></h2>
+<p>Some HEP packages (like <code class="docutils literal notranslate"><span class="pre">geant4-data</span></code>) consist only of data files, and can thus be used on any platform.
+Spack cannot yet handle this gracefully, but an ongoing development tries to treat compilers as dependencies, which would help with re-using data packages.</p>
+</section>
+<section id="duplicating-recipes-in-downstream-repositories">
+<h2>Duplicating Recipes in Downstream Repositories<a class="headerlink" href="#duplicating-recipes-in-downstream-repositories" title="Permalink to this headline">¶</a></h2>
+<p>Although it is possible to “patch” spack build recipes by overriding them in another repository (key4hep-spack, for example), this is discouraged.
+The central repo is one of the strenghts of spack, with many contributors ensuring that packages build smoothly.
+Also, packages are installed in different namespaces, so it is not possible to deprecate changed recipes and use the upstream ones without re-installing the packages.</p>
+</section>
+<section id="cvmfs-installation-workflow">
+<h2>CVMFS Installation Workflow<a class="headerlink" href="#cvmfs-installation-workflow" title="Permalink to this headline">¶</a></h2>
+<p>The distribution on cvmfs is an exact copy of the spack installation on the build machine, just copied with this rsync command on the publisher:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>rsync -axv --inplace --delete    --verbose -e &quot;ssh -T  -o Compression=no -o StrictHostKeyChecking=no -o GSSAPIAuthentication=yes -o GSSAPITrustDNS=yes&quot; user@build-machine:/cvmfs/sw.hsf.org/spackages/ /cvmfs/sw.hsf.org/spackages/
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">--delete</span></code> option can be omitted in order to preserve already installed packages, regardless of the state of the build machine.</p>
+</section>
+<section id="compiler-wrappers">
+<h2>Compiler Wrappers<a class="headerlink" href="#compiler-wrappers" title="Permalink to this headline">¶</a></h2>
+<p>Spack uses compiler wrappers instead of exposing the actual compilers during the build.
+For packages like whizard, which register the compiler path to use during runtime, this will not work, as the wrappers are not available at runtime.
+For these packages, the current workaround is to force spack to use the actual compilers during build (see the build recipe of <code class="docutils literal notranslate"><span class="pre">whizard</span></code>).</p>
+</section>
+<section id="spack-installed-lcg-releases">
+<h2>Spack-Installed LCG releases<a class="headerlink" href="#spack-installed-lcg-releases" title="Permalink to this headline">¶</a></h2>
+<p>A spack installation that contains all packages in the LCG releases is work in progress, see https://gitlab.cern.ch/sft/sft-spack-repo.</p>
+</section>
+<section id="using-spack-installed-gcc">
+<h2>Using Spack-installed GCC<a class="headerlink" href="#using-spack-installed-gcc" title="Permalink to this headline">¶</a></h2>
+<p>When installing gcc with spack, it is necessary to add a <code class="docutils literal notranslate"><span class="pre">cc</span></code> symlink to <code class="docutils literal notranslate"><span class="pre">$PATH</span></code>, in order to avoid errors with cling, see https://github.com/spack/spack/issues/17488.</p>
+</section>
+</section>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="spack-developer-workflows.html" class="btn btn-neutral float-right" title="Spack workflows for developing Key4hep software" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="spack-nightlies.html" class="btn btn-neutral float-left" title="Nightly Builds with Spack" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2020, Key4hep.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

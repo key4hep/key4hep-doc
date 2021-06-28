@@ -1,0 +1,614 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Spack workflows for developing Key4hep software &mdash; Key4hep  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/panels.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="../_static/panels.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Spack Buildcaches" href="spack-buildcache.html" />
+    <link rel="prev" title="Spack Usage and Further Technical Topics" href="spack-advanced.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Key4hep
+          
+
+          
+            
+            <img src="../_static/starterkit.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../setup-and-getting-started/README.html">Getting started with Key4hep software</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../setup-and-getting-started/README.html#setting-up-the-key4hep-software-stack">Setting up the Key4hep Software Stack</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../setup-and-getting-started/README.html#using-central-installations-on-cvmfs">Using central installations on cvmfs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../setup-and-getting-started/README.html#using-virtual-machines-or-docker-containers">Using Virtual Machines or Docker containers</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../setup-and-getting-started/README.html#cernvm-virtual-appliance">CernVM Virtual Appliance</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="README.html">Using Spack to build Key4hep software</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="README.html#setting-up-spack">Setting up Spack</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="README.html#downloading-a-pre-configured-instance-lxplus">Downloading a pre-configured instance (lxplus)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="README.html#configuring-spack">Configuring Spack</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="README.html#installing-spack">Installing Spack</a></li>
+<li class="toctree-l4"><a class="reference internal" href="README.html#installing-the-key4hep-package-recipes">Installing the key4hep package recipes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="README.html#configuring-packages-yaml">Configuring <code class="docutils literal notranslate"><span class="pre">packages.yaml</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="README.html#configuring-upstreams-yaml">Configuring <code class="docutils literal notranslate"><span class="pre">upstreams.yaml</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="README.html#setting-up-an-upstream-compiler">Setting up an upstream compiler</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="spack-nightlies.html">Nightly Builds with Spack</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="spack-nightlies.html#usage-of-the-nightly-builds-on-cvmfs">Usage of the nightly builds on CVMFS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spack-nightlies.html#technical-information">Technical Information</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="spack-advanced.html">Spack Usage and Further Technical Topics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="spack-advanced.html#concretizing-before-installation">Concretizing before Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="spack-advanced.html#working-around-spack-concretizer-problems">Working around spack concretizer problems</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="spack-advanced.html#requiring-a-specific-package-version">Requiring a specific package version</a></li>
+<li class="toctree-l4"><a class="reference internal" href="spack-advanced.html#requiring-certain-variants-globally">Requiring certain variants globally</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="spack-advanced.html#system-dependencies">System Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spack-advanced.html#target-architectures">Target Architectures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spack-advanced.html#bundle-packages-and-environments">Bundle Packages and Environments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spack-advanced.html#setting-up-runtime-environments">Setting Up Runtime Environments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spack-advanced.html#compiler-dependencies-and-data-packages">Compiler Dependencies and Data Packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spack-advanced.html#duplicating-recipes-in-downstream-repositories">Duplicating Recipes in Downstream Repositories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spack-advanced.html#cvmfs-installation-workflow">CVMFS Installation Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spack-advanced.html#compiler-wrappers">Compiler Wrappers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spack-advanced.html#spack-installed-lcg-releases">Spack-Installed LCG releases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spack-advanced.html#using-spack-installed-gcc">Using Spack-installed GCC</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Spack workflows for developing Key4hep software</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#developing-a-single-package">Developing a single package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#installing-a-local-version-with-dev-build">Installing a local version with <code class="docutils literal notranslate"><span class="pre">dev-build</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#using-the-local-version-as-dependency">Using the local version as dependency</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#more-advanced-usage">More advanced usage</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#developing-multiple-packages-or-dependencies-of-other-packages">Developing multiple packages or dependencies of other packages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#using-an-environment-to-setup-all-dependencies">Using an environment to setup all dependencies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#environments-and-a-development-workflow">Environments and a development workflow</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#adding-another-package-to-develop">Adding another package to develop</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="spack-buildcache.html">Spack Buildcaches</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/clic.html">Using the Key4hep-Stack for CLIC Simulation and Reconstruction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../examples/clic.html#simulation">Simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/clic.html#reconstruction">Reconstruction</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../examples/clic.html#reconstruction-with-marlin">Reconstruction with Marlin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/clic.html#reconstruction-with-with-gaudi">Reconstruction with with Gaudi</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developing-key4hep-software/README.html">Developing Key4hep</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../developing-key4hep-software/Key4hepSoftwareGit.html">Github workflow and contribution guide</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../developing-key4hep-software/Key4hepSoftwareGit.html#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-key4hep-software/Key4hepSoftwareGit.html#first-time-setup-of-git">First time setup of git</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-key4hep-software/Key4hepSoftwareGit.html#generate-and-set-up-ssh-keys-for-github">Generate and set up ssh keys for github</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-key4hep-software/Key4hepSoftwareGit.html#improving-your-git-experience">Improving your git experience</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-key4hep-software/Key4hepSoftwareGit.html#development-workflow">Development workflow</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../developing-key4hep-software/Key4hepSoftwareGit.html#keeping-your-local-repository-up-to-date">Keeping your local repository up to date</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../developing-key4hep-software/Key4hepSoftwareGit.html#contributing-code">Contributing code</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-key4hep-software/Key4hepSoftwareGit.html#recommendations">Recommendations</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../developing-key4hep-software/Key4hepSoftwareGit.html#general-recommendations">General recommendations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../developing-key4hep-software/Key4hepSoftwareGit.html#commit-comments">Commit comments</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../developing-key4hep-software/Key4hepSoftwareGit.html#cleaning-history">Cleaning history</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../developing-key4hep-software/Key4hepSoftwareGit.html#pull-requests">Pull requests</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-key4hep-software/Key4hepSoftwareGit.html#trouble-shooting">Trouble-shooting</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../developing-key4hep-software/Key4hepSoftwareGit.html#when-i-try-to-push-to-the-repository-i-get-an-authentication-error">When I try to push to the repository, I get an authentication error</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../developing-key4hep-software/Key4hepSoftwareGit.html#i-have-cloned-with-https-and-now-i-can-t-push-my-changes-what-do-i-do">I have cloned with https and now I can’t push my changes, what do I do?</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-key4hep-software/Key4hepSoftwareGit.html#need-help">Need help?</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../developing-key4hep-software/Key4hepCMakeGuide.html">CMake guide for Key4hep software</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../developing-key4hep-software/Key4hepCMakeGuide.html#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-key4hep-software/Key4hepCMakeGuide.html#quick-start-into-building-key4hep-software">Quick start into building Key4hep Software</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../developing-key4hep-software/Key4hepCMakeGuide.html#set-up-the-environment">Set up the environment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../developing-key4hep-software/Key4hepCMakeGuide.html#running-cmake">Running CMake</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../developing-key4hep-software/Key4hepCMakeGuide.html#using-your-local-installation">Using your local installation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-key4hep-software/Key4hepCMakeGuide.html#cmake-example-packages">CMake example packages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-key4hep-software/Key4hepCMakeGuide.html#changing-the-cmake-configuration">Changing the CMake Configuration</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../developing-key4hep-software/Key4hepCMakeGuide.html#runtime-environment">Runtime Environment</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-key4hep-software/Key4hepCMakeGuide.html#ctest-in-key4hep">CTest in Key4hep</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../developing-key4hep-software/Key4hepCMakeGuide.html#customizing-how-cmake-is-run">Customizing how CMake is run</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../developing-key4hep-software/WritingAlgorithms.html">Writing Gaudi Algorithms</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../developing-key4hep-software/WritingAlgorithms.html#getting-started">Getting Started</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-key4hep-software/WritingAlgorithms.html#exercise-adding-an-algorithm">Exercise: Adding an Algorithm</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../talks-and-presentations/README.html">Talks and Presentations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../talks-and-presentations/README.html#upcoming-talks-and-workshops">Upcoming Talks and Workshops</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../call-for-logos/README.html">Call for logos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CONTRIBUTING.html">Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CONTRIBUTING.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../CONTRIBUTING.html#dependencies">Dependencies</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../CONDUCT.html">Contributor Code of Conduct</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../LICENSE.html">Instructional Material</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../LICENSE.html#software">Software</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">External links:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://cern.ch/fccsw">FCC software</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://twiki.cern.ch/twiki/bin/view/CLIC/CLICSoftwareComputing">CLIC software</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://ilcsoft.desy.de/portal">ILC software</a></li>
+<li class="toctree-l1"><a class="reference external" href="http://cepcsoft.ihep.ac.cn/">CEPC software</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Key4hep</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Spack workflows for developing Key4hep software</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            
+              <a href="https://github.com/key4hep/key4hep-doc/blob/master/spack-build-instructions/spack-developer-workflows.md" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <section id="spack-workflows-for-developing-key4hep-software">
+<h1>Spack workflows for developing Key4hep software<a class="headerlink" href="#spack-workflows-for-developing-key4hep-software" title="Permalink to this headline">¶</a></h1>
+<p>Using spack to develop software is somewhat pushing its intended usage to its limits.
+However, it is not impossible and this is an area of spack that is currently under active development.
+Unfortunately, this also means that the spack documentation might not be fully up-to-date on these topics.
+Hence, this page tries to collect some of the experiences the Key4hep developers have made.</p>
+<section id="developing-a-single-package">
+<h2>Developing a single package<a class="headerlink" href="#developing-a-single-package" title="Permalink to this headline">¶</a></h2>
+<p>When only developing on a single package it is possible to use the <a class="reference external" href="https://spack.readthedocs.io/en/latest/command_index.html#spack-dev-build"><code class="docutils literal notranslate"><span class="pre">dev-build</span></code></a> command of spack.
+A brief tutorial can be found in <a class="reference external" href="https://spack-tutorial.readthedocs.io/en/lanl19/tutorial_developer_workflows.html">the spack documentation</a>.
+There is also a dedicated channel on slack (https://spackpm.herokuapp.com/) where questions regarding the development workflow can be discussed.
+It allows to build a given package directly from local sources in the same way as spack does it, and even makes this package available to other packages in the same way it does packages that have been installed by spack directly.
+Here we will use <a class="reference external" href="https://github.com/iLCSoft/LCIO">LCIO</a> as an example since it can be installed without (or with only one) dependency.</p>
+<p>As a first step let’s have a look at what installing <code class="docutils literal notranslate"><span class="pre">lcio</span></code> with spack would entail.
+Note that we explicitly disable the ROOT dictionaries in order to limit the number of dependencies</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>spack spec -Il lcio ~rootdict
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Input spec
+--------------------------------
+ -   lcio~rootdict
+
+Concretized
+--------------------------------
+
+ -   vdwx2aq  lcio@2.16%gcc@9.3.0~examples~ipo~jar~rootdict build_type=RelWithDebInfo cxxstd=17 arch=linux-ubuntu20.04-skylake
+[+]  utzbuq7      ^cmake@3.16.3%gcc@9.3.0~doc+ncurses+openssl+ownlibs~qt patches=1c540040c7e203dd8e27aa20345ecb07fe06570d56410a24a266ae570b1c4c39,bf695e3febb222da2ed94b3beea600650e4318975da90e4a71d6f31a6d5d8c3d arch=linux-ubuntu20.04-skylake
+[+]  pljbs5a      ^sio@0.0.4%gcc@9.3.0+builtin_zlib~ipo build_type=RelWithDebInfo cxxstd=17 arch=linux-ubuntu20.04-skylake
+</pre></div>
+</div>
+<p>In this configuration <code class="docutils literal notranslate"><span class="pre">lcio</span></code> has only two dependencies, <code class="docutils literal notranslate"><span class="pre">sio</span></code> and <code class="docutils literal notranslate"><span class="pre">cmake</span></code>, which are both already installed in this case.
+If these dependencies are not yet installed, spack will automatically install them for you when using the <code class="docutils literal notranslate"><span class="pre">dev-build</span></code> command.</p>
+<section id="installing-a-local-version-with-dev-build">
+<h3>Installing a local version with <code class="docutils literal notranslate"><span class="pre">dev-build</span></code><a class="headerlink" href="#installing-a-local-version-with-dev-build" title="Permalink to this headline">¶</a></h3>
+<p>In order to install a local version of LCIO with spack, first we have to clone it into a local directory</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/iLCSoft/LCIO
+</pre></div>
+</div>
+<p>Now we can install this local version via</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> LCIO
+spack dev-build lcio@master ~rootdict
+</pre></div>
+</div>
+<p>This should install <code class="docutils literal notranslate"><span class="pre">lcio</span></code> and all dependencies that are not yet fulfilled, giving you the full output of all the build stages ending on something like the following</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>...
+==&gt; lcio: Successfully installed lcio-master-7dovpqn3kscbg672ham5wcqro7lg45gh
+  Fetch: 0.00s.  Build: 1.62s.  Total: 1.62s.
+[+] /home/tmadlener/work/spack/opt/spack/linux-ubuntu20.04-skylake/gcc-9.3.0/lcio-master-7dovpqn3kscbg672ham5wcqro7lg45gh
+</pre></div>
+</div>
+<p>Note, that it is necessary to specify a single concrete version here for <code class="docutils literal notranslate"><span class="pre">lcio</span></code>. We use <code class="docutils literal notranslate"><span class="pre">&#64;master</span></code>.
+This version has to be one that is already available for the package (use <code class="docutils literal notranslate"><span class="pre">spack</span> <span class="pre">info</span></code> to find out which ones are available) and cannot be an arbitrary version.
+It also does not necessarily have to correspond to the actual version of the source code you are currently installing.
+However, it is of course encouraged to use a meaningful version specifier, since this package should also be useable as desired by dependent packages.</p>
+</section>
+<section id="using-the-local-version-as-dependency">
+<h3>Using the local version as dependency<a class="headerlink" href="#using-the-local-version-as-dependency" title="Permalink to this headline">¶</a></h3>
+<p>Now that the local version has been installed, it would of course be nice to be able to use it in downstream packages as well.
+Spack doesn’t pick package versions installed from local sources by default, but as with any other package it is possible to require a specific version of a dependency.
+This is described in a bit more detail <a class="reference external" href="https://key4hep.github.io/key4hep-doc/spack-build-instructions/spack-advanced.html#concretizing-before-installation">here</a>.</p>
+<p>Let’s first find out how the version that we have just installed looks like</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>spack find -lv lcio
+</pre></div>
+</div>
+<p>which will yield something similar to</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>==&gt; 1 installed package
+-- linux-ubuntu20.04-skylake / gcc@9.3.0 ------------------------
+7dovpqn lcio@master~examples~ipo~jar~rootdict build_type=RelWithDebInfo cxxstd=17 dev_path=/home/tmadlener/work/ILCSoft/LCIO
+</pre></div>
+</div>
+<p>As you can see the local path from which this version was installed has become part of the spec for the installed package (the <code class="docutils literal notranslate"><span class="pre">dev_path=...</span></code> part of the spec above).
+Hence, also the hash is affected by the fact that it has been built from a local source.</p>
+</section>
+<section id="more-advanced-usage">
+<h3>More advanced usage<a class="headerlink" href="#more-advanced-usage" title="Permalink to this headline">¶</a></h3>
+<p>Note: If you have installed lcio following the description above you might have to uninstall it again first to follow these instructions, because spack will not overwrite an already installed package.</p>
+<p>The above instructions only dealt with installing a package from a local source, but not how to easily get a development environment allowing for a quick edit, compile cycle.
+This can be achieved by using the <code class="docutils literal notranslate"><span class="pre">--drop-in</span></code> and the <code class="docutils literal notranslate"><span class="pre">--before</span></code>/<code class="docutils literal notranslate"><span class="pre">--until</span></code> arguments of the <code class="docutils literal notranslate"><span class="pre">dev-build</span></code> command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>spack dev-build --drop-in bash --until cmake lcio@master ~rootdict
+</pre></div>
+</div>
+<p>This command will first install all necessary dependencies, then run the install process for <code class="docutils literal notranslate"><span class="pre">lcio</span></code> until <strong>after</strong> the <code class="docutils literal notranslate"><span class="pre">cmake</span></code> stage and then drop you into a new bash shell with the proper build environment setup.
+It will also setup a build folder, which follows the naming scheme <code class="docutils literal notranslate"><span class="pre">spack-build-${hash}</span></code>, in this case: <code class="docutils literal notranslate"><span class="pre">spack-build-7dovpqn</span></code>.
+To compile <code class="docutils literal notranslate"><span class="pre">lcio</span></code> simply go into this directory and run <code class="docutils literal notranslate"><span class="pre">make</span></code> in there</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> spack-build-7dovpqn
+make -j4
+</pre></div>
+</div>
+<p>You are now in an environment where you can easily edit the local source code and re-compile afterwards.</p>
+<p>Once all the development is done, it is still necessary to install everything to the appropriate location.
+This installation has to be registered in the spack database as well. Hence, simply calling <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">install</span></code> in the build directory will not do the trick.
+Another call to <code class="docutils literal notranslate"><span class="pre">dev-build</span></code> is necessary.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> .. <span class="c1"># go back to the source directory where you started</span>
+spack dev-build lcio@master ~rootdict
+</pre></div>
+</div>
+<p>This will run the whole chain again, but it will not overwrite the build directory.
+Hence, it will not recompile everything again, but simply install all the build artifacts to the appropriate location.
+<code class="docutils literal notranslate"><span class="pre">spack</span> <span class="pre">find</span> <span class="pre">-lv</span> <span class="pre">lcio</span></code> can be used to check if the installation was successful.</p>
+<p><strong>NOTE: You are probably still in the build environment at this stage. To return back to you original shell simply type <code class="docutils literal notranslate"><span class="pre">exit</span></code>.</strong></p>
+</section>
+</section>
+<section id="developing-multiple-packages-or-dependencies-of-other-packages">
+<h2>Developing multiple packages or dependencies of other packages<a class="headerlink" href="#developing-multiple-packages-or-dependencies-of-other-packages" title="Permalink to this headline">¶</a></h2>
+<p>Developing on many packages simultaneously using the <code class="docutils literal notranslate"><span class="pre">dev-build</span></code> command can become cumbersome and doesn’t really scale.</p>
+<section id="using-an-environment-to-setup-all-dependencies">
+<h3>Using an environment to setup all dependencies<a class="headerlink" href="#using-an-environment-to-setup-all-dependencies" title="Permalink to this headline">¶</a></h3>
+<p>One way to develop on multiple packages simultaneously can be to setup an <a class="reference external" href="https://spack.readthedocs.io/en/latest/environments.html">environment</a> that contains the dependencies of all packages.</p>
+<p>As an example the following definition of an environment has been used to develop on
+<a class="reference external" href="https://github.com/AIDASoft/podio"><code class="docutils literal notranslate"><span class="pre">podio</span></code></a>, <a class="reference external" href="https://github.com/key4hep/EDM4HEP"><code class="docutils literal notranslate"><span class="pre">EDM4HEP</span></code></a> and some other packages.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">spack</span><span class="p">:</span>
+  <span class="nt">specs</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">python</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">root@6.20.04 +davix+gsl+math~memstat+minuit+mlp~mysql+opengl~postgres~pythia6+pythia8+python~qt4+r+root7+rootfit+rpath~shadow+sqlite+ssl~table+tbb+threads+tmva+unuran+vc+vdt+vmc+x+xml+xrootd build_type=RelWithDebInfo cxxstd=17 patches=22af3471f3fd87c0fe8917bf9c811c6d806de6c8b9867d30a1e3d383a1b929d7</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">dd4hep +geant4</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">geant4</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">heppdt</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">hepmc@2.06.10</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">tricktrack</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">py-pyyaml</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">py-jinja2</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">cmake</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">pythia8</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">evtgen</span>
+  <span class="nt">concretization</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">together</span>
+  <span class="nt">view</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+  <span class="nt">packages</span><span class="p">:</span>
+    <span class="nt">all</span><span class="p">:</span>
+      <span class="nt">compiler</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="nv">gcc@9.3.0</span><span class="p p-Indicator">]</span>
+      <span class="nt">variants</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">cxxstd=17</span>
+</pre></div>
+</div>
+<p>Assuming this is the content of <code class="docutils literal notranslate"><span class="pre">edm4hep_devel.yaml</span></code> an environment can be created, activated, concretized and installed with the following commands:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>spack env create edm4hep-devel edm4hep_devel.yaml
+spack env activate -p edm4hep-devel
+spack concretize
+spack install
+</pre></div>
+</div>
+<p>After an environment has been installed, it can easily be activated via</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>spack env activate -p edm4hep-devel
+</pre></div>
+</div>
+<p>which immediately drops you in an environment with all the packages stated in the environment file above available and properly set up.
+Developing packages that depend on these should then be straight forward, especially for properly setup CMake based projects that can automatically find and configure their dependencies.</p>
+<p>The disadvantage of this approach is that the packages you want to develop on have to be on the top of the stack and if they depend on each other, you still have to properly handle these dependencies on your own.</p>
+</section>
+<section id="environments-and-a-development-workflow">
+<h3>Environments and a development workflow<a class="headerlink" href="#environments-and-a-development-workflow" title="Permalink to this headline">¶</a></h3>
+<p>Recently spack gained the ability to setup environments and specify multiple packages that you would like to develop on (See <a class="reference external" href="https://github.com/spack/spack/pull/15256">spack/spack#256</a>).
+It is not yet really documented and it is not yet fully optimized, but it allows for a decent development experience if your package is not too deep down in the stack.
+It is not impossible to develop on packages deep down the software stack, but this can imply frequently recompiling large parts of the software stack, since spack does not yet handle this in the best way, but instead builds all packages that you are not developing on from scratch. Hence, even if a simple relinking would have done the trick, spack will still build a lot of packages again.
+Nevertheless, the feature is in a usable state and this section briefly describes how to use it.
+Especially if you mainly develop on one package but sometimes want to check whether the rest of the stack, that depends on this package still compiles with the latest version, this can be a very useful workflow.</p>
+<p>As an example we will be using the <code class="docutils literal notranslate"><span class="pre">k4simdelphes</span></code> package that depends on <code class="docutils literal notranslate"><span class="pre">edm4hep</span></code>, which in turn depens again on <code class="docutils literal notranslate"><span class="pre">podio</span></code>.
+Suppose we want to change <code class="docutils literal notranslate"><span class="pre">podio</span></code> and <code class="docutils literal notranslate"><span class="pre">edm4hep</span></code> and see if <code class="docutils literal notranslate"><span class="pre">k4simdelphes</span></code> still compiles and works.
+We would then use an environment definition file similar to the usual environments. For this example it has the following content</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">spack</span><span class="p">:</span>
+  <span class="nt">spec</span><span class="p">:</span> 
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">k4simdelphes</span>
+  <span class="nt">concretization</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">together</span>
+  <span class="nt">view</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+  <span class="nt">packages</span><span class="p">:</span>
+     <span class="nt">all</span><span class="p">:</span>
+       <span class="nt">compiler</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="nv">gcc@9.3.0</span><span class="p p-Indicator">]</span>
+       <span class="nt">variants</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">cxxstd=17</span>
+  <span class="nt">develop</span><span class="p">:</span>
+    <span class="nt">podio</span><span class="p">:</span>
+      <span class="nt">spec</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">podio@master +sio</span>
+      <span class="nt">path</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">../../../../../podio</span>
+    <span class="nt">edm4hep</span><span class="p">:</span>
+      <span class="nt">spec</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">edm4hep@master</span>
+      <span class="nt">path</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">../../../../../EDM4hep</span>
+</pre></div>
+</div>
+<p>The first part is the same as previously, but a new <code class="docutils literal notranslate"><span class="pre">develop</span></code> section containing information about the packages that should be developed on has been added.
+For each package there is a <code class="docutils literal notranslate"><span class="pre">spec</span></code> and a <code class="docutils literal notranslate"><span class="pre">path</span></code> field. The <code class="docutils literal notranslate"><span class="pre">spec</span></code> field tells spack which spec to build, while the <code class="docutils literal notranslate"><span class="pre">path</span></code> field tells spack where the source files are located.
+<strong>The path is relative to the <code class="docutils literal notranslate"><span class="pre">$(prefix)/var/spack/environments/${environment-name}</span></code> directory or an absolute path.</strong></p>
+<p>Assuming that you are currently in the directory that contains local <code class="docutils literal notranslate"><span class="pre">spack</span></code> installation, the following steps are necessary to create the development environment</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/AIDASoft/podio
+git clone https://github.com/key4hep/EDM4hep
+spack env create my-development-env development_env_packages.yaml
+</pre></div>
+</div>
+<p>where <code class="docutils literal notranslate"><span class="pre">development_env_packages.yaml</span></code> is the yaml file with the contents just described above.</p>
+<p>It is now possible to activate this environment via</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>spack env activate -p my-development-env
+</pre></div>
+</div>
+<p>To install all the packages, including the local versions of <code class="docutils literal notranslate"><span class="pre">podio</span></code> and <code class="docutils literal notranslate"><span class="pre">edm4hep</span></code> it is now enough to simply do <code class="docutils literal notranslate"><span class="pre">spack</span> <span class="pre">install</span></code><strong>in the activated environment</strong>.
+This will build your local copies of <code class="docutils literal notranslate"><span class="pre">podio</span></code> and <code class="docutils literal notranslate"><span class="pre">edm4hep</span></code> and use these versions as dependencies for the <code class="docutils literal notranslate"><span class="pre">k4simdelphes</span></code> package.
+Changes can also be made to either of the two packages.
+To compile only one package without installing it yet, it is easiest to simply go to the directory where the sources are.
+There should now be a few spack related files and a spack build folder among the other source files</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[...]
+spack-configure-args.txt
+spack-build-env.txt
+spack-build-out.txt
+spack-build-${hash}
+</pre></div>
+</div>
+<p>Here <code class="docutils literal notranslate"><span class="pre">${hash}</span></code> is the same that you get from <code class="docutils literal notranslate"><span class="pre">spack</span> <span class="pre">find</span> <span class="pre">-l</span> <span class="pre">package</span></code>.
+After you have done all the necessary changes you can simply change into this build directory and run <code class="docutils literal notranslate"><span class="pre">make</span></code> to compile the package again.
+Once all your development is done and you want to install the package <code class="docutils literal notranslate"><span class="pre">spack</span> <span class="pre">install</span></code> will run the whole build chain again.
+This means that all the (local) development packages in your environment will only be recompiled as far as necessary, while all other packages that depend on the development packages will be re-built from scratch.</p>
+<p>Once you are done developing, this environment can be used like any other environment simply by running <code class="docutils literal notranslate"><span class="pre">spack</span> <span class="pre">env</span> <span class="pre">activate</span> <span class="pre">my-development-env</span></code> to activate it.</p>
+<section id="adding-another-package-to-develop">
+<h4>Adding another package to develop<a class="headerlink" href="#adding-another-package-to-develop" title="Permalink to this headline">¶</a></h4>
+<p>If you now realize that your changes to <code class="docutils literal notranslate"><span class="pre">podio</span></code> or <code class="docutils literal notranslate"><span class="pre">edm4hep</span></code> broke <code class="docutils literal notranslate"><span class="pre">k4simdelphes</span></code> and you need to also implement some changes there, you do not have to define a new environment.
+Instead it is possible to add <code class="docutils literal notranslate"><span class="pre">k4simdelphes</span></code> to the <code class="docutils literal notranslate"><span class="pre">develop</span></code> section via <code class="docutils literal notranslate"><span class="pre">spack</span> <span class="pre">develop</span></code> (assuming you are still in the activated environment and in the same directory where also the <code class="docutils literal notranslate"><span class="pre">podio</span></code> and <code class="docutils literal notranslate"><span class="pre">edm4hep</span></code> sources live)</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/key4hep/k4SimDelphes
+spack develop --no-clone --path ../../../../../k4SimDelphes k4simdelphes@main
+</pre></div>
+</div>
+<p>Here, the <code class="docutils literal notranslate"><span class="pre">--path</span></code> is again either relative to the environment directory inside spack. It could also be an absolute path.
+You now have to concretize the environment again before you can install the packages.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>spack concretize -f
+spack install
+</pre></div>
+</div>
+<p>Now you can work on <code class="docutils literal notranslate"><span class="pre">k4simdelphes</span></code> in the same way as you can for <code class="docutils literal notranslate"><span class="pre">podio</span></code> or <code class="docutils literal notranslate"><span class="pre">edm4hep</span></code>.
+You can also check that the environment now indeed uses your local version of <code class="docutils literal notranslate"><span class="pre">k4simdelphes</span></code> via</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>spack find -lv k4simdelphes
+</pre></div>
+</div>
+<p>which should now yield something along the lines of</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>==&gt; In environment my-development-env
+==&gt; Root specs
+------- k4simdelphes@main 
+
+==&gt; 1 installed package
+-- linux-ubuntu20.04-broadwell / gcc@9.3.0 ----------------------
+m5khm2w k4simdelphes@main~ipo build_type=RelWithDebInfo dev_path=/home/tmadlener/work/spack/var/spack/environments/test-devel-env/../../../../../k4SimDelphes
+</pre></div>
+</div>
+<p>where the path to the local source files has now again become part of the spec as can be seen by the <code class="docutils literal notranslate"><span class="pre">dev_path=...</span></code> part of the spec.</p>
+</section>
+</section>
+</section>
+</section>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="spack-buildcache.html" class="btn btn-neutral float-right" title="Spack Buildcaches" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="spack-advanced.html" class="btn btn-neutral float-left" title="Spack Usage and Further Technical Topics" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2020, Key4hep.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
