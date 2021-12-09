@@ -22,7 +22,7 @@ jobs:
         pip3 install -r requirements.txt
     - name: Sphinx build
       run: |
-        git clone --depth 1 https://github.com/key4hep/k4marlinwrapper
+        curl --fail --silent https://raw.githubusercontent.com/key4hep/k4MarlinWrapper/master/doc/starterkit/k4MarlinWrapperCLIC/Readme.md -o k4marlinwrapper/doc/starterkit/k4MarlinWrapperCLIC/Readme.md
         sphinx-build -M html . build
     - name: Publish gh-pages
       if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
