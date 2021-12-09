@@ -11,7 +11,7 @@ jobs:
       fail-fast: false
       matrix:
         SETUP: ['/cvmfs/sw.hsf.org/key4hep/setup.sh', '/cvmfs/sw-nightlies.hsf.org/key4hep/setup.sh']
-        PAGE: ['examples/clic', ]
+        PAGE: ['k4marlinwrapper/doc/starterkit/k4MarlinWrapperCLIC/Readme.md']
     steps:
     - uses: actions/checkout@v2
     - uses: cvmfs-contrib/github-action-cvmfs@v2
@@ -21,6 +21,7 @@ jobs:
     - name: Setup container
       run: |
         docker exec CI_container /bin/bash -c ' ln -s /usr/lib64/liblzma.so.5.2.2 /usr/lib64/liblzma.so;\
+        git clone --depth 1 https://github.com/key4hep/k4marlinwrapper;\
         source ${{ matrix.SETUP }};\
         pip3 install jupytext;\
         pip3 install --upgrade jupyter;\

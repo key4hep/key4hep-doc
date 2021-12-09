@@ -13,7 +13,7 @@
     spack-build-instructions/spack-advanced.md
     spack-build-instructions/spack-developer-workflows.md
     spack-build-instructions/spack-buildcache.md
-    examples/clic.md
+    k4marlinwrapper/doc/starterkit/k4MarlinWrapperCLIC/Readme.md
     developing-key4hep-software/README.md
     talks-and-presentations/README.md
     call-for-logos/README.md
