@@ -8,13 +8,10 @@
     :caption: Contents:
 
     setup-and-getting-started/README.md
-    spack-build-instructions/README.md
-    spack-build-instructions/spack-nightlies.md
-    spack-build-instructions/spack-advanced.md
-    spack-build-instructions/spack-developer-workflows.md
-    spack-build-instructions/spack-buildcache.md
     k4marlinwrapper/doc/starterkit/k4MarlinWrapperCLIC/Readme.md
     developing-key4hep-software/README.md
+    spack-build-instructions-for-developers/README.md
+    spack-build-instructions-for-librarians/README.md
     talks-and-presentations/README.md
     call-for-logos/README.md
     CONTRIBUTING.md
