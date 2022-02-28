@@ -10,7 +10,6 @@
     setup-and-getting-started/README.md
     k4marlinwrapper/doc/starterkit/k4MarlinWrapperCLIC/Readme.md
     developing-key4hep-software/README.md
-    spack-build-instructions-for-developers/README.md
     spack-build-instructions-for-librarians/README.md
     talks-and-presentations/README.md
     call-for-logos/README.md
