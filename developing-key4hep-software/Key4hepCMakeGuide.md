@@ -124,7 +124,7 @@ CMAKEFLAGS='--trace' make
 
 Instead of running `  make` , run:
 
- ```{.bash}
+ ```bash
  make VERBOSE=1 
  ```
 
