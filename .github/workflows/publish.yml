@@ -17,15 +17,18 @@ jobs:
       fail-fast: false
     steps:
     - uses: actions/checkout@v2
+    - uses: actions/setup-python@v2
+      with:
+        python-version: 3.9
     - name: Install Requirements
       run: |
-        pip3 install -r requirements.txt
+        pip install --upgrade pip
+        pip install -r requirements.txt
+    - name: Fetch external sources
+      run: |
+        bash .github/scripts/fetch_external_sources.sh
     - name: Sphinx build
       run: |
-        # pull in pages from other repositories
-        mkdir -p k4marlinwrapper/doc/starterkit/k4MarlinWrapperCLIC/
-        curl --fail --silent https://raw.githubusercontent.com/key4hep/k4MarlinWrapper/master/doc/starterkit/k4MarlinWrapperCLIC/Readme.md -o k4marlinwrapper/doc/starterkit/k4MarlinWrapperCLIC/Readme.md
-        # build site
         sphinx-build -M html . build
     - name: Publish gh-pages
       if: ${{ github.ref == 'refs/heads/master' }}
