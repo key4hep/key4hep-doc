@@ -1,4 +1,4 @@
-git+https://github.com/chrisburr/recommonmark.git@patch-1
+myst-parser==0.17.0
 starterkit-ci==0.0.12
 sphinx-copybutton==0.3.0
 sphinx-markdown-tables==0.0.15

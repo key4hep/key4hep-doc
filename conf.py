@@ -23,7 +23,7 @@ html_context = {
 extensions = [
     'sphinx_copybutton',
     'sphinx_markdown_tables',
-    'recommonmark',
+    'myst_parser',
 ]
 
 source_suffix = {
@@ -37,4 +37,4 @@ html_static_path += [
 linkcheck_ignore += [
 ]
 
-
+myst_heading_anchors = 3
