@@ -102,7 +102,7 @@ Please always follow the recommendations below.
 
 -   feel free to commit often to your local repository, make a pull request once the topic you are working on is finished
     - if the feature you are working on is large, consider making a work in progress-pull request (see [below](#pull-requests))
-    - git commits represent a snapshot of the software as a whole, and not only the difference to a previous commit (although that as well, in practice). It is recommended that each commit compiles and passes the tests. Take a look at the [commit history of a key4hep repository](https://github.com/key4hep/k4simdelphes/commits/master) and the histories of some individual files to find both good and bad examples. 
+    - git commits represent a snapshot of the software as a whole, and not only the difference to a previous commit (although that as well, in practice). It is recommended that each commit compiles and passes the tests. Take a look at the [commit history of a key4hep repository](https://github.com/key4hep/k4simdelphes/commits/main) and the histories of some individual files to find both good and bad examples.
     
 -   always provide a meaningful comment for each commit
     -   if you are working on an issue, refer to that issue by adding "refs. #[issue id]", see also
