@@ -11,7 +11,9 @@ try_fetch() {
     local repo=$(echo ${file} | awk -F '/' '{print $1}')
     local repo_file=${file/${repo}/}
 
-    curl --fail --silent https://raw.githubusercontent.com/${org}/${repo}/master/${repo_file#/} -o ${file}
+    for branch in main master; do
+      curl --fail --silent https://raw.githubusercontent.com/${org}/${repo}/${branch}/${repo_file#/} -o ${file} && break
+    done
 }
 
 while read -r line; do
