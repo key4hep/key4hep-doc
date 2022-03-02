@@ -63,14 +63,12 @@ However, it is of course encouraged to use a meaningful version specifier, since
 ### Using the local version as dependency
 
 Now that the local version has been installed, it would of course be nice to be able to use it in downstream packages as well.
-Spack doesn't pick package versions installed from local sources by default, but as with any other package it is possible to require a specific version of a dependency.
-This is described in a bit more detail [here](https://key4hep.github.io/key4hep-doc/spack-build-instructions/spack-advanced.html#concretizing-before-installation).
-
-Let's first find out how the version that we have just installed looks like
+As far as spack is concerned, a package that has been built from local sources is not really different from one that has been built from automatically downloaded sources.
+The main difference is that the fact that it has been built from local sources manifests in the spec
 ```bash
 spack find -lv lcio
 ```
-which will yield something similar to
+will yield something like
 ```
 ==> 1 installed package
 -- linux-ubuntu20.04-skylake / gcc@9.3.0 ------------------------
@@ -78,6 +76,12 @@ which will yield something similar to
 ```
 As you can see the local path from which this version was installed has become part of the spec for the installed package (the `dev_path=...` part of the spec above).
 Hence, also the hash is affected by the fact that it has been built from a local source.
+
+To use this specific version as a dependency the usual spack syntax can be used, e.g.
+```bash
+spack install marlin ^lcio/7dovpqn
+```
+will install `marlin` but use the version of `lcio` that we have just built locally.
 
 ### More advanced usage
 Note: If you have installed lcio following the description above you might have to uninstall it again first to follow these instructions, because spack will not overwrite an already installed package.
