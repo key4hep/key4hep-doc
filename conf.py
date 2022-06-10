@@ -12,6 +12,8 @@ exclude_patterns += [
     'README.md',
 ]
 
+html_theme = "sphinx_rtd_theme"
+
 html_context = {
     'display_github': True,
     'github_user': 'key4hep',
@@ -30,9 +32,9 @@ source_suffix = {
     '.md': 'markdown',
 }
 
-html_static_path += [
-    f'_static',
-]
+#html_static_path += [
+#    f'_static',
+#]
 
 linkcheck_ignore += [
 ]
