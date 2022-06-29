@@ -11,6 +11,7 @@
     k4marlinwrapper/doc/starterkit/k4MarlinWrapperCLIC/Readme.md
     k4marlinwrapper/doc/starterkit/k4MarlinWrapperCLIC/edmConverters.md
     k4marlinwrapper/doc/starterkit/k4MarlinWrapperCLIC/howtoMultithread.md
+    k4marlinwrapper/doc/starterkit/k4MarlinWrapperCLIC/CEDViaWrapper.md
     k4simdelphes/doc/starterkit/k4SimDelphes/Readme.md
     developing-key4hep-software/README.md
     spack-build-instructions-for-librarians/README.md
