@@ -19,3 +19,7 @@ Logo 4
 Logo 5
 
 <img src="key4hep_logo5.svg" width="50%" height="50%">
+
+Logo 6
+
+![](key4hep_logo6.svg)
