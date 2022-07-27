@@ -23,3 +23,4 @@ Logo 5
 Logo 6
 
 ![](key4hep_logo6.svg)
+![](key4hep_logo6p1.svg)
