@@ -2,22 +2,20 @@
 ## Setting up Spack
 
 
-### Downloading a pre-configured instance (lxplus)
+### Downloading a spack instance 
 
-On centos7 machines with cvmfs, the easiest way to set up spack is to download a pre-configured instance that is created automatically from the current key4hep/key4hep-spack repository.
+On centos7 machines with cvmfs, the easiest way to set up spack is to simply clone the key4hep fork, and use one of the provided spack "environments", that is spack configuration that is created automatically from the current key4hep/key4hep-spack repository.
 
 ```bash
-# download spack artifact created by ci --
-# pre-configured for key4hep use on lxplus/centos7
-
-curl -L -o spack.tar.gz https://gitlab.cern.ch/key4hep/k4-deploy/-/jobs/artifacts/release/raw/key4hep-spack_centos7-cvmfs.tar.gz?job=setup_spack_push
-tar xfz spack.tar.gz && rm spack.tar.gz
+git clone https://github.com/key4hep/spack
+git clone https://github.com/key4hep/key4hep-spack
 source spack/share/spack/setup-env.sh
+spack env activate key4hep-spack/environments/key4hep-release-user
 ```
 
 This sets up spack with a suitable compiler from cvmfs, the key4hep package recipes and the location of the upstream installation on cvmfs so packages can be installed on top:
 
-```
+```bash
 # list already installed ("upstream") packages
 spack find -p
 # install a package locally, using suitable upstream packages as dependencies
