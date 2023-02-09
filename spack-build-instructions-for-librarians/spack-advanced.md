@@ -3,7 +3,7 @@
 
 This page collects a few known workarounds for issues and areas of development in spack. 
 Check also the issues in [key4hep-spack](https://github.com/key4hep/key4hep-spack/issues) for up-to-date information. 
-Additionally, we also provide a few more advnaced invocations of `spack` commands that allow a certain degree of debugging of the decisions spack has made when installing a given package and its dependencies.
+Additionally, we also provide a few more advanced invocations of `spack` commands that allow a certain degree of debugging of the decisions spack has made when installing a given package and its dependencies.
 
 ## Checking which packages will be newly installed
 
