@@ -1,105 +1,73 @@
 
 # Spack Usage and Further Technical Topics
 
-This page collects a few known workarounds for issues and areas of development in spack.
-Check also the issues in [key4hep-spack](https://github.com/key4hep/key4hep-spack/issues) for up-to-date information.
+This page collects a few known workarounds for issues and areas of development in spack. 
+Check also the issues in [key4hep-spack](https://github.com/key4hep/key4hep-spack/issues) for up-to-date information. 
+Additionally, we also provide a few more advnaced invocations of `spack` commands that allow a certain degree of debugging of the decisions spack has made when installing a given package and its dependencies.
 
+## Checking which packages will be newly installed
 
-## Concretizing before Installation
-
-Spack often needs to be forced to use existing packages as dependencies when installing a new package.
-The best way to make sure that spack does not unnecessarily re-install is to 'preview' what will be installed with the command:
-
-```bash
-spack spec -I whizard
-```
+When installing a package it might be interesting to estimate how long it will take to do so.
+An important proxy for this is how many and which dependencies spack will install in order to build a package.
+This can be done with the `spack solve` command, which invokes the concretizer and then spits out the solution that would be installed if the same arguments were passed to `spack install`, e.g.
 
 ```bash
-
-Input spec
---------------------------------
- -   whizard
-
-Concretized
---------------------------------
- -   whizard@3.0.0_alpha%gcc@9.3.0~fastjet+hepmc~latex~lcio~lhapdf~openmp+pythia8 arch=linux-ubuntu20.04-broadwell
-[+]      ^hepmc@2.06.10%gcc@9.3.0 build_type=RelWithDebInfo arch=linux-ubuntu20.04-broadwell
-[+]          ^cmake@3.16.3%gcc@9.3.0~doc+ncurses+openssl+ownlibs~qt patches=1c540040c7e203dd8e27aa20345ecb07fe06570d56410a24a266ae570b1c4c39 arch=linux-ubuntu20.04-broadwell
- -       ^ocaml@4.10.0%gcc@9.3.0+force-safe-string arch=linux-ubuntu20.04-broadwell
-[+]          ^ncurses@6.2%gcc@9.3.0~symlinks+termlib arch=linux-ubuntu20.04-broadwell
-[+]              ^pkgconf@1.7.3%gcc@9.3.0 arch=linux-ubuntu20.04-broadwell
-[+]      ^pythia8@8244%gcc@9.3.0~evtgen~fastjet+hepmc~root+shared arch=linux-ubuntu20.04-broadwell
-[+]          ^rsync@3.1.3%gcc@9.3.0 arch=linux-ubuntu20.04-broadwell
-[+]              ^popt@1.16%gcc@9.3.0 arch=linux-ubuntu20.04-broadwell
-[+]              ^zlib@1.2.11%gcc@9.3.0+optimize+pic+shared arch=linux-ubuntu20.04-broadwell
-
-
+spack solve -I
 ```
-In this example, you could check for an existing `ocaml` installation and use it via its hash:
+```console
+==> Best of 12 considered solutions.
+==> Optimization Criteria:
+  Priority  Criterion                                            Installed  ToBuild
+  1         number of input specs not concretized                        -        0
+  2         number of packages to build (vs. reuse)                      -        4
+  3         requirement weight                                           0        0
+  4         deprecated versions used                                     1        0
+  5         version weight                                               0        0
+  6         number of non-default variants (roots)                       0        0
+  7         preferred providers for roots                                0        0
+  8         default values of variants not being used (roots)            0        0
+  9         number of non-default variants (non-roots)                   3        0
+  10        preferred providers (non-roots)                              0        0
+  11        compiler mismatches                                          0        0
+  12        OS mismatches                                                0        0
+  13        non-preferred OS's                                           0        0
+  14        version badness                                            156        0
+  15        default values of variants not being used (non-roots)        1        0
+  16        non-preferred compilers                                      0        0
+  17        target mismatches                                            0        0
+  18        non-preferred targets                                      165       44
 
-```bash
-
-spack find -l ocaml
-```
-
-```bash
-
-==> 2 installed packages
--- linux-centos7-broadwell / gcc@8.3.0 --------------------------
-2aolgjw ocaml@4.08.1  ycqhz3l ocaml@4.10.0
-```
-
-```bash
-
-spack spec -I whizard ^/ycqhz3l
-
---------------------------------
- -   whizard@3.0.0_alpha%gcc@9.3.0~fastjet+hepmc~latex~lcio~lhapdf~openmp+pythia8 arch=linux-ubuntu20.04-broadwell
-[+]      ^hepmc@2.06.10%gcc@9.3.0 build_type=RelWithDebInfo arch=linux-ubuntu20.04-broadwell
-[+]          ^cmake@3.16.3%gcc@9.3.0~doc+ncurses+openssl+ownlibs~qt patches=1c540040c7e203dd8e27aa20345ecb07fe06570d56410a24a266ae570b1c4c39 arch=linux-ubuntu20.04-broadwell
-[+]       ^ocaml@4.10.0%gcc@9.3.0+force-safe-string arch=linux-ubuntu20.04-broadwell
-[+]          ^ncurses@6.2%gcc@9.3.0~symlinks+termlib arch=linux-ubuntu20.04-broadwell
-[+]              ^pkgconf@1.7.3%gcc@9.3.0 arch=linux-ubuntu20.04-broadwell
-[+]      ^pythia8@8244%gcc@9.3.0~evtgen~fastjet+hepmc~root+shared arch=linux-ubuntu20.04-broadwell
-[+]          ^rsync@3.1.3%gcc@9.3.0 arch=linux-ubuntu20.04-broadwell
-[+]              ^popt@1.16%gcc@9.3.0 arch=linux-ubuntu20.04-broadwell
-[+]              ^zlib@1.2.11%gcc@9.3.0+optimize+pic+shared arch=linux-ubuntu20.04-broadwell
-
+ -   whizard@3.0.3%gcc@10.3.0~fastjet~latex~lcio~lhapdf~openloops~openmp+pythia8 hepmc=3 arch=linux-ubuntu20.04-x86_64
+[+]      ^hepmc3@3.2.4%gcc@10.3.0~interfaces~ipo~python~rootio build_type=RelWithDebInfo arch=linux-ubuntu20.04-x86_64
+[+]          ^cmake@3.16.3%gcc@10.3.0~doc+ncurses+ownlibs~qt build_type=RelWithDebInfo patches=1c54004,bf695e3 arch=linux-ubuntu20.04-x86_64
+ -       ^libtirpc@1.2.6%gcc@10.3.0 arch=linux-ubuntu20.04-x86_64
+ -           ^krb5@1.19.3%gcc@10.3.0+shared arch=linux-ubuntu20.04-x86_64
+[+]              ^bison@3.8.2%gcc@10.3.0 arch=linux-ubuntu20.04-x86_64
+[+]                  ^diffutils@3.8%gcc@10.3.0 arch=linux-ubuntu20.04-x86_64
+[+]                      ^libiconv@1.16%gcc@10.3.0 libs=shared,static arch=linux-ubuntu20.04-x86_64
+[+]                  ^m4@1.4.18%gcc@10.3.0+sigsegv patches=3877ab5,fc9b616 arch=linux-ubuntu20.04-x86_64
+[+]                  ^perl@5.30.0%gcc@10.3.0~cpanm+shared+threads arch=linux-ubuntu20.04-x86_64
+[+]              ^gettext@0.21%gcc@10.3.0+bzip2+curses+git~libunistring+libxml2+tar+xz arch=linux-ubuntu20.04-x86_64
+[+]                  ^bzip2@1.0.8%gcc@10.3.0~debug~pic+shared arch=linux-ubuntu20.04-x86_64
+[+]                  ^libxml2@2.9.13%gcc@10.3.0~python arch=linux-ubuntu20.04-x86_64
+[+]                      ^pkgconf@1.8.0%gcc@10.3.0 arch=linux-ubuntu20.04-x86_64
+[+]                      ^xz@5.2.5%gcc@10.3.0~pic libs=shared,static arch=linux-ubuntu20.04-x86_64
+[+]                      ^zlib@1.2.12%gcc@10.3.0+optimize+pic+shared patches=0d38234 arch=linux-ubuntu20.04-x86_64
+[+]                  ^ncurses@6.2%gcc@10.3.0~symlinks+termlib abi=none arch=linux-ubuntu20.04-x86_64
+[+]                  ^tar@1.30%gcc@10.3.0 zip=pigz arch=linux-ubuntu20.04-x86_64
+[+]              ^openssl@1.1.1f%gcc@10.3.0~docs~shared certs=mozilla arch=linux-ubuntu20.04-x86_64
+ -       ^ocaml@4.13.1%gcc@10.3.0+force-safe-string arch=linux-ubuntu20.04-x86_64
+[+]      ^pythia8@8.306%gcc@10.3.0~evtgen~fastjet~hdf5+hepmc+hepmc3~lhapdf~madgraph5amc~mpich~openmpi~python~rivet~root+shared arch=linux-ubuntu20.04-x86_64
+[+]          ^hepmc@2.06.11%gcc@10.3.0~ipo build_type=RelWithDebInfo length=MM momentum=GEV arch=linux-ubuntu20.04-x86_64
+[+]          ^rsync@3.1.3%gcc@10.3.0 arch=linux-ubuntu20.04-x86_64
 ```
 
-This 'concretizer' is one of the areas of development in spack, so the commands might frequently change or the behaviour differ from what is described here.
+The `-I` flag shows which packages are alrady installed.
+`spack solve` also shows some information about all the things that were considered during concretization. It can also be used to dump more information on the concretization process.
+Unfortunately, this information is rather hard to parse, and still a work in progress from the spack developers.
 
 
-
-### Working around spack concretizer problems
-
-Currently the default settings for some of the packages here do not work due to
-known [short comings of the spack
-concretizer](https://spack.readthedocs.io/en/latest/known_issues.html#variants-are-not-properly-forwarded-to-dependencies).
-For example `spack install k4fwcore` will most probably fail with the following error
-
-```
-1. "cxxstd=11" conflicts with "root+root7" [root7 requires at least C++14]
-```
-
-Instead of fixing all the packages to deal with these issues, one of the
-following workarounds can be used. The issues in spack are planned to be fixed
-with the next spack release which would hopefully make these obsolete.
-
-#### Requiring a specific package version
-
-The simplest solution to the above problem is to simply require a `root` version
-with the appropriate requirements, e.g.
-
-```bash
-spack install k4fwcore ^root cxxstd=17
-```
-
-will tell spack to use `cxxstd=17` also for building `root` and get rid of the
-conflict above. If using this, make sure to use the same value for `cxxstd` for
-`k4fwcore` and `root`.
-
-#### Requiring certain variants globally
+## Requiring certain variants globally
 
 spack can be configured using some [configuration
 files](https://spack.readthedocs.io/en/latest/configuration.html). Specifically
@@ -118,14 +86,13 @@ It is still possible to override this for certain packages either by
 individually configuring them in `packages.yaml` or via the command line which
 take precedence over all configuration files.
 
-
-
+In the Key4hep software stack build recipes for releases, we use the same mechanism, as this configuration is also available from spack environments.
 
 
 ## System Dependencies
 
-Although spack can use externally installed packages (and even automatically find them), this is strongly discouraged.
-This is because the dependency resolution may not work as intended, and changes to the external packages can break the installation
+Some spack packages have *external find* support. For these packages it is possible to let spack detect the variants and versions for system (or otherwise) installed packages.
+For such cases use the `spack external find` command. It has to be noted that detecting external packages and using them does not always work perfectly.
 
 
 ## Target Architectures
