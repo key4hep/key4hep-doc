@@ -1,13 +1,59 @@
 # Building Key4hep using Spack: For Developers 
 
-Using spack to develop software is somewhat pushing its intended usage to its limits.
-However, it is not impossible and this is an area of spack that is currently under active development.
-Unfortunately, this also means that the spack documentation might not be fully up-to-date on these topics.
-Hence, this page tries to collect some of the experiences the Key4hep developers have made.
+Using spack to develop software is somewhat pushing its intended usage to its
+limits. However, it is not impossible and this is an area of spack that is
+currently under active development. Unfortunately, this also means that the
+spack documentation might not be fully up-to-date on these topics. Hence, this
+page tries to collect some of the experiences the Key4hep developers have made.
 
 ```{tip} 
 To obtain and setup `spack` take a look at {doc}`/spack-build-instructions-for-librarians/spack-setup`.
 ```
+
+## Spack set up
+
+For a standalone spack installation where we are happy to install all the
+dependencies the link above will suffice. However, it is possible to use the
+key4hep stack from cvmfs that has all the dependencies installed and only
+install the packages that we want to work on. For that, it is important to
+reproduce the environment that was used for building whatever release we are
+going to use. Otherwise spack will see that we have different versions of
+packages and will try to compile and install more than what we need. As
+explained here, there are three files that are provided with each release or
+nightly, that we need to use. Let's say we want to use the nigthly for
+2023-07-18. Then the first thing we do is source the nightly:
+
+``` bash
+source /cvmfs/sw-nightlies.hsf.org/key4hep/releases/2023-07-18/x86_64-almalinux9-gcc11.3.1-opt/key4hep-stack/2023-07-18-kzukii/setup.sh
+```
+
+And then we clone spack and key4hep-spack, set up the environment and the
+upstream installation, and the latest build from scratch (that we have to find
+manually for now using, for example, `find -iname .scratch`), in this case it
+happens to be 2023-06-24):
+
+``` bash
+rel=/cvmfs/sw-nightlies.hsf.org/key4hep/releases/2023-07-18/x86_64-almalinux9-gcc11.3.1-opt
+latest_scratch=/cvmfs/sw-nightlies.hsf.org/key4hep/releases/2023-06-24/x86_64-almalinux9-gcc11.3.1-opt
+git clone https://github.com/key4hep/key4hep-spack --depth 1
+git clone https://github.com/spack/spack
+cd key4hep-spack
+git checkout $(cat $rel/.key4hep-spack-commit)
+cd ..
+cd spack
+git checkout $(cat $rel/.spack-commit)
+source $rel/.cherry-pick
+cd ..
+source spack/share/spack/setup-env.sh
+spack env activate key4hep-spack/environments/key4hep-nightly
+spack config add "upstreams:nightly:install_tree: $rel"
+spack config add "upstreams:nightly-scratch:install_tree: $latest_scratch"
+```
+
+And now we should have exactly the same version of spack and key4hep-spack that
+was used to make the build, so the number of dependencies that spack tries to
+install should be the minimum: it should find all the dependencies (in practice
+this may not be the case but it should find most of them).
 
 ## Developing a single package
 
@@ -36,8 +82,10 @@ Concretized
 
 ```
 
-In this configuration `lcio` has only two dependencies, `sio` and `cmake`, which are both already installed in this case.
-If these dependencies are not yet installed, spack will automatically install them for you when using the `dev-build` command.
+In this configuration `lcio` has only two dependencies, `sio` and `cmake`, which
+are both already installed in this case. If these dependencies are not yet
+installed, spack will automatically install them for you when using the
+`dev-build` command.
 
 ### Installing a local version with `dev-build`
 
