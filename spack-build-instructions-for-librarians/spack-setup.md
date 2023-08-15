@@ -7,7 +7,7 @@
 Spack is easy to set up: simply clone the key4hep fork, and use one of the provided spack "environments", that is spack configuration that is created automatically from the current key4hep/key4hep-spack repository.
 
 ```bash
-git clone https://github.com/key4hep/spack
+git clone https://github.com/spack/spack
 git clone https://github.com/key4hep/key4hep-spack
 source spack/share/spack/setup-env.sh
 source key4hep-spack/environments/key4hep-release-user/setup_clingo_centos7.sh # NOTE: only needed on centos7
@@ -61,7 +61,7 @@ While this still puts the configuration files in the global scope of spack, it i
 Spack itself is very easy to install -  simply clone the repository with git.
 
 ```bash
-git clone https://github.com/key4hep/spack.git
+git clone https://github.com/spack/spack.git
 source spack/share/spack/setup-env.sh
 ```
 
