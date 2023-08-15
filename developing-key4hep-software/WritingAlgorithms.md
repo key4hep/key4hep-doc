@@ -59,3 +59,15 @@ The repository contains an `EmptyAlg` in `K4TestFWCore/src/components`.
 * Third Step: Print out a string before the event number that should be configurable at runtime.
 
 * Finally: use the Gaudi Random Number Generator Service to approximate pi with a [Monte Carlo Integration](https://en.wikipedia.org/wiki/Monte_Carlo_integration)
+
+
+## Debugging: How to use GDB
+
+[The GNU Project Debugger](https://www.sourceware.org/gdb/) is supported by
+Gaudi and can be invoked by passing additional `--gdb` parameter to the `k4run`.
+For example:
+```bash
+k4run ../K4TestFWCore/options/createExampleEventData.py --gdb
+```
+This will start the GDB and attaches it to the algorithm. To start running of
+the algorithm type `continue` in the GDB console.
