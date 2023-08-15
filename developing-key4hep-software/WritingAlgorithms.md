@@ -69,5 +69,9 @@ For example:
 ```bash
 k4run ../K4TestFWCore/options/createExampleEventData.py --gdb
 ```
-This will start the GDB and attaches it to the algorithm. To start running of
-the algorithm type `continue` in the GDB console.
+This will start the GDB and attaches it to the Gaudi steering. After initial
+loading, user can start running of the steering by typing `continue` into the
+GDB console. To interrupt running of the Gaudi steering use `CTRL+C`.
+
+More details how to run GDB with Gaudi can be found in
+[LHCb Code Analysis Tools](https://twiki.cern.ch/twiki/bin/view/LHCb/CodeAnalysisTools#Debugging_gaudirun_py_on_Linux_w).
