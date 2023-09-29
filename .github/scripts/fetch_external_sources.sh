@@ -16,28 +16,36 @@ try_fetch() {
     done
 }
 
-while read -r line; do
-  # Check if line is non-empty and ends on .md
-  if [ -n "${line}" ] && [[ "${line}" == *.md ]]; then
-    # If the file exists do nothing, otherwise pull it in from github
-    if ! ls "${line}" > /dev/null 2>&1; then
-      echo "${line} does not exist. Trying to fetch it from github"
-      mkdir -p  $(dirname ${line}) # make the directory for the output
+# process one markdown file with content that potentially needs fetching from an
+# external repository
+fetch_for_file() {
+  local file_to_proc=${1}
 
-      # Try a few github organizations
-      for org in key4hep HEP-FCC AIDASoft iLCSoft; do
-        echo "Trying to fetch from github organization: '${org}'"
-        if try_fetch ${org} ${line}; then
-          echo "Fetched succesfully from organization '${org}'"
-          break
-        fi
-      done
-    fi
+  while read -r line; do
+    # Check if line is non-empty and ends on .md
+    if [ -n "${line}" ] && [[ "${line}" == *.md ]]; then
+      # If the file exists do nothing, otherwise pull it in from github
+      if ! ls "${line}" > /dev/null 2>&1; then
+        echo "${line} does not exist. Trying to fetch it from github"
+        mkdir -p  $(dirname ${line}) # make the directory for the output
 
-    # Check again if we hav succesfully fetched the file
-    if ! ls "${line}" > /dev/null 2>&1; then
-      echo "Could not fetch file '${line}' from external sources" 1>&2
-      exit 1
+        # Try a few github organizations
+        for org in key4hep HEP-FCC AIDASoft iLCSoft; do
+          echo "Trying to fetch from github organization: '${org}'"
+          if try_fetch ${org} ${line}; then
+            echo "Fetched succesfully from organization '${org}'"
+            break
+          fi
+        done
+      fi
+
+      # Check again if we hav succesfully fetched the file
+      if ! ls "${line}" > /dev/null 2>&1; then
+        echo "Could not fetch file '${line}' from external sources" 1>&2
+        exit 1
+      fi
     fi
-  fi
-done < README.md
+  done < ${file_to_proc}
+}
+
+fetch_for_file README.md
