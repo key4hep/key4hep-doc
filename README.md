@@ -8,6 +8,7 @@
     :caption: Contents:
 
     setup-and-getting-started/README.md
+    tutorials/README.md
     k4marlinwrapper/doc/starterkit/k4MarlinWrapperCLIC/Readme.md
     k4marlinwrapper/doc/starterkit/k4MarlinWrapperCLIC/edmConverters.md
     k4marlinwrapper/doc/starterkit/k4MarlinWrapperCLIC/howtoMultithread.md
