@@ -7,7 +7,7 @@ Gaudi will take care of running them for each event. In addition, Gaudi has a
 set of services and tools like logging and support for running in a
 multithreaded environment.
 
-The relationship with key4hep happens through
+The relationship between Gaudi with key4hep happens through
 [k4FWCore](https://github.com/key4hep/k4FWCore). k4FWCore has tools and
 utilities needed to be able to use (almost) seamlessly EDM4hep collections in
 Gaudi algorithms. We recommend checking out the
@@ -26,7 +26,8 @@ of being able to run in a multithreaded environment (almost) trivially[^1].
 
 ## Setup
 We will need Gaudi, k4FWCore and all their dependencies. Installing these by
-ourselves is not easy but there are software stacks on cvmfs, see the 
+ourselves is not easy but there are software stacks on cvmfs, see the
+{doc}`/setup-and-getting-started/README.md` to set up the key4hep stack.
 
 The easiest way of having a working repository is to copy the template
 repository that we provide in key4hep:
@@ -44,7 +45,24 @@ git@github.com:key4hep/k4-project-template.git
 This template repository already has the cmake code that will make our
 algorithms know where Gaudi and k4FWCore and to properly link to them. In
 addition there are a few examples that combined with the tests in k4FWCore
-provide an overview of what's possible to do. 
+provide an overview of what's possible to do. The `k4-project-template`
+repository contains a CMake configuration (as described in more detail in the
+previous tutorial) so it can be built with:
+
+```bash
+cd k4-project-template
+mkdir build install
+cd build
+cmake .. -DCMAKE_INSTALL_PREFIX=../install
+make -j 4 install
+```
+
+To run the algorithms contained in this repository you can use `k4run`, like:
+
+```bash
+k4run ../K4TestFWCore/options/createExampleEventData.py 
+
+```
 
 ## Walkthrough of Functional Algorithms
 
@@ -225,28 +243,6 @@ StatusCode MyAlgorithm::initialize() {
 ```
 
 
-It contains a CMake configuration (as described in more detail in the previous tutorial) so it can be built with:
-
-```bash
-cd k4-project-template
-mkdir build install
-cd build
-cmake .. -DCMAKE_INSTALL_PREFIX=../install
-make -j 4
-```
-
-To run the algorithms contained in this repository, it is not necesary to run
-
-```
-make install
-```
-
-you can use the `run` script in the `build` directory, like:
-
-```bash
-./run k4run ../K4TestFWCore/options/createExampleEventData.py 
-
-```
 
 ## Exercise: Adding an Algorithm
 
