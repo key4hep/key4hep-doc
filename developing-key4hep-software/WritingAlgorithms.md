@@ -283,25 +283,6 @@ StatusCode MyAlgorithm::initialize() {
 }
 ```
 
-## Exercise: Adding an Algorithm
-
-The repository contains an `EmptyAlg` in `K4TestFWCore/src/components`.
-
-
-* As a first exercise, copy and modify this algorithm to print out the current
-  event number.
-
-* Second step: If you used `std::cout` in the first step, try to use the gaudi
-  logging service instead.
-
-* Third Step: Print out a string before the event number that should be
-  configurable at runtime.
-
-* Finally: use the Gaudi Random Number Generator Service to approximate pi with
-  a [Monte Carlo
-  Integration](https://en.wikipedia.org/wiki/Monte_Carlo_integration)
-
-
 ## Debugging: How to use GDB
 
 [The GNU Project Debugger](https://www.sourceware.org/gdb/) is supported by
