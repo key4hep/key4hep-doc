@@ -1,6 +1,6 @@
 # Writing Gaudi Algorithms
 
-# Gaudi
+## Gaudi
 
 Gaudi is an event-processing framework. Algorithms can be defined by users and
 Gaudi will take care of running them for each event. In addition, Gaudi has a
@@ -10,7 +10,7 @@ multithreaded environment.
 The relationship with key4hep happens through
 [k4FWCore](https://github.com/key4hep/k4FWCore). k4FWCore has tools and
 utilities needed to be able to use (almost) seamlessly EDM4hep collections in
-Gaudi algorithms. We recommend checking the
+Gaudi algorithms. We recommend checking out the
 [tests](https://github.com/key4hep/k4FWCore/tree/main/test/k4FWCoreTest) in this
 repository since they contain examples of algorithms (in particular of
 algorithms using `Gaudi::Functional`).
@@ -20,18 +20,13 @@ Using `Gaudi::Functional` is the recommended way of creating algorithms. The
 design is simple and at the same time enforces several constraints at
 compile-time, allowing for a quicker development cycle. In particular, we will
 see that our algorithms won't have an internal state and we obtain the benefit
-of being able to run in a multithreaded environment trivially[^1].
+of being able to run in a multithreaded environment (almost) trivially[^1].
 
 [^1]: It's possible to find algorithms written based on GaudiAlg which is going to be removed from future versions of Gaudi. GaudiAlg was substituted by Gaudi::Algorithm, although the recommended way is to use Gaudi::Functional.
 
 ## Setup
 We will need Gaudi, k4FWCore and all their dependencies. Installing these by
-ourselves is not easy but there are software stacks on cvmfs. For example, to
-source the key4hep nightlies:
-
-``` bash
-source /cvmfs/sw-nightlies.hsf.org/key4hep/setup.sh
-```
+ourselves is not easy but there are software stacks on cvmfs, see the 
 
 The easiest way of having a working repository is to copy the template
 repository that we provide in key4hep:
@@ -47,24 +42,26 @@ git@github.com:key4hep/k4-project-template.git
 ```
 
 This template repository already has the cmake code that will make our
-algorithms know where Gaudi and k4FWCore and to properly link to them.
-Our development cycle will be based on cmake
+algorithms know where Gaudi and k4FWCore and to properly link to them. In
+addition there are a few examples that combined with the tests in k4FWCore
+provide an overview of what's possible to do. 
 
-##
+## Walkthrough of Functional Algorithms
 
-Algorithms in Gaudi are relatively straightforward to write. For each algorithm
-we want, we have to create a class that will inherit from one of the
-Gaudi::Functional classes. The most important function member will be
-`operator()` which is what will run over our events. There are several base
-classes in Gaudi (see a complete list in
-https://lhcb.github.io/DevelopKit/03a-gaudi/:
+Functional algorithms in Gaudi are relatively straightforward to write. For each
+algorithm we want, we have to create a class that will inherit from one of the
+`Gaudi::Functional` classes. The most important function member will be
+`operator()` which is what will run over our events (or over none in case we are
+generating). There are several base classes in Gaudi (see a more complete list
+in https://lhcb.github.io/DevelopKit/03a-gaudi/):
 - Consumer, one or more inputs, no outputs
 - Producer, one or more outputs, no inputs
 - Transformer (and MultiTransformer), one or more inputs, one or more outputs
 
-The structure of our class will then be, in the general case of the transformer:
-``` cpp
+The structure of our class (more precisely structs) will then be, in the general
+case of the transformer:
 
+``` cpp
 #include "GaudiAlg/Transformer.h"
 // Define BaseClass_t
 #include "k4FWCore/BaseClass.h"
@@ -76,9 +73,11 @@ struct ExampleTransformer final
   colltype_out operator()(const colltype_in& input) const override;
 };
 ```
+
 Some key points:
 - The magic to make our algorithm work with EDM4hep collections happens by
-  including `BaseClass.h` and passing it as one of the template arguments to 
+  including `BaseClass.h` and passing `BaseClass_t` it as one of the template
+  arguments to the Gaudi class we are inheriting from.
 - `operator()` is const, which means that it can't modify class members. This is
   intended and helps with multithreading by not having an internal state.
 
@@ -91,18 +90,18 @@ using colltype_in  = edm4hep::MCParticleCollection;
 using colltype_out = edm4hep::MCParticleCollection;
 ```
 
-and then we have a transformer that will take one MCParticleCollection as input
-and return another one. If we have multiple inputs we keep adding arguments to
-the signature and if we don't have any we can leave that empty. For the output
-this is slightly more complicated because if there are more than one output we
-have to return an `std::tuple<OutputClass1, OutputClass2>`; if there aren't any
-outputs we can simple return `void`.
+and then we have a transformer that will take one `MCParticleCollection` as
+input and return another one. If we have multiple inputs we keep adding
+arguments to the function arguments and if we don't have any we can leave that
+empty. For the output this is slightly more complicated because if there are
+more than one output we have to return an `std::tuple<OutputClass1,
+OutputClass2>`; if there aren't any outputs we can simply return `void`.
 
-Then the constructor. We'll always inherit from the constructor of the class
-we're inheriting (in this example a `Transformer`) and then we'll initialize a
-set of `KeyValues`. These `KeyValues` will be how we define the names of our
-inputs and outputs so they can be found by other algorithms, read from a file or
-saved to a file.
+Then we reach the constructor. We'll always initialize from the constructor of the
+class we're inheriting (in this example a `Transformer`) and then we'll
+initialize a set of `KeyValues`. These `KeyValues` will be how we define the
+names of our inputs and outputs so they can be found by other algorithms, read
+from a file or saved to a file.
 
 ``` cpp
   ExampleTransformer(const std::string& name, ISvcLocator* svcLoc)
@@ -114,11 +113,12 @@ saved to a file.
 ```
 
 Here we are defining how we will name our input collection in the steering value
-("InputCollection") and giving it a default value. We're doing the same with the
-output collection. The order is important here, first inputs then outputs and
-they are ordered. When we have more inputs we just add another line. For
-outputs, since they are bundled together in a `std::tuple` when there are
-several, we have to enclose the list of `KeyValue` with brackets, like
+(`InputCollection`) and giving it a default value. We're doing the same with the
+output collection. The order is important here: first inputs and then outputs
+and they are ordered. When we have more inputs we just add another line, like
+the one above for the input collection. For outputs, since they are bundled
+together in a `std::tuple` when there are several, we have to enclose the list
+of `KeyValue` with brackets, like
 
 ``` cpp
   ExampleMultiTransformer(const std::string& name, ISvcLocator* svcLoc)
@@ -128,6 +128,7 @@ several, we have to enclose the list of `KeyValue` with brackets, like
                     KeyValue("OutputCollection1", "NewMCParticles"),
                     KeyValue("OutputCollection2", "SimTrackerHits"),
                     KeyValue("OutputCollection3", "UsefulCollection"),
+                    }
                     ) {
                     // possibly do something
                     }
@@ -160,7 +161,7 @@ The complete example for reference
 ``` cpp
 ```
 
-The steering file
+## The steering file
 
 ``` python
 
@@ -202,17 +203,20 @@ ApplicationMgr(TopAlg=[inp, transformer, out],
 
 ## Initialize and finalize
 There are some occasions where we may want to run some code between the
-constructor and the `operator()`, that is the place for `initialize()`. There is
-also a way of doing something after processing with `finalize()`. For that, we
-can add to our classes those functions:
+constructor and the `operator()`; that is the place for `initialize()`. There is
+also a way of doing something similar after processing with `finalize()`. For that, we
+can add to our classes those functions (we can also add only one of these):
+
 ``` cpp
   StatusCode initialize() override;
   StatusCode finalize() override;
 ```
+
 and then we can implement them.
 
 Make sure to remember to return the corresponding status code, otherwise
 Gaudi will crash. For example:
+
 ``` cpp
 StatusCode MyAlgorithm::initialize() {
   // do something
@@ -220,16 +224,6 @@ StatusCode MyAlgorithm::initialize() {
 }
 ```
 
-## Getting Started
-
-Writing Gaudi components requires a bit of boilerplate code.
-Often it is easiest to start from existing files and modify them as needed.
-For this tutorial, there is a dedicated repository that contains an example.
-Start by cloning it locally:
-
-```bash
-git clone https://github.com/key4hep/k4-project-template
-```
 
 It contains a CMake configuration (as described in more detail in the previous tutorial) so it can be built with:
 
