@@ -39,7 +39,7 @@ git clone https://github.com/key4hep/k4-project-template
 or ideally with ssh
 
 ``` bash
-git@github.com:key4hep/k4-project-template.git
+git clone git@github.com:key4hep/k4-project-template
 ```
 
 This template repository already has the cmake code that will make our
@@ -175,24 +175,33 @@ When we return several collections we can bundle them in an `std::tuple` like th
     return std::make_tuple(std::move(collection1), std::move(collection2));
 ```
 
-The complete example for reference
-``` cpp
-```
+The complete example for reference can be found in the tests of k4FWCore:
+https://github.com/key4hep/k4FWCore/blob/main/test/k4FWCoreTest/src/components/ExampleFunctionalTransformer.cpp
 
 ## The steering file
 
+The steering file is the file where we define which algorithms will run, what
+parameters they will use and how they will do it; what level of logging, if
+using multithreading, etc.
+
+We start with some imports
+
 ``` python
-
-# This is an example reading from a file and using a consumer with several inputs
-# to check that the contents of the file are the expected ones
-
 from Gaudi.Configuration import INFO
 from Configurables import ExampleFunctionalTransformer
 from Configurables import ApplicationMgr
 from Configurables import k4DataSvc
 from Configurables import PodioOutput
 from Configurables import PodioInput
+```
 
+it's also possible to import everything from `Configurables` but it's better not
+to so that if we are using IDE or an editor with some kind of analysis it can
+tell us if we are using an undefined variable, for example.
+
+Then, the input:
+
+``` python
 podioevent = k4DataSvc("EventDataSvc")
 podioevent.input = "output_k4test_exampledata_producer.root"
 
@@ -200,16 +209,42 @@ inp = PodioInput()
 inp.collections = [
     "MCParticles",
 ]
+```
 
+We select the name of the input file and which collections we'll make available
+for the rest of the algorithms.
+
+For the output:
+
+``` python
 out = PodioOutput("out")
 out.filename = "output_k4test_exampledata_transformer.root"
 # The collections that we don't drop will also be present in the output file
 out.outputCommands = ["drop MCParticles"]
+```
 
+we can select which collections we keep in the output file. By default the
+collections in the output file will be the same as in the input file. Check the
+[relevant
+documentation](https://github.com/key4hep/k4FWCore/blob/main/doc/PodioInputOutput.md)
+to learn more about `PodioInput` and `PodioOutput`.
+
+Our algorithm will look like this:
+
+``` python
 transformer = ExampleFunctionalTransformer("ExampleFunctionalTransformer",
                                            InputCollection="MCParticles",
                                            OutputCollection="NewMCParticles")
+```
 
+If we have defined `Gaudi::Property`s for our algorithm it is also possible to
+change them by doing `transformer.property = value`; however with the names of
+the collections, if they are provided, they are set when creating the python
+object with our algorithm.
+
+Finally we define what to run:
+
+``` python
 ApplicationMgr(TopAlg=[inp, transformer, out],
                EvtSel="NONE",
                EvtMax=10,
@@ -218,6 +253,12 @@ ApplicationMgr(TopAlg=[inp, transformer, out],
                )
 ```
 
+We pass a list of the algorithms in `TopAlg`. `PodioInput` will be the first one
+and `PodioOutput` will be the last one when used. In `EvtMax` we set what is the
+maximum number of event that we are processing. Use -1 not to limit it. That
+means if we are processing a file, then read all the events in the file. We pass
+extra services to `ExtSvc` and set an `OutputLevel` that could be `DEBUG`,
+`WARNING` or `INFO` most of the time.
 
 ## Initialize and finalize
 There are some occasions where we may want to run some code between the
@@ -242,20 +283,23 @@ StatusCode MyAlgorithm::initialize() {
 }
 ```
 
-
-
 ## Exercise: Adding an Algorithm
 
 The repository contains an `EmptyAlg` in `K4TestFWCore/src/components`.
 
 
-* As a first exercise, copy and modify this algorithm to print out the current event number.
+* As a first exercise, copy and modify this algorithm to print out the current
+  event number.
 
-* Second step: If you used `std::cout` in the first step, try to use the gaudi logging service instead.
+* Second step: If you used `std::cout` in the first step, try to use the gaudi
+  logging service instead.
 
-* Third Step: Print out a string before the event number that should be configurable at runtime.
+* Third Step: Print out a string before the event number that should be
+  configurable at runtime.
 
-* Finally: use the Gaudi Random Number Generator Service to approximate pi with a [Monte Carlo Integration](https://en.wikipedia.org/wiki/Monte_Carlo_integration)
+* Finally: use the Gaudi Random Number Generator Service to approximate pi with
+  a [Monte Carlo
+  Integration](https://en.wikipedia.org/wiki/Monte_Carlo_integration)
 
 
 ## Debugging: How to use GDB
@@ -272,3 +316,14 @@ GDB console. To interrupt running of the Gaudi steering use `CTRL+C`.
 
 More details how to run GDB with Gaudi can be found in
 [LHCb Code Analysis Tools](https://twiki.cern.ch/twiki/bin/view/LHCb/CodeAnalysisTools#Debugging_gaudirun_py_on_Linux_w).
+
+## Avoiding const in `operator()`
+There is a way of working around `operator()` being const and that is by adding
+the keyword `mutable` to our data member. This will allow us to change our data
+member inside `operator()` and will cause code that wasn't compiling because of
+this to compile. Of course, this is not a good idea because unless the member of
+our class is thread-safe, that means that our algorithm is no longer thread-safe
+and running with multiple threads can cause different results. Even worse than
+that, it's very possible that there are not any errors or crashes but the
+results are simply wrong from having several threads changing a member at the
+same time, for example.
