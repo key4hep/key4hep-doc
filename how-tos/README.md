@@ -12,6 +12,7 @@ Key4hep users and are mostly designed to be reference material, rather than
 
    key4hep-tutorials/edm4hep_analysis/edm4hep_api_intro.md
    k4fwcore/doc/PodioInputOutput.md
+   k4marlinwrapper/doc/MarlinWrapperIntroduction.md
 ```
 
 <!-- List of image files to also fetch
@@ -22,4 +23,5 @@ key4hep-tutorials/edm4hep_analysis/images/doxygen_type_table.png
 key4hep-tutorials/edm4hep_analysis/images/edm4hep_branches_1.png
 key4hep-tutorials/edm4hep_analysis/images/edm4hep_browse_relations_1.png
 key4hep-tutorials/edm4hep_analysis/images/edm4hep_doxygen.png
+k4marlinwrapper/doc/marlin_wrapper_tools.png
 -->
