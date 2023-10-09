@@ -2,7 +2,9 @@
 
 This page contains several tutorials for working in a Key4hep software stack. We
 try to design and set them up in a way that they can be done at any time but we
-present them at hands-on tutorial sessions as well.
+present them at hands-on tutorial sessions as well. This is an incomplete list
+of all available tutorials, which you can find in the
+[`key4hep-tutorials`](https://github.com/key4hep/key4hep-tutorials) repository.
 
 **If you are following these tutorials and run into an issue please let us know
 by [opening an issue](https://github.com/key4hep/key4hep-doc/issues/new/choose)
