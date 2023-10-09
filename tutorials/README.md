@@ -16,7 +16,7 @@ here.
     :caption: Exercises
 
     k4marlinwrapper/doc/starterkit/k4MarlinWrapperCLIC/Readme.md
-    k4marlinwrapper/doc/MarlinWrapperIntroduction.md
+    key4hep-tutorials/gaudi_ild_reco/README.md
     k4marlinwrapper/doc/starterkit/k4MarlinWrapperCLIC/howtoMultithread.md
     k4marlinwrapper/doc/starterkit/k4MarlinWrapperCLIC/CEDViaWrapper.md
     k4simdelphes/doc/starterkit/k4SimDelphes/Readme.md

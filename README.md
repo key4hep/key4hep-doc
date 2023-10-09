@@ -8,6 +8,7 @@
     :caption: Contents:
 
     setup-and-getting-started/README.md
+    how-tos/README.md
     tutorials/README.md
     developing-key4hep-software/README.md
     spack-build-instructions-for-librarians/README.md

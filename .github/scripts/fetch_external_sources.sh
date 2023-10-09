@@ -27,7 +27,7 @@ fetch_for_file() {
 
   while read -r line; do
     # Check if line is non-empty and ends on .md
-    if [ -n "${line}" ] && [[ "${line}" == *.md ]]; then
+    if [ -n "${line}" ] && [[ "${line}" == *.md ]] || [[ "${line}" == *.png ]]; then
       # If the file exists do nothing, otherwise pull it in from github
       local file_to_fetch=${file_dir}/${line}
       if ! ls "${file_to_fetch}" > /dev/null 2>&1; then
@@ -56,3 +56,4 @@ fetch_for_file() {
 
 fetch_for_file README.md
 fetch_for_file tutorials/README.md
+fetch_for_file how-tos/README.md
