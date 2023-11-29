@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="500px" height="500px" viewBox="0 0 500 500" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>key4hep_v0</title>
+    <g id="key4hep_v0" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <circle id="Oval" fill="#06D6A0" cx="250" cy="250" r="209"></circle>
+        <g id="Group" transform="translate(105.000000, 91.000000)">
+            <rect id="Rectangle" fill="#212529" x="116" y="44" width="73" height="122"></rect>
+            <text id="H" font-family="UbuntuMono-Bold, Ubuntu Mono" font-size="200" font-weight="bold" fill="#212529">
+                <tspan x="0" y="166">H</tspan>
+            </text>
+            <text id="E" font-family="UbuntuMono-Bold, Ubuntu Mono" font-size="200" font-weight="bold" fill="#06D6A0">
+                <tspan x="79" y="166">E</tspan>
+            </text>
+            <rect id="Rectangle-Copy" fill="#212529" x="165" y="43" width="24" height="271"></rect>
+            <text id="P" font-family="UbuntuMono-Bold, Ubuntu Mono" font-size="200" font-weight="bold" fill="#212529">
+                <tspan x="190" y="166">P</tspan>
+            </text>
+            <text id="4" font-family="UbuntuMono-Bold, Ubuntu Mono" font-size="200" font-weight="bold" fill="#212529">
+                <tspan x="101" y="314">4</tspan>
+            </text>
+        </g>
+    </g>
+</svg>

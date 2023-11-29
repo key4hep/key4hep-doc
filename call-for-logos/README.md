@@ -14,13 +14,18 @@ Logo 3
 
 Logo 4
 
-<img src="key4hep_logo4.svg" width="50%" height="50%">
+![](key4hep_logo4.svg)
 
 Logo 5
 
-<img src="key4hep_logo5.svg" width="50%" height="50%">
+![](key4hep_logo5.svg)
 
 Logo 6
 
 ![](key4hep_logo6.svg)
 ![](key4hep_logo6p1.svg)
+
+Logo 7
+
+![](key4hep_logo7.svg)
+![](key4hep_logo7p1.svg)
