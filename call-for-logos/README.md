@@ -14,11 +14,11 @@ Logo 3
 
 Logo 4
 
-![](key4hep_logo4.svg)
+<picture><img src="key4hep_logo4.svg" width="30%"></picture>
 
 Logo 5
 
-![](key4hep_logo5.svg)
+<picture><img src="key4hep_logo5.svg" width="30%"></picture>
 
 Logo 6
 
