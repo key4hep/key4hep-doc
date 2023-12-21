@@ -34,7 +34,7 @@ conduct][conduct].
 [gh-fork-pull]: https://reflectoring.io/github-fork-and-pull/
 
 
-```eval_rst
+```{eval-rst}
 .. toctree::
     :hidden:
 

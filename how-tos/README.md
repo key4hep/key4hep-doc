@@ -5,7 +5,7 @@ certain things within the Key4hep software stack. They are mainly aimed at
 Key4hep users and are mostly designed to be reference material, rather than
 [tutorials](https://key4hep.github.io/key4hep-doc/tutorials/README.html).
 
-```eval_rst
+```{eval-rst}
 .. toctree::
    :caption: Contents
    :maxdepth: 1

@@ -4,7 +4,7 @@ Sooner rather than later you will find it necessary write code for Key4hep. Thes
 
 
 
-```eval_rst
+```{eval-rst}
 .. toctree::
     :caption: Contents:
 

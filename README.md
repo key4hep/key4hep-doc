@@ -1,7 +1,7 @@
 # Key4hep
 
 
-```eval_rst
+```{eval-rst}
 .. toctree::
     :maxdepth: 3
     :includehidden:

@@ -11,7 +11,7 @@ source /cvmfs/sw.hsf.org/key4hep/setup.sh
 
 In this page, the workflow to create this installation is documented.
 
-```eval_rst
+```{eval-rst}
 .. toctree::
     :caption: Contents:
 

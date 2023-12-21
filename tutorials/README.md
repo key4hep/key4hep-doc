@@ -13,7 +13,7 @@ you have the feeling that something is missing, we are also very happy to accept
 new tutorial suggestions. If you have a tutorial that you would like to add
 here.
 
-```eval_rst
+```{eval-rst}
 .. toctree::
     :caption: Exercises
 
