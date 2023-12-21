@@ -22,3 +22,6 @@ jobs:
     - name: Sphinx build
       run: |
         sphinx-build -M html . build -b linkcheck
+    - uses: actions/upload-pages-artifact@v3
+      with:
+        path: build/html
