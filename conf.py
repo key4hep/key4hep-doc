@@ -39,7 +39,9 @@ source_suffix = {
 #    f'_static',
 # ]
 
-linkcheck_ignore = []
+linkcheck_ignore = [
+    r"https://twiki.cern.ch/twiki/bin/view",  # TWikis might need login
+]
 
 myst_heading_anchors = 3
 

@@ -296,7 +296,7 @@ loading, user can start running of the steering by typing `continue` into the
 GDB console. To interrupt running of the Gaudi steering use `CTRL+C`.
 
 More details how to run GDB with Gaudi can be found in
-[LHCb Code Analysis Tools](https://twiki.cern.ch/twiki/bin/view/LHCb/CodeAnalysisTools#Debugging_gaudirun_py_on_Linux_w).
+[LHCb Code Analysis Tools](https://twiki.cern.ch/twiki/bin/view/LHCb/CodeAnalysisTools#Debugging_gaudirun_py_on_Linux_w) (requires a CERN account to view).
 
 ## Avoiding const in `operator()`
 There is a way of working around `operator()` being const and that is by adding
