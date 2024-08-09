@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reading and writing EDM4hep files in Gaudi &mdash; Key4hep  documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../../_static/copybutton.js?v=f281be69"></script>
+        <script src="../../../_static/design-tabs.js?v=36754332"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Adding custom arguments to k4run" href="k4run-args.html" />
+    <link rel="prev" title="EDM4hep - The common event data model" href="../../key4hep-tutorials/edm4hep_analysis/edm4hep_api_intro.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            Key4hep
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../setup-and-getting-started/README.html">Getting started with Key4hep software</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../README.html">Key4hep How-Tos and Instructions</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../key4hep-tutorials/edm4hep_analysis/edm4hep_api_intro.html">EDM4hep - The common event data model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../key4hep-tutorials/edm4hep_analysis/edm4hep_api_intro.html#podio-the-technical-infrastructure-on-which-things-run">podio - The technical infrastructure on which things run</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Reading and writing EDM4hep files in Gaudi</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#the-k4datasvc">The <code class="docutils literal notranslate"><span class="pre">k4DataSvc</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#reading-events">Reading events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#writing-events">Writing events</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#writing-only-a-subset-of-collections">Writing only a subset of collections</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="k4run-args.html">Adding custom arguments to <code class="docutils literal notranslate"><span class="pre">k4run</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../k4marlinwrapper/doc/MarlinWrapperIntroduction.html">Wrapping Marlin processors in Gaudi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../k4edm4hep2lcioconv/doc/LCIO2EDM4hep.html">Standalone conversion from LCIO to EDM4hep</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../k4edm4hep2lcioconv/doc/LCIO2EDM4hep.html#library-usage-of-the-conversion-functions">Library usage of the conversion functions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials/README.html">Key4hep Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developing-key4hep-software/README.html">Developing Key4hep</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../spack-build-instructions-for-librarians/README.html">Building Key4hep: For Librarians</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../talks-and-presentations/README.html">Talks and Presentations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../call-for-logos/README.html">Call for logos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../CONTRIBUTING.html">Contributing</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">External links:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://cern.ch/fccsw">FCC software</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://twiki.cern.ch/twiki/bin/view/CLIC/CLICSoftwareComputing">CLIC software</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://ilcsoft.desy.de/portal">ILC software</a></li>
+<li class="toctree-l1"><a class="reference external" href="http://cepcsoft.ihep.ac.cn/">CEPC software</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://mcd-wiki.web.cern.ch/software/">Muon Collider software</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Key4hep</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../README.html">Key4hep How-Tos and Instructions</a></li>
+      <li class="breadcrumb-item active">Reading and writing EDM4hep files in Gaudi</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/key4hep/key4hep-doc/blob/main/how-tos/k4fwcore/doc/PodioInputOutput.md" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <!--
+Copyright (c) 2014-2024 Key4hep-Project.
+
+This file is part of Key4hep.
+See https://key4hep.github.io/key4hep-doc/ for further info.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+<section id="reading-and-writing-edm4hep-files-in-gaudi">
+<h1>Reading and writing EDM4hep files in Gaudi<a class="headerlink" href="#reading-and-writing-edm4hep-files-in-gaudi" title="Link to this heading"></a></h1>
+<p>The facilities to read and write EDM4hep (or in general event data models based
+on podio) are provided by <a class="reference external" href="https://github.com/key4hep/k4FWCore"><code class="docutils literal notranslate"><span class="pre">k4FWCore</span></code></a>.
+This page will describe their usage, but not go into too much details of their
+internals. This page also assumes a certain familiarity with Gaudi, i.e. most of
+the snippets just show a minimal configuration part, and not a complete runnable
+example.</p>
+<section id="the-k4datasvc">
+<h2>The <code class="docutils literal notranslate"><span class="pre">k4DataSvc</span></code><a class="headerlink" href="#the-k4datasvc" title="Link to this heading"></a></h2>
+<p>Whenever you want to work with EDM4hep in the Gaudi based framework of Key4hep,
+you will need to use the <code class="docutils literal notranslate"><span class="pre">k4DataSvc</span></code> as <em>EventDataSvc</em>. You can instantiate and
+configure this service like the following</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">Gaudi.Configuration</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">Configurables</span> <span class="kn">import</span> <span class="n">k4DataSvc</span>
+
+<span class="n">evtSvc</span> <span class="o">=</span> <span class="n">k4DataSvc</span><span class="p">(</span><span class="s2">&quot;EventDataSvc&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>It is important that the name is <code class="docutils literal notranslate"><span class="pre">EventDataSvc</span></code> in this case, as otherwise
+this is an assumption from Gaudi.</strong> Once you have the <code class="docutils literal notranslate"><span class="pre">k4DataSvc</span></code> instantiated,
+you still have to make the <code class="docutils literal notranslate"><span class="pre">ApplicationMgr</span></code> aware of it, by making sure that the
+<code class="docutils literal notranslate"><span class="pre">evtSvc</span></code> is in the list of the <em>external services</em> (<code class="docutils literal notranslate"><span class="pre">ExtSvc</span></code>):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">Configurables</span> <span class="kn">import</span> <span class="n">ApplicationMgr</span>
+<span class="n">ApplicationMgr</span><span class="p">(</span>
+    <span class="c1"># other args</span>
+    <span class="n">ExtSvc</span> <span class="o">=</span> <span class="p">[</span><span class="n">evtSvc</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="reading-events">
+<h2>Reading events<a class="headerlink" href="#reading-events" title="Link to this heading"></a></h2>
+<p>To read events you will need to use the <code class="docutils literal notranslate"><span class="pre">PodioInput</span></code> algorithm in addition to
+the <a class="reference internal" href="#the-k4datasvc"><code class="docutils literal notranslate"><span class="pre">k4DataSvc</span></code></a>. Currently, you will need to pass the input
+file to the <code class="docutils literal notranslate"><span class="pre">k4DataSvc</span></code> via the <code class="docutils literal notranslate"><span class="pre">input</span></code> option but pass the collections that you
+want to read to the <code class="docutils literal notranslate"><span class="pre">PodioInput</span></code>. We are working on making this (discussion
+happens in this <a class="reference external" href="https://github.com/key4hep/k4FWCore/issues/105">issue</a>). The
+parts of your options file related to reading EDM4hep files will look something
+like this</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">Configurables</span> <span class="kn">import</span> <span class="n">PodioInput</span><span class="p">,</span> <span class="n">k4DataSvc</span>
+
+<span class="n">evtSvc</span> <span class="o">=</span> <span class="n">k4DataSvc</span><span class="p">(</span><span class="s2">&quot;EventDataSvc&quot;</span><span class="p">)</span>
+<span class="n">evtSvc</span><span class="o">.</span><span class="n">input</span> <span class="o">=</span> <span class="s2">&quot;/path/to/your/input-file.root&quot;</span>
+
+<span class="n">podioInput</span> <span class="o">=</span> <span class="n">PodioInput</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>It is possible to change the input file from the command line via</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>k4run<span class="w"> </span>&lt;your-options-file&gt;<span class="w"> </span>--EventDataSvc.input<span class="o">=</span>&lt;input-file&gt;
+</pre></div>
+</div>
+<p>By default the <code class="docutils literal notranslate"><span class="pre">PodioInput</span></code> will read all collections that are available from
+the input file. It is possible to limit the collections that should become
+available via the <code class="docutils literal notranslate"><span class="pre">collections</span></code> option</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">podioInput</span><span class="o">.</span><span class="n">collections</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="c1"># List of collection names that should be made available</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</section>
+<section id="writing-events">
+<h2>Writing events<a class="headerlink" href="#writing-events" title="Link to this heading"></a></h2>
+<p>To write events you will need to use the <code class="docutils literal notranslate"><span class="pre">PodioOutput</span></code> algorithm in addition to
+the <a class="reference internal" href="#the-k4datasvc"><code class="docutils literal notranslate"><span class="pre">k4DataSvc</span></code></a>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">Configurables</span> <span class="kn">import</span> <span class="n">PodioOutput</span>
+
+<span class="n">podioOutput</span> <span class="o">=</span> <span class="n">PodioOutput</span><span class="p">(</span><span class="s2">&quot;PodioOutput&quot;</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s2">&quot;my_output.root&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>By default this will write the complete event contents to the output file.</p>
+<section id="writing-only-a-subset-of-collections">
+<h3>Writing only a subset of collections<a class="headerlink" href="#writing-only-a-subset-of-collections" title="Link to this heading"></a></h3>
+<p>Sometimes it is desirable to limit the collections to a subset of all available
+collections from the EventStore. The <code class="docutils literal notranslate"><span class="pre">PodioOutput</span></code> allows to do this via the
+<code class="docutils literal notranslate"><span class="pre">outputCommands</span></code> option that takes a list of <code class="docutils literal notranslate"><span class="pre">keep</span></code> or <code class="docutils literal notranslate"><span class="pre">drop</span></code> commands. Each
+command must consist of the <code class="docutils literal notranslate"><span class="pre">keep</span></code>/<code class="docutils literal notranslate"><span class="pre">drop</span></code> command and a target. The target is a
+collection name that may include the <code class="docutils literal notranslate"><span class="pre">?</span></code> or <code class="docutils literal notranslate"><span class="pre">*</span></code> wildcard patterns. This might
+look like the following</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">podioOutput</span><span class="o">.</span><span class="n">outputCommands</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;keep *&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>which will keep everything (the default), while</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">podioOutput</span><span class="o">.</span><span class="n">outputCommands</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;drop *&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>will simply drop all collections and effectively write an empty file (apart from
+some metadata). A common pattern is to <code class="docutils literal notranslate"><span class="pre">&quot;drop</span> <span class="pre">*&quot;</span></code> and then selectively adding
+<code class="docutils literal notranslate"><span class="pre">keep</span></code> collections to keep, e.g. to only keep the highest level MC and reco
+information:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">podioOutput</span><span class="o">.</span><span class="n">outputCommands</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;drop *&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;keep MCParticlesSkimmed&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;keep PandoraPFOs&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;keep RecoMCTruthLink&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../../key4hep-tutorials/edm4hep_analysis/edm4hep_api_intro.html" class="btn btn-neutral float-left" title="EDM4hep - The common event data model" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="k4run-args.html" class="btn btn-neutral float-right" title="Adding custom arguments to k4run" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020, Key4hep.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

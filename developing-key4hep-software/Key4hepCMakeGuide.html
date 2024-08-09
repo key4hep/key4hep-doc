@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CMake guide for Key4hep software &mdash; Key4hep  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../_static/copybutton.js?v=f281be69"></script>
+        <script src="../_static/design-tabs.js?v=36754332"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Developing a single package" href="SinglePackage.html" />
+    <link rel="prev" title="Github workflow and contribution guide" href="Key4hepSoftwareGit.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Key4hep
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../setup-and-getting-started/README.html">Getting started with Key4hep software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../how-tos/README.html">Key4hep How-Tos and Instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/README.html">Key4hep Tutorials</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="README.html">Developing Key4hep</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Key4hepSoftwareGit.html">Github workflow and contribution guide</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">CMake guide for Key4hep software</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#quick-start-into-building-key4hep-software">Quick start into building Key4hep Software</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#set-up-the-environment">Set up the environment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#running-cmake">Running CMake</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#using-your-local-installation">Using your local installation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#cmake-example-packages">CMake example packages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#changing-the-cmake-configuration">Changing the CMake Configuration</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#runtime-environment">Runtime Environment</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#ctest-in-key4hep">CTest in Key4hep</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#customizing-how-cmake-is-run">Customizing how CMake is run</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="SinglePackage.html">Developing a single package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SpackForDevelopers.html">Building Key4hep using Spack: For Developers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="WritingAlgorithms.html">Writing Gaudi Algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="WritingAlgorithms.html#gaudi-functional">Gaudi::Functional</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../spack-build-instructions-for-librarians/README.html">Building Key4hep: For Librarians</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../talks-and-presentations/README.html">Talks and Presentations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../call-for-logos/README.html">Call for logos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CONTRIBUTING.html">Contributing</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">External links:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://cern.ch/fccsw">FCC software</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://twiki.cern.ch/twiki/bin/view/CLIC/CLICSoftwareComputing">CLIC software</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://ilcsoft.desy.de/portal">ILC software</a></li>
+<li class="toctree-l1"><a class="reference external" href="http://cepcsoft.ihep.ac.cn/">CEPC software</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://mcd-wiki.web.cern.ch/software/">Muon Collider software</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Key4hep</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="README.html">Developing Key4hep</a></li>
+      <li class="breadcrumb-item active">CMake guide for Key4hep software</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/key4hep/key4hep-doc/blob/main/developing-key4hep-software/Key4hepCMakeGuide.md" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="cmake-guide-for-key4hep-software">
+<h1>CMake guide for Key4hep software<a class="headerlink" href="#cmake-guide-for-key4hep-software" title="Link to this heading"></a></h1>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
+<p>CMake is a tool for building software, which has become the de-facto
+standard outside HEP. In HEP, it is for example used by the ILC/CLIC
+communities and by the LHCb collaboration. For CMS people, CMake is the
+equivalent of scram.</p>
+</section>
+<section id="quick-start-into-building-key4hep-software">
+<h2>Quick start into building Key4hep Software<a class="headerlink" href="#quick-start-into-building-key4hep-software" title="Link to this heading"></a></h2>
+<section id="set-up-the-environment">
+<h3>Set up the environment<a class="headerlink" href="#set-up-the-environment" title="Link to this heading"></a></h3>
+<p>The first step is adding all dependencies to the bash environment.
+In case you are unsure, it is best to use the default init script, provided on CVMFS for Centos7:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">source</span> <span class="o">/</span><span class="n">cvmfs</span><span class="o">/</span><span class="n">sw</span><span class="o">.</span><span class="n">hsf</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">key4hep</span><span class="o">/</span><span class="n">setup</span><span class="o">.</span><span class="n">sh</span>
+</pre></div>
+</div>
+<p>Note that mixing setup scripts (from another package, for example) may or may not work as intended - more likely not.
+For any requests to changes in the environment, feel free to contact the software team on the mailing list or any other channels.
+Developers may also look into <code class="docutils literal notranslate"><span class="pre">spack</span></code> to have more fine-grained control over the build dependencies.</p>
+</section>
+<section id="running-cmake">
+<h3>Running CMake<a class="headerlink" href="#running-cmake" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Create a build directory: <code class="docutils literal notranslate"><span class="pre">mkdir</span> <span class="pre">build;</span> <span class="pre">cd</span> <span class="pre">build</span></code></p></li>
+<li><p>Run CMake in the build directory: <code class="docutils literal notranslate"><span class="pre">cmake</span> <span class="pre">..</span> </code></p></li>
+<li><p>Change any cmake options by rerunning cmake.<br />
+For example: <code class="docutils literal notranslate"><span class="pre">cmake</span> <span class="pre">..</span> <span class="pre">-DCMAKE_INSTALL_PREFIX=../install</span> <span class="pre">-DCMAKE_BUILD_TYPE=Debug</span></code>.<br />
+Tools like ccmake may also be useful: <code class="docutils literal notranslate"><span class="pre">ccmake</span> <span class="pre">..</span></code></p></li>
+<li><p>Compile the software, using all the cpus available:    <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">-j</span> <span class="pre">`getconf</span> <span class="pre">_NPROCESSORS_ONLN`</span> </code></p></li>
+<li><p>Install by running <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">install</span></code></p></li>
+<li><p>In case any dependency is changed, most likely you need to remove all the contents of the build folder and rerun cmake and the compilation.</p></li>
+</ul>
+</section>
+<section id="using-your-local-installation">
+<h3>Using your local installation<a class="headerlink" href="#using-your-local-installation" title="Link to this heading"></a></h3>
+<p>In order to run the code you just installed, there are a few environment variables to set up (assuming the installation directory is the working directory):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mkdir</span> <span class="n">build</span><span class="p">;</span> <span class="n">cd</span> <span class="n">build</span>
+<span class="n">cmake</span> <span class="o">..</span> <span class="o">-</span><span class="n">DCMAKE_INSTALL_PREFIX</span><span class="o">=../</span><span class="n">InstallArea</span>
+<span class="n">make</span> <span class="n">install</span>
+<span class="n">cd</span> <span class="o">../</span><span class="n">InstallArea</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">export</span> <span class="pre">CMAKE_PREFIX_PATH=$PWD/:$CMAKE_PREFIX_PATH</span></code></p>
+<ul>
+<li><p>in order to use this installation as a dependency for other packages</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">export</span> <span class="pre">PATH=$PWD/bin/:$PATH</span></code></p>
+<ul>
+<li><p>in order to make any executables available on the command line</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">export</span> <span class="pre">LD_LIBRARY_PATH=$PWD/lib:$PWD/lib64:$LD_LIBRARY_PATH</span></code></p>
+<ul>
+<li><p>in order to make libraries available for linking and for the plugin systems in Gaudi/DD4hep</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">export</span> <span class="pre">PYTHONPATH=$PWD/python:$PYTHONPATH</span></code></p>
+<ul>
+<li><p>in order to make libraries available for linking and for the plugin systems in Gaudi/DD4hep</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">export</span> <span class="pre">ROOT_INCLUDE_PATH=$PWD/include:$ROOT_INCLUDE_PATH</span></code></p>
+<ul>
+<li><p>in case the package builds ROOT dictionaries</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">export</span> <span class="pre">&lt;PACKAGENAME&gt;=$PWD/share/&lt;PackageName&gt;</span></code></p>
+<ul>
+<li><p>some packages distribute data files that are found with a special environment variable, usually this is the package name in all caps.</p></li>
+<li><p>e.g. <code class="docutils literal notranslate"><span class="pre">export</span> <span class="pre">K4SIMDELPHES=$PWD/share/k4SimDelphes/</span></code></p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+<section id="cmake-example-packages">
+<h2>CMake example packages<a class="headerlink" href="#cmake-example-packages" title="Link to this heading"></a></h2>
+<p>Colin provides <a class="reference external" href="https://github.com/cbernet/cmake-examples">a few simple CMake
+examples</a>. They are helpful to understand the basics of
+CMake.</p>
+<p>Get these packages:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/cbernet/cmake-examples.git
+cd cmake-examples
+</pre></div>
+</div>
+<p>Follow the instructions in
+<a class="reference external" href="https://github.com/cbernet/cmake-examples/blob/master/README.md">README.md</a>.</p>
+</section>
+<section id="changing-the-cmake-configuration">
+<h2>Changing the CMake Configuration<a class="headerlink" href="#changing-the-cmake-configuration" title="Link to this heading"></a></h2>
+<p>When adding new source files to a package, the CMake build system needs
+to be made aware of them. Usually <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> contains a wildcard
+expression that adds all implementation files in a subfolder, e.g.
+<code class="docutils literal notranslate"><span class="pre">src/*.cpp</span></code> , so there is no need to explicitly add the names of the
+new files. To update the list of files, it is fastest to run
+<code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">configure</span></code> .</p>
+<p>Note that when changing the name of a property of an algorithm or a
+tool, <code class="docutils literal notranslate"><span class="pre">make</span></code> (and not only <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">packagename</span></code> ) needs to be run for
+Gaudi to be aware of the change.</p>
+<section id="runtime-environment">
+<h3>Runtime Environment<a class="headerlink" href="#runtime-environment" title="Link to this heading"></a></h3>
+<p>Key4hep packages, in particular the gaudi framework components, consist of executables, headers, scripts, dynamic libraries, xmls  and special files describing gaudi components.
+In order to use these, some environment variables need to be set.</p>
+<p>Gaudi also offers the possibility to set up the environment via the <code class="docutils literal notranslate"><span class="pre">xenv</span></code> command. This is done by simply prefixing the command you want to run with the <code class="docutils literal notranslate"><span class="pre">run</span></code> script in the top level directory of FCCSW, or directly in the build directory.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./build/run<span class="w"> </span>key4run<span class="w"> </span>Examples/options/pythia.py
+</pre></div>
+</div>
+<p>Sometimes it is convenient to run FCCSW directly from the binaries in the build directory without installing them.
+This can be done by using the <code class="docutils literal notranslate"><span class="pre">run</span></code> script in the build directory, or setting the environment variables as in <code class="docutils literal notranslate"><span class="pre">setup.sh</span></code> for the build folder.
+Note that the directories in the  build folder differ a bit. Mostly it is important the the LD_LIBRARY_PATH is pre-fixed with the library directories. The fccrun command should pick up the components from the build folder then.</p>
+</section>
+</section>
+<section id="ctest-in-key4hep">
+<h2>CTest in Key4hep<a class="headerlink" href="#ctest-in-key4hep" title="Link to this heading"></a></h2>
+<p>Key4hep also uses CMake for integration tests.
+They are added with <code class="docutils literal notranslate"><span class="pre">add_test()</span></code> and can be run with <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">test</span></code> in the build folder. For Gaudi packages, the environment should be set so they can be run also in a build environments, see https://github.com/HEP-FCC/k4Gen/blob/main/k4Gen/CMakeLists.txt</p>
+<section id="customizing-how-cmake-is-run">
+<h3>Customizing how CMake is run<a class="headerlink" href="#customizing-how-cmake-is-run" title="Link to this heading"></a></h3>
+<p>An environment variable is used to forward command line arguments to the cmake command, for example to run cmake with the <code class="docutils literal notranslate"><span class="pre">trace</span></code> option:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">CMAKEFLAGS</span><span class="o">=</span><span class="s1">&#39;--trace&#39;</span> <span class="n">make</span>
+</pre></div>
+</div>
+<p>{% callout “How do I check compilation flags?” %}</p>
+<p>Instead of running <code class="docutils literal notranslate">&#160; <span class="pre">make</span></code> , run:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span><span class="nv">VERBOSE</span><span class="o">=</span><span class="m">1</span><span class="w"> </span>
+</pre></div>
+</div>
+<p>{% endcallout %}</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Key4hepSoftwareGit.html" class="btn btn-neutral float-left" title="Github workflow and contribution guide" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="SinglePackage.html" class="btn btn-neutral float-right" title="Developing a single package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020, Key4hep.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
