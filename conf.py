@@ -44,7 +44,7 @@ linkcheck_ignore = [
 ]
 
 linkcheck_request_headers = {
-    "https://opensource.org": {
+    r"https://opensource.org": {
         "User-Agent": "Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:24.0) Gecko/20100101 Firefox/24.0"
     }
 }
