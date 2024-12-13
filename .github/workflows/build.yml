@@ -15,6 +15,7 @@ jobs:
     - name: Try curl to get to opensource.org
       run: |
         curl -I https://opensource.org/ \
+          -v \
           --http1.1 \
           -H "User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:100.0) Gecko/20100101 Firefox/100.0 Sphinx/7.2.6" \
           -H "Accept-Encoding: gzip, deflate" \

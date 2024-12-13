@@ -4,7 +4,7 @@
 
 import http.client
 
-http.client.HTTPConnection.debuglevel = 1
+# http.client.HTTPConnection.debuglevel = 1
 
 project = "Key4hep"
 copyright = "2020, Key4hep"
