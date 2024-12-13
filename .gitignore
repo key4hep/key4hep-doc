@@ -13,6 +13,7 @@ node_modules
 book.pdf
 *~
 build
+linkcheck
 
 # external repositories
 k4marlinwrapper/
