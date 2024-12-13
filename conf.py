@@ -43,6 +43,12 @@ linkcheck_ignore = [
     r"https://twiki.cern.ch/twiki/bin/view",  # TWikis might need login
 ]
 
+linkcheck_request_headers = {
+    "https://opensource.org": {
+        "User-Agent": "Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:24.0) Gecko/20100101 Firefox/24.0"
+    }
+}
+
 myst_heading_anchors = 3
 
 myst_enable_extensions = ["colon_fence"]
