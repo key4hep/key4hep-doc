@@ -2,9 +2,10 @@
 # Here it is useful to allow the configuration to be maintained elsewhere
 # from starterkit_ci.sphinx_config import *  # NOQA
 
-import http.client
+import os
 
-# http.client.HTTPConnection.debuglevel = 1
+IN_GITHUB_ACTIONS_CI = os.environ.get("GITHUB_ACTIONS", False)
+
 
 project = "Key4hep"
 copyright = "2020, Key4hep"
@@ -39,18 +40,13 @@ source_suffix = {
     ".md": "markdown",
 }
 
-# html_static_path += [
-#    f'_static',
-# ]
-
-
-# linkcheck_request_headers = {
-#     "https://opensource.org": {"User-Agent": "Python-urllib/3.12"}
-# }
-
 linkcheck_ignore = [
     r"https://twiki.cern.ch/twiki/bin/view",  # TWikis might need login
 ]
+if IN_GITHUB_ACTIONS_CI:
+    linkcheck_ignore.append(
+        r"https://opensource.org",  # cloudflare blocks requests from github actions
+    )
 
 
 myst_heading_anchors = 3

@@ -12,20 +12,6 @@ jobs:
     - uses: actions/setup-python@v5
       with:
         python-version: 3.12
-    - name: Figure out IP
-      run: |
-        curl https://ipinfo.io
-    - name: Try curl to get to opensource.org
-      run: |
-        curl -I https://opensource.org/ \
-          -v \
-          --http1.1 \
-          -H "Host: opensource.org" \
-          -H "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36" \
-          -H "Accept-Encoding: gzip, deflate" \
-          -H "Accept: */*" \
-          -H "Connection: keep-alive"
-
     - name: Install Requirements
       run: |
         pip install --upgrade pip
