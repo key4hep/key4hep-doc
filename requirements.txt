@@ -159,7 +159,7 @@ sphinxcontrib-serializinghtml==1.1.9
     # via sphinx
 tinycss2==1.2.1
     # via nbconvert
-tornado==6.4.1
+tornado==6.4.2
     # via jupyter-client
 traitlets==5.14.0
     # via
