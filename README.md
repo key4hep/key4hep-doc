@@ -1,30 +1,32 @@
-# Key4hep
+# Key4hep documentation
+[![docs](https://img.shields.io/badge/docs-main-blue.svg)](https://key4hep.github.io/key4hep-doc/)
 
+Key4hep central documentation
 
-```{eval-rst}
-.. toctree::
-    :maxdepth: 3
-    :includehidden:
-    :caption: Contents:
+## Getting dependencies
 
-    setup-and-getting-started/README.md
-    how-tos/README.md
-    tutorials/README.md
-    developing-key4hep-software/README.md
-    spack-build-instructions-for-librarians/README.md
-    talks-and-presentations/README.md
-    call-for-logos/README.md
-    CONTRIBUTING.md
+Install python dependencies:
 
-.. toctree::
-    :maxdepth: 2
-    :includehidden:
-    :caption: External links:
-
-    FCC software  <https://cern.ch/fccsw>
-    CLIC software <https://twiki.cern.ch/twiki/bin/view/CLIC/CLICSoftwareComputing>
-    ILC software <https://ilcsoft.desy.de/portal>
-    CEPC software <http://cepcsoft.ihep.ac.cn/>
-    Muon Collider software <https://mcd-wiki.web.cern.ch/software/>
+```sh
+pip install -r requirements.txt
 ```
 
+## Building locally
+
+First fetch the documentation pages from other key4hep repositories:
+
+```sh
+.github/scripts/fetch_external_sources.sh 
+```
+
+Then build the site locally:
+
+```sh
+sphinx-build -M html docs build
+```
+
+Check the links validity with:
+
+```
+sphinx-build -b linkcheck docs linkcheck
+```
