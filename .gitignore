@@ -19,4 +19,5 @@ linkcheck
 k4marlinwrapper/
 k4simdelphes/
 key4hep-tutorials
-how-tos
+k4fwcore/
+k4edm4hep2lcioconv

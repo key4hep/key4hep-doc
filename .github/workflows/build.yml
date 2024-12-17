@@ -21,8 +21,8 @@ jobs:
         bash .github/scripts/fetch_external_sources.sh
     - name: Sphinx build
       run: |
-        sphinx-build -M html . build
-        sphinx-build -b linkcheck . linkcheck
+        sphinx-build -M html docs build
+        sphinx-build -b linkcheck docs linkcheck
     - uses: actions/upload-pages-artifact@v3
       with:
         path: build/html

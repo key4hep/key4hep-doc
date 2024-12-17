@@ -30,7 +30,7 @@ jobs:
         bash .github/scripts/fetch_external_sources.sh
     - name: Sphinx build
       run: |
-        sphinx-build -M html . build
+        sphinx-build -M html docs build
     - name: Publish gh-pages
       run: |
         cd build/html

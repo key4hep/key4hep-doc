@@ -54,6 +54,6 @@ fetch_for_file() {
   done < ${file_to_proc}
 }
 
-fetch_for_file README.md
-fetch_for_file tutorials/README.md
-fetch_for_file how-tos/README.md
+fetch_for_file docs/index.md
+fetch_for_file docs/tutorials/README.md
+fetch_for_file docs/how-tos/README.md
