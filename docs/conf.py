@@ -22,7 +22,7 @@ exclude_patterns = [
 html_theme = "sphinx_rtd_theme"
 
 html_context = {
-    "display_github": True,
+    "display_github": False,
     "github_user": "key4hep",
     "github_repo": "key4hep-doc",
     "github_version": "main",
