@@ -49,20 +49,25 @@ fetch_for_file() {
     if [ -n "${line}" ] && [[ "${line}" == *.md ]] || [[ "${line}" == *.png ]]; then
       # If the file exists do nothing, otherwise pull it in from github
       local file_to_fetch=${file_dir}/${line}
-      if [ "${FORCE}" = true ] || ! ls "${file_to_fetch}" > /dev/null 2>&1; then
-        echo "${line} does not exist or force option is enabled. Trying to fetch it from github"
-        local outputdir=$(dirname ${file_to_fetch})
-        mkdir -p ${outputdir}  # make the directory for the output
-
-        # Try a few github organizations
-        for org in key4hep HEP-FCC AIDASoft iLCSoft; do
-          echo "Trying to fetch from github organization: '${org}'"
-          if try_fetch ${org} ${line} ${file_dir}; then
-            echo "Fetched successfully from organization '${org}'"
-            break
-          fi
-        done
+      if [ "${FORCE}" = true ]; then
+        echo "Force option enabled. Trying to fetch '${line}' from github"
+      elif ! ls "${file_to_fetch}" > /dev/null 2>&1; then
+        echo "${line} does not exist. Trying to fetch it from github"
+      else
+        continue
       fi
+
+      local outputdir=$(dirname ${file_to_fetch})
+      mkdir -p ${outputdir}  # make the directory for the output
+
+      # Try a few github organizations
+      for org in key4hep HEP-FCC AIDASoft iLCSoft; do
+        echo "Trying to fetch from github organization: '${org}'"
+        if try_fetch ${org} ${line} ${file_dir}; then
+          echo "Fetched successfully from organization '${org}'"
+          break
+        fi
+      done
 
       # Check again if we have successfully fetched the file
       if ! ls "${file_to_fetch}" > /dev/null 2>&1; then
