@@ -7,19 +7,28 @@
 # Initialize force option
 FORCE=false
 
+# Display usage message
+display_usage() {
+  echo "Usage: $0 [--force|-f] [--help|-h]"
+}
+
 # Parse command line arguments
 for arg in "$@"; do
   case $arg in
     --force|-f) FORCE=true ;;
     --help|-h)
-      echo "Usage: $0 [--force|-f] [--help|-h]"
+      display_usage
       echo ""
       echo "Options:"
       echo "  --force, -f    Force fetching files even if they already exist"
       echo "  --help, -h     Display this help message"
       exit 0
       ;;
-    *) echo "Unknown parameter passed: $arg"; exit 1 ;;
+    *)
+      echo "Unknown parameter passed: $arg"
+      display_usage
+      exit 1
+      ;;
   esac
 done
 
