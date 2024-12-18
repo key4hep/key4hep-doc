@@ -19,6 +19,8 @@ First fetch the documentation pages from other key4hep repositories:
 .github/scripts/fetch_external_sources.sh 
 ```
 
+If the sources already exist but you want to update them, use the `--force` option.
+
 Then build the site locally:
 
 ```sh
