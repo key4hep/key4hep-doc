@@ -9,7 +9,7 @@ FORCE=false
 
 # Display usage message
 display_usage() {
-  echo "Usage: $0 [--force|-f] [--help|-h]"
+  echo "Usage: $(basename $0) [--force|-f] [--help|-h]"
 }
 
 # Parse command line arguments
