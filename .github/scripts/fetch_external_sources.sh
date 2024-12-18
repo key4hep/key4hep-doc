@@ -1,8 +1,36 @@
 #!/usr/bin/env bash
 # Script that tries to automatically fetch further documentation from other
 # github repositories, where it simply assumes that they are available under the
-# same name. Runs through our ususal suspects of github organizations while
+# same name. Runs through our usual suspects of github organizations while
 # trying to do so
+
+# Initialize force option
+FORCE=false
+
+# Display usage message
+display_usage() {
+  echo "Usage: $(basename $0) [--force|-f] [--help|-h]"
+}
+
+# Parse command line arguments
+for arg in "$@"; do
+  case $arg in
+    --force|-f) FORCE=true ;;
+    --help|-h)
+      display_usage
+      echo ""
+      echo "Options:"
+      echo "  --force, -f    Force fetching files even if they already exist"
+      echo "  --help, -h     Display this help message"
+      exit 0
+      ;;
+    *)
+      echo "Unknown parameter passed: $arg"
+      display_usage
+      exit 1
+      ;;
+  esac
+done
 
 # Try to fetch a file from a github repository
 try_fetch() {
@@ -30,22 +58,27 @@ fetch_for_file() {
     if [ -n "${line}" ] && [[ "${line}" == *.md ]] || [[ "${line}" == *.png ]]; then
       # If the file exists do nothing, otherwise pull it in from github
       local file_to_fetch=${file_dir}/${line}
-      if ! ls "${file_to_fetch}" > /dev/null 2>&1; then
+      if [ "${FORCE}" = true ]; then
+        echo "Force option enabled. Trying to fetch '${line}' from github"
+      elif ! ls "${file_to_fetch}" > /dev/null 2>&1; then
         echo "${line} does not exist. Trying to fetch it from github"
-        local outputdir=$(dirname ${file_to_fetch})
-        mkdir -p ${outputdir}  # make the directory for the output
-
-        # Try a few github organizations
-        for org in key4hep HEP-FCC AIDASoft iLCSoft; do
-          echo "Trying to fetch from github organization: '${org}'"
-          if try_fetch ${org} ${line} ${file_dir}; then
-            echo "Fetched succesfully from organization '${org}'"
-            break
-          fi
-        done
+      else
+        continue
       fi
 
-      # Check again if we hav succesfully fetched the file
+      local outputdir=$(dirname ${file_to_fetch})
+      mkdir -p ${outputdir}  # make the directory for the output
+
+      # Try a few github organizations
+      for org in key4hep HEP-FCC AIDASoft iLCSoft; do
+        echo "Trying to fetch from github organization: '${org}'"
+        if try_fetch ${org} ${line} ${file_dir}; then
+          echo "Fetched successfully from organization '${org}'"
+          break
+        fi
+      done
+
+      # Check again if we have successfully fetched the file
       if ! ls "${file_to_fetch}" > /dev/null 2>&1; then
         echo "Could not fetch file '${line}' from external sources" 1>&2
         exit 1
