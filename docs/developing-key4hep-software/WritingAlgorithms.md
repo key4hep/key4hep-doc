@@ -27,7 +27,7 @@ of being able to run in a multithreaded environment (almost) trivially[^1].
 ## Setup
 We will need Gaudi, k4FWCore and all their dependencies. Installing these by
 ourselves is not easy but there are software stacks on cvmfs, see this
-[page](../setup-and-getting-started/README.md) to set up the key4hep stack.
+[page](../getting_started/setup.md) to set up the key4hep stack.
 
 The easiest way of having a working repository is to copy the template
 repository that we provide in key4hep:
