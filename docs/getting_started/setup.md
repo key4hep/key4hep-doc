@@ -1,12 +1,10 @@
-# Getting started with Key4hep software
+# Getting key4hep
 
-## Setting up the Key4hep Software Stack
-
-### Using a central installation on cvmfs
+## With CVMFS
 
 Two builds with the key4hep stack are distributed on cvmfs. The releases happen
 every few months on demand (for example, if there is a new important feature or
-a breaking change) and at the moment Ubuntu22.04 and AlmaLinux9 (EL9,
+a breaking change) and at the moment Ubuntu 22.04 and AlmaLinux 9 (EL9,
 RockyLinux9) are supported. We also have older releases for CentOS7 but are not
 making any new builds for that.
 
