@@ -6,7 +6,7 @@
     :maxdepth: 3
     :includehidden:
     :caption: Contents:
-
+    getting_started/introduction.md
     setup-and-getting-started/README.md
     how-tos/README.md
     tutorials/README.md
