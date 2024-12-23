@@ -4,6 +4,8 @@ For assistance beyond this documentation, you can reach the Key4hep community vi
 
 - email: key4hep dash sw @ cern dot ch
 
-For issues or requests related to the documentation, please use the [bugtracker](https://github.com/key4hep/key4hep-doc/issues).
+If you have any issues, comments or requests, open an issue in the [bugtracker](https://github.com/key4hep/key4hep-spack/issues).
 
-For discussions or help with a specific Key4hep package, you can open a request on its repository's bug tracker. A [list of repositories](https://github.com/orgs/key4hep/repositories) is available on GitHub.
+For issues or requests related to the documentation, please use the [documentation bugtracker](https://github.com/key4hep/key4hep-doc/issues).
+
+For discussions or help with a specific Key4hep package, you can open a request on its repository's bugtracker. A [list of repositories](https://github.com/orgs/key4hep/repositories) is available on GitHub.
