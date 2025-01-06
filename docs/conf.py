@@ -22,7 +22,7 @@ exclude_patterns = [
 html_theme = "sphinx_rtd_theme"
 
 html_context = {
-    "display_github": True,
+    "display_github": False,
     "github_user": "key4hep",
     "github_repo": "key4hep-doc",
     "github_version": "main",
@@ -51,4 +51,4 @@ if IN_GITHUB_ACTIONS_CI:
 
 myst_heading_anchors = 4
 
-myst_enable_extensions = ["colon_fence"]
+myst_enable_extensions = ["colon_fence", "html_image"]
