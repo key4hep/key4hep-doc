@@ -1,26 +1,32 @@
 # Developing a single package
 
-For quick changes of, for example, a single package, it's possible to compile
-the package using cmake (after having sourced the release or nightlies) and then
-export some environment variables manually so that our local version will be
-picked up instead of the one in cvmfs:
+For quick modifications, such as updating a single package, you can source the stack from cvmfs, compile a local version of the selected package, and export specific environment variables to ensure the local package is used instead of the one from cvmfs.
 
-``` bash
-export PATH=/path/to/install/bin:$PATH
-export LD_LIBRARY_PATH=/path/to/install/lib:/path/to/install/lib64:$LD_LIBRARY_PATH
-export ROOT_INCLUDE_PATH=/path/to/install/include:$ROOT_INCLUDE_PATH
-export PYTHONPATH=/path/to/install/python:$PYTHONPATH
+## With `k4_local_repo`
+
+`k4_local_repo` is a helper command to simplify setting up the environment for single package development. This command becomes available immediately after sourcing the environment. To use it, navigate to the root directory of the package you want to develop and execute the command:
+
+```bash
+k4_local_repo <install_location>
 ```
 
-where the path to the installation is the one we gave cmake with
-`-DCMAKE_INSTALL_PREFIX` when configuring. It's possible more environment
-variables need to be set depending on which package we are installing but the
-previous ones are the main ones for many of the packages of the key4hep stack.
+where `<install_location>` refers to the location where the package will be installed. This should match the one specified during cmake configuration with `-DCMAKE_INSTALL_PREFIX=<install_location>`.
 
-While this approach works and any number of packages can be built this way, it
-is cumbersome to do so for many packages, as one has to repeat the cycle of
-configuring, building and installing and then exporting the environment
-variables as many times as packages are installed. It is possible to miss
-packages and then the cvmfs version will be used instead of the local one
-without notice and it's also cumbersome to reproduce the environment at a later
-time.
+Afterwards, the environment will be updated to automatically pick up the installed package.
+
+## Manually
+
+While the `k4_local_repo` is the preferred method, it's also possible to set up the environment variables manually. To do so, execute the following commands:
+
+```bash
+export PATH=<install_location>/bin:$PATH
+export LD_LIBRARY_PATH=<install_location>/lib:<install_location>/lib64:$LD_LIBRARY_PATH
+export ROOT_INCLUDE_PATH=<install_location>/include:$ROOT_INCLUDE_PATH
+export PYTHONPATH=<install_location>/python:$PYTHONPATH
+```
+
+where `<install_location>` should match the install location specified during cmake configuration with `-DCMAKE_INSTALL_PREFIX=<install_location>`. It's possible some packages may required specifying some extra environmental variables beside these.
+
+## Limitations
+
+While this approach works and any number of packages can be built this way, it is cumbersome to do so for many packages, as one has to repeat the cycle of configuring, building, and installing and then exporting the environment variables as many times as packages are installed. It is possible to miss packages, and then the cvmfs version will be used instead of the local one without notice. It's also cumbersome to reproduce the environment at a later time.
