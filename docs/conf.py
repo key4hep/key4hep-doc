@@ -8,7 +8,7 @@ IN_GITHUB_ACTIONS_CI = os.environ.get("GITHUB_ACTIONS", False)
 
 
 project = "Key4hep"
-copyright = "2020, Key4hep"
+copyright = "2025, Key4hep"
 author = "Key4hep"
 # html_logo = "starterkit.png"
 
