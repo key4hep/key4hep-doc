@@ -7,10 +7,9 @@ For quick modifications, such as updating a single package, you can source the s
 `k4_local_repo` is a helper command to simplify setting up the environment for single package development. This command becomes available immediately after sourcing the environment. To use it, navigate to the root directory of the package you want to develop and execute the command:
 
 ```bash
-k4_local_repo <install_location>
+k4_local_repo [<install_location>]
 ```
-
-where `<install_location>` refers to the location where the package will be installed. This should match the one specified during cmake configuration with `-DCMAKE_INSTALL_PREFIX=<install_location>`.
+where, `<install_location>` refers to the directory where the package will be installed. If not specified, the default `./install/` directory is assumed. This should match the location specified during cmake configuration with `-DCMAKE_INSTALL_PREFIX=<install_location>`.
 
 Afterwards, the environment will be updated to automatically pick up the installed package.
 
