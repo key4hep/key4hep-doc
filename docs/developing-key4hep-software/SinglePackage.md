@@ -14,6 +14,8 @@ where `<install_location>` refers to the location where the package will be inst
 
 Afterwards, the environment will be updated to automatically pick up the installed package.
 
+When working with multiple local packages it might be beneficial to write a helper script to execute `k4_local_repo` for each locally developed package.
+
 ## Manually
 
 While the `k4_local_repo` is the preferred method, it's also possible to set up the environment variables manually. To do so, execute the following commands:
@@ -27,6 +29,5 @@ export PYTHONPATH=<install_location>/python:$PYTHONPATH
 
 where `<install_location>` should match the install location specified during cmake configuration with `-DCMAKE_INSTALL_PREFIX=<install_location>`. It's possible some packages may require specifying some extra environmental variables beside these, for example replacing some libraries with local libraries in `MARLIN_DLL` if needed.
 
-## Limitations
+While this approach works and any number of packages can be built this way, it is cumbersome and error-prone to do so for many packages. In such cases using `k4_local_repo` is strongly recommended.
 
-While this approach works and any number of packages can be built this way, it is cumbersome to do so for many packages, as one has to repeat the cycle of configuring, building, and installing and then exporting the environment variables as many times as packages are installed. It is possible to miss packages, and then the cvmfs version will be used instead of the local one without notice. It's also cumbersome to reproduce the environment at a later time.
