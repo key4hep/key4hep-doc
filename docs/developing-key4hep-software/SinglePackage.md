@@ -25,7 +25,7 @@ export ROOT_INCLUDE_PATH=<install_location>/include:$ROOT_INCLUDE_PATH
 export PYTHONPATH=<install_location>/python:$PYTHONPATH
 ```
 
-where `<install_location>` should match the install location specified during cmake configuration with `-DCMAKE_INSTALL_PREFIX=<install_location>`. It's possible some packages may require specifying some extra environmental variables beside these.
+where `<install_location>` should match the install location specified during cmake configuration with `-DCMAKE_INSTALL_PREFIX=<install_location>`. It's possible some packages may require specifying some extra environmental variables beside these, for example replacing some libraries with local libraries in `MARLIN_DLL` if needed.
 
 ## Limitations
 
