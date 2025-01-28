@@ -1,9 +1,5 @@
 # Getting help
 
-For assistance beyond this documentation, you can reach the Key4hep community via:
-
-- email: key4hep dash sw @ cern dot ch
-
 If you have any issues, comments or requests, open an issue in the [bugtracker](https://github.com/key4hep/key4hep-spack/issues).
 
 For issues or requests related to the documentation, please use the [documentation bugtracker](https://github.com/key4hep/key4hep-doc/issues).
