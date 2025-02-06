@@ -4,7 +4,7 @@
 
 Two builds with the key4hep stack are distributed on cvmfs. The releases happen
 every few months on demand (for example, if there is a new important feature or
-a breaking change) and at the moment AlmaLinux 9 (EL9, RockyLinux9), Ubuntu
+a breaking change) and at the moment AlmaLinux 9 (EL9, Rocky Linux 9), Ubuntu
 22.04 are supported. Some older releases also were built for CentOS7. For
 sourcing the releases, run:
 
