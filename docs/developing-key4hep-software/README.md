@@ -12,6 +12,7 @@ Sooner rather than later you will find it necessary write code for Key4hep. Thes
     SinglePackage.md
     SpackForDevelopers.md
     WritingAlgorithms.md
+    k4fwcore/doc/uniqueIDGen.md
 
 CMakeBuild.md
 
