@@ -90,3 +90,4 @@ fetch_for_file() {
 fetch_for_file docs/index.md
 fetch_for_file docs/tutorials/README.md
 fetch_for_file docs/how-tos/README.md
+fetch_for_file docs/developing-key4hep-software/README.md
