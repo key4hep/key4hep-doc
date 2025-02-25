@@ -189,24 +189,20 @@ We start with some imports
 ``` python
 from Gaudi.Configuration import INFO
 from Configurables import ExampleFunctionalTransformer
-from Configurables import ApplicationMgr
-from Configurables import k4DataSvc
-from Configurables import PodioOutput
-from Configurables import PodioInput
+from k4FWCore import ApplicationMgr, IOSvc
 ```
 
 it's also possible to import everything from `Configurables` but it's better not
 to so that if we are using IDE or an editor with some kind of analysis it can
 tell us if we are using an undefined variable, for example.
 
-Then, the input:
+Then, create `IOSvc` and configure the input:
 
 ``` python
-podioevent = k4DataSvc("EventDataSvc")
-podioevent.input = "output_k4test_exampledata_producer.root"
+io_svc = IOSvc()
 
-inp = PodioInput()
-inp.collections = [
+io_svc.Input = "output_k4test_exampledata_producer.root"
+io_svc.CollectionNames = [
     "MCParticles",
 ]
 ```
@@ -217,17 +213,15 @@ for the rest of the algorithms.
 For the output:
 
 ``` python
-out = PodioOutput("out")
-out.filename = "output_k4test_exampledata_transformer.root"
+io_svc.Output = "output_k4test_exampledata_transformer.root"
 # The collections that we don't drop will also be present in the output file
-out.outputCommands = ["drop MCParticles"]
+io_svc.outputCommands = ["drop MCParticles"]
 ```
 
-we can select which collections we keep in the output file. By default the
-collections in the output file will be the same as in the input file. Check the
+we can select which collections we keep in the output file. By default all the collections created during the job will be saved. Check the
 [relevant
 documentation](https://github.com/key4hep/k4FWCore/blob/main/doc/PodioInputOutput.md)
-to learn more about `PodioInput` and `PodioOutput`.
+to learn more about `IOSvc`.
 
 Our algorithm will look like this:
 
@@ -245,19 +239,18 @@ object with our algorithm.
 Finally we define what to run:
 
 ``` python
-ApplicationMgr(TopAlg=[inp, transformer, out],
+ApplicationMgr(TopAlg=[transformer],
                EvtSel="NONE",
                EvtMax=10,
-               ExtSvc=[k4DataSvc("EventDataSvc")],
+               ExtSvc=[],
                OutputLevel=INFO,
                )
 ```
 
-We pass a list of the algorithms in `TopAlg`. `PodioInput` will be the first one
-and `PodioOutput` will be the last one when used. In `EvtMax` we set what is the
+We pass a list of the algorithms in `TopAlg`. In `EvtMax` we set what is the
 maximum number of event that we are processing. Use -1 not to limit it. That
-means if we are processing a file, then read all the events in the file. We pass
-extra services to `ExtSvc` and set an `OutputLevel` that could be `DEBUG`,
+means if we are processing a file, then read all the events in the file.
+Any extra services can be passed with `ExtSvc`. We set an `OutputLevel` that could be `DEBUG`,
 `WARNING` or `INFO` most of the time.
 
 ## Initialize and finalize
