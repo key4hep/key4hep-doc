@@ -13,6 +13,7 @@ Key4hep users and are mostly designed to be reference material, rather than
    key4hep-tutorials/edm4hep_analysis/edm4hep_api_intro.md
    k4fwcore/doc/PodioInputOutput.md
    k4fwcore/doc/k4run-args.md
+   k4fwcore/doc/algorithmTiming.md
    k4marlinwrapper/doc/MarlinWrapperIntroduction.md
    k4edm4hep2lcioconv/doc/LCIO2EDM4hep.md
 ```
