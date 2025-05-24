@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Building Key4hep using CMake: For Developers &mdash; Key4hep  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../_static/copybutton.js?v=f281be69"></script>
+        <script src="../_static/design-tabs.js?v=36754332"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Key4hep
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/help.html">Getting help</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/setup.html">Getting key4hep</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/CONTRIBUTING.html">Contributing</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../how-tos/README.html">Key4hep How-Tos and Instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/README.html">Key4hep Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="README.html">Developing Key4hep</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../spack-build-instructions-for-librarians/README.html">Building Key4hep: For Librarians</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../talks-and-presentations/README.html">Talks and Presentations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../call-for-logos/README.html">Call for logos</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">External links</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://cern.ch/fccsw">FCC software</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://twiki.cern.ch/twiki/bin/view/CLIC/CLICSoftwareComputing">CLIC software</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://ilcsoft.desy.de/portal">ILC software</a></li>
+<li class="toctree-l1"><a class="reference external" href="http://cepcsoft.ihep.ac.cn/">CEPC software</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://mcd-wiki.web.cern.ch/software/">Muon Collider software</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Key4hep</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Building Key4hep using CMake: For Developers</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/developing-key4hep-software/CMakeBuild.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="building-key4hep-using-cmake-for-developers">
+<h1>Building Key4hep using CMake: For Developers<a class="headerlink" href="#building-key4hep-using-cmake-for-developers" title="Link to this heading"></a></h1>
+<p>A common problem when developing is needing to build multiple packages on top of
+the stack to test changes in several repositories. One way of doing this is
+using Spack but there is an experimental way using cmake.</p>
+<p>First, source the releases or the nightlies as usual. Then, run the following
+command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">cvmfs</span><span class="o">/</span><span class="n">sw</span><span class="o">-</span><span class="n">nightlies</span><span class="o">.</span><span class="n">hsf</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">key4hep</span><span class="o">/</span><span class="n">experimental</span><span class="o">/</span><span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">pkg1</span> <span class="n">pkg2</span>
+</pre></div>
+</div>
+<p>Where <code class="docutils literal notranslate"><span class="pre">pkg1</span></code> and <code class="docutils literal notranslate"><span class="pre">pkg2</span></code> are the packages that will be cloned (can be empty). On
+top of that, <code class="docutils literal notranslate"><span class="pre">setup.py</span></code> checks for folders (or symbolic links) in the current
+directory that contain <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code>. This can be useful if we want to use a
+local version and don’t need to clone some repositories. After running the
+command, a CMakeLists.txt file will appear. We may have to edit it manually if
+we are using packages that are not recognized or are in a different organization
+than the predefined ones. The information that we’ll need to edit is most likely
+one of the first lines at the top:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">set</span><span class="p">(</span><span class="n">pkgs</span> <span class="n">EDM4hep</span> <span class="n">k4FWCore</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>that sets the packages that will be built in their right build order.
+and the individual <code class="docutils literal notranslate"><span class="pre">FetchContent_Declare</span></code> entries for each package.</p>
+<p>After we are happy with the CMakeLists.txt file, it’s important that we set the
+new environment variables:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>install
+<span class="nb">cd</span><span class="w"> </span>install
+<span class="nb">export</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="nv">$PWD</span>/bin:<span class="nv">$PATH</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">LD_LIBRARY_PATH</span><span class="o">=</span><span class="nv">$PWD</span>/lib:<span class="nv">$PWD</span>/lib64:<span class="nv">$LD_LIBRARY_PATH</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">ROOT_INCLUDE_PATH</span><span class="o">=</span><span class="nv">$PWD</span>/include:<span class="nv">$ROOT_INCLUDE_PATH</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">PYTHONPATH</span><span class="o">=</span><span class="nv">$PWD</span>/python:<span class="nv">$PYTHONPATH</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">CMAKE_PREFIX_PATH</span><span class="o">=</span><span class="nv">$PWD</span>:<span class="nv">$CMAKE_PREFIX_PATH</span>
+<span class="nb">cd</span><span class="w"> </span>..
+</pre></div>
+</div>
+<p>Then, we can run the usual commands for building:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mkdir</span> <span class="n">build</span>
+<span class="n">cd</span> <span class="n">build</span>
+<span class="n">cmake</span> <span class="o">..</span> <span class="o">-</span><span class="n">DCMAKE_INSTALL_PREFIX</span><span class="o">=../</span><span class="n">install</span>
+<span class="n">make</span> <span class="o">-</span><span class="n">j</span> <span class="n">N</span> <span class="n">install</span>
+</pre></div>
+</div>
+<p>and it will build all the packages at the same time, so it may take some time. Symbolic links are
+created in the build directory for each package that allow us to run <code class="docutils literal notranslate"><span class="pre">ctest</span></code> like:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>k4FWCore
+ctest<span class="w"> </span>-j<span class="w"> </span><span class="m">2</span>
+</pre></div>
+</div>
+<p>in case we are building k4FWCore.</p>
+<p>For the cloned directories, in case we want to clone a different commit or
+branch from the master/main branch, this can be done by editing the
+CMakeLists.txt</p>
+<section id="possible-issues">
+<h2>Possible issues<a class="headerlink" href="#possible-issues" title="Link to this heading"></a></h2>
+<p>Not everything has been tested so it’s likely some things won’t work. For
+many packages there are recent changes that enable these builds so using older
+versions probably won’t work.</p>
+</section>
+<section id="packages-that-have-been-tested">
+<h2>Packages that have been tested<a class="headerlink" href="#packages-that-have-been-tested" title="Link to this heading"></a></h2>
+<p>The following packages have been built together successfully so it should be
+possible to build any combination of them:</p>
+<ul class="simple">
+<li><p>podio</p></li>
+<li><p>EDM4hep</p></li>
+<li><p>k4FWCore</p></li>
+<li><p>LCIO</p></li>
+<li><p>ILCUTIL</p></li>
+<li><p>LCCD</p></li>
+<li><p>GEAR</p></li>
+<li><p>Marlin</p></li>
+<li><p>k4EDM4hep2LcioConv</p></li>
+<li><p>k4MarlinWrapper</p></li>
+</ul>
+</section>
+<section id="changing-to-a-different-commit-or-branch">
+<h2>Changing to a different commit or branch<a class="headerlink" href="#changing-to-a-different-commit-or-branch" title="Link to this heading"></a></h2>
+<p>If we don’t want to build the master or main branch of the repositories we are
+cloning, we have two options:</p>
+<ul class="simple">
+<li><p>Set the commit or branch we want in the <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> in the corresponding
+<code class="docutils literal notranslate"><span class="pre">FetchContent_Declare</span></code> entry by changing <code class="docutils literal notranslate"><span class="pre">GIT_TAG</span></code> to whatever commit or branch
+we want to checkout.</p></li>
+<li><p>Go to the source directory, which can be found in the build directory under
+<code class="docutils literal notranslate"><span class="pre">_deps/&lt;pkg&gt;-src</span></code> and checkout manually whatever commit or branch you want.</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Key4hep.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

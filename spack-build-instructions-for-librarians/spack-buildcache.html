@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Spack Buildcaches &mdash; Key4hep  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../_static/copybutton.js?v=f281be69"></script>
+        <script src="../_static/design-tabs.js?v=36754332"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Key4hep
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/help.html">Getting help</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/setup.html">Getting key4hep</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/CONTRIBUTING.html">Contributing</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../how-tos/README.html">Key4hep How-Tos and Instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/README.html">Key4hep Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developing-key4hep-software/README.html">Developing Key4hep</a></li>
+<li class="toctree-l1"><a class="reference internal" href="README.html">Building Key4hep: For Librarians</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../talks-and-presentations/README.html">Talks and Presentations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../call-for-logos/README.html">Call for logos</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">External links</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://cern.ch/fccsw">FCC software</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://twiki.cern.ch/twiki/bin/view/CLIC/CLICSoftwareComputing">CLIC software</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://ilcsoft.desy.de/portal">ILC software</a></li>
+<li class="toctree-l1"><a class="reference external" href="http://cepcsoft.ihep.ac.cn/">CEPC software</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://mcd-wiki.web.cern.ch/software/">Muon Collider software</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Key4hep</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Spack Buildcaches</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/spack-build-instructions-for-librarians/spack-buildcache.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="spack-buildcaches">
+<h1>Spack Buildcaches<a class="headerlink" href="#spack-buildcaches" title="Link to this heading"></a></h1>
+<p>{% callout “Spack documentation” %}</p>
+<p>Buildcaches were investigated, but are no longer supported for Key4hep software, due to the difficulty of relocating some packages.</p>
+<p>For more information refer to the <a class="reference external" href="https://spack.readthedocs.io/en/latest/binary_caches.html">spack documentation</a>.</p>
+<p>{% endcallout %}</p>
+<p>It is possible to relocate and  re-use  binaries with the so-called buildcache.
+Some central buildcaches are on the key4hep <code class="docutils literal notranslate"><span class="pre">eos</span></code> space under:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">eos</span><span class="o">/</span><span class="n">project</span><span class="o">/</span><span class="n">k</span><span class="o">/</span><span class="n">key4hep</span><span class="o">/</span><span class="n">www</span><span class="o">/</span><span class="n">key4hep</span><span class="o">/</span><span class="n">spack_build</span><span class="o">/</span><span class="n">mirror</span><span class="o">/</span><span class="n">spackages</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">spackages</span></code> is intended as the central buildcache for key4hep packages built from scratch,
+but there exist other buildcaches for packages built against the LCG releases, and rolling builds that are using the branchname <code class="docutils literal notranslate"><span class="pre">master</span></code> or other moving targets.
+All packages versioned <code class="docutils literal notranslate"><span class="pre">package&#64;master</span></code> are treated by spack as the same version, even if master points to different commits, thus they must be installed to separate directories, ideally indicating the date.
+A buildcache called <code class="docutils literal notranslate"><span class="pre">contrib</span></code> is intended for build tools such as compilers.
+Spack automatically creates subdirectory for different platforms and compiler versions.</p>
+<p>For write permissions to this space, subscribe to the egroup <code class="docutils literal notranslate"><span class="pre">cernbox-project-key4hep-writers</span></code>.</p>
+<p>The following command can be used to put packages into the buildcache:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># key4hep-stack was already installed with &#39;spack install key4hep-stack&#39;</span>
+spack<span class="w"> </span>mirror<span class="w"> </span>add<span class="w"> </span>key4hep<span class="w"> </span>/eos/project/k/key4hep/www/key4hep/spack_build/mirror/spackages
+spack<span class="w"> </span>buildcache<span class="w"> </span>create<span class="w"> </span>-m<span class="w"> </span>key4hep<span class="w"> </span>-u<span class="w"> </span>-a<span class="w"> </span>-f<span class="w"> </span>key4hep-stack
+</pre></div>
+</div>
+<p>Since the packages need to be relocated as well as copied, this might take up to an hour.</p>
+<p>In order to install packages from the  buildcache, use:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>spack<span class="w"> </span>buildcache<span class="w"> </span>install<span class="w"> </span>-u<span class="w"> </span>-a<span class="w"> </span>key4hep-stack
+</pre></div>
+</div>
+<p>Spack will then search all added mirrors for <code class="docutils literal notranslate"><span class="pre">key4hep-stack</span></code>.
+For read-only access on machines without <code class="docutils literal notranslate"><span class="pre">eos</span></code>, these files are served also over http:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>spack<span class="w"> </span>mirror<span class="w"> </span>add<span class="w"> </span>key4hep-web<span class="w"> </span>http://key4hep.web.cern.ch/key4hep/spack_build/mirror/spackages/
+</pre></div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Key4hep.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
