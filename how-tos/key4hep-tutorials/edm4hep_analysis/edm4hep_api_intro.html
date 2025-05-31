@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EDM4hep - The common event data model &mdash; Key4hep  documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../../_static/copybutton.js?v=f281be69"></script>
+        <script src="../../../_static/design-tabs.js?v=36754332"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Reading and writing EDM4hep files in Gaudi" href="../../k4fwcore/doc/PodioInputOutput.html" />
+    <link rel="prev" title="Key4hep How-Tos and Instructions" href="../../README.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            Key4hep
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/help.html">Getting help</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/setup.html">Getting key4hep</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/CONTRIBUTING.html">Contributing</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../README.html">Key4hep How-Tos and Instructions</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">EDM4hep - The common event data model</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#important-resources">Important resources</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#doxygen-api-documentation">Doxygen API documentation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#the-overview-diagram">The overview diagram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#the-table-of-available-types">The table of available types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#navigating-the-doxygen-reference-page">Navigating the doxygen reference page</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#some-utility-functionality">Some utility functionality</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#podio-the-technical-infrastructure-on-which-things-run">podio - The technical infrastructure on which things run</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#podio-code-generation">podio code generation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#the-three-layers-of-podio">The three layers of podio</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#basics-of-generated-code-value-semantics">Basics of generated code - value semantics</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#guessing-the-interface-from-the-yaml-definition">Guessing the interface from the yaml definition</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#why-is-there-a-xyz-and-a-mutablexyx">Why is there a <code class="docutils literal notranslate"><span class="pre">XYZ</span></code> and a <code class="docutils literal notranslate"><span class="pre">MutableXYX</span></code>?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#writing-function-interfaces">Writing function interfaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#subset-collections">Subset collections</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#the-podio-frame-container">The <code class="docutils literal notranslate"><span class="pre">podio::Frame</span></code> container</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#getting-collections-from-a-frame">Getting collections from a <code class="docutils literal notranslate"><span class="pre">Frame</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#putting-a-collection-into-a-frame">Putting a collection into a <code class="docutils literal notranslate"><span class="pre">Frame</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#reading-edm4hep-files">Reading EDM4hep files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#the-available-low-level-readers">The available low level readers</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#root-file-layout-of-podio-generated-edms">ROOT file layout of podio generated EDMs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#how-do-i-figure-out-if-a-file-is-legacy">How do I figure out if a file is legacy?</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#podio-dump"><code class="docutils literal notranslate"><span class="pre">podio-dump</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../k4fwcore/doc/PodioInputOutput.html">Reading and writing EDM4hep files in Gaudi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../k4fwcore/doc/k4run-args.html">Adding custom arguments to <code class="docutils literal notranslate"><span class="pre">k4run</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../k4fwcore/doc/algorithmTiming.html">Getting algorithm run time information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../k4marlinwrapper/doc/MarlinWrapperIntroduction.html">Wrapping Marlin processors in Gaudi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../k4edm4hep2lcioconv/doc/LCIO2EDM4hep.html">Standalone conversion from LCIO to EDM4hep</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../k4edm4hep2lcioconv/doc/LCIO2EDM4hep.html#library-usage-of-the-conversion-functions">Library usage of the conversion functions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials/README.html">Key4hep Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developing-key4hep-software/README.html">Developing Key4hep</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../spack-build-instructions-for-librarians/README.html">Building Key4hep: For Librarians</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../talks-and-presentations/README.html">Talks and Presentations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../call-for-logos/README.html">Call for logos</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">External links</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://cern.ch/fccsw">FCC software</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://twiki.cern.ch/twiki/bin/view/CLIC/CLICSoftwareComputing">CLIC software</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://ilcsoft.desy.de/portal">ILC software</a></li>
+<li class="toctree-l1"><a class="reference external" href="http://cepcsoft.ihep.ac.cn/">CEPC software</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://mcd-wiki.web.cern.ch/software/">Muon Collider software</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Key4hep</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../README.html">Key4hep How-Tos and Instructions</a></li>
+      <li class="breadcrumb-item active">EDM4hep - The common event data model</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/how-tos/key4hep-tutorials/edm4hep_analysis/edm4hep_api_intro.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="edm4hep-the-common-event-data-model">
+<h1>EDM4hep - The common event data model<a class="headerlink" href="#edm4hep-the-common-event-data-model" title="Link to this heading"></a></h1>
+<p>EDM4hep is the common and shared Event Data Model (EDM) of the Key4hep project.
+Here we will give a brief introduction to EDM4hep as well as some of the
+technicalities behind it. We will also guide you towards documentation and try
+to give you the knowledge to make sense of it.</p>
+<section id="important-resources">
+<h2>Important resources<a class="headerlink" href="#important-resources" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>EDM4hep doxygen API reference page: <a class="reference external" href="https://edm4hep.web.cern.ch">edm4hep.web.cern.ch</a></p></li>
+<li><p>EDM4hep github repository: <a class="reference external" href="https://github.com/key4hep/EDM4hep">github.com/key4hep/EDM4hep</a></p></li>
+<li><p>podio documentation page (including API reference): <a class="reference external" href="https://key4hep.web.cern.ch/podio">key4hep.web.cern.ch/podio</a></p></li>
+<li><p>podio github repository: <a class="reference external" href="https://github.com/AIDASoft/podio">github.com/AIDASoft/podio</a></p></li>
+</ul>
+</section>
+<section id="doxygen-api-documentation">
+<h2>Doxygen API documentation<a class="headerlink" href="#doxygen-api-documentation" title="Link to this heading"></a></h2>
+<p>We start with having a look at the <a class="reference external" href="https://edm4hep.web.cern.ch">EDM4hep doxygen API reference
+page</a>:</p>
+<section id="the-overview-diagram">
+<h3>The overview diagram<a class="headerlink" href="#the-overview-diagram" title="Link to this heading"></a></h3>
+<p><img alt="" src="../../../_images/edm4hep_doxygen.png" /></p>
+<p>You see a diagrammatic overview of EDM4hep with all the available data types,
+broadly organized into different categories. The arrows depict two ways data
+types can be related / linked with each other</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#relations">“Relations”</a> (black arrows)</p></li>
+<li><p><a class="reference internal" href="#links">“Links”</a> (purple-ish arrows)</p></li>
+</ul>
+<section id="relations">
+<h4>Relations<a class="headerlink" href="#relations" title="Link to this heading"></a></h4>
+<p>These are relations defined within the data types, and which are directly
+accessible from the data types. They come in two flavors, depending on the
+multiplicity of the relation</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">OneToOneRelations</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">OneToManyRelations</span></code></p></li>
+</ul>
+<p>Data types can relate to other instances of the same type (e.g. <code class="docutils literal notranslate"><span class="pre">MCParticle</span></code>s
+usually form a hierarchy of mothers/daughters). Relations are directed, i.e. it
+is possible to go from one object to a related object, but vice versa this does
+usually not hold. For example, a <code class="docutils literal notranslate"><span class="pre">ReconstructedParticle</span></code> can point to multiple
+<code class="docutils literal notranslate"><span class="pre">Tracks</span></code> or <code class="docutils literal notranslate"><span class="pre">Clusters</span></code>, but those do not point to a <code class="docutils literal notranslate"><span class="pre">ReconstructedParticle</span></code>.</p>
+</section>
+<section id="links">
+<h4>Links<a class="headerlink" href="#links" title="Link to this heading"></a></h4>
+<p>These are relations that are in a sense “external” to the data model definition.
+They are currently mainly used to connect MC and RECO information, as a direct
+link via a relation is not desirable as it would mix the two worlds. In contrast
+to relations, links are not directed, i.e. it is possible to access both
+involved objects from the link.</p>
+</section>
+</section>
+<section id="the-table-of-available-types">
+<h3>The table of available types<a class="headerlink" href="#the-table-of-available-types" title="Link to this heading"></a></h3>
+<p>Just below the diagram is an overview table of all the types that are defined in
+EDM4hep. Here they are organized into</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Components</span></code> - Very simple types, that are used throughout the <code class="docutils literal notranslate"><span class="pre">Datatypes</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Datatypes</span></code> - The data types that are defined in EDM4hep</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Links</span></code> - The available links between different data types</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Generator</span> <span class="pre">related</span> <span class="pre">(meta-)data</span></code> - Data types related to generator metadata</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Interfaces</span></code> - Abstractions for accessing different types by a shared set of properties</p></li>
+</ul>
+<p><img alt="" src="../../../_images/doxygen_type_table.png" /></p>
+<p>Clicking on any of these links will take you to the
+<a class="reference external" href="https://github.com/key4hep/EDM4hep/blob/master/edm4hep.yaml"><code class="docutils literal notranslate"><span class="pre">edm4hep.yaml</span></code></a>
+definition file of EDM4hep, jumping directly to the definition of the respective
+datatype or component. For more information on this file check out the section
+about <a class="reference internal" href="#podio-the-technical-infrastructure-on-which-things-run">podio</a>. In
+principle it is possible to have <em>very educated guesses</em> on how the interface of
+the classes will look like from this.</p>
+</section>
+<section id="navigating-the-doxygen-reference-page">
+<h3>Navigating the doxygen reference page<a class="headerlink" href="#navigating-the-doxygen-reference-page" title="Link to this heading"></a></h3>
+<p>To see all the available classes simply click on <a class="reference external" href="https://edm4hep.web.cern.ch/classes.html"><code class="docutils literal notranslate"><span class="pre">Classes</span> <span class="pre">-&gt;</span> <span class="pre">Class</span> <span class="pre">Index</span></code></a> or on <a class="reference external" href="https://edm4hep.web.cern.ch/annotated.html"><code class="docutils literal notranslate"><span class="pre">Classes</span> <span class="pre">-&gt;</span> <span class="pre">Class</span> <span class="pre">List</span></code></a>. Doing the latter and
+expanding the <code class="docutils literal notranslate"><span class="pre">edm4hep</span></code> namespace gives you something like this</p>
+<p><img alt="" src="../../../_images/doxygen_class_list.png" /></p>
+<p>Clicking on any of the links in this list will take you to the reference page
+for that class, e.g. for the <a class="reference external" href="https://edm4hep.web.cern.ch/classedm4hep_1_1_reconstructed_particle.html"><code class="docutils literal notranslate"><span class="pre">ReconstructedParticle</span></code></a></p>
+<p><img alt="" src="../../../_images/doxygen_reco_particle.png" /></p>
+<section id="why-are-there-so-many-classes-and-do-i-need-all-of-them">
+<h4>Why are there so many classes and do I need all of them?<a class="headerlink" href="#why-are-there-so-many-classes-and-do-i-need-all-of-them" title="Link to this heading"></a></h4>
+<p>If you look at the list you will realize there are many classes that are all
+named very similar, e.g.</p>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">CaloHitContribution</span></code></strong></p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">CaloHitContributionCollection</span></code></strong></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CaloHitContributionCollectionData</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CaloHitContributionCollectionIterator</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CaloHitContributionData</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CaloHitContributionMutableCollectionIterator</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CaloHitContributionObj</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CaloHitContributionSIOBlock</span></code></p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">MutableCaloHitContribution</span></code></strong></p></li>
+</ul>
+<p>From all of these classes <strong>only the ones marked bold are truly “visible” and
+intended for use</strong>. The others are internal classes or simple helper types that
+you will most likely only ever see in compiler errors, especially if you follow
+the <em>Almost Always Auto</em> style of writing c++ code (see <a class="reference external" href="https://herbsutter.com/2013/08/12/gotw-94-solution-aaa-style-almost-always-auto/">Herb Sutter’s original
+blog
+post</a>
+or <a class="reference external" href="http://cginternals.github.io/guidelines/articles/almost-always-auto/">a slightly easier to digest
+summary</a>).
+To understand why these classes exist and what their purpose is, we have to make
+a slight detour to
+<a class="reference internal" href="#podio-the-technical-infrastructure-on-which-things-run">podio</a>.</p>
+</section>
+</section>
+<section id="some-utility-functionality">
+<h3>Some utility functionality<a class="headerlink" href="#some-utility-functionality" title="Link to this heading"></a></h3>
+<p>EDM4hep also brings a bit of utility functionality. You can find it in the
+<a class="reference external" href="https://edm4hep.web.cern.ch/namespaceedm4hep_1_1utils.html"><code class="docutils literal notranslate"><span class="pre">edm4hep::utils</span></code>
+namespace</a> (click on
+<code class="docutils literal notranslate"><span class="pre">Namespaces</span> <span class="pre">-&gt;</span> <span class="pre">Namespace</span> <span class="pre">List</span></code>, then expand the <code class="docutils literal notranslate"><span class="pre">edm4hep</span></code> namespace and then
+click on <code class="docutils literal notranslate"><span class="pre">utils</span></code> to arrive at this link).</p>
+</section>
+</section>
+</section>
+<section id="podio-the-technical-infrastructure-on-which-things-run">
+<h1>podio - The technical infrastructure on which things run<a class="headerlink" href="#podio-the-technical-infrastructure-on-which-things-run" title="Link to this heading"></a></h1>
+<p>podio is an EDM toolkit that is used by and developed further in the Key4hep
+context. The main purpose is to have an efficiently implemented, thread safe EDM
+starting from a high level description. For more (gory) details have a look at
+the <a class="reference external" href="https://github.com/AIDASoft/podio">github repository</a>.</p>
+<p>Here we will describe the code generation, and its implications for EDM4hep. A
+<a class="reference internal" href="#the-podio-frame-container">bit further down</a> we will describe how to read and
+write podio (root) files and the <a class="reference internal" href="#podio-dump"><code class="docutils literal notranslate"><span class="pre">podio-dump</span></code></a> tool to inspect
+files without having to open them.</p>
+<section id="podio-code-generation">
+<h2>podio code generation<a class="headerlink" href="#podio-code-generation" title="Link to this heading"></a></h2>
+<p>The podio code generator is a python script that reads in the EDM definition in
+<strong>yaml</strong> format, does a few basic validation checks on the definition, and then
+generates all the necessary code via the Jinja2 template engine.</p>
+<p><img alt="" src="../../../_images/edm4hep_analysis" /><a class="reference internal" href="https://raw.githubusercontent.com/key4hep/key4hep-tutorials/4b0cb1387169538c3580ab953c7bb179e42a8470/edm4hep_analysis/images/podio_generate.svg"><img alt="https://raw.githubusercontent.com/key4hep/key4hep-tutorials/4b0cb1387169538c3580ab953c7bb179e42a8470/edm4hep_analysis/images/podio_generate.svg" src="https://raw.githubusercontent.com/key4hep/key4hep-tutorials/4b0cb1387169538c3580ab953c7bb179e42a8470/edm4hep_analysis/images/podio_generate.svg" width="320" /></a></p>
+<p>The generated code should (among other things)</p>
+<ul class="simple">
+<li><p>be efficient,</p></li>
+<li><p>offer an easy to use interface,</p></li>
+<li><p>offer performant I/O.</p></li>
+</ul>
+<p>Having automated code generation has a few advantages:</p>
+<ul class="simple">
+<li><p>Freeing the user from the repetitive task of implementing all the types
+themselves</p></li>
+<li><p>Freeing the user from having to deal with all the details of how to do things
+efficiently</p></li>
+<li><p>Making it very easy to roll out improved implementations (or bug fixes) via
+simply regenerating the code</p></li>
+</ul>
+<section id="the-three-layers-of-podio">
+<h3>The three layers of podio<a class="headerlink" href="#the-three-layers-of-podio" title="Link to this heading"></a></h3>
+<p>To achieve the goals stated above podio favors composition over inheritance and
+uses <strong>plain-old-data (POD)</strong> types wherever possible. To achieve this podio
+employs a layered design, which makes it possible to have an efficient memory
+layout and performant I/O implementation, while still offering an easy to use
+interface</p>
+<p><img alt="" src="../../../_images/edm4hep_analysis" /><a class="reference internal" href="https://raw.githubusercontent.com/key4hep/key4hep-tutorials/4b0cb1387169538c3580ab953c7bb179e42a8470/edm4hep_analysis/images/podio_layers.png"><img alt="https://raw.githubusercontent.com/key4hep/key4hep-tutorials/4b0cb1387169538c3580ab953c7bb179e42a8470/edm4hep_analysis/images/podio_layers.png" src="https://raw.githubusercontent.com/key4hep/key4hep-tutorials/4b0cb1387169538c3580ab953c7bb179e42a8470/edm4hep_analysis/images/podio_layers.png" style="width: 320px;" /></a></p>
+<ul class="simple">
+<li><p>The <em>User Layer</em> is the top most layer and it <strong>offers the full
+functionality</strong> and is the <strong>only layer with which users interact directly</strong>.
+It consists mainly of the collections and lightweight handle classes, i.e.</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">XYZCollection</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">XYZ</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MutableXYZ</span></code></p></li>
+</ul>
+</li>
+<li><p>The <em>Object Layer</em> consists of the <code class="docutils literal notranslate"><span class="pre">XYZObj</span></code> classes, that take care of all
+resource management and which also enable the relations between different
+objects.</p></li>
+<li><p>The <em>POD Layer</em> at the very bottom is where all the actual data lives in
+simple <code class="docutils literal notranslate"><span class="pre">XYZData</span></code> POD structs. These are the things that are actually stored
+in, e.g. root files that are written by podio.</p></li>
+</ul>
+</section>
+<section id="basics-of-generated-code-value-semantics">
+<h3>Basics of generated code - value semantics<a class="headerlink" href="#basics-of-generated-code-value-semantics" title="Link to this heading"></a></h3>
+<p>The generated c++ code offers so called <em>value semantics</em>. The exact details of
+what this actually means are not very important, the main point <strong>is that you
+can treat all objects as values and you don’t have to worry about inefficient
+copies or managing resources:</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">recos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">edm4hep</span><span class="o">::</span><span class="n">ReconstructedParticleCollection</span><span class="p">();</span>
+
+<span class="c1">// ... fill, e.g. via</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">recos</span><span class="p">.</span><span class="n">create</span><span class="p">();</span>
+<span class="c1">// or via</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">p2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">edm4hep</span><span class="o">::</span><span class="n">ReconstructedParticle</span><span class="p">();</span>
+<span class="n">recos</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">p2</span><span class="p">);</span><span class="w"> </span>
+
+<span class="c1">// Loop over a collection</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="n">reco</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">recos</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">vtx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reco</span><span class="p">.</span><span class="n">getStartVertex</span><span class="p">();</span>
+<span class="w">  </span><span class="c1">// do something with the vertex</span>
+<span class="w">  </span>
+<span class="w">  </span><span class="c1">// loop over related tracks</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="n">track</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">reco</span><span class="p">.</span><span class="n">getTracks</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// do something with this track</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This looks very similar to the equivalent python code (if you squint a bit, and ignore the <code class="docutils literal notranslate"><span class="pre">auto</span></code>s, <code class="docutils literal notranslate"><span class="pre">;</span></code> and <code class="docutils literal notranslate"><span class="pre">{}</span></code> ;) )</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">recos</span> <span class="o">=</span> <span class="n">edm4hep</span><span class="o">.</span><span class="n">ReconstructedParticleCollection</span><span class="p">()</span>
+
+<span class="c1"># ... fill, e.g. via</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">recos</span><span class="o">.</span><span class="n">create</span><span class="p">()</span>
+<span class="c1"># or via</span>
+<span class="n">p2</span> <span class="o">=</span> <span class="n">edm4hep</span><span class="o">.</span><span class="n">ReconstructedParticle</span><span class="p">()</span>
+<span class="n">recos</span><span class="o">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">p2</span><span class="p">)</span>
+
+<span class="c1"># Loop over a collection</span>
+<span class="k">for</span> <span class="n">reco</span> <span class="ow">in</span> <span class="n">recos</span><span class="p">:</span>
+  <span class="n">vtx</span> <span class="o">=</span> <span class="n">reco</span><span class="o">.</span><span class="n">getStartVertex</span><span class="p">()</span>
+  <span class="c1"># do something with the vertex</span>
+  
+  <span class="c1"># loop over related tracks</span>
+  <span class="k">for</span> <span class="n">track</span> <span class="ow">in</span> <span class="n">reco</span><span class="o">.</span><span class="n">getTracks</span><span class="p">():</span>
+    <span class="c1"># do something with the tracks</span>
+</pre></div>
+</div>
+<p>The python interface is functionally equivalent to the one c++ interface, since
+that is implemented via PyROOT. There are some additions that make the python
+interface more <em>pythonic</em>, e.g. <code class="docutils literal notranslate"><span class="pre">len(recos)</span></code> is equivalent to <code class="docutils literal notranslate"><span class="pre">recos.size()</span></code>.
+Nevertheless, the doxygen reference is valid for both interfaces.</p>
+</section>
+<section id="guessing-the-interface-from-the-yaml-definition">
+<h3>Guessing the interface from the yaml definition<a class="headerlink" href="#guessing-the-interface-from-the-yaml-definition" title="Link to this heading"></a></h3>
+<p>Since all code is generated, it is usually pretty straight forward to guess how
+the interface will look like just from looking at the definition in the yaml
+file. For EDM4hep the general rule is to get a <code class="docutils literal notranslate"><span class="pre">Member</span></code> variable, a
+<code class="docutils literal notranslate"><span class="pre">OneToOneRelation</span></code>, a <code class="docutils literal notranslate"><span class="pre">OneToManyRelation</span></code> or a <code class="docutils literal notranslate"><span class="pre">VectorMember</span></code> is to <strong>simply
+stick a <code class="docutils literal notranslate"><span class="pre">get</span></code> in front of the name in the yaml file and to capitalize the first
+letter.</strong>, e.g.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">Members</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">edm4hep::Vector3f momentum // the momentum in [GeV]</span>
+</pre></div>
+</div>
+<p>will turn into something like</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">const</span><span class="w"> </span><span class="n">edm4hep</span><span class="o">::</span><span class="n">Vector3f</span><span class="o">&amp;</span><span class="w"> </span><span class="nf">getMomentum</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Similar, but in slightly more nuanced rules apply for the methods that are
+generated for setting a value. For <code class="docutils literal notranslate"><span class="pre">Member</span></code> variables and <code class="docutils literal notranslate"><span class="pre">OneToOneRelation</span></code>s
+the general rule is to <strong>stick a <code class="docutils literal notranslate"><span class="pre">set</span></code> in front of the name in the yaml file and
+to capitalize the first letter</strong>, e.g. (continuing from above)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">setMomentum</span><span class="p">(</span><span class="n">edm4hep</span><span class="o">::</span><span class="n">Vector3f</span><span class="w"> </span><span class="n">value</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>For the <code class="docutils literal notranslate"><span class="pre">OneToManyRelation</span></code>s and <code class="docutils literal notranslate"><span class="pre">VectorMember</span></code>s the rule is to <strong>stick a
+<code class="docutils literal notranslate"><span class="pre">addTo</span></code> in front of the name in the yaml file and to capitalize the first
+letter</strong>, e.g.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">OneToManyRelation</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MCParticle daughters // the daughters of this particle</span>
+</pre></div>
+</div>
+<p>will be generated to</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">addToDaughters</span><span class="p">(</span><span class="n">MCParticle</span><span class="w"> </span><span class="n">daughter</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="why-is-there-a-xyz-and-a-mutablexyx">
+<h3>Why is there a <code class="docutils literal notranslate"><span class="pre">XYZ</span></code> and a <code class="docutils literal notranslate"><span class="pre">MutableXYX</span></code>?<a class="headerlink" href="#why-is-there-a-xyz-and-a-mutablexyx" title="Link to this heading"></a></h3>
+<p>The underlying technical reasons are rather complex, dive quite deepish into c++
+nuances, and definitely far beyond the scope of this tutorial. In short: We need
+two different handle classes in order to control whether users are allowed to
+modify things or not. As one of the main goals of podio generated EDMs is to be
+thread safe the default generated class for each data type allows only for
+immutable read access, i.e. it provides only the <code class="docutils literal notranslate"><span class="pre">get</span></code> methods. Only the
+<code class="docutils literal notranslate"><span class="pre">Mutable</span></code> classes actually have the <code class="docutils literal notranslate"><span class="pre">set</span></code> methods, and can hence be used to
+actually modify objects. The most important implication of this is the
+following: <strong>Everything that you read from file, or that you get from the Gaudi
+TES is immutable.</strong> I.e. there is no way for you to change or update the values
+that you read. The only way to “update” values (or collections) is to actually
+copy the contents and then store the updated values back. Independent copies of
+objects can be obtained with the clone` method.</p>
+</section>
+<section id="writing-function-interfaces">
+<h3>Writing function interfaces<a class="headerlink" href="#writing-function-interfaces" title="Link to this heading"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">Mutable</span></code> objects implicitly convert to an instance of a default class.
+Hence, <strong>always use the default classes when specifying function interfaces</strong>
+(obviously this only works if you only need read access in the function). <strong>There
+is no implicit conversion from the default, immutable objects to the <code class="docutils literal notranslate"><span class="pre">Mutable</span></code>
+objects!</strong></p>
+<p>As an example</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">printE</span><span class="p">(</span><span class="n">edm4hep</span><span class="o">::</span><span class="n">MCParticle</span><span class="w"> </span><span class="n">particle</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">particle</span><span class="p">.</span><span class="n">getEnergy</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">&#39;\n&#39;</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">printEMutable</span><span class="p">(</span><span class="n">edm4hep</span><span class="o">::</span><span class="n">MutableMCParticle</span><span class="w"> </span><span class="n">particle</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">particle</span><span class="p">.</span><span class="n">getEnergy</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">&#39;\n&#39;</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">mutP</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">edm4hep</span><span class="o">::</span><span class="n">MutableMCParticle</span><span class="p">();</span>
+<span class="w">  </span><span class="n">p</span><span class="p">.</span><span class="n">setEnergy</span><span class="p">(</span><span class="mf">3.14</span><span class="p">);</span>
+<span class="w">  </span>
+<span class="w">  </span><span class="n">printE</span><span class="p">(</span><span class="n">mutP</span><span class="p">);</span><span class="w">  </span><span class="c1">// Works due to implicit conversion</span>
+<span class="w">  </span><span class="n">printEMutable</span><span class="p">(</span><span class="n">mutP</span><span class="p">);</span><span class="w">  </span><span class="c1">// Obviously also works</span>
+<span class="w">  </span>
+<span class="w">  </span><span class="c1">// Now we create an immutable object</span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">P</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">edm4hep</span><span class="o">::</span><span class="n">MCParticle</span><span class="p">();</span>
+<span class="w">  </span>
+<span class="w">  </span><span class="n">printE</span><span class="p">(</span><span class="n">P</span><span class="p">);</span><span class="w">  </span><span class="c1">// Obviously works</span>
+<span class="w">  </span><span class="n">printEMutable</span><span class="p">(</span><span class="n">P</span><span class="p">);</span><span class="w">  </span><span class="c1">// BREAKS: No conversion from default to Mutable</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="subset-collections">
+<h3>Subset collections<a class="headerlink" href="#subset-collections" title="Link to this heading"></a></h3>
+<p>Similar to LCIO, podio generated EDMs offer a <em>subset collection functionality</em>.
+This allows to create collections of objects, that are actually part of another
+collection, e.g. to simply collect all the muons that are present in a larger
+collection of reconstructed particles:</p>
+<p><img alt="" src="../../../_images/edm4hep_analysis" /><a class="reference internal" href="https://raw.githubusercontent.com/key4hep/key4hep-tutorials/4b0cb1387169538c3580ab953c7bb179e42a8470/edm4hep_analysis/images/podio_subset_collections.svg"><img alt="https://raw.githubusercontent.com/key4hep/key4hep-tutorials/4b0cb1387169538c3580ab953c7bb179e42a8470/edm4hep_analysis/images/podio_subset_collections.svg" src="https://raw.githubusercontent.com/key4hep/key4hep-tutorials/4b0cb1387169538c3580ab953c7bb179e42a8470/edm4hep_analysis/images/podio_subset_collections.svg" width="200" /></a></p>
+<p>To create a subset collection, simply do</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">muons</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">edm4hep</span><span class="o">::</span><span class="n">ReconstructedParticleCollection</span><span class="p">();</span>
+<span class="n">muons</span><span class="p">.</span><span class="n">setSubsetCollection</span><span class="p">();</span>
+
+<span class="c1">// You can now add objects that are part </span>
+<span class="c1">// of another collection to this one via push_back</span>
+<span class="n">muons</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">recos</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+</pre></div>
+</div>
+<p>Reading a subset collection works exactly the same as reading a normal
+collection. This is handled in a transparent way, such that you usually don’t
+even realize that you are operating on a subset collection.</p>
+</section>
+</section>
+<section id="the-podio-frame-container">
+<h2>The <code class="docutils literal notranslate"><span class="pre">podio::Frame</span></code> container<a class="headerlink" href="#the-podio-frame-container" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">podio::Frame</span></code> is a <em>generalized event</em>. It is a container that aggregates
+all relevant data (and some meta data). It also defines an implicit <em>interval of
+validity</em> (but that is less relevant for this tutorial). It provides a thread
+safe interface for data access</p>
+<ul class="simple">
+<li><p>Immutable read access only for collections that are stored inside the a
+<code class="docutils literal notranslate"><span class="pre">Frame</span></code></p></li>
+<li><p>All data that is inside a <code class="docutils literal notranslate"><span class="pre">Frame</span></code> is owned by it, and this is also reflected
+in its interface.</p></li>
+</ul>
+<p><img alt="" src="../../../_images/edm4hep_analysis" /><a class="reference internal" href="https://raw.githubusercontent.com/key4hep/key4hep-tutorials/4b0cb1387169538c3580ab953c7bb179e42a8470/edm4hep_analysis/images/frame_concept.svg"><img alt="https://raw.githubusercontent.com/key4hep/key4hep-tutorials/4b0cb1387169538c3580ab953c7bb179e42a8470/edm4hep_analysis/images/frame_concept.svg" src="https://raw.githubusercontent.com/key4hep/key4hep-tutorials/4b0cb1387169538c3580ab953c7bb179e42a8470/edm4hep_analysis/images/frame_concept.svg" width="300" /></a></p>
+<p>Here we will just briefly introduce the main functionality, for more details see
+the <a class="reference external" href="https://github.com/AIDASoft/podio/blob/master/doc/frame.md">documentation in
+podio</a>.</p>
+<section id="getting-collections-from-a-frame">
+<h3>Getting collections from a <code class="docutils literal notranslate"><span class="pre">Frame</span></code><a class="headerlink" href="#getting-collections-from-a-frame" title="Link to this heading"></a></h3>
+<p>Assuming that <code class="docutils literal notranslate"><span class="pre">event</span></code> is a <code class="docutils literal notranslate"><span class="pre">podio::Frame</span></code> in the following code examples,
+getting a collection can be done via (c++)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">mcParticles</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">event</span><span class="p">.</span><span class="n">get</span><span class="o">&lt;</span><span class="n">edm4hep</span><span class="o">::</span><span class="n">MCParticleCollection</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;MCParticles&quot;</span><span class="p">);</span><span class="w"> </span>
+</pre></div>
+</div>
+<p>or (python)</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mcParticles</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;MCParticles&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This retrieves the collection that is stored under the name <code class="docutils literal notranslate"><span class="pre">MCParticles</span></code> with
+type <code class="docutils literal notranslate"><span class="pre">edm4hep::MCParticleCollection</span></code>. If no such collection exists, it will
+simply return an empty collection of the desired type. As you can see, the type
+is automatically inferred in python. <strong>Note that <code class="docutils literal notranslate"><span class="pre">get</span></code> returns a const&amp;, so it
+is required to actually put the <code class="docutils literal notranslate"><span class="pre">&amp;</span></code> behind <code class="docutils literal notranslate"><span class="pre">auto</span></code> in c++</strong>, otherwise there will
+be a compilation error complaining about a copy-constructor being marked
+<code class="docutils literal notranslate"><span class="pre">delete</span></code>.</p>
+</section>
+<section id="putting-a-collection-into-a-frame">
+<h3>Putting a collection into a <code class="docutils literal notranslate"><span class="pre">Frame</span></code><a class="headerlink" href="#putting-a-collection-into-a-frame" title="Link to this heading"></a></h3>
+<p>When putting a collection into a <code class="docutils literal notranslate"><span class="pre">Frame</span></code> you give up ownership of this
+collection. To signal this to the users, it is necessary to <em>move</em> the
+collection into a <code class="docutils literal notranslate"><span class="pre">Frame</span></code>. Again assuming <code class="docutils literal notranslate"><span class="pre">event</span></code> is a <code class="docutils literal notranslate"><span class="pre">podio::Frame</span></code> in the
+following examples, this looks like this</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">recos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">edm4hep</span><span class="o">::</span><span class="n">ReconstructedParticleCollection</span><span class="p">();</span>
+<span class="n">event</span><span class="p">.</span><span class="n">put</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">recos</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;ReconstructedParticles&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Note the requirement to explicitly use <code class="docutils literal notranslate"><span class="pre">std::move</span></code> in this case. At this point
+<code class="docutils literal notranslate"><span class="pre">recos</span></code> is <em>moved</em> into the <code class="docutils literal notranslate"><span class="pre">event</span></code>, and you are left with an object <a class="reference external" href="https://stackoverflow.com/a/12095473"><em>in a
+valid but unspecified state</em></a> that you
+should under normal circumstances no longer use after this point. (Technically
+we do enough that you still can use this, but don’t expect the results to match
+your expectations).</p>
+</section>
+</section>
+<section id="reading-edm4hep-files">
+<h2>Reading EDM4hep files<a class="headerlink" href="#reading-edm4hep-files" title="Link to this heading"></a></h2>
+<p>EDM4hep files are read with tools provided by podio. As podio supports multiple
+different backends there are several, <em>low level</em> readers that support all the
+necessary functionality. You can obviously use these readers directly, but we
+recommend to use the <code class="docutils literal notranslate"><span class="pre">Reader</span></code> class and the <code class="docutils literal notranslate"><span class="pre">makeReader</span></code> function that will
+dispatch to the correct low level reader automatically.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;podio/Reader.h&gt;</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;edm4hep/MCParticleCollection.h&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">reader</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">podio</span><span class="o">::</span><span class="n">makeReader</span><span class="p">(</span><span class="s">&quot;some_file_containing_edm4hep.data.root&quot;</span><span class="p">);</span>
+
+<span class="w">  </span><span class="c1">// Loop over all events</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">reader</span><span class="p">.</span><span class="n">getEvents</span><span class="p">();</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">event</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reader</span><span class="p">.</span><span class="n">readNextEvent</span><span class="p">();</span>
+<span class="w">    </span><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">mcParticles</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">event</span><span class="p">.</span><span class="n">get</span><span class="o">&lt;</span><span class="n">edm4hep</span><span class="o">::</span><span class="n">MCParticleCollection</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;MCParticles&quot;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// do more stuff with this event</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<section id="the-available-low-level-readers">
+<h3>The available low level readers<a class="headerlink" href="#the-available-low-level-readers" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ROOTReader</span></code> - The default reader for TTree based files</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ROOTLegacyReader</span></code> - The reader for an old podio format based on TTrees</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">RNTupleReader</span></code> - A reader for RNTuple based files</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SIOReader</span></code> - The reader for reading files using the SIO backend</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SIOLegacyReader</span></code> - The reader for the SIO backend with an old podio format</p></li>
+</ul>
+<p>The <code class="docutils literal notranslate"><span class="pre">Legacy</span></code> readers are stated here mainly for completeness, in case you need
+to read a rather old file that still used the <code class="docutils literal notranslate"><span class="pre">EventStore</span></code> which has been
+removed from podio some time ago. See
+<a class="reference internal" href="#how-do-i-figure-out-if-a-file-is-legacy">here</a> for more information on how to
+figure out whether the file you are interested in is a legacy file or not.
+As podio is a rather low level tool, also the interface of these readers feel
+somewhat low level. This is mostly visible in the fact, that you have to provide
+a <code class="docutils literal notranslate"><span class="pre">category</span></code> (name) when getting the number of entries, or when reading the next
+entry. This is because in principle podio can handle multiple different
+categories of Frames in one file. <strong>For the purpose of this tutorial and also
+for the majority of use cases, simply use <code class="docutils literal notranslate"><span class="pre">&quot;events&quot;</span></code> as category name.</strong> Readers
+in podio do not return a <code class="docutils literal notranslate"><span class="pre">podio::Frame</span></code> directly, rather they just return some
+<em>frame data</em> from which a <code class="docutils literal notranslate"><span class="pre">podio::Frame</span></code> can be constructed. Putting all of
+these things together, a simple event loop looks like this in c++:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;podio/ROOTReader.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;podio/Frame.h&quot;</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;edm4hep/MCParticleCollection.h&quot;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">reader</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">podio</span><span class="o">::</span><span class="n">ROOTReader</span><span class="p">();</span>
+<span class="w">  </span><span class="n">reader</span><span class="p">.</span><span class="n">openFile</span><span class="p">(</span><span class="s">&quot;some_file_containing_edm4hep_data.root&quot;</span><span class="p">);</span>
+<span class="w">  </span>
+<span class="w">  </span><span class="c1">// Loop over all events</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">reader</span><span class="p">.</span><span class="n">getEntries</span><span class="p">(</span><span class="s">&quot;events&quot;</span><span class="p">);</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">event</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">podio</span><span class="o">::</span><span class="n">Frame</span><span class="p">(</span><span class="n">reader</span><span class="p">.</span><span class="n">readNextEntry</span><span class="p">(</span><span class="s">&quot;events&quot;</span><span class="p">));</span>
+<span class="w">    </span><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">mcParticles</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">event</span><span class="p">.</span><span class="n">get</span><span class="o">&lt;</span><span class="n">edm4hep</span><span class="o">::</span><span class="n">MCParticleCollection</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;MCParticles&quot;</span><span class="p">);</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="c1">// do more stuff with this event</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The equivalent python code looks like this</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">podio</span> <span class="kn">import</span> <span class="n">root_io</span>
+
+<span class="n">reader</span> <span class="o">=</span> <span class="n">root_io</span><span class="o">.</span><span class="n">Reader</span><span class="p">(</span><span class="s2">&quot;some_file_containing_edm4hep_data.root&quot;</span><span class="p">)</span>
+<span class="c1"># if you want to read legacy files use root_io.LegacyReader</span>
+
+<span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">reader</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;events&quot;</span><span class="p">):</span>
+  <span class="n">mcParticles</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;MCParticles&quot;</span><span class="p">)</span>
+  <span class="c1"># do more stuff with this event</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="root-file-layout-of-podio-generated-edms">
+<h2>ROOT file layout of podio generated EDMs<a class="headerlink" href="#root-file-layout-of-podio-generated-edms" title="Link to this heading"></a></h2>
+<p>podio generated EDMs, i.e. also EDM4hep, use ROOT as their default I/O backend.
+Since everything is based on PODs, the produced root files are pretty straight
+forward to read and interpret (with some caveats). They are already almost flat
+ntuples.</p>
+<p><img alt="" src="../../../_images/edm4hep_branches_1.png" /></p>
+<p><img alt="" src="../../../_images/edm4hep_browse_relations_1.png" /></p>
+<section id="how-do-i-figure-out-if-a-file-is-legacy">
+<h3>How do I figure out if a file is legacy?<a class="headerlink" href="#how-do-i-figure-out-if-a-file-is-legacy" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p>Use <a class="reference internal" href="#podio-dump"><code class="docutils literal notranslate"><span class="pre">podio-dump</span></code></a> and it will tell you</p></li>
+</ol>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span>podio-dump<span class="w"> </span>/home/workarea/data/rv02-02.sv02-02.mILD_l5_o1_v02.E250-SetA.I402003.Pe2e2h.eL.pR.n000.d_dstm_15089_0_edm4hep.root
+<span class="go">input file: /home/workarea/data/rv02-02.sv02-02.mILD_l5_o1_v02.E250-SetA.I402003.Pe2e2h.eL.pR.n000.d_dstm_15089_0_edm4hep.root</span>
+
+<span class="go">Frame categories in this file (this is a legacy file!):</span>
+<span class="go">[...]</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>Peek inside the root file and look at the contents</p></li>
+</ol>
+<p><img alt="" src="../../../_images/edm4hep_analysis" /><a class="reference internal" href="https://raw.githubusercontent.com/key4hep/key4hep-tutorials/4b0cb1387169538c3580ab953c7bb179e42a8470/edm4hep_analysis/images/initial_browser_edm4hep.png"><img alt="https://raw.githubusercontent.com/key4hep/key4hep-tutorials/4b0cb1387169538c3580ab953c7bb179e42a8470/edm4hep_analysis/images/initial_browser_edm4hep.png" src="https://raw.githubusercontent.com/key4hep/key4hep-tutorials/4b0cb1387169538c3580ab953c7bb179e42a8470/edm4hep_analysis/images/initial_browser_edm4hep.png" style="width: 200px;" /></a> <img alt="" src="../../../_images/edm4hep_analysis" /><a class="reference internal" href="https://raw.githubusercontent.com/key4hep/key4hep-tutorials/4b0cb1387169538c3580ab953c7bb179e42a8470/edm4hep_analysis/images/initial_browser_legacy_edm4hep.png"><img alt="https://raw.githubusercontent.com/key4hep/key4hep-tutorials/4b0cb1387169538c3580ab953c7bb179e42a8470/edm4hep_analysis/images/initial_browser_legacy_edm4hep.png" src="https://raw.githubusercontent.com/key4hep/key4hep-tutorials/4b0cb1387169538c3580ab953c7bb179e42a8470/edm4hep_analysis/images/initial_browser_legacy_edm4hep.png" style="width: 200px;" /></a></p>
+</section>
+</section>
+<section id="podio-dump">
+<h2><code class="docutils literal notranslate"><span class="pre">podio-dump</span></code><a class="headerlink" href="#podio-dump" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">podio-dump</span></code> utility allows to inspect EDM4hep files from the command line.
+The synopsis looks like this</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span>podio-dump<span class="w"> </span>--help
+<span class="go">usage: podio-dump [-h] [-c CATEGORY] [-e ENTRIES] [-d] [--dump-edm DUMP_EDM] [--version] inputfile</span>
+
+<span class="go">Dump contents of a podio file to stdout</span>
+
+<span class="go">positional arguments:</span>
+<span class="go">  inputfile             Name of the file to dump content from</span>
+
+<span class="go">options:</span>
+<span class="go">  -h, --help            show this help message and exit</span>
+<span class="go">  -c CATEGORY, --category CATEGORY</span>
+<span class="go">                        Which Frame category to dump</span>
+<span class="go">  -e ENTRIES, --entries ENTRIES</span>
+<span class="go">                        Which entries to print. A single number, comma separated list of numbers or &quot;first:last&quot; for an inclusive range of entries. Defaults to the first entry.</span>
+<span class="go">  -d, --detailed        Dump the full contents not just the collection info</span>
+<span class="go">  --dump-edm DUMP_EDM   Dump the specified EDM definition from the file in yaml format</span>
+<span class="go">  --version             show program&#39;s version number and exit</span>
+</pre></div>
+</div>
+<p>By default it prints how many events are present in the file and also a summary
+of the contents of the first event. This overview consists of the names, data
+types and number of elements of the collections that are stored in this event.
+Using the <code class="docutils literal notranslate"><span class="pre">--detailed</span></code> flag, <code class="docutils literal notranslate"><span class="pre">podio-dump</span></code> will print the complete contents of
+all collections in ASCII format. This can be quite a bit of information. Using
+the <code class="docutils literal notranslate"><span class="pre">--entries</span></code> flag it is possible to choose which events to look at. The
+<code class="docutils literal notranslate"><span class="pre">--categories</span></code> flag is an advanced feature and not necessary for this tutorial.</p>
+<p><code class="docutils literal notranslate"><span class="pre">podio-dump</span></code> will also tell you whether the file that is passed to it is a
+<em>legacy file</em> in which case you will need the <code class="docutils literal notranslate"><span class="pre">ROOTLegacyReader</span></code> or the
+<code class="docutils literal notranslate"><span class="pre">SIOLegacyReader</span></code> to read it.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../../README.html" class="btn btn-neutral float-left" title="Key4hep How-Tos and Instructions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../k4fwcore/doc/PodioInputOutput.html" class="btn btn-neutral float-right" title="Reading and writing EDM4hep files in Gaudi" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Key4hep.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
