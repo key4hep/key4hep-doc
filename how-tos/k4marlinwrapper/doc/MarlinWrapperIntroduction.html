@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wrapping Marlin processors in Gaudi &mdash; Key4hep  documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../../_static/copybutton.js?v=f281be69"></script>
+        <script src="../../../_static/design-tabs.js?v=36754332"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Standalone conversion from LCIO to EDM4hep" href="../../k4edm4hep2lcioconv/doc/LCIO2EDM4hep.html" />
+    <link rel="prev" title="Getting algorithm run time information" href="../../k4fwcore/doc/algorithmTiming.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            Key4hep
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/help.html">Getting help</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/setup.html">Getting key4hep</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/CONTRIBUTING.html">Contributing</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../README.html">Key4hep How-Tos and Instructions</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../key4hep-tutorials/edm4hep_analysis/edm4hep_api_intro.html">EDM4hep - The common event data model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../key4hep-tutorials/edm4hep_analysis/edm4hep_api_intro.html#podio-the-technical-infrastructure-on-which-things-run">podio - The technical infrastructure on which things run</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../k4fwcore/doc/PodioInputOutput.html">Reading and writing EDM4hep files in Gaudi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../k4fwcore/doc/k4run-args.html">Adding custom arguments to <code class="docutils literal notranslate"><span class="pre">k4run</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../k4fwcore/doc/algorithmTiming.html">Getting algorithm run time information</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Wrapping Marlin processors in Gaudi</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#the-marlinprocessorwrapper-gaudi-algorithm">The <code class="docutils literal notranslate"><span class="pre">MarlinProcessorWrapper</span></code> Gaudi algorithm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#reading-and-writing-lcio-events-with-gaudi">Reading and writing LCIO events with Gaudi</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#automatic-conversion-of-marlin-xml-steering-files">Automatic conversion of Marlin XML steering files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#limitations">Limitations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#using-the-edm-converters">Using the EDM converters</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#configuration-options">Configuration options</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#tools-for-facilitating-interoperability">Tools for facilitating interoperability</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#potential-pitfalls-when-using-other-gaudi-algorithms">Potential pitfalls when using other Gaudi Algorithms</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../k4edm4hep2lcioconv/doc/LCIO2EDM4hep.html">Standalone conversion from LCIO to EDM4hep</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../k4edm4hep2lcioconv/doc/LCIO2EDM4hep.html#library-usage-of-the-conversion-functions">Library usage of the conversion functions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials/README.html">Key4hep Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developing-key4hep-software/README.html">Developing Key4hep</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../spack-build-instructions-for-librarians/README.html">Building Key4hep: For Librarians</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../talks-and-presentations/README.html">Talks and Presentations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../call-for-logos/README.html">Call for logos</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">External links</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://cern.ch/fccsw">FCC software</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://twiki.cern.ch/twiki/bin/view/CLIC/CLICSoftwareComputing">CLIC software</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://ilcsoft.desy.de/portal">ILC software</a></li>
+<li class="toctree-l1"><a class="reference external" href="http://cepcsoft.ihep.ac.cn/">CEPC software</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://mcd-wiki.web.cern.ch/software/">Muon Collider software</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Key4hep</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../README.html">Key4hep How-Tos and Instructions</a></li>
+      <li class="breadcrumb-item active">Wrapping Marlin processors in Gaudi</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/how-tos/k4marlinwrapper/doc/MarlinWrapperIntroduction.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <!--
+Copyright (c) 2019-2024 Key4hep-Project.
+
+This file is part of Key4hep.
+See https://key4hep.github.io/key4hep-doc/ for further info.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+<section id="wrapping-marlin-processors-in-gaudi">
+<h1>Wrapping Marlin processors in Gaudi<a class="headerlink" href="#wrapping-marlin-processors-in-gaudi" title="Link to this heading"></a></h1>
+<p>This page describes how to run existing Marlin processors within the Gaudi
+framework. <code class="docutils literal notranslate"><span class="pre">Marlin</span></code> and <code class="docutils literal notranslate"><span class="pre">Gaudi</span></code> are two event processing frameworks available in
+the Key4hep software stack. The former was originally developed by the linear
+collider communities in iLCSoft, while the latter originally comes from LHCb. It
+is also the event processing framework for future developments within Key4hep.
+To enable using the existing functionality that has been developed for the
+linear collider studies and also to allow for a gradual migration the
+<code class="docutils literal notranslate"><span class="pre">MarlinProcessorWrapper</span></code> has been developed. It allows to run Marlin processors
+within the Gaudi framework and it’s usage is described
+<a class="reference internal" href="#the-marlinprocessorwrapper-gaudi-algorithm">below</a></p>
+<p>One of the major differences between Marlin processors and (Key4hep) Gaudi
+algorithms is the event data model (EDM) that they use. While Marlin uses LCIO,
+Gaudi in Key4hep uses <a class="reference external" href="https://edm4hep.web.cern.ch">EDM4hep</a>. Since EDM4hep is
+based on LCIO the differences are limited and it is possible to convert between
+the two EDMs as necessary. We will also show how to do this
+<a class="reference internal" href="#using-the-edm-converters">below</a>.</p>
+<p>The following descriptions assume that you are somewhat familiar with how to
+configure and run Gaudi via <code class="docutils literal notranslate"><span class="pre">k4run</span></code>, i.e. most of the snippets will just show
+the bare minimum of configuration, but will usually not work without
+modifications (e.g. in most cases the <code class="docutils literal notranslate"><span class="pre">ApplicationMgr</span></code> as well as putting all
+the configured algorithms into the list of algorithms to run is missing
+entirely).</p>
+<section id="the-marlinprocessorwrapper-gaudi-algorithm">
+<h2>The <code class="docutils literal notranslate"><span class="pre">MarlinProcessorWrapper</span></code> Gaudi algorithm<a class="headerlink" href="#the-marlinprocessorwrapper-gaudi-algorithm" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">MarlinProcessorWrapper</span></code> is a standard Gaudi algorithm and can be used just
+like all others, i.e. in a Gaudi options file we simply have to import it via</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">Gaudi.Configuration</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">Configurables</span> <span class="kn">import</span> <span class="n">MarlinProcessorWrapper</span>
+</pre></div>
+</div>
+<p>It can then be configured just like any other algorithm by instantiating it and
+passing the necessary parameters to it. Each Marlin processor that you want to
+wrap needs its own instance. The main configuration parameters for the
+<code class="docutils literal notranslate"><span class="pre">MarlinProcessorWrapper</span></code> are</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ProcessorType</span></code> - a string with the <strong>Marlin processor type</strong>. The type is
+usually the class name of the Marlin processor, and corresponds to the <code class="docutils literal notranslate"><span class="pre">type</span></code>
+attribute in a Marlin XML configuration for a processor.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Parameters</span></code> - a dictionary of string keys and <strong>list of string</strong> values. Each
+parameter of the Marlin processor needs its own entry in this dictionary and
+all parameter values have to be strings as the parsing is done internally.</p></li>
+</ul>
+<p>As a very brief example; The following snippet of a Marlin XML steering file</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="nt">&lt;processor</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;StatMonitorAlg&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;StatusMonitor&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;parameter</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;HowOften&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;int&quot;</span><span class="nt">&gt;</span>1<span class="nt">&lt;/parameter&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/processor&gt;</span>
+</pre></div>
+</div>
+<p>could be converted to the following snippet of a Gaudi options file</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">StatMonitorAlg</span> <span class="o">=</span> <span class="n">MarlinProcessorWrapper</span><span class="p">(</span><span class="s2">&quot;StatMonitorAlg&quot;</span><span class="p">)</span>
+<span class="n">StatMonitorAlg</span><span class="o">.</span><span class="n">ProcessorType</span> <span class="o">=</span> <span class="s2">&quot;StatusMonitor&quot;</span>
+<span class="n">StatMonitorAlg</span><span class="o">.</span><span class="n">Parameters</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;HowOften&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;1&quot;</span><span class="p">]}</span>
+</pre></div>
+</div>
+<p><strong>Note that wrapped Marlin processors still expect their inputs in LCIO
+format!</strong> You can either read in the data in that format directly, or use
+<a class="reference internal" href="#using-the-edm-converters">converters</a> to convert from EDM4hep to LCIO first.</p>
+</section>
+<section id="reading-and-writing-lcio-events-with-gaudi">
+<h2>Reading and writing LCIO events with Gaudi<a class="headerlink" href="#reading-and-writing-lcio-events-with-gaudi" title="Link to this heading"></a></h2>
+<p>In order to read in event data in LCIO format into the Gaudi world it is
+necessary to use the <code class="docutils literal notranslate"><span class="pre">LcioEvent</span></code> Gaudi algorithm. It is configured in the same
+way as normal Gaudi algorithms, i.e. in a minimal standalone form</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">Gaudi.Configurables</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">Configurables</span> <span class="kn">import</span> <span class="n">LcioEvent</span>
+
+<span class="n">read</span> <span class="o">=</span> <span class="n">LcioEvent</span><span class="p">()</span>
+<span class="n">read</span><span class="o">.</span><span class="n">Files</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;inputfile1.slcio&quot;</span><span class="p">,</span> <span class="s2">&quot;inputfile2.slcio&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>For writing LCIO events from Gaudi, simply use a <code class="docutils literal notranslate"><span class="pre">MarlinProcessorWrapper</span></code> to
+wrap a <code class="docutils literal notranslate"><span class="pre">LCIOOutputProcessor</span></code>, e.g.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">Configurables</span> <span class="kn">import</span> <span class="n">MarlinProcessorWrapper</span>
+
+<span class="n">Output_DST</span> <span class="o">=</span> <span class="n">MarlinProcessorWrapper</span><span class="p">(</span><span class="s2">&quot;Output_DST&quot;</span><span class="p">)</span>
+<span class="n">Output_DST</span><span class="o">.</span><span class="n">ProcessorType</span> <span class="o">=</span> <span class="s2">&quot;LCIOOutputProcessor&quot;</span>
+<span class="n">Output_DST</span><span class="o">.</span><span class="n">Parameters</span> <span class="o">=</span> <span class="p">{</span>
+                         <span class="s2">&quot;DropCollectionNames&quot;</span><span class="p">:</span> <span class="p">[],</span>
+                         <span class="s2">&quot;DropCollectionTypes&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;MCParticle&quot;</span><span class="p">,</span> <span class="s2">&quot;LCRelation&quot;</span><span class="p">,</span> <span class="s2">&quot;SimCalorimeterHit&quot;</span><span class="p">],</span>
+                         <span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="automatic-conversion-of-marlin-xml-steering-files">
+<h2>Automatic conversion of Marlin XML steering files<a class="headerlink" href="#automatic-conversion-of-marlin-xml-steering-files" title="Link to this heading"></a></h2>
+<p>We provide the <code class="docutils literal notranslate"><span class="pre">convertMarlinSteeringToGaudi.py</span></code> converter script to
+automatically convert Marlin steering files in XML format to Gaudi options
+python files. Usage is as simple as</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>convertMarlinSteeringToGaudi.py<span class="w"> </span>&lt;input-steering.xml&gt;<span class="w"> </span>&lt;output-gaudi-options.py&gt;
+</pre></div>
+</div>
+<section id="limitations">
+<h3>Limitations<a class="headerlink" href="#limitations" title="Link to this heading"></a></h3>
+<p>This converter script handles almost everything, but there are a few
+short-comings which it cannot yet handle:</p>
+<ul class="simple">
+<li><p>Marlin XML steering files can have <code class="docutils literal notranslate"><span class="pre">include</span></code> statements, e.g. <code class="docutils literal notranslate"><span class="pre">&lt;include</span> <span class="pre">ref=&quot;Tracking/TrackingDigi.xml&quot;/&gt;</span></code>. These cannot be resolved by the converter
+script, and it will issue a warning. The easiest way to fix this is to simply
+run <code class="docutils literal notranslate"><span class="pre">Marlin</span> <span class="pre">-n</span></code> to resolve all these statements and then run the converter
+script again on the output file which will be named
+<code class="docutils literal notranslate"><span class="pre">&lt;inputfile-base&gt;Parsed.xml</span></code>.</p></li>
+<li><p>Marlin has a mechanism to resolve constants that are defined in the
+<code class="docutils literal notranslate"><span class="pre">constants</span></code> section and used like <code class="docutils literal notranslate"><span class="pre">${someFancyConstant}</span></code> in the following. The
+converter script and the converted Gaudi options file handle these in general.
+However, it might be necessary to change the values of the constants inside
+the <code class="docutils literal notranslate"><span class="pre">CONSTANTS</span></code> dictionary that can be found at the beginning of the created
+options file. Alternatively one can use <code class="docutils literal notranslate"><span class="pre">Marlin</span> <span class="pre">-n</span></code> with e.g.
+<code class="docutils literal notranslate"><span class="pre">--constant.someFancyConstant=&lt;value&gt;</span></code> to set the values in the Marlin
+steering file first and again parse the converted output.</p></li>
+<li><p>Marlin supports conditional execution of processors via the <code class="docutils literal notranslate"><span class="pre">condition</span></code> tag.
+These conditions can be configured via constant values from the <code class="docutils literal notranslate"><span class="pre">constants</span></code>
+section in the steering file, but in principle these can also be runtime
+values that are set, e.g. by a previously run processor. At the moment dynamic
+conditions (where the value might change on an event by event basis) are not
+supported by Gaudi. Additionally static conditions are only partially handled
+by the converter script. While it converts the necessary configuration, it
+will by default not put the converted algorithm into the <code class="docutils literal notranslate"><span class="pre">algList</span></code> list of
+algorithms to run and you might have to comment / uncomment the algorithms you
+actually want to run.</p></li>
+<li><p>If the value of the <code class="docutils literal notranslate"><span class="pre">LCIOInputFiles</span></code> is empty in the input XML file, the
+converter script will put a value of <code class="docutils literal notranslate"><span class="pre">&quot;None&quot;</span></code> into the <code class="docutils literal notranslate"><span class="pre">read.Files</span></code> parameter.
+You will have to change this either in the steering file or them in via
+<code class="docutils literal notranslate"><span class="pre">--LcioEvent.Files</span></code>.</p></li>
+<li><p>Marlin is in some cases able to replace <code class="docutils literal notranslate"><span class="pre">constant</span></code>s with the values stored in
+environment variables of the same name. In Gaudi these have to be retrieved
+from the environment explicitly via <code class="docutils literal notranslate"><span class="pre">os.environ</span></code>.</p></li>
+</ul>
+</section>
+</section>
+<section id="using-the-edm-converters">
+<h2>Using the EDM converters<a class="headerlink" href="#using-the-edm-converters" title="Link to this heading"></a></h2>
+<p>The converters between EDM4hep and LCIO are implemented as so called
+<code class="docutils literal notranslate"><span class="pre">GaudiTool</span></code>s. They can be attached to any <code class="docutils literal notranslate"><span class="pre">MarlinProcessorWrapper</span></code> algorithm
+that is configured in the Gaudi options file. The tools are called
+<code class="docutils literal notranslate"><span class="pre">Lcio2EDM4hepTool</span></code> and <code class="docutils literal notranslate"><span class="pre">EDM4hep2LcioTool</span></code> respectively. Each wrapped processor
+can be equipped with both tools, so that it is possible to e.g. convert input
+from EDM4hep to LCIO and output from LCIO to EDM4hep again:</p>
+<p><img alt="" src="../../../_images/marlin_wrapper_tools.png" /></p>
+<p>The (very) basic usage of the converter tools looks like the following</p>
+<ul class="simple">
+<li><p>Instantiate the necessary tools (and configure them as desired)</p></li>
+<li><p>Attach the tools to a wrapped marlin processor via the <code class="docutils literal notranslate"><span class="pre">Lcio2EDM4hepTool</span></code>
+and/or <code class="docutils literal notranslate"><span class="pre">EDM4hep2LcioTool</span></code> options</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">Configurables</span> <span class="kn">import</span> <span class="n">EDM4hep2LcioTool</span><span class="p">,</span> <span class="n">Lcio2EDM4hepTool</span>
+
+<span class="n">edm4hep2LcioConv</span> <span class="o">=</span> <span class="n">EDM4hep2LcioTool</span><span class="p">(</span><span class="s2">&quot;EDM4hep2Lcio&quot;</span><span class="p">)</span>
+<span class="n">lcio2edm4hepConv</span> <span class="o">=</span> <span class="n">Lcio2EDM4hepTool</span><span class="p">(</span><span class="s2">&quot;Lcio2EDM4hep&quot;</span><span class="p">)</span>
+
+<span class="n">wrappedProcAlg</span> <span class="o">=</span> <span class="n">MarlinProcessorWrapper</span><span class="p">(</span><span class="s2">&quot;ProcessorToWrap&quot;</span><span class="p">)</span>
+<span class="n">wrappedProcAlg</span><span class="o">.</span><span class="n">Lcio2EDM4hepTool</span> <span class="o">=</span> <span class="n">lcio2edm4hepConv</span>
+<span class="n">wrappedProcAlg</span><span class="o">.</span><span class="n">EDM4hep2LcioTool</span> <span class="o">=</span> <span class="n">edm4hep2LcioConv</span>
+</pre></div>
+</div>
+<p>An arbitrary number of converter tools can be instantiated and attached to Gaudi
+algorithms (taking into account that each algorithm can at most have one
+converter for each direction attached). If you have multiple tools make sure to
+give them meaningful names in order to avoid any confusion.</p>
+<section id="configuration-options">
+<h3>Configuration options<a class="headerlink" href="#configuration-options" title="Link to this heading"></a></h3>
+<p>By default each converter tool will try to convert the complete event content
+that is currently available in the transient event store for the corresponding
+source format. <strong>It will skip the conversion of a collection if the same
+collection already exists in the other format. This check is done by collection
+name.</strong> However, it is possible to control the conversion process with a
+slightly higher granularity with two options that can be configured</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">collNameMapping</span></code> - this is a dictionary of collection names, where a <em>source</em>
+collection name is mapped to a <em>target</em> collection name during the conversion.
+This makes it possible to rename collections on the fly. In combination with
+the <code class="docutils literal notranslate"><span class="pre">convertAll</span></code> option this also allows to select the collections that should
+be converted. In that case if you want to keep the original collection name
+you can simply repeat it.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">convertAll</span></code> - set this to <code class="docutils literal notranslate"><span class="pre">False</span></code> if you do not want to convert all
+collections, but rather would like to select a subset to convert.</p></li>
+</ul>
+<p>As an example, if you only want to convert the <code class="docutils literal notranslate"><span class="pre">MCParticles</span></code> collection, you
+would configure the tool like this</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">edm4hep2LcioConv</span> <span class="o">=</span> <span class="n">EDM4hep2LcioTool</span><span class="p">(</span><span class="s2">&quot;EDM4hep2Lcio&quot;</span><span class="p">)</span>
+<span class="n">edm4hep2LcioConv</span><span class="o">.</span><span class="n">convertAll</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">edm4hep2LcioConv</span><span class="o">.</span><span class="n">collNameMapping</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;MCParticles&quot;</span><span class="p">:</span> <span class="s2">&quot;MCParticles&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>On the other hand if you want to convert all collections, but rename the
+<code class="docutils literal notranslate"><span class="pre">MCParticle</span></code> (LCIO) input collection to the <code class="docutils literal notranslate"><span class="pre">MCParticles</span></code> (EDM4hep) output
+collection in the process, you would configure the tool like so</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">lcio2edm4hepConv</span> <span class="o">=</span> <span class="n">Lcio2EDM4hepTool</span><span class="p">(</span><span class="s2">&quot;Lcio2EDM4hep&quot;</span><span class="p">)</span>
+<span class="n">lcio2edm4hepConv</span><span class="o">.</span><span class="n">collNameMapping</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;MCParticle&quot;</span><span class="p">:</span> <span class="s2">&quot;MCParticles&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">&quot;EventHeader&quot;</span></code> collection will be added to the collections to convert
+unconditionally. Hence, if it’s missing the conversion will fail. Make sure to
+read it in, or create it on the fly.</p>
+</div>
+</section>
+</section>
+<section id="tools-for-facilitating-interoperability">
+<h2>Tools for facilitating interoperability<a class="headerlink" href="#tools-for-facilitating-interoperability" title="Link to this heading"></a></h2>
+<p>Mixed reconstruction and analysis chains (i.e. chains that have wrapped Marlin
+processors and native Gaudi algorithms) come with some challenges, e.g. the need
+to handle LCIO and EDM4hep inputs and outputs transparently and making sure that
+all the necessary conversions are done at the appropriate places. To facilitate
+this k4MarlinWrapper provides some python tools to automate parts of this.</p>
+<p>Most importantly the <code class="docutils literal notranslate"><span class="pre">IOHandlerHelper</span></code> class can be used to create and insert
+the correct readers and writers as well as injecting converters at the necessary
+places. We recommend using it if you need to support different input and output
+formats. The basic setup looks like this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">Configurables</span> <span class="kn">import</span> <span class="n">EventDataSvc</span>
+<span class="kn">from</span> <span class="nn">k4FWCore</span> <span class="kn">import</span> <span class="n">IOSvc</span>
+<span class="kn">from</span> <span class="nn">k4MarlinWrapper.io_helpers</span> <span class="kn">import</span> <span class="n">IOHandlerHelper</span>
+
+<span class="n">alg_list</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">evt_svc</span> <span class="o">=</span> <span class="n">EventDataSvc</span><span class="p">(</span><span class="s2">&quot;EventDataSvc&quot;</span><span class="p">)</span>
+<span class="n">svc_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">evt_svc</span><span class="p">]</span>
+<span class="n">io_svc</span> <span class="o">=</span> <span class="n">IOSvc</span><span class="p">()</span>
+
+<span class="n">io_handler</span> <span class="o">=</span> <span class="n">IOHandlerHelper</span><span class="p">(</span><span class="n">alg_list</span><span class="p">,</span> <span class="n">io_svc</span><span class="p">)</span>
+<span class="c1"># Create an appropriate reader for the input files</span>
+<span class="n">io_handler</span><span class="o">.</span><span class="n">add_reader</span><span class="p">(</span><span class="n">input_files</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This will either add an EDM4hep reader to the <code class="docutils literal notranslate"><span class="pre">IOSvc</span></code> (at the very beginning of
+the reconstruction chain) or add an <code class="docutils literal notranslate"><span class="pre">LcioEvent</span></code> algorithm at the current place
+in the <code class="docutils literal notranslate"><span class="pre">alg_list</span></code>. You can now simply add all the algorithms
+(<code class="docutils literal notranslate"><span class="pre">MarlinProcessorWrapper</span></code> or native Gaudi algorithms) as usual to the
+<code class="docutils literal notranslate"><span class="pre">alg_list</span></code>.</p>
+<p>For adding EDm4hep output simply do</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">io_handler</span><span class="o">.</span><span class="n">add_edm4hep_writer</span><span class="p">(</span><span class="s2">&quot;output.edm4hep.root&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>which will create an output file <code class="docutils literal notranslate"><span class="pre">output.edm4hep.root</span></code> and use the <code class="docutils literal notranslate"><span class="pre">[&quot;keep</span> <span class="pre">*&quot;]</span></code>
+as <code class="docutils literal notranslate"><span class="pre">IOSvc.outputCommands</span></code>. The latter can be changed by passing a second
+argument.</p>
+<p>For adding LCIO output you need to</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">lcio_writer</span> <span class="o">=</span> <span class="n">io_handler</span><span class="o">.</span><span class="n">add_lcio_writer</span><span class="p">(</span><span class="s2">&quot;LCIOWriter&quot;</span><span class="p">)</span>
+<span class="n">lcio_writer</span><span class="o">.</span><span class="n">Parameters</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;LCIOOutputFile&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;output.slcio&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;LCIOWriteMode&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;WRITE_NEW&quot;</span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Note that in this case the <code class="docutils literal notranslate"><span class="pre">lcio_writer</span></code> is not yet fully configured but simply
+added to the chain of algorithms to execute.</p>
+<p>Finally, to insert all the necessary converters simply call
+<code class="docutils literal notranslate"><span class="pre">finalize_converters</span></code> before handing off the algorithm list to the
+<code class="docutils literal notranslate"><span class="pre">ApplicationMgr</span></code>, i.e.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">io_handler</span><span class="o">.</span><span class="n">finalize_converters</span><span class="p">()</span>
+
+<span class="kn">from</span> <span class="nn">k4FWCore</span> <span class="kn">import</span> <span class="n">ApplicationMgr</span>
+<span class="n">ApplicationMgr</span><span class="p">(</span><span class="n">TopAlg</span><span class="o">=</span><span class="n">alg_list</span><span class="p">,</span> <span class="n">EvtSel</span><span class="o">=</span><span class="s2">&quot;NONE&quot;</span><span class="p">,</span> <span class="n">ExtSvc</span><span class="o">=</span><span class="p">[</span><span class="n">evt_svc</span><span class="p">])</span>
+</pre></div>
+</div>
+</section>
+<section id="potential-pitfalls-when-using-other-gaudi-algorithms">
+<h2>Potential pitfalls when using other Gaudi Algorithms<a class="headerlink" href="#potential-pitfalls-when-using-other-gaudi-algorithms" title="Link to this heading"></a></h2>
+<p>Although mixing wrapped Marlin Processors with other Gaudi Algorithms is working
+for most cases, there are a few conceptual differences that have not yet been
+completely mapped. This might lead to unexpected or different results when
+running in Gaudi vs. running the same processors via Marlin (as far as
+possible). This list aims to collect them and where possible also tries to point
+out ways to work around them.</p>
+<ul class="simple">
+<li><p>In Marlin processors can use a <code class="docutils literal notranslate"><span class="pre">marlin::SkipEventException</span></code> to skip the
+processing of the rest of the event.</p></li>
+<li><p>In Marlin a <code class="docutils literal notranslate"><span class="pre">marlin::StopProcessingException</span></code> will immediately stop the
+processing of the event loop. However, in Gaudi the current event will still
+finish processing.</p></li>
+</ul>
+<p>For the <code class="docutils literal notranslate"><span class="pre">MarlinProcessorWrapper</span></code> algorithm we have put in checks and effectively
+skip the execution of the actual wrapped processor in these cases. However,
+other Gaudi algorithms will not have this check. Hence, execution chains that
+<strong>only consist of wrapped Marlin processors will work as expected</strong> here.
+However, <strong>mixed chains will most likely not work as expected</strong> (e.g. algorithms
+will not find expected inputs, etc.).</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../../k4fwcore/doc/algorithmTiming.html" class="btn btn-neutral float-left" title="Getting algorithm run time information" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../k4edm4hep2lcioconv/doc/LCIO2EDM4hep.html" class="btn btn-neutral float-right" title="Standalone conversion from LCIO to EDM4hep" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Key4hep.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
