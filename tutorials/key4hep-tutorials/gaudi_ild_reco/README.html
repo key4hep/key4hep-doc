@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Running ILD simulation and reconstruction &mdash; Key4hep  documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../../_static/copybutton.js?v=f281be69"></script>
+        <script src="../../../_static/design-tabs.js?v=36754332"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="How to run multithreading with k4MarlinWrapper (Gaudi)" href="../../k4marlinwrapper/doc/starterkit/k4MarlinWrapperCLIC/howtoMultithread.html" />
+    <link rel="prev" title="Using the Key4hep-Stack for CLIC Simulation and Reconstruction" href="../../k4marlinwrapper/doc/starterkit/k4MarlinWrapperCLIC/Readme.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            Key4hep
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/help.html">Getting help</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/setup.html">Getting key4hep</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/CONTRIBUTING.html">Contributing</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../how-tos/README.html">Key4hep How-Tos and Instructions</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../README.html">Key4hep Tutorials</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../k4marlinwrapper/doc/starterkit/k4MarlinWrapperCLIC/Readme.html">Using the Key4hep-Stack for CLIC Simulation and Reconstruction</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Running ILD simulation and reconstruction</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#setup">Setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#running-the-simulation">Running the simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#reconstruction">Reconstruction</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#using-ildreconstruction-py-from-ildconfig">Using <code class="docutils literal notranslate"><span class="pre">ILDReconstruction.py</span></code> from ILDConfig</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#creating-a-gaudi-options-file">Creating a Gaudi options file</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#adapting-the-options-file-for-edm4hep">Adapting the options file for EDM4hep</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#running-the-reconstruction-with-k4run">Running the reconstruction with <code class="docutils literal notranslate"><span class="pre">k4run</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../k4marlinwrapper/doc/starterkit/k4MarlinWrapperCLIC/howtoMultithread.html">How to run multithreading with k4MarlinWrapper (Gaudi)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../k4marlinwrapper/doc/starterkit/k4MarlinWrapperCLIC/CEDViaWrapper.html">Running an Event Display with EDM4hep or LCIO input</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../k4simdelphes/doc/starterkit/k4SimDelphes/Readme.html">Running Delphes fast simulation with EDM4hep output</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developing-key4hep-software/README.html">Developing Key4hep</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../spack-build-instructions-for-librarians/README.html">Building Key4hep: For Librarians</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../talks-and-presentations/README.html">Talks and Presentations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../call-for-logos/README.html">Call for logos</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">External links</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://cern.ch/fccsw">FCC software</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://twiki.cern.ch/twiki/bin/view/CLIC/CLICSoftwareComputing">CLIC software</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://ilcsoft.desy.de/portal">ILC software</a></li>
+<li class="toctree-l1"><a class="reference external" href="http://cepcsoft.ihep.ac.cn/">CEPC software</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://mcd-wiki.web.cern.ch/software/">Muon Collider software</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Key4hep</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../README.html">Key4hep Tutorials</a></li>
+      <li class="breadcrumb-item active">Running ILD simulation and reconstruction</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/tutorials/key4hep-tutorials/gaudi_ild_reco/README.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="running-ild-simulation-and-reconstruction">
+<h1>Running ILD simulation and reconstruction<a class="headerlink" href="#running-ild-simulation-and-reconstruction" title="Link to this heading"></a></h1>
+<p>This exercise aims at showing you how to run full simulation as well as
+reconstruction using <code class="docutils literal notranslate"><span class="pre">ddsim</span></code> and the Gaudi based Key4hep framework respectively.
+You will</p>
+<ul class="simple">
+<li><p>Run <code class="docutils literal notranslate"><span class="pre">ddsim</span></code> to produce SIM level input files for the reconstruction in EDM4hep
+format</p></li>
+<li><p>Learn how to use the tools provided by
+<a class="reference external" href="https://github.com/key4hep/k4MarlinWrapper"><code class="docutils literal notranslate"><span class="pre">k4MarlinWrapper</span></code></a> that allows to
+run workflows that were originally developed for the <code class="docutils literal notranslate"><span class="pre">Marlin</span></code> in the Gaudi
+based framework of Key4hep. This includes</p>
+<ul>
+<li><p>Converting a Marlin steering file to a Gaudi options file,</p></li>
+<li><p>Adapting the options file to be able to read and write EDM4hep output</p></li>
+<li><p>Running this Gaudi options file via <code class="docutils literal notranslate"><span class="pre">k4run</span></code></p></li>
+</ul>
+</li>
+</ul>
+<p>In this particular case we are using the ILD configuration to do this but the
+conceptual steps are very similar for other detector concepts that used Marlin
+originally.</p>
+<section id="setup">
+<h2>Setup<a class="headerlink" href="#setup" title="Link to this heading"></a></h2>
+<p>If you haven’t done it yet, source a Key4hep software environment via</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>/cvmfs/sw.hsf.org/key4hep/setup.sh
+</pre></div>
+</div>
+<p>For the remainder of the tutorial we will assume that you are working within the
+<code class="docutils literal notranslate"><span class="pre">key4hep_tut_ild_reco</span></code> directory, i.e.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>key4hep_tut_ild_reco
+<span class="nb">cd</span><span class="w"> </span>key4hep_tut_ild_reco<span class="w"> </span>
+</pre></div>
+</div>
+<p>However, this is a minor detail and you can choose whatever directory you want.
+We do suggest a clean directory though.</p>
+<p>Next we will be using the standard simulation and reconstruction
+configuration for ILD which we can get via</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/iLCSoft/ILDConfig
+</pre></div>
+</div>
+<p>For the rest of this tutorial we will be working in the
+<code class="docutils literal notranslate"><span class="pre">ILDConfig/StandardConfig/production</span></code> folder</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>ILDConfig/StandardConfig/production
+</pre></div>
+</div>
+</section>
+<section id="running-the-simulation">
+<h2>Running the simulation<a class="headerlink" href="#running-the-simulation" title="Link to this heading"></a></h2>
+<p>We will use the output file of <a class="reference external" href="https://github.com/key4hep/key4hep-tutorials/blob/main/whizard_gen/README.md"><em>the whizard
+tutorial</em></a>
+as generator level input. In case you have not done that exercise you can get
+one via</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>wget<span class="w"> </span>https://raw.githubusercontent.com/key4hep/key4hep-tutorials/main/gaudi_ild_reco/input_files/zh_mumu.slcio
+</pre></div>
+</div>
+<p>Simulating a few events with <code class="docutils literal notranslate"><span class="pre">ddsim</span></code> is straight forward. <code class="docutils literal notranslate"><span class="pre">ddsim</span></code> can produce
+EDM4hep and LCIO format output files, and it decides which format to used based
+on the name of the output file:</p>
+<ul class="simple">
+<li><p>Names ending on <code class="docutils literal notranslate"><span class="pre">.slcio</span></code> will result in LCIO output files</p></li>
+<li><p>Names ending in <code class="docutils literal notranslate"><span class="pre">edm4hep.root</span></code> will result in in EDM4hep output files</p></li>
+</ul>
+<p>In the course of this exercise we will only need the EDM4hep format, we simply
+provide both options for convenience here.</p>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-0" name="sd-tab-set-0" type="radio">
+</input><label class="sd-tab-label" data-sync-id="edm4hep" for="sd-tab-item-0">
+EDM4hep</label><div class="sd-tab-content docutils">
+<p>To run the simulation with EDM4hep output you can use the following command</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ddsim<span class="w"> </span>--compactFile<span class="w"> </span><span class="nv">$k4geo_DIR</span>/ILD/compact/ILD_l5_v02/ILD_l5_v02.xml<span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>--steeringFile<span class="w"> </span>ddsim_steer.py<span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>--inputFiles<span class="w"> </span>zh_mumu.slcio<span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>--outputFile<span class="w"> </span>zh_mumu_SIM.edm4hep.root
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-1" name="sd-tab-set-0" type="radio">
+</input><label class="sd-tab-label" data-sync-id="lcio" for="sd-tab-item-1">
+LCIO</label><div class="sd-tab-content docutils">
+<p>To run the simulation with LCIO output you can use the following command</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ddsim<span class="w"> </span>--compactFile<span class="w"> </span><span class="nv">$k4geo_DIR</span>/ILD/compact/ILD_l5_v02/ILD_l5_v02.xml<span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>--steeringFile<span class="w"> </span>ddsim_steer.py<span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>--inputFiles<span class="w"> </span>zh_mumu.slcio<span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>--outputFile<span class="w"> </span>zh_mumu_SIM.slcio
+</pre></div>
+</div>
+</div>
+</div>
+<p>Depending on the machine where you are running this, this will take up to a few
+minutes to complete. You can start this and read on in the meantime.</p>
+</section>
+<section id="reconstruction">
+<h2>Reconstruction<a class="headerlink" href="#reconstruction" title="Link to this heading"></a></h2>
+<p>To run the reconstruction we will use the Gaudi based Key4hep framework. Note
+that we can run the reconstruction just the same as within iLCSoft via <code class="docutils literal notranslate"><span class="pre">Marlin</span></code>.
+However, we will not show that in this tutorial.</p>
+<section id="using-ildreconstruction-py-from-ildconfig">
+<h3>Using <code class="docutils literal notranslate"><span class="pre">ILDReconstruction.py</span></code> from ILDConfig<a class="headerlink" href="#using-ildreconstruction-py-from-ildconfig" title="Link to this heading"></a></h3>
+<p>In order to run the <em>standard reconstruction</em> simply run the following command</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>k4run<span class="w"> </span>ILDReconstruction.py<span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>--detectorModel<span class="o">=</span>ILD_l5_o1_v02<span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>--inputFiles<span class="o">=</span>zh_mumu_SIM.edm4hep.root<span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>--outputFileBase<span class="o">=</span>zh_mumu
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">ILDReconstruction.py</span></code> configuration can handle several different ILD
+detector configurations, so we have to choose one via the <code class="docutils literal notranslate"><span class="pre">--detectorModel</span></code>
+argument. Make sure that this is compatible to the one that has been used for
+simulation.</p>
+<p>This will produce several new output files</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">zh_mumu_REC.edm4hep.root</span></code> - The output of the reconstruction in EDM4hep
+format</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">zh_mumu_AIDA.root</span></code> - The histograms that were produce by wrapped processors
+using the AIDA interface</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">zh_mumu_PfoAnalysis.root</span></code> - The output file of the Pandora PFO analysis
+processor</p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">ILDReconstruction.py</span></code> also supports reading LCIO inputs and will detect this
+automatically from the input file name. It also supports producing LCIO output
+files via the <code class="docutils literal notranslate"><span class="pre">--lcioOutput</span></code> flag, which can either be <code class="docutils literal notranslate"><span class="pre">off</span></code> (default), <code class="docutils literal notranslate"><span class="pre">on</span></code> or
+<code class="docutils literal notranslate"><span class="pre">only</span></code> (for not producing any EMD4hep output).</p>
+<p>Check <a class="reference external" href="https://key4hep.github.io/key4hep-doc/how-tos/key4hep-tutorials/edm4hep_analysis/edm4hep_api_intro.html">the introduction to EDM4hep /
+podio</a>
+for more details on how to read and analyse this file.</p>
+</section>
+<section id="creating-a-gaudi-options-file">
+<h3>Creating a Gaudi options file<a class="headerlink" href="#creating-a-gaudi-options-file" title="Link to this heading"></a></h3>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>These instructions show you how to convert an existing Marlin steering file to a
+Gaudi options file using the full ILD reconstruction as an example since it
+exhibits a few of the potential issues that you might run into along the way.
+However, we <strong>strongly recommend using the existing reconstruction configuration
+that is available from
+<a class="reference external" href="https://github.com/iLCSoft/ILDConfig/tree/master/StandardConfig/production">ILDConfig</a>
+for actually running the reconstruction.</strong> It has more features and also
+supports running with different detector models, something that the following
+steps will not achieve!.</p>
+</div>
+<p>The bulk of the work for creating such an options file from an existing Marlin
+steering file in XML format can be done with the
+<code class="docutils literal notranslate"><span class="pre">convertMarlinSteeringToGaudi.py</span></code> converter script. We will start by converting
+the <code class="docutils literal notranslate"><span class="pre">MarlinStdReco.xml</span></code> steering file and then do some minor adjustments to the
+converted options file. The main thing to consider for the ILD configuration is
+that <code class="docutils literal notranslate"><span class="pre">MarlinStdReco.xml</span></code> makes use of several include statements to pull in more
+configuration. Hence, we first have to create a Marlin steering file with these
+includes resolved. We also have to provide a <code class="docutils literal notranslate"><span class="pre">DetectorModel</span></code> constant here,
+since some of the includes depend on this.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Marlin<span class="w"> </span>-n<span class="w"> </span>MarlinStdReco.xml<span class="w"> </span>--constant.DetectorModel<span class="o">=</span>ILD_l5_o1_v02
+</pre></div>
+</div>
+<p>You should now have a <code class="docutils literal notranslate"><span class="pre">MarlinStdRecoParsed.xml</span></code> file. This is the one that we
+will convert using the converter script via</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>convertMarlinSteeringToGaudi.py<span class="w"> </span>MarlinStdRecoParsed.xml<span class="w"> </span>MarlinStdReco.py
+</pre></div>
+</div>
+<p>Since some parts of the Marlin steering file conversion can not be handled
+automatically we have to make a few adjustments to <code class="docutils literal notranslate"><span class="pre">MarlinStdReco.py</span></code>. We
+recommend to simply edit the file directly, but you can also use the <code class="docutils literal notranslate"><span class="pre">sed</span></code>
+commands below to do these adjustments. The adjustments are:</p>
+<ul class="simple">
+<li><p>Give the <code class="docutils literal notranslate"><span class="pre">lcgeo_DIR</span></code> constant (first entry in the <code class="docutils literal notranslate"><span class="pre">CONSTANTS</span></code> dict) a
+meaningful value. The easiest way to do this is to simply get the value of the
+corresponding environment variable via <code class="docutils literal notranslate"><span class="pre">os.environ[&quot;lcgeo_DIR&quot;]</span></code> (don’t forget
+to <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">os</span></code> at the top)</p></li>
+<li><p>Exclude the <code class="docutils literal notranslate"><span class="pre">BgOverlayWW</span></code>, <code class="docutils literal notranslate"><span class="pre">BgOverlayBB</span></code>, <code class="docutils literal notranslate"><span class="pre">BgOverlayBW</span></code>, <code class="docutils literal notranslate"><span class="pre">BgOverlayWB</span></code> and <code class="docutils literal notranslate"><span class="pre">PairBgOverlay</span></code>
+algorithms from being run, by simply commenting out the lines where these are
+appended to the <code class="docutils literal notranslate"><span class="pre">algList</span></code> (this list is populated at almost the end of the
+file).</p></li>
+</ul>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<code class="docutils literal notranslate"><span class="pre">sed</span></code> commands for adjustments<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;1s/^/import os\n/&#39;</span><span class="w"> </span>MarlinStdReco.py
+sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;s/\( *.lcgeo_DIR.:\).*/\1 os.environ[&quot;lcgeo_DIR&quot;],&#39;</span>/<span class="w"> </span>MarlinStdReco.py
+sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;s/algList.append(BgOverlayWW)/# algList.append(BgOverlayWW)/&#39;</span><span class="w"> </span>MarlinStdReco.py
+sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;s/algList.append(BgOverlayWB)/# algList.append(BgOverlayWB)/&#39;</span><span class="w"> </span>MarlinStdReco.py
+sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;s/algList.append(BgOverlayBW)/# algList.append(BgOverlayBW)/&#39;</span><span class="w"> </span>MarlinStdReco.py
+sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;s/algList.append(BgOverlayBB)/# algList.append(BgOverlayBB)/&#39;</span><span class="w"> </span>MarlinStdReco.py
+sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;s/algList.append(PairBgOverlay)/# algList.append(PairBgOverlay)/&#39;</span><span class="w"> </span>MarlinStdReco.py
+</pre></div>
+</div>
+</div>
+</details><p>With the state the options file is in now, you would be able to run it with LCIO
+input.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Running the reconstruction with LCIO<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">To run the reconstruction with LCIO inputs and outputs we now simply need to
+pass in the input file that we have created at the simulation step</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>k4run<span class="w"> </span>MarlinStdReco.py<span class="w"> </span>--LcioEvent.Files<span class="o">=</span>zh_mumu_SIM.slcio
+</pre></div>
+</div>
+<p class="sd-card-text">This should take somewhere between 20 seconds up to roughly a minute to run. If
+you haven’t changed anything else you should now have a few output files:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ls<span class="w"> </span>StandardReco_*.*
+</pre></div>
+</div>
+<p class="sd-card-text">should now show a <code class="docutils literal notranslate"><span class="pre">REC</span></code> and <code class="docutils literal notranslate"><span class="pre">DST</span></code> file, as well as a <code class="docutils literal notranslate"><span class="pre">PfoAnalysis</span></code> and an <code class="docutils literal notranslate"><span class="pre">AIDA</span></code>
+file. You can change the names of these files by adjusting the <code class="docutils literal notranslate"><span class="pre">OutputBaseName</span></code>,
+resp. The corresponding filename constants values in <code class="docutils literal notranslate"><span class="pre">CONSTANTS</span></code>.</p>
+</div>
+</details></section>
+<section id="adapting-the-options-file-for-edm4hep">
+<h3>Adapting the options file for EDM4hep<a class="headerlink" href="#adapting-the-options-file-for-edm4hep" title="Link to this heading"></a></h3>
+<p>It is necessary to adapt the Gaudi options file a bit further:</p>
+<ul class="simple">
+<li><p>Replace the <code class="docutils literal notranslate"><span class="pre">LcioEvent</span></code> algorithm with the <code class="docutils literal notranslate"><span class="pre">PodioInput</span></code> algorithm</p>
+<ul>
+<li><p>Make sure to replace the <code class="docutils literal notranslate"><span class="pre">Files</span></code> option with the <code class="docutils literal notranslate"><span class="pre">collections</span></code> option and to
+populate this option with the list of collections you want to read (see
+below)</p></li>
+</ul>
+</li>
+<li><p>Replace the <code class="docutils literal notranslate"><span class="pre">EventDataSvc</span></code> with the <code class="docutils literal notranslate"><span class="pre">k4DataSvc</span></code> (remember to instantiate it
+with <code class="docutils literal notranslate"><span class="pre">&quot;EventDataSvc&quot;</span></code> as name)</p></li>
+<li><p>Add a <code class="docutils literal notranslate"><span class="pre">PodioOutput</span></code> algorithm to write EDM4hep output (don’t forget to add it
+to the <code class="docutils literal notranslate"><span class="pre">algList</span></code> at the very end)</p>
+<ul>
+<li><p>(For the sake of this exercise) configure this to only write the
+<code class="docutils literal notranslate"><span class="pre">MCParticlesSkimmed</span></code>, <code class="docutils literal notranslate"><span class="pre">PandoraPFOs</span></code> and the <code class="docutils literal notranslate"><span class="pre">RecoMCTruthLink</span></code> collections</p></li>
+</ul>
+</li>
+<li><p>Attach the necessary in-memory on-the-fly converters between EDM4hep and LCIO
+(and vice versa)</p>
+<ul>
+<li><p>For the conversion of the EDM4hep inputs to LCIO instantiate a
+<code class="docutils literal notranslate"><span class="pre">EDM4hep2LcioTool</span></code> and attach it to the first wrapped processor that is run
+(<code class="docutils literal notranslate"><span class="pre">MyAIDAProcessor</span></code>). See detailed description below.</p></li>
+<li><p>For the conversion of the LCIO outputs to EDM4hep instantiate a
+<code class="docutils literal notranslate"><span class="pre">Lcio2EDM4hepTool</span></code> and attach it to the last wrapped processor that is run
+before the <code class="docutils literal notranslate"><span class="pre">PodioOutput</span></code> algorithm that you just added (<code class="docutils literal notranslate"><span class="pre">MyPfoAnalysis</span></code>).
+Also see below.</p></li>
+</ul>
+</li>
+</ul>
+<p><strong>For all of these steps make sure that you <code class="docutils literal notranslate"><span class="pre">import</span></code> all the necessary tools and
+algorithms from <code class="docutils literal notranslate"><span class="pre">Configurables</span></code>!</strong></p>
+<p>The top of your file should now look something like this</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">Configurables</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">PodioInput</span><span class="p">,</span> <span class="n">PodioOutput</span><span class="p">,</span> <span class="n">k4DataSvc</span><span class="p">,</span> <span class="n">MarlinProcessorWrapper</span><span class="p">,</span>
+    <span class="n">EDM4hep2LcioTool</span><span class="p">,</span> <span class="n">Lcio2EDM4hepTool</span>
+    <span class="p">)</span>
+<span class="kn">from</span> <span class="nn">k4MarlinWrapper.parseConstants</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">algList</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">evtsvc</span> <span class="o">=</span> <span class="n">k4DataSvc</span><span class="p">(</span><span class="s2">&quot;EventDataSvc&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>while the configuration for the input reader and the <code class="docutils literal notranslate"><span class="pre">EDM4hep2LcioTool</span></code> should
+look like this</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">read</span> <span class="o">=</span> <span class="n">PodioInput</span><span class="p">()</span>
+<span class="n">read</span><span class="o">.</span><span class="n">OutputLevel</span> <span class="o">=</span> <span class="n">INFO</span>
+<span class="n">read</span><span class="o">.</span><span class="n">collections</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="c1"># ... list of collection names</span>
+<span class="p">]</span>
+<span class="n">algList</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">read</span><span class="p">)</span>
+
+<span class="n">edm4hep2LcioConv</span> <span class="o">=</span> <span class="n">EDM4hep2LcioTool</span><span class="p">()</span>
+<span class="n">edm4hep2LcioConv</span><span class="o">.</span><span class="n">collNameMapping</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;MCParticles&quot;</span><span class="p">:</span> <span class="s2">&quot;MCParticle&quot;</span>
+<span class="p">}</span>
+
+<span class="c1"># ... Unchanged config of MyAIDAProcessor</span>
+
+<span class="n">MyAIDAProcessor</span><span class="o">.</span><span class="n">EDM4hep2LcioTool</span> <span class="o">=</span> <span class="n">edm4hep2LcioConv</span>
+</pre></div>
+</div>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+list of collection names<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">The list of collections that is populated by standard configuration of ILD for
+simulation looks like this. You can simply copy this into the options file</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">read</span><span class="o">.</span><span class="n">collections</span> <span class="o">=</span> <span class="p">[</span>
+     <span class="s2">&quot;BeamCalCollection&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;BeamCalCollectionContributions&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;ECalBarrelScHitsEven&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;ECalBarrelScHitsEvenContributions&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;ECalBarrelScHitsOdd&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;ECalBarrelScHitsOddContributions&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;ECalBarrelSiHitsEven&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;ECalBarrelSiHitsEvenContributions&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;ECalBarrelSiHitsOdd&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;ECalBarrelSiHitsOddContributions&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;EcalEndcapRingCollection&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;EcalEndcapRingCollectionContributions&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;ECalEndcapScHitsEven&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;ECalEndcapScHitsEvenContributions&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;ECalEndcapScHitsOdd&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;ECalEndcapScHitsOddContributions&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;ECalEndcapSiHitsEven&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;ECalEndcapSiHitsEvenContributions&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;ECalEndcapSiHitsOdd&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;ECalEndcapSiHitsOddContributions&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;EventHeader&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;FTDCollection&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;HcalBarrelRegCollection&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;HcalBarrelRegCollectionContributions&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;HCalBarrelRPCHits&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;HCalBarrelRPCHitsContributions&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;HCalECRingRPCHits&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;HCalECRingRPCHitsContributions&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;HcalEndcapRingCollection&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;HcalEndcapRingCollectionContributions&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;HCalEndcapRPCHits&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;HCalEndcapRPCHitsContributions&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;HcalEndcapsCollection&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;HcalEndcapsCollectionContributions&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;LHCalCollection&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;LHCalCollectionContributions&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;LumiCalCollection&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;LumiCalCollectionContributions&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;MCParticles&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;SETCollection&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;SITCollection&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;TPCCollection&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;TPCLowPtCollection&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;TPCSpacePointCollection&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;VXDCollection&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;YokeBarrelCollection&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;YokeBarrelCollectionContributions&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;YokeEndcapsCollection&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;YokeEndcapsCollectionContributions&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</details><p>Finally, the <code class="docutils literal notranslate"><span class="pre">PodioOutput</span></code> algorithm and the <code class="docutils literal notranslate"><span class="pre">Lcio2EDM4hepTool</span></code> can be
+configuration should look something like this</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ... MyPfoAnalysis configuration unchanged</span>
+
+<span class="n">lcio2edm4hepConv</span> <span class="o">=</span> <span class="n">Lcio2EDM4hepTool</span><span class="p">()</span>
+<span class="n">lcio2edm4hepConv</span><span class="o">.</span><span class="n">collNameMapping</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;MCParticle&quot;</span><span class="p">:</span> <span class="s2">&quot;MCParticles&quot;</span>
+<span class="p">}</span>
+<span class="n">MyPfoAnalysis</span><span class="o">.</span><span class="n">Lcio2EDM4hepTool</span> <span class="o">=</span> <span class="n">lcio2edm4hepConv</span>
+
+<span class="n">edm4hepOutput</span> <span class="o">=</span> <span class="n">PodioOutput</span><span class="p">()</span>
+<span class="n">edm4hepOutput</span><span class="o">.</span><span class="n">filename</span> <span class="o">=</span> <span class="s2">&quot;zh_mumu_reco.edm4hep.root&quot;</span>
+<span class="n">edm4hepOutput</span><span class="o">.</span><span class="n">outputCommands</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;drop *&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;keep MCParticlesSkimmed&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;keep PandoraPFOs&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;keep RecoMCTruthLink&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="c1"># ... the complete algList</span>
+<span class="n">algList</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">edm4hepOutput</span><span class="p">)</span>
+
+<span class="c1"># ... ApplicationMgr config</span>
+</pre></div>
+</div>
+</section>
+<section id="running-the-reconstruction-with-k4run">
+<h3>Running the reconstruction with <code class="docutils literal notranslate"><span class="pre">k4run</span></code><a class="headerlink" href="#running-the-reconstruction-with-k4run" title="Link to this heading"></a></h3>
+<p>After all these adaptions it is now possible to run the full reconstruction
+chain on the previously simulated input with <code class="docutils literal notranslate"><span class="pre">k4run</span></code></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>k4run<span class="w"> </span>MarlinStdReco.py<span class="w"> </span>--num-events<span class="o">=</span><span class="m">3</span><span class="w"> </span>--EventDataSvc.input<span class="o">=</span>zh_mumu_SIM.edm4hep.root
+</pre></div>
+</div>
+<p>Here we are again using the command line to specify the input file, we could
+have just as well used the <code class="docutils literal notranslate"><span class="pre">input</span></code> option of the <code class="docutils literal notranslate"><span class="pre">evtsvc</span></code> in the options file.
+Note also that we explicitly pass in the number of events, this is a workaround
+for <a class="reference external" href="https://github.com/key4hep/k4MarlinWrapper/issues/94">this issue</a>.</p>
+<p>You should now have a <code class="docutils literal notranslate"><span class="pre">zh_mumu_reco.edm4hep.root</span></code> file that contains the
+complete events in all their glory. For a more practical output you can tweak
+the <code class="docutils literal notranslate"><span class="pre">edm4hepOutput.outputCommands</span></code> option in order to keep only “interesting”
+collections. Also note that the REC and DST LCIO output files are still
+produced. Can you reproduce these data tiers for EDM4hep?</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../../k4marlinwrapper/doc/starterkit/k4MarlinWrapperCLIC/Readme.html" class="btn btn-neutral float-left" title="Using the Key4hep-Stack for CLIC Simulation and Reconstruction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../k4marlinwrapper/doc/starterkit/k4MarlinWrapperCLIC/howtoMultithread.html" class="btn btn-neutral float-right" title="How to run multithreading with k4MarlinWrapper (Gaudi)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Key4hep.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

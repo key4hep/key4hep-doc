@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Adding custom arguments to k4run &mdash; Key4hep  documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../../_static/copybutton.js?v=f281be69"></script>
+        <script src="../../../_static/design-tabs.js?v=36754332"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Getting algorithm run time information" href="algorithmTiming.html" />
+    <link rel="prev" title="Reading and writing EDM4hep files in Gaudi" href="PodioInputOutput.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            Key4hep
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/help.html">Getting help</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/setup.html">Getting key4hep</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/CONTRIBUTING.html">Contributing</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../README.html">Key4hep How-Tos and Instructions</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../key4hep-tutorials/edm4hep_analysis/edm4hep_api_intro.html">EDM4hep - The common event data model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../key4hep-tutorials/edm4hep_analysis/edm4hep_api_intro.html#podio-the-technical-infrastructure-on-which-things-run">podio - The technical infrastructure on which things run</a></li>
+<li class="toctree-l2"><a class="reference internal" href="PodioInputOutput.html">Reading and writing EDM4hep files in Gaudi</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Adding custom arguments to <code class="docutils literal notranslate"><span class="pre">k4run</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="algorithmTiming.html">Getting algorithm run time information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../k4marlinwrapper/doc/MarlinWrapperIntroduction.html">Wrapping Marlin processors in Gaudi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../k4edm4hep2lcioconv/doc/LCIO2EDM4hep.html">Standalone conversion from LCIO to EDM4hep</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../k4edm4hep2lcioconv/doc/LCIO2EDM4hep.html#library-usage-of-the-conversion-functions">Library usage of the conversion functions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials/README.html">Key4hep Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developing-key4hep-software/README.html">Developing Key4hep</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../spack-build-instructions-for-librarians/README.html">Building Key4hep: For Librarians</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../talks-and-presentations/README.html">Talks and Presentations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../call-for-logos/README.html">Call for logos</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">External links</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://cern.ch/fccsw">FCC software</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://twiki.cern.ch/twiki/bin/view/CLIC/CLICSoftwareComputing">CLIC software</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://ilcsoft.desy.de/portal">ILC software</a></li>
+<li class="toctree-l1"><a class="reference external" href="http://cepcsoft.ihep.ac.cn/">CEPC software</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://mcd-wiki.web.cern.ch/software/">Muon Collider software</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Key4hep</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../README.html">Key4hep How-Tos and Instructions</a></li>
+      <li class="breadcrumb-item active">Adding custom arguments to <code class="docutils literal notranslate"><span class="pre">k4run</span></code></li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/how-tos/k4fwcore/doc/k4run-args.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <!--
+Copyright (c) 2014-2024 Key4hep-Project.
+
+This file is part of Key4hep.
+See https://key4hep.github.io/key4hep-doc/ for further info.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+<section id="adding-custom-arguments-to-k4run">
+<h1>Adding custom arguments to <code class="docutils literal notranslate"><span class="pre">k4run</span></code><a class="headerlink" href="#adding-custom-arguments-to-k4run" title="Link to this heading"></a></h1>
+<p>It is possible to extend <code class="docutils literal notranslate"><span class="pre">k4run</span></code> with custom arguments from a steering file
+using <code class="docutils literal notranslate"><span class="pre">k4FWCore.parseArgs</span></code>.</p>
+<p>Example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">k4FWCore.parseArgs</span> <span class="kn">import</span> <span class="n">parser</span>
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--trackingOnly&quot;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Run only track reconstruction&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">my_opts</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_known_args</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="c1"># later</span>
+<span class="k">if</span> <span class="n">my_opts</span><span class="o">.</span><span class="n">trackingOnly</span><span class="p">:</span>
+    <span class="c1"># only run track reconstruction</span>
+</pre></div>
+</div>
+<p>The example steering file can then be executed as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">k4run</span> <span class="n">example_steering_file</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">trackingOnly</span> <span class="o">--</span><span class="n">some</span><span class="o">-</span><span class="n">other</span><span class="o">-</span><span class="n">args</span>
+</pre></div>
+</div>
+<p>Behind the scenes <code class="docutils literal notranslate"><span class="pre">parser</span></code> is just a normal instance of python’s
+<a class="reference external" href="https://docs.python.org/3/library/argparse.html"><code class="docutils literal notranslate"><span class="pre">argparse.ArgumentParser</span></code></a>,
+please refer to its documentation for usage details. Use <code class="docutils literal notranslate"><span class="pre">parse_known_args()</span></code>
+instead of <code class="docutils literal notranslate"><span class="pre">parse_args()</span></code> so that the normal <code class="docutils literal notranslate"><span class="pre">k4run</span></code> arguments keep working. The
+<code class="docutils literal notranslate"><span class="pre">[0]</span></code> is necessary because the added arguments will be in the first element of
+the tuple returned from <code class="docutils literal notranslate"><span class="pre">parse_known_args</span></code>.</p>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="PodioInputOutput.html" class="btn btn-neutral float-left" title="Reading and writing EDM4hep files in Gaudi" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="algorithmTiming.html" class="btn btn-neutral float-right" title="Getting algorithm run time information" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Key4hep.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
