@@ -29,3 +29,10 @@ Logo 7
 
 ![](key4hep_logo7.svg)
 ![](key4hep_logo7p1.svg)
+
+Logo 8
+
+<picture>
+  <img src="key4hep_logo8.svg"         width="20%" style="margin-right: 100px;" />
+  <img src="key4hep_logo8_outline.svg" width="20%"/>
+</picture>
