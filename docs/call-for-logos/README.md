@@ -32,7 +32,12 @@ Logo 7
 
 Logo 8
 
-<picture>
-  <img src="key4hep_logo8.svg"         width="20%" style="margin-right: 100px;" />
-  <img src="key4hep_logo8_outline.svg" width="20%"/>
-</picture>
+```{image} key4hep_logo8.svg
+:width: 20%
+:align: left
+```
+
+```{image} key4hep_logo8_outline.svg
+:width: 20%
+:align: center
+```
