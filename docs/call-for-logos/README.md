@@ -41,3 +41,7 @@ Logo 8
 :width: 20%
 :align: center
 ```
+
+Logo 9
+
+![](key4hep_logo9.svg)
