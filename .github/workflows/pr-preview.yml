@@ -1,0 +1,70 @@
+name: Build/Deploy PR preview
+
+on:
+  pull_request_target:
+    types:
+      - opened
+      - reopened
+      - synchronized
+      - closed
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-preview:
+    uses: ./.github/workflows/build.yml
+    with:
+      ref: ${{ github.event.pull_request.head.sha }}
+      linkcheck: false
+
+  linkcheck:
+    uses: ./.github/workflows/build.yml
+    with:
+      ref: ${{ github.event.pull_request.head.sha }}
+      linkcheck: true
+      upload-artifact: false
+
+  deploy-preview:
+    needs: build-preview
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+
+      - uses: actions/download-artifact@v5
+        with:
+          name: github-pages
+          path: doc_artifact
+
+      - name: Unpack documentation
+        run: |
+          mkdir -p pr-preview-unpacked
+          tar -xvf doc_artifact/artifact.tar --directory pr-preview-unpacked
+          rm -r doc_artifact
+
+      - name: Deploy Preview
+        uses: rossjrw/pr-preview-action@v1.6.2
+        if: contains(['opened', 'reopened', 'synchronize'], ${{ github.event.action }})
+        with:
+          source-dir: pr-preview-unpacked
+          preview-branch: gh-pages
+          umbrella-dir: pr-preview
+          deploy-repository: "key4hep/key4hep-doc"
+          action: auto
+
+      - name: Remove Preview
+        uses: rossjrw/pr-preview-action@v1.6.2
+        if: github.event.action == 'closed' && !github.event.pull_request.merged
+        with:
+          source-dir: pr-preview-unpacked
+          preview-branch: gh-pages
+          umbrella-dir: pr-preview
+          deploy-repository: "key4hep/key4hep-doc"
+          action: remove

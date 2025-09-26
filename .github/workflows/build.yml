@@ -11,6 +11,11 @@ on:
         type: boolean
         required: false
         default: true
+      upload-artifact:
+        description: Upload an artifact for downstream consumption
+        type: boolean
+        required: false
+        default: true
 
 jobs:
   build:
@@ -40,5 +45,6 @@ jobs:
       run: |
         sphinx-build -b linkcheck docs linkcheck
     - uses: actions/upload-pages-artifact@v4
+      if: ${{ inputs.upload-artifact }}
       with:
         path: build/html
