@@ -44,6 +44,7 @@ jobs:
 
       - name: Unpack documentation
         run: |
+          mkdir -p pr-preview-unpacked
           tar -xvf doc_artifact/artifact.tar --directory pr-preview-unpacked
           rm -r doc_artifact
 
