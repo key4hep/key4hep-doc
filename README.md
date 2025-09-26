@@ -32,3 +32,15 @@ Check the links validity with:
 ```
 sphinx-build -b linkcheck docs linkcheck
 ```
+
+## Deploying to github pages
+
+The deployment to github pages happens via the `gh-pages` branch. On this branch
+the documentation goes into the `main` subdirectory, and we have a redirecting
+[`index.html`](./index.html).
+
+The branch is automatically populated via github actions. However, its history
+is not really interesting (even though the action keeps it intact). In case the
+repository gets too large, it is possible to remove the branch entirely and
+start from scratch (the next run of the action will populate the branch again).
+**Only the `index.html` file has to be put onto the branch first.**

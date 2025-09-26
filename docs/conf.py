@@ -44,8 +44,11 @@ linkcheck_ignore = [
     r"https://twiki.cern.ch/twiki/bin/view",  # TWikis might need login
 ]
 if IN_GITHUB_ACTIONS_CI:
-    linkcheck_ignore.append(
-        r"https://opensource.org",  # cloudflare blocks requests from github actions
+    linkcheck_ignore.extend(
+        [
+            r"https://opensource.org",  # cloudflare blocks requests from github actions
+            r"https://github\.com/[^/]+/[^/]+/commits/.*",  # github does quite some rate limiting
+        ]
     )
 
 

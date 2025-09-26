@@ -1,49 +1,52 @@
-
 name: publish
 
 on:
   push:
+    branches:
+      - main
   workflow_dispatch:
   schedule:
     # * is a special character in YAML so you have to quote this string
     - cron:  '0 0 * * *' # end of every day
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 
 jobs:
-  build-and-publish:
-    if: ${{ github.ref == 'refs/heads/main' }}
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-    steps:
-    - uses: actions/checkout@v4
-    - uses: actions/setup-python@v5
-      with:
-        python-version: 3.12
-    - name: Install Requirements
-      run: |
-        pip install --upgrade pip
-        pip install -r requirements.txt
-    - name: Fetch external sources
-      run: |
-        bash .github/scripts/fetch_external_sources.sh
-    - name: Sphinx build
-      run: |
-        sphinx-build -M html docs build
-    - name: Publish gh-pages
-      run: |
-        cd build/html
-        git init
-        git config user.name "Key4hep bot"
-        git config user.email "Key4hep.bot@example.com"
-        git remote add upstream https://vvolkl:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git
+  build:
+    uses: ./.github/workflows/build.yml
+    with:
+      ref: ${{ github.ref_name }}
+      linkcheck: true
 
-        touch .nojekyll
-        git add .nojekyll
-        git commit -m "Initial commit"
-        git branch -m gh-pages
-        touch .
-        git add -A .
-        git commit -m "Rebuild page at ${GITHUB_SHA}"
-        git push -f upstream gh-pages:gh-pages
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v5
+      with:
+        ref: gh-pages
+    - uses: actions/download-artifact@v5
+      with:
+        name: github-pages
+        path: doc_artifact
+    - name: Update Documentation
+      env:
+        TARGET_DIR: ${{ github.ref_name }}
+      run: |
+        mkdir -p ${TARGET_DIR}
+        rm -rf ${TARGET_DIR}/*
+        tar -xvf doc_artifact/artifact.tar --directory ${TARGET_DIR}
+        rm -r doc_artifact
+    - name: Commit and Push changes
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        TARGET_DIR: ${{ github.ref_name }}
+      run: |
+        git config --global user.email ${GITHUB_ACTOR_ID}+${GITHUB_ACTOR}@users.noreply.github.com
+        git config --global user.name ${GITHUB_ACTOR}
+        git add ${TARGET_DIR}
+        git diff-index --quiet HEAD 2>&1 > /dev/null || git commit -m "Update documentation for ${TARGET_DIR}" && git push
