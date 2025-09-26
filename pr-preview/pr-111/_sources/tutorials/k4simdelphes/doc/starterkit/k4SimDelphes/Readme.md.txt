@@ -7,7 +7,7 @@ The following examples assume that you have access to an existing installation o
 ```bash
 source /cvmfs/sw.hsf.org/key4hep/setup.sh
 ```
-Alternatively it is possible to build the complete stack via `spack`, see the [instructions](https://key4hep.github.io/key4hep-doc/spack-build-instructions-for-librarians/README.html) for how to do this.
+Alternatively it is possible to build the complete stack via `spack`, see the [instructions](https://key4hep.github.io/key4hep-doc/main/spack-build-instructions-for-librarians/README.html) for how to do this.
 
 In order to run the examples below it is necessary to get some inputs that are used for the generation of the physics events. In the following we will be using pythia generator files that are also used by the FCCee. In particular we will be generating the following process
 
