@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Seeding algorithm PRNG &mdash; Key4hep  documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../../_static/copybutton.js?v=f281be69"></script>
+        <script src="../../../_static/design-tabs.js?v=36754332"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Building Key4hep: For Librarians" href="../../../spack-build-instructions-for-librarians/README.html" />
+    <link rel="prev" title="Writing Gaudi Algorithms" href="../../WritingAlgorithms.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            Key4hep
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/help.html">Getting help</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/setup.html">Getting key4hep</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/CONTRIBUTING.html">Contributing</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../how-tos/README.html">Key4hep How-Tos and Instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials/README.html">Key4hep Tutorials</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../README.html">Developing Key4hep</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../Key4hepSoftwareGit.html">Github workflow and contribution guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../SinglePackage.html">Developing a single package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../SpackForDevelopers.html">Building Key4hep using Spack: For Developers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../WritingAlgorithms.html">Writing Gaudi Algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../WritingAlgorithms.html#gaudi-functional">Gaudi::Functional</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Seeding algorithm PRNG</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#uniqueidgensvc-service">UniqueIDGenSvc service</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#using-uniqueidgensvc-in-algorithms">Using UniqueIDGenSvc in algorithms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#seeding-functional-algorithm-example">Seeding functional algorithm example</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../spack-build-instructions-for-librarians/README.html">Building Key4hep: For Librarians</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../talks-and-presentations/README.html">Talks and Presentations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../call-for-logos/README.html">Call for logos</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">External links</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://cern.ch/fccsw">FCC software</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://twiki.cern.ch/twiki/bin/view/CLIC/CLICSoftwareComputing">CLIC software</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://ilcsoft.desy.de/portal">ILC software</a></li>
+<li class="toctree-l1"><a class="reference external" href="http://cepcsoft.ihep.ac.cn/">CEPC software</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://mcd-wiki.web.cern.ch/software/">Muon Collider software</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Key4hep</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../README.html">Developing Key4hep</a></li>
+      <li class="breadcrumb-item active">Seeding algorithm PRNG</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/developing-key4hep-software/k4fwcore/doc/uniqueIDGen.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <!--
+Copyright (c) 2014-2024 Key4hep-Project.
+
+This file is part of Key4hep.
+See https://key4hep.github.io/key4hep-doc/ for further info.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+<section id="seeding-algorithm-prng">
+<h1>Seeding algorithm PRNG<a class="headerlink" href="#seeding-algorithm-prng" title="Link to this heading"></a></h1>
+<p>Correctly seeding pseudo-random number generators (PRNG) is important to ensuring reproducible and good-quality randomness. A common pattern is to reinitialize each algorithm’s PRNG with a unique seed for each processed event.</p>
+<section id="uniqueidgensvc-service">
+<h2>UniqueIDGenSvc service<a class="headerlink" href="#uniqueidgensvc-service" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">UniqueIDGenSvc</span></code> Gaudi service can generate unique <code class="docutils literal notranslate"><span class="pre">size_t</span></code> values that can be used as PRNG seeds, based on an event number, run number, and algorithm name.</p>
+<p>The service can be included in a steering file by:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">Configurables</span> <span class="kn">import</span> <span class="n">UniqueIDGenSvc</span>
+<span class="n">uidgen_svc</span> <span class="o">=</span> <span class="n">UniqueIDGenSvc</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The service can be configured with a central seed from which the unique values will be derived. This seed can be configured with the <code class="docutils literal notranslate"><span class="pre">Seed</span></code> property:</p>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-0" name="sd-tab-set-0" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-0">
+Python</label><div class="sd-tab-content docutils">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">uidgen_svc</span><span class="o">.</span><span class="n">Seed</span> <span class="o">=</span> <span class="mi">987654321</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-1" name="sd-tab-set-0" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-1">
+CLI</label><div class="sd-tab-content docutils">
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>k4run<span class="w"> </span>&lt;steering-file&gt;<span class="w"> </span>--UniqueIDGenSvc.Seed<span class="w"> </span><span class="m">987654321</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="using-uniqueidgensvc-in-algorithms">
+<h2>Using UniqueIDGenSvc in algorithms<a class="headerlink" href="#using-uniqueidgensvc-in-algorithms" title="Link to this heading"></a></h2>
+<p>To use the <code class="docutils literal notranslate"><span class="pre">UniqueIDGenSvc</span></code> in a Gaudi algorithm first include the header file and declare a member variable:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;k4Interface/IUniqueIDGenSvc.h&gt;</span>
+
+<span class="n">SmartIF</span><span class="o">&lt;</span><span class="n">IUniqueIDGenSvc</span><span class="o">&gt;</span><span class="w"> </span><span class="n">m_service</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Then, initialize the service in:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">StatusCode</span><span class="w"> </span><span class="nf">ExampleAlgorithm::initialize</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">m_service</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">service</span><span class="p">(</span><span class="s">&quot;UniqueIDGenSvc&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Then, use the service during execution (<code class="docutils literal notranslate"><span class="pre">execute</span></code> member function for the algorithms derived from <code class="docutils literal notranslate"><span class="pre">Gaudi::Algorithm</span></code> or <code class="docutils literal notranslate"><span class="pre">operator()</span></code> for functional algorithms):</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">StatusCode</span><span class="w"> </span><span class="nf">ExampleAlgorithm::execute</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">EventContext</span><span class="o">&amp;</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">// Instead of passing event number and run number separately,</span>
+<span class="w">  </span><span class="c1">// an overload accepting EventHeader or EventHeaderCollection can be also used.</span>
+<span class="w">  </span><span class="n">StatusCode</span><span class="w"> </span><span class="n">sc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">m_service</span><span class="o">-&gt;</span><span class="n">getUniqueID</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">());</span>
+<span class="w">  </span><span class="n">m_service</span><span class="o">-&gt;</span><span class="n">getUniqueID</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">());</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="seeding-functional-algorithm-example">
+<h2>Seeding functional algorithm example<a class="headerlink" href="#seeding-functional-algorithm-example" title="Link to this heading"></a></h2>
+<p>In the EDM4hep data model, the event number and run number can be obtained from an <code class="docutils literal notranslate"><span class="pre">EventHeaderCollection</span></code>.
+The following is an example of a functional algorithm using <code class="docutils literal notranslate"><span class="pre">EventHeaderCollection</span></code> and <code class="docutils literal notranslate"><span class="pre">UniqueIDGenSvc</span></code> service to seed a PRNG.</p>
+<p>To begin, some boilerplate code is needed to declare the <code class="docutils literal notranslate"><span class="pre">EventHeaderCollection</span></code> as an algorithm input. In this example, the algorithm will also generate and produce a <code class="docutils literal notranslate"><span class="pre">podio::UserDataCollection&lt;double&gt;</span></code> containing random numbers generated during its execution.
+The name of input <code class="docutils literal notranslate"><span class="pre">EventHeaderCollection</span></code> object can be customized using the <code class="docutils literal notranslate"><span class="pre">EventHeaderCollection</span></code> property, with <code class="docutils literal notranslate"><span class="pre">EventHeader</span></code> set as the default name. Similarly, the name of the output <code class="docutils literal notranslate"><span class="pre">podio::UserDataCollection&lt;double&gt;</span></code>object can be adjusted via the <code class="docutils literal notranslate"><span class="pre">OutputCollection</span></code> property, which defaults to <code class="docutils literal notranslate"><span class="pre">RandomNumbers</span></code>.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">ExampleRNGSeedingAlg</span><span class="w"> </span><span class="k">final</span>
+<span class="w">    </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">k4FWCore</span><span class="o">::</span><span class="n">Transformer</span><span class="o">&lt;</span><span class="n">podio</span><span class="o">::</span><span class="n">UserDataCollection</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">edm4hep</span><span class="o">::</span><span class="n">EventHeaderCollection</span><span class="o">&amp;</span><span class="p">)</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w">  </span><span class="n">ExampleRNGSeedingAlg</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">ISvcLocator</span><span class="o">*</span><span class="w"> </span><span class="n">svcLoc</span><span class="p">)</span>
+<span class="w">      </span><span class="o">:</span><span class="w"> </span><span class="n">Transformer</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">svcLoc</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="n">KeyValues</span><span class="p">(</span><span class="s">&quot;EventHeaderCollection&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s">&quot;EventHeader&quot;</span><span class="p">})},</span>
+<span class="w">                    </span><span class="p">{</span><span class="n">KeyValues</span><span class="p">(</span><span class="s">&quot;OutputCollection&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s">&quot;RandomNumbers&quot;</span><span class="p">})})</span><span class="w"> </span><span class="p">{}</span>
+</pre></div>
+</div>
+<p>Then, declare a member variable for the service interface and locate the service during algorithm initialization:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">private</span><span class="o">:</span>
+<span class="w">  </span><span class="n">SmartIF</span><span class="o">&lt;</span><span class="n">IUniqueIDGenSvc</span><span class="o">&gt;</span><span class="w"> </span><span class="n">m_uniqueIDSvc</span><span class="p">{</span><span class="k">nullptr</span><span class="p">};</span>
+
+<span class="k">public</span><span class="o">:</span>
+<span class="w">  </span><span class="n">StatusCode</span><span class="w"> </span><span class="n">initialize</span><span class="p">()</span><span class="w"> </span><span class="k">final</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">m_uniqueIDSvc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">service</span><span class="p">(</span><span class="s">&quot;UniqueIDGenSvc&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">m_uniqueIDSvc</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">error</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Unable to locate the UniqueIDGenSvc&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endmsg</span><span class="p">;</span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="n">StatusCode</span><span class="o">::</span><span class="n">FAILURE</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">StatusCode</span><span class="o">::</span><span class="n">SUCCESS</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+</pre></div>
+</div>
+<p>During algorithm execution the <code class="docutils literal notranslate"><span class="pre">EventHeaderCollection</span></code> can be used to obtain a unique value from the <code class="docutils literal notranslate"><span class="pre">m_uniqueIDSvc</span></code>, then the value can be used as a seed for PRNG. In this example the PRNG is then used to generate a random value and push it to an output collection.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="o">:</span>
+<span class="w">  </span><span class="n">podio</span><span class="o">::</span><span class="n">UserDataCollection</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="k">operator</span><span class="p">()(</span><span class="k">const</span><span class="w"> </span><span class="n">edm4hep</span><span class="o">::</span><span class="n">EventHeaderCollection</span><span class="o">&amp;</span><span class="w"> </span><span class="n">evtHeader</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">final</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// obtain unique value from the first header in a collection</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">uid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">m_uniqueIDSvc</span><span class="o">-&gt;</span><span class="n">getUniqueID</span><span class="p">(</span><span class="n">evtHeader</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">());</span>
+<span class="w">    </span><span class="c1">// or from a given EventHeader object</span>
+<span class="w">    </span><span class="c1">// auto uid = m_uniqueIDSvc-&gt;getUniqueID(evtHeader[0], name());</span>
+
+<span class="w">    </span><span class="c1">// seed TRandom3 or some other PRNG of your choice</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">prng</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TRandom3</span><span class="p">(</span><span class="n">uid</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">coll</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">podio</span><span class="o">::</span><span class="n">UserDataCollection</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">();</span>
+<span class="w">    </span><span class="n">coll</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">prng</span><span class="p">.</span><span class="n">Rndm</span><span class="p">());</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">coll</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+</pre></div>
+</div>
+<p>A complete code example can be found <a class="reference external" href="https://github.com/key4hep/k4FWCore/blob/main/test/k4FWCoreTest/src/components/ExampleRNGSeedingAlg.cpp">here</a>.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../../WritingAlgorithms.html" class="btn btn-neutral float-left" title="Writing Gaudi Algorithms" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../../spack-build-instructions-for-librarians/README.html" class="btn btn-neutral float-right" title="Building Key4hep: For Librarians" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Key4hep.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
