@@ -44,3 +44,8 @@ is not really interesting (even though the action keeps it intact). In case the
 repository gets too large, it is possible to remove the branch entirely and
 start from scratch (the next run of the action will populate the branch again).
 **Only the `index.html` file has to be put onto the branch first.**
+
+We also make preview pages for PRs on this repository which will be placed onto
+the `gh-pages` branch as well, but under a dedicated directory. This means that
+they are generally reachable by people, if they know the corresponding full
+reference.
