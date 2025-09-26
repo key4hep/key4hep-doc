@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Standalone conversion from LCIO to EDM4hep &mdash; Key4hep  documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../../_static/copybutton.js?v=f281be69"></script>
+        <script src="../../../_static/design-tabs.js?v=36754332"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Key4hep Tutorials" href="../../../tutorials/README.html" />
+    <link rel="prev" title="Wrapping Marlin processors in Gaudi" href="../../k4marlinwrapper/doc/MarlinWrapperIntroduction.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            Key4hep
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/help.html">Getting help</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/setup.html">Getting key4hep</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/CONTRIBUTING.html">Contributing</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../README.html">Key4hep How-Tos and Instructions</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../key4hep-tutorials/edm4hep_analysis/edm4hep_api_intro.html">EDM4hep - The common event data model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../key4hep-tutorials/edm4hep_analysis/edm4hep_api_intro.html#podio-the-technical-infrastructure-on-which-things-run">podio - The technical infrastructure on which things run</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../k4fwcore/doc/PodioInputOutput.html">Reading and writing EDM4hep files in Gaudi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../k4fwcore/doc/k4run-args.html">Adding custom arguments to <code class="docutils literal notranslate"><span class="pre">k4run</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../k4fwcore/doc/algorithmTiming.html">Getting algorithm run time information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../k4marlinwrapper/doc/MarlinWrapperIntroduction.html">Wrapping Marlin processors in Gaudi</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Standalone conversion from LCIO to EDM4hep</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#patching-missing-collections-on-the-fly">Patching missing collections on the fly</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#patching-missing-particleid-information-on-the-fly">Patching missing ParticleID information on the fly</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#patching-lcrelation-collections">Patching <code class="docutils literal notranslate"><span class="pre">LCRelation</span></code> collections</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#patching-collections-as-subset-collections">Patching collections as subset collections</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#converting-only-a-subset-of-collections">Converting only a subset of collections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#renaming-collections-on-the-fly">Renaming collections on the fly</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#library-usage-of-the-conversion-functions">Library usage of the conversion functions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#converting-collection-data">Converting collection (data)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#handling-relations">Handling relations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#handling-of-subset-collections">Handling of subset collections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#handling-of-lcrelations">Handling of <code class="docutils literal notranslate"><span class="pre">LCRelation</span></code>s</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#converting-entire-events">Converting entire events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#converting-event-parameters">Converting Event parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#subtle-differences-between-lcio-and-edm4hep">Subtle differences between LCIO and EDM4hep</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example-for-a-reconstructedparticle-collection">Example for a ReconstructedParticle Collection</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials/README.html">Key4hep Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developing-key4hep-software/README.html">Developing Key4hep</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../spack-build-instructions-for-librarians/README.html">Building Key4hep: For Librarians</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../talks-and-presentations/README.html">Talks and Presentations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../call-for-logos/README.html">Call for logos</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">External links</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://cern.ch/fccsw">FCC software</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://twiki.cern.ch/twiki/bin/view/CLIC/CLICSoftwareComputing">CLIC software</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://ilcsoft.desy.de/portal">ILC software</a></li>
+<li class="toctree-l1"><a class="reference external" href="http://cepcsoft.ihep.ac.cn/">CEPC software</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://mcd-wiki.web.cern.ch/software/">Muon Collider software</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Key4hep</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../README.html">Key4hep How-Tos and Instructions</a></li>
+      <li class="breadcrumb-item active">Standalone conversion from LCIO to EDM4hep</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/how-tos/k4edm4hep2lcioconv/doc/LCIO2EDM4hep.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="standalone-conversion-from-lcio-to-edm4hep">
+<h1>Standalone conversion from LCIO to EDM4hep<a class="headerlink" href="#standalone-conversion-from-lcio-to-edm4hep" title="Link to this heading"></a></h1>
+<p>The <code class="docutils literal notranslate"><span class="pre">lcio2edm4hep</span></code> executable reads LCIO (<code class="docutils literal notranslate"><span class="pre">.slcio</span></code>) files and converts its
+contents into EDM4hep. Each <code class="docutils literal notranslate"><span class="pre">LCEvent</span></code> of the input file will be put into a
+<code class="docutils literal notranslate"><span class="pre">podio::Frame</span></code> in the output file (under the <code class="docutils literal notranslate"><span class="pre">events</span></code> category). The most basic
+usage is simply</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>lcio2edm4hep<span class="w"> </span>&lt;input.slcio&gt;<span class="w"> </span>&lt;output.edm4hep.root&gt;
+</pre></div>
+</div>
+<section id="patching-missing-collections-on-the-fly">
+<h2>Patching missing collections on the fly<a class="headerlink" href="#patching-missing-collections-on-the-fly" title="Link to this heading"></a></h2>
+<p>A major difference between LCIO and EDM4hep is that in LCIO an <code class="docutils literal notranslate"><span class="pre">LCEvent</span></code> can
+effectively have arbitrary contents, whereas in EDM4hep the assumption is that
+each event consists of the same collections (even if some of them are empty).
+Hence, it is necessary to either ensure that all events in the LCIO file have
+the same contents or or to give <code class="docutils literal notranslate"><span class="pre">lcio2edm4hep</span></code> some additional information such
+that it can patch in potentially missing collections on the fly. This additional
+information comes in the form of a third argument to <code class="docutils literal notranslate"><span class="pre">lcio2edm4hep</span></code> and is
+effectively a list of collection names and their types that comprise the
+superset of all collections appearing in at least one event in the input LCIO
+file. The format looks like this</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">name</span><span class="p">[:</span><span class="n">output</span><span class="o">-</span><span class="n">name</span><span class="p">]</span>  <span class="nb">type</span><span class="o">-</span><span class="n">name</span><span class="p">[</span><span class="o">*</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Each collection is a single line containing the name first (including an
+optional output name <a class="reference internal" href="#renaming-collections-on-the-fly">see below</a>) and than its
+type. An additional <code class="docutils literal notranslate"><span class="pre">*</span></code> signifies a <em>subset collection</em>. The simplest form looks like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">SETSpacePoints</span>             <span class="n">TrackerHit</span>
+<span class="n">RecoMCTruthLink</span>            <span class="n">LCRelation</span><span class="p">[</span><span class="n">ReconstructedParticle</span><span class="p">,</span><span class="n">MCParticle</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>The easiest way to obtain such a file is to use the <code class="docutils literal notranslate"><span class="pre">check_missing_cols</span></code>
+executable that comes with LCIO using the <code class="docutils literal notranslate"><span class="pre">--minimal</span></code> flag. The output of this
+can be directly consumed by <code class="docutils literal notranslate"><span class="pre">lcio2edm4hep</span></code></p>
+<section id="patching-missing-particleid-information-on-the-fly">
+<h3>Patching missing ParticleID information on the fly<a class="headerlink" href="#patching-missing-particleid-information-on-the-fly" title="Link to this heading"></a></h3>
+<p>EDM4hep also assumes that the <code class="docutils literal notranslate"><span class="pre">ParticleID</span></code> objects that are attached to elements
+of a <code class="docutils literal notranslate"><span class="pre">ReconstructedParticle</span></code> are consistent, i.e. the same PID algo names have
+been used throughout the processing. In order to guarantee this for the
+conversion it is possible to attach missing information on the fly, the grammar
+for this is</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pid</span><span class="o">-</span><span class="n">algo</span><span class="o">-</span><span class="n">name</span>  <span class="n">reco</span><span class="o">-</span><span class="n">coll</span><span class="o">-</span><span class="n">name</span><span class="o">|</span><span class="p">[</span><span class="n">parameter</span><span class="o">-</span><span class="n">names</span><span class="p">[,</span><span class="n">param</span><span class="o">-</span><span class="n">names</span><span class="p">]]</span>
+</pre></div>
+</div>
+<p>This will use the (LCIO) <code class="docutils literal notranslate"><span class="pre">PIDHandler</span></code> to add a PID algorithm with name
+<code class="docutils literal notranslate"><span class="pre">pid-algo-name</span></code> to the collection <code class="docutils literal notranslate"><span class="pre">reco-coll-name</span></code>. Optionally if any parameter
+names are present it will also set the parameter names for this PID algorithm.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This is only available from LCIO versions <strong>larger</strong> than <code class="docutils literal notranslate"><span class="pre">v02-22-01</span></code>!</p>
+</div>
+</section>
+<section id="patching-lcrelation-collections">
+<h3>Patching <code class="docutils literal notranslate"><span class="pre">LCRelation</span></code> collections<a class="headerlink" href="#patching-lcrelation-collections" title="Link to this heading"></a></h3>
+<p>For collections of <code class="docutils literal notranslate"><span class="pre">LCRelation</span></code> type it is necessary to define the <code class="docutils literal notranslate"><span class="pre">FromType</span></code> and
+<code class="docutils literal notranslate"><span class="pre">ToType</span></code> as well, as otherwise the converter will not be able to create the
+correct edm4hep file. The <code class="docutils literal notranslate"><span class="pre">check_missing_cols</span></code> executable will try to determine
+these types from the collection parameters and will warn if it cannot do it for
+certain collections. In this case it is the <strong>users responsibility to provide
+the missing types</strong> as otherwise the conversion will simply skip these
+collections, or potentially even crash.</p>
+</section>
+<section id="patching-collections-as-subset-collections">
+<h3>Patching collections as subset collections<a class="headerlink" href="#patching-collections-as-subset-collections" title="Link to this heading"></a></h3>
+<p>A single <code class="docutils literal notranslate"><span class="pre">*</span></code> (star) after the type name tells the patching to flip the <em>subset</em>
+collection flag for a newly created collection. This can be necessary for
+producing consistent outputs in EDM4hep. As an example</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">FTD_STRIPCollection</span>      <span class="n">SimTrackerHit</span><span class="o">*</span>
+</pre></div>
+</div>
+<p>will create a <code class="docutils literal notranslate"><span class="pre">SimTrackerHit</span></code> subset collection with the name <code class="docutils literal notranslate"><span class="pre">FTD_STRIPCollection</span></code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This is only available from LCIO versions <strong>larger</strong> than <code class="docutils literal notranslate"><span class="pre">v02-22-03</span></code>!</p>
+</div>
+<section id="example">
+<h4>Example:<a class="headerlink" href="#example" title="Link to this heading"></a></h4>
+<ol class="arabic simple">
+<li><p>Get the patch file</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>check_missing_cols<span class="w"> </span>--minimal<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>/pnfs/desy.de/ilc/prod/ilc/mc-2020/ild/rec/250-SetA/higgs/ILD_l5_o2_v02/v02-02-01/00015671/000/rv02-02-01.sv02-02-01.mILD_l5_o2_v02.E250-SetA.I402005.Pe3e3h.eL.pR.n000_002.d_rec_00015671_493.slcio<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>&gt;<span class="w"> </span>patch.txt
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>Pass it to <code class="docutils literal notranslate"><span class="pre">lcio2edm4hep</span></code></p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>lcio2edm4hep<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>/pnfs/desy.de/ilc/prod/ilc/mc-2020/ild/rec/250-SetA/higgs/ILD_l5_o2_v02/v02-02-01/00015671/000/rv02-02-01.sv02-02-01.mILD_l5_o2_v02.E250-SetA.I402005.Pe3e3h.eL.pR.n000_002.d_rec_00015671_493.slcio<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>Output.root<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>patch.txt
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="converting-only-a-subset-of-collections">
+<h2>Converting only a subset of collections<a class="headerlink" href="#converting-only-a-subset-of-collections" title="Link to this heading"></a></h2>
+<p>Using the same mechanism as for patching collections it is also possible to only
+convert a subset of all available collections. <code class="docutils literal notranslate"><span class="pre">lcio2edm4hep</span></code> uses the contents
+of the <code class="docutils literal notranslate"><span class="pre">colltypefile</span></code> to determine the contents of the output. If that contains
+only a subset of all collections, only that subset will be converted. Missing
+collections will still be patched in, in this case.</p>
+</section>
+<section id="renaming-collections-on-the-fly">
+<h2>Renaming collections on the fly<a class="headerlink" href="#renaming-collections-on-the-fly" title="Link to this heading"></a></h2>
+<p>The optional <code class="docutils literal notranslate"><span class="pre">[:output-name]</span></code> part of each collection can be used to remap the
+names of the collections in the input LCIO file to a different name in the
+output EDM4hep file, e.g.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">MCParticle</span><span class="p">:</span><span class="n">MCParticles</span>      <span class="n">MCParticle</span>
+</pre></div>
+</div>
+<p>will read the <code class="docutils literal notranslate"><span class="pre">MCParticle</span></code> collection from the input file but store it as
+<code class="docutils literal notranslate"><span class="pre">MCParticles</span></code> in the output file.</p>
+</section>
+</section>
+<section id="library-usage-of-the-conversion-functions">
+<h1>Library usage of the conversion functions<a class="headerlink" href="#library-usage-of-the-conversion-functions" title="Link to this heading"></a></h1>
+<p>The conversion functions are designed to also be usable as a library. The overall design is to make the conversion a two step process. Step one is converting the data and step two being the resolving of the relations and filling of subset collection.</p>
+<section id="converting-collection-data">
+<h2>Converting collection (data)<a class="headerlink" href="#converting-collection-data" title="Link to this heading"></a></h2>
+<p>The main entry point is <code class="docutils literal notranslate"><span class="pre">convertCollection</span></code> which will automatically dispatch to
+the correct conversion function depending on the type information that is stored
+in the input <code class="docutils literal notranslate"><span class="pre">LCCollection</span></code>. It is also possible to access the individual
+conversion functions for each type. All of the conversion functions take a map
+of LCIO to EDM4hep objects of their specific type that will be filled during the
+conversion. for convenience all necessary maps are bundled in the
+<code class="docutils literal notranslate"><span class="pre">LcioEdmTypeMapping</span></code> struct.</p>
+</section>
+<section id="handling-relations">
+<h2>Handling relations<a class="headerlink" href="#handling-relations" title="Link to this heading"></a></h2>
+<p><strong>Once all necessary collections have been converted, it is necessary to resolve
+the relations between the objects.</strong> This is done using the <code class="docutils literal notranslate"><span class="pre">resolveRelations</span></code>
+function. This will again dispatch to the correct relation resolving function
+for the corresponding types, which can obviously also be invoked directly.</p>
+</section>
+<section id="handling-of-subset-collections">
+<h2>Handling of subset collections<a class="headerlink" href="#handling-of-subset-collections" title="Link to this heading"></a></h2>
+<p>Subset collections are handled similar to relations using the function
+<code class="docutils literal notranslate"><span class="pre">fillSubset</span></code>. Internally this simply forwards to <code class="docutils literal notranslate"><span class="pre">handleSubsetColl</span></code> which
+handles all the type details and can obviously also be used directly.</p>
+</section>
+<section id="handling-of-lcrelations">
+<h2>Handling of <code class="docutils literal notranslate"><span class="pre">LCRelation</span></code>s<a class="headerlink" href="#handling-of-lcrelations" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">LCRelation</span></code> only exist in LCIO and their conversion is limited to what is
+available in EDM4hep. They use the <code class="docutils literal notranslate"><span class="pre">&quot;FromType&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">&quot;ToType&quot;</span></code> collection
+parameters to get the necessary type information.</p>
+<p>The LinkCollections in EDM4hep are then created using <code class="docutils literal notranslate"><span class="pre">createLinks</span></code>.</p>
+</section>
+<section id="converting-entire-events">
+<h2>Converting entire events<a class="headerlink" href="#converting-entire-events" title="Link to this heading"></a></h2>
+<p>Converting an entire event can be done calling the <code class="docutils literal notranslate"><span class="pre">convertEvent</span></code>. This can also
+be used as an example to guide the implementation of custom conversions using
+the available functionality.</p>
+</section>
+<section id="converting-event-parameters">
+<h2>Converting Event parameters<a class="headerlink" href="#converting-event-parameters" title="Link to this heading"></a></h2>
+<p>This can be done by calling <code class="docutils literal notranslate"><span class="pre">convertObjectParameters</span></code> that will put all the event parameters into the passed <code class="docutils literal notranslate"><span class="pre">podio::Frame</span></code>.</p>
+</section>
+<section id="subtle-differences-between-lcio-and-edm4hep">
+<h2>Subtle differences between LCIO and EDM4hep<a class="headerlink" href="#subtle-differences-between-lcio-and-edm4hep" title="Link to this heading"></a></h2>
+<p>There are a few small differences between LCIO and EDM4hep that shine through in the conversion, these are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">CaloHitContributions</span></code> are part of the SimCalorimeterHits in LCIO while being their own data type in EDM4hep. They are created by <a class="reference external" href="https://github.com/key4hep/k4EDM4hep2LcioConv/blob/main/k4EDM4hep2LcioConv/include/k4EDM4hep2LcioConv/k4Lcio2EDM4hepConv.h"><code class="docutils literal notranslate"><span class="pre">createCaloHitContributions</span></code></a>.</p></li>
+<li><p>The event information like an event number is part of the <code class="docutils literal notranslate"><span class="pre">LCEvent</span></code> in LCIO. In EDM4hep there is a separate EventHeader Collection. It can be created using <a class="reference external" href="https://github.com/key4hep/k4EDM4hep2LcioConv/blob/main/k4EDM4hep2LcioConv/include/k4EDM4hep2LcioConv/k4Lcio2EDM4hepConv.h"><code class="docutils literal notranslate"><span class="pre">EventHeaderCollection</span></code></a> which is stored under the name <code class="docutils literal notranslate"><span class="pre">&quot;EventHeader&quot;</span></code>.</p></li>
+<li><p>Particle IDs are converted during the conversion of the the reconstructed Particle collection.</p></li>
+</ul>
+</section>
+<section id="example-for-a-reconstructedparticle-collection">
+<h2>Example for a ReconstructedParticle Collection<a class="headerlink" href="#example-for-a-reconstructedparticle-collection" title="Link to this heading"></a></h2>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;k4EDM4hep2LcioConv/k4Lcio2EDM4hepConv.h&quot;</span>
+
+<span class="c1">// the struct defined in the header file is used for the maps linking Lcio particles</span>
+<span class="c1">// to their EDM counterparts.</span>
+
+<span class="k">auto</span><span class="w"> </span><span class="n">typeMapping</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LcioEdmTypeMapping</span><span class="p">{};</span>
+
+<span class="c1">// We assume that this is a collection of ReconstructedParticles!</span>
+<span class="n">LCEVENT</span><span class="o">::</span><span class="n">LCCollection</span><span class="o">*</span><span class="w"> </span><span class="n">lcCollection</span><span class="p">;</span>
+
+<span class="c1">// Convert the data</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">edmCollections</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">convertReconstructedParticle</span><span class="p">(</span><span class="s">&quot;name&quot;</span><span class="p">,</span>
+<span class="w">                                                   </span><span class="n">lcCollection</span><span class="p">,</span>
+<span class="w">                                                   </span><span class="n">typeMapping</span><span class="p">.</span><span class="n">recoParticles</span><span class="p">,</span>
+<span class="w">                                                   </span><span class="n">typeMapping</span><span class="p">.</span><span class="n">particleIDs</span><span class="p">);</span>
+
+<span class="c1">// Resolve relations (only converted objects will be available)</span>
+<span class="c1">// This has to be called at the very end, after all collection data has been</span>
+<span class="c1">// converted</span>
+<span class="n">resolveRelations</span><span class="p">(</span><span class="n">typeMapping</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../../k4marlinwrapper/doc/MarlinWrapperIntroduction.html" class="btn btn-neutral float-left" title="Wrapping Marlin processors in Gaudi" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../../tutorials/README.html" class="btn btn-neutral float-right" title="Key4hep Tutorials" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Key4hep.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

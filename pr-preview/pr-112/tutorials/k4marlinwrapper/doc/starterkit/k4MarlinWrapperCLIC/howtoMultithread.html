@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How to run multithreading with k4MarlinWrapper (Gaudi) &mdash; Key4hep  documentation</title>
+      <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../../../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../../../../_static/copybutton.js?v=f281be69"></script>
+        <script src="../../../../../_static/design-tabs.js?v=36754332"></script>
+    <script src="../../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" />
+    <link rel="next" title="Running an Event Display with EDM4hep or LCIO input" href="CEDViaWrapper.html" />
+    <link rel="prev" title="Running ILD simulation and reconstruction" href="../../../../key4hep-tutorials/gaudi_ild_reco/README.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../../index.html" class="icon icon-home">
+            Key4hep
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../getting_started/introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../getting_started/help.html">Getting help</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../getting_started/setup.html">Getting key4hep</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../getting_started/CONTRIBUTING.html">Contributing</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../../how-tos/README.html">Key4hep How-Tos and Instructions</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../../README.html">Key4hep Tutorials</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Readme.html">Using the Key4hep-Stack for CLIC Simulation and Reconstruction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../key4hep-tutorials/gaudi_ild_reco/README.html">Running ILD simulation and reconstruction</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">How to run multithreading with k4MarlinWrapper (Gaudi)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#running-gaudi-with-multithreading-support">Running Gaudi with multithreading support</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#how-to-run-with-inter-event-parallelism">How to run with inter-event parallelism</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#running-example">Running example</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="CEDViaWrapper.html">Running an Event Display with EDM4hep or LCIO input</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../k4simdelphes/doc/starterkit/k4SimDelphes/Readme.html">Running Delphes fast simulation with EDM4hep output</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../developing-key4hep-software/README.html">Developing Key4hep</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../spack-build-instructions-for-librarians/README.html">Building Key4hep: For Librarians</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../talks-and-presentations/README.html">Talks and Presentations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../call-for-logos/README.html">Call for logos</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">External links</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://cern.ch/fccsw">FCC software</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://twiki.cern.ch/twiki/bin/view/CLIC/CLICSoftwareComputing">CLIC software</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://ilcsoft.desy.de/portal">ILC software</a></li>
+<li class="toctree-l1"><a class="reference external" href="http://cepcsoft.ihep.ac.cn/">CEPC software</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://mcd-wiki.web.cern.ch/software/">Muon Collider software</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../index.html">Key4hep</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../../README.html">Key4hep Tutorials</a></li>
+      <li class="breadcrumb-item active">How to run multithreading with k4MarlinWrapper (Gaudi)</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../../_sources/tutorials/k4marlinwrapper/doc/starterkit/k4MarlinWrapperCLIC/howtoMultithread.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <!--
+Copyright (c) 2019-2024 Key4hep-Project.
+
+This file is part of Key4hep.
+See https://key4hep.github.io/key4hep-doc/ for further info.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+<section id="how-to-run-multithreading-with-k4marlinwrapper-gaudi">
+<h1>How to run multithreading with k4MarlinWrapper (Gaudi)<a class="headerlink" href="#how-to-run-multithreading-with-k4marlinwrapper-gaudi" title="Link to this heading"></a></h1>
+<p><strong>Supported</strong></p>
+<ul class="simple">
+<li><p>Reading LCIO events with <code class="docutils literal notranslate"><span class="pre">LcioEvent()</span></code></p></li>
+<li><p>Writing LCIO events with <code class="docutils literal notranslate"><span class="pre">LcioEventOutput()</span></code></p></li>
+<li><p>Running <code class="docutils literal notranslate"><span class="pre">MarlinProcessorWrapper</span></code>s with <strong>no</strong> converters</p></li>
+<li><p>Using <code class="docutils literal notranslate"><span class="pre">whiteboard</span></code> as <code class="docutils literal notranslate"><span class="pre">ExtSvc</span></code> (no k4DataSvc or EventDataSvc)</p></li>
+</ul>
+<p><strong>Not supported</strong></p>
+<ul class="simple">
+<li><p>Using EDM converters <code class="docutils literal notranslate"><span class="pre">EDM4hep2LcioTool</span></code> and <code class="docutils literal notranslate"><span class="pre">Lcio2EDM4hepTool()</span></code></p></li>
+<li><p>Reading EDM4hep events with <code class="docutils literal notranslate"><span class="pre">PodioInput()</span></code></p></li>
+<li><p>Writing EDM4hep events with <code class="docutils literal notranslate"><span class="pre">PodioOutput()</span></code></p></li>
+<li><p>Writing EDM4hep events with <code class="docutils literal notranslate"><span class="pre">MarlinProcessorWrapper</span></code> of type <code class="docutils literal notranslate"><span class="pre">LCIOOutputProcessor</span></code></p></li>
+<li><p>Running non-thread algorithms/processors in parallel</p></li>
+<li><p>Running wrapped Marlin processors that make use of the <code class="docutils literal notranslate"><span class="pre">isFirstEvent</span></code> method in their <code class="docutils literal notranslate"><span class="pre">processEvent</span></code> method to do some setup only in the first event. There is no way to make this thread safe. If you want your processor to be usable on in a multi threaded environment, you have to move this setup to <code class="docutils literal notranslate"><span class="pre">init</span></code>.</p></li>
+</ul>
+<section id="running-gaudi-with-multithreading-support">
+<h2>Running Gaudi with multithreading support<a class="headerlink" href="#running-gaudi-with-multithreading-support" title="Link to this heading"></a></h2>
+<p>Gaudi uses <a class="reference external" href="https://uxlfoundation.github.io/oneTBB/">oneTBB</a> under the hood for multithreading.</p>
+<p>Gaudi exposes two main levels of parallelism:</p>
+<ul class="simple">
+<li><p>Inter-event parallelism: running multiple events in parallel</p></li>
+<li><p>Intra-event parallelism: running multiple algorithms in parallel, within an event</p></li>
+</ul>
+<p>The two levels of parallelism can be combined: events can run in parallel, and algorithms within the events can run in parallel.</p>
+<section id="how-to-run-with-inter-event-parallelism">
+<h3>How to run with inter-event parallelism<a class="headerlink" href="#how-to-run-with-inter-event-parallelism" title="Link to this heading"></a></h3>
+<p>The following components are used to achieve parallelism:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">Configurables</span> <span class="kn">import</span> <span class="p">(</span><span class="n">HiveWhiteBoard</span><span class="p">,</span> <span class="n">HiveSlimEventLoopMgr</span><span class="p">,</span> <span class="n">AvalancheSchedulerSvc</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>These 3 components need to be configured to adapt the level of parallelism to the sequence, algorithms and hardware to be used.</p>
+<ul class="simple">
+<li><p>Event Data Service: <code class="docutils literal notranslate"><span class="pre">HiveWhiteBoard</span></code></p>
+<ul>
+<li><p><em>EventSlots</em>: Number of events that may run in parallel, each with its own EventStore</p></li>
+<li><p>This is the Event Data Service, which needs the number of EventSlots</p></li>
+</ul>
+</li>
+<li><p>Event Loop Manager: <code class="docutils literal notranslate"><span class="pre">HiveSlimEventLoopMgr</span></code></p>
+<ul>
+<li><p>Event Loop Manager with parallelism support</p></li>
+</ul>
+</li>
+<li><p>Thread Scheduling config: <code class="docutils literal notranslate"><span class="pre">AvalancheSchedulerSvc</span></code></p>
+<ul>
+<li><p>Scheduler to indicate the number of threads to use</p></li>
+<li><p>In needs the total number of threads to use: this determines how many events and algorithms can be in flight (run in parallel)</p></li>
+<li><p>Default value is <code class="docutils literal notranslate"><span class="pre">-1</span></code> which indicate TBB to take over the machine with what it decides to be the optimal configuration</p></li>
+</ul>
+</li>
+</ul>
+<p>All these components can be set as follows in the options file:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">evtslots</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">threads</span> <span class="o">=</span> <span class="mi">4</span>
+
+<span class="n">whiteboard</span> <span class="o">=</span> <span class="n">HiveWhiteBoard</span><span class="p">(</span><span class="s2">&quot;EventDataSvc&quot;</span><span class="p">,</span> <span class="n">EventSlots</span><span class="o">=</span><span class="n">evtslots</span><span class="p">)</span>
+<span class="n">slimeventloopmgr</span> <span class="o">=</span> <span class="n">HiveSlimEventLoopMgr</span><span class="p">(</span><span class="n">SchedulerName</span><span class="o">=</span><span class="s2">&quot;AvalancheSchedulerSvc&quot;</span><span class="p">,</span> <span class="n">OutputLevel</span><span class="o">=</span><span class="n">DEBUG</span><span class="p">)</span>
+<span class="n">scheduler</span> <span class="o">=</span> <span class="n">AvalancheSchedulerSvc</span><span class="p">(</span><span class="n">ThreadPoolSize</span><span class="o">=</span><span class="n">threads</span><span class="p">,</span> <span class="n">OutputLevel</span><span class="o">=</span><span class="n">WARNING</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">Configurables</span> <span class="kn">import</span> <span class="n">ApplicationMgr</span>
+<span class="n">ApplicationMgr</span><span class="p">(</span> <span class="n">TopAlg</span> <span class="o">=</span> <span class="p">[</span><span class="n">seq</span><span class="p">],</span>
+                <span class="n">EvtSel</span> <span class="o">=</span> <span class="s1">&#39;NONE&#39;</span><span class="p">,</span>
+                <span class="n">EvtMax</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
+                <span class="n">ExtSvc</span> <span class="o">=</span> <span class="p">[</span><span class="n">whiteboard</span><span class="p">],</span>
+                <span class="n">EventLoop</span><span class="o">=</span><span class="n">slimeventloopmgr</span><span class="p">,</span>
+                <span class="n">MessageSvcType</span><span class="o">=</span><span class="s2">&quot;InertMessageSvc&quot;</span>
+              <span class="p">)</span>
+</pre></div>
+</div>
+<p>To only run events in parallel, with no parallelism between the algorithms within each event, the cardinality of the algorithms must be set:</p>
+<ul class="simple">
+<li><p>Given a list of algorithms, set the cardinality of all to be 1</p></li>
+<li><p>Create a <code class="docutils literal notranslate"><span class="pre">GaudiSequencer</span></code> with all the algorithms as <code class="docutils literal notranslate"><span class="pre">Members</span></code></p></li>
+<li><p>Set the <code class="docutils literal notranslate"><span class="pre">GaudiSequencer</span></code> sequential property to true</p></li>
+<li><p>Pass the created <code class="docutils literal notranslate"><span class="pre">GaudiSequencer</span></code> to the Application Manager in the <code class="docutils literal notranslate"><span class="pre">TopAlg</span></code>: <code class="docutils literal notranslate"><span class="pre">TopAlg</span> <span class="pre">=</span> <span class="pre">[seq]</span></code></p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">Configurables</span> <span class="kn">import</span> <span class="n">MarlinProcessorWrapper</span>
+<span class="kn">from</span> <span class="nn">Configurables</span> <span class="kn">import</span> <span class="p">(</span><span class="n">GaudiSequencer</span><span class="p">)</span>
+
+<span class="n">cardinality</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="n">alg1</span> <span class="o">=</span> <span class="n">MarlinProcessorWrapper</span><span class="p">(</span><span class="s2">&quot;alg1&quot;</span><span class="p">)</span>
+<span class="n">alg2</span> <span class="o">=</span> <span class="n">MarlinProcessorWrapper</span><span class="p">(</span><span class="s2">&quot;alg2&quot;</span><span class="p">)</span>
+<span class="n">alg3</span> <span class="o">=</span> <span class="n">MarlinProcessorWrapper</span><span class="p">(</span><span class="s2">&quot;alg3&quot;</span><span class="p">)</span>
+<span class="n">alg4</span> <span class="o">=</span> <span class="n">MarlinProcessorWrapper</span><span class="p">(</span><span class="s2">&quot;alg4&quot;</span><span class="p">)</span>
+
+<span class="n">algList</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="n">algList</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">alg1</span><span class="p">)</span>
+<span class="n">algList</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">alg2</span><span class="p">)</span>
+<span class="n">algList</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">alg3</span><span class="p">)</span>
+<span class="n">algList</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">alg4</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">algo</span> <span class="ow">in</span> <span class="n">algList</span><span class="p">:</span>
+    <span class="n">algo</span><span class="o">.</span><span class="n">Cardinality</span> <span class="o">=</span> <span class="n">cardinality</span>
+    <span class="n">algo</span><span class="o">.</span><span class="n">OutputLevel</span> <span class="o">=</span> <span class="n">DEBUG</span>
+
+<span class="n">seq</span> <span class="o">=</span> <span class="n">GaudiSequencer</span><span class="p">(</span>
+    <span class="s2">&quot;createViewSeq&quot;</span><span class="p">,</span>
+    <span class="n">Members</span><span class="o">=</span><span class="n">algList</span><span class="p">,</span>
+    <span class="n">Sequential</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">OutputLevel</span><span class="o">=</span><span class="n">VERBOSE</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">Configurables</span> <span class="kn">import</span> <span class="n">ApplicationMgr</span>
+<span class="n">ApplicationMgr</span><span class="p">(</span> <span class="n">TopAlg</span> <span class="o">=</span> <span class="p">[</span><span class="n">seq</span><span class="p">],</span>
+                <span class="n">EvtSel</span> <span class="o">=</span> <span class="s1">&#39;NONE&#39;</span><span class="p">,</span>
+                <span class="n">EvtMax</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
+                <span class="n">ExtSvc</span> <span class="o">=</span> <span class="p">[</span><span class="n">whiteboard</span><span class="p">],</span>
+                <span class="n">EventLoop</span><span class="o">=</span><span class="n">slimeventloopmgr</span><span class="p">,</span>
+                <span class="n">MessageSvcType</span><span class="o">=</span><span class="s2">&quot;InertMessageSvc&quot;</span>
+              <span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="running-example">
+<h2>Running example<a class="headerlink" href="#running-example" title="Link to this heading"></a></h2>
+<p>A multi-threaded CLIC Reconstruction can be run in multi-threaded mode, for LCIO input and output.
+After successful compilation, from the build location:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check available tests</span>
+ctest<span class="w"> </span>-N
+
+<span class="c1"># Run multi-threaded clicReconstruction test</span>
+ctest<span class="w"> </span>-R<span class="w"> </span>clicRec_lcio_mt
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../../../../key4hep-tutorials/gaudi_ild_reco/README.html" class="btn btn-neutral float-left" title="Running ILD simulation and reconstruction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="CEDViaWrapper.html" class="btn btn-neutral float-right" title="Running an Event Display with EDM4hep or LCIO input" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Key4hep.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

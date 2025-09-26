@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Building Key4hep using Spack: For Developers &mdash; Key4hep  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../_static/copybutton.js?v=f281be69"></script>
+        <script src="../_static/design-tabs.js?v=36754332"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Writing Gaudi Algorithms" href="WritingAlgorithms.html" />
+    <link rel="prev" title="Developing a single package" href="SinglePackage.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Key4hep
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/help.html">Getting help</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/setup.html">Getting key4hep</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/CONTRIBUTING.html">Contributing</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../how-tos/README.html">Key4hep How-Tos and Instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/README.html">Key4hep Tutorials</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="README.html">Developing Key4hep</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Key4hepSoftwareGit.html">Github workflow and contribution guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SinglePackage.html">Developing a single package</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Building Key4hep using Spack: For Developers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#spack-set-up">Spack set up</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#developing-a-single-package">Developing a single package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#installing-a-local-version-with-dev-build">Installing a local version with <code class="docutils literal notranslate"><span class="pre">dev-build</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#using-the-local-version-as-dependency">Using the local version as dependency</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#more-advanced-usage">More advanced usage</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#developing-multiple-packages-or-dependencies-of-other-packages">Developing multiple packages or dependencies of other packages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#using-an-environment-to-setup-all-dependencies">Using an environment to setup all dependencies</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#environments-and-a-development-workflow">Environments and a development workflow</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="WritingAlgorithms.html">Writing Gaudi Algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="WritingAlgorithms.html#gaudi-functional">Gaudi::Functional</a></li>
+<li class="toctree-l2"><a class="reference internal" href="k4fwcore/doc/uniqueIDGen.html">Seeding algorithm PRNG</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../spack-build-instructions-for-librarians/README.html">Building Key4hep: For Librarians</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../talks-and-presentations/README.html">Talks and Presentations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../call-for-logos/README.html">Call for logos</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">External links</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://cern.ch/fccsw">FCC software</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://twiki.cern.ch/twiki/bin/view/CLIC/CLICSoftwareComputing">CLIC software</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://ilcsoft.desy.de/portal">ILC software</a></li>
+<li class="toctree-l1"><a class="reference external" href="http://cepcsoft.ihep.ac.cn/">CEPC software</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://mcd-wiki.web.cern.ch/software/">Muon Collider software</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Key4hep</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="README.html">Developing Key4hep</a></li>
+      <li class="breadcrumb-item active">Building Key4hep using Spack: For Developers</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/developing-key4hep-software/SpackForDevelopers.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="building-key4hep-using-spack-for-developers">
+<h1>Building Key4hep using Spack: For Developers<a class="headerlink" href="#building-key4hep-using-spack-for-developers" title="Link to this heading"></a></h1>
+<p>Using spack to develop software is somewhat pushing its intended usage to its
+limits. However, it is not impossible and this is an area of spack that is
+currently under active development. Unfortunately, this also means that the
+spack documentation might not be fully up-to-date on these topics. Hence, this
+page tries to collect some of the experiences the Key4hep developers have made.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>To obtain and setup <code class="docutils literal notranslate"><span class="pre">spack</span></code> take a look at <a class="reference internal" href="../spack-build-instructions-for-librarians/spack-setup.html"><span class="doc">Setting up Spack</span></a>.</p>
+</div>
+<section id="spack-set-up">
+<h2>Spack set up<a class="headerlink" href="#spack-set-up" title="Link to this heading"></a></h2>
+<p>For a standalone spack installation where we are happy to install all the
+dependencies the link above will suffice. However, it is possible to use the
+key4hep stack from cvmfs that has all the dependencies installed and only
+install the packages that we want to work on. For that, it is important to
+reproduce the environment that was used for building whatever release we are
+going to use. Otherwise spack will see that we have different versions of
+packages and will try to compile and install more than what we need. As
+explained here, there are three files that are provided with each release or
+nightly, that we need to use. Let’s say we want to use the nigthly for
+2023-07-18. Then the first thing we do is source the nightly:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>/cvmfs/sw-nightlies.hsf.org/key4hep/releases/2023-07-18/x86_64-almalinux9-gcc11.3.1-opt/key4hep-stack/2023-07-18-kzukii/setup.sh
+</pre></div>
+</div>
+<p>And then we clone spack and key4hep-spack, set up the environment and the
+upstream installation, and the latest build from scratch (that we have to find
+manually for now using, for example, <code class="docutils literal notranslate"><span class="pre">find</span> <span class="pre">-iname</span> <span class="pre">.scratch</span></code>), in this case it
+happens to be 2023-06-24):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">rel</span><span class="o">=</span>/cvmfs/sw-nightlies.hsf.org/key4hep/releases/2023-07-18/x86_64-almalinux9-gcc11.3.1-opt
+<span class="nv">latest_scratch</span><span class="o">=</span>/cvmfs/sw-nightlies.hsf.org/key4hep/releases/2023-06-24/x86_64-almalinux9-gcc11.3.1-opt
+git<span class="w"> </span>clone<span class="w"> </span>https://github.com/key4hep/key4hep-spack<span class="w"> </span>--depth<span class="w"> </span><span class="m">1</span>
+git<span class="w"> </span>clone<span class="w"> </span>https://github.com/spack/spack
+<span class="nb">cd</span><span class="w"> </span>key4hep-spack
+git<span class="w"> </span>checkout<span class="w"> </span><span class="k">$(</span>cat<span class="w"> </span><span class="nv">$rel</span>/.key4hep-spack-commit<span class="k">)</span>
+<span class="nb">cd</span><span class="w"> </span>..
+<span class="nb">cd</span><span class="w"> </span>spack
+git<span class="w"> </span>checkout<span class="w"> </span><span class="k">$(</span>cat<span class="w"> </span><span class="nv">$rel</span>/.spack-commit<span class="k">)</span>
+<span class="nb">source</span><span class="w"> </span><span class="nv">$rel</span>/.cherry-pick
+<span class="nb">cd</span><span class="w"> </span>..
+<span class="nb">source</span><span class="w"> </span>spack/share/spack/setup-env.sh
+spack<span class="w"> </span>env<span class="w"> </span>activate<span class="w"> </span>key4hep-spack/environments/key4hep-nightly
+spack<span class="w"> </span>config<span class="w"> </span>add<span class="w"> </span><span class="s2">&quot;upstreams:nightly:install_tree: </span><span class="nv">$rel</span><span class="s2">&quot;</span>
+spack<span class="w"> </span>config<span class="w"> </span>add<span class="w"> </span><span class="s2">&quot;upstreams:nightly-scratch:install_tree: </span><span class="nv">$latest_scratch</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+<p>And now we should have exactly the same version of spack and key4hep-spack that
+was used to make the build, so the number of dependencies that spack tries to
+install should be the minimum: it should find all the dependencies (in practice
+this may not be the case but it should find most of them).</p>
+</section>
+<section id="developing-a-single-package">
+<h2>Developing a single package<a class="headerlink" href="#developing-a-single-package" title="Link to this heading"></a></h2>
+<p>When only developing on a single package it is possible to use the <a class="reference external" href="https://spack.readthedocs.io/en/latest/command_index.html#spack-dev-build"><code class="docutils literal notranslate"><span class="pre">dev-build</span></code></a> command of spack.
+A brief tutorial can be found in <a class="reference external" href="https://spack-tutorial.readthedocs.io/en/latest/tutorial_developer_workflows.html">the spack documentation</a>.
+There is also a dedicated channel on slack <a class="reference external" href="https://spackpm.slack.com">spackpm.slack.com</a> (to get an invitation, visit <a class="reference external" href="https://slack.spack.io">slack.spack.io</a>) where questions regarding the development workflow can be discussed.
+It allows to build a given package directly from local sources in the same way as spack does it, and even makes this package available to other packages in the same way it does packages that have been installed by spack directly.
+Here we will use <a class="reference external" href="https://github.com/iLCSoft/LCIO">LCIO</a> as an example since it can be installed without (or with only one) dependency.</p>
+<p>As a first step let’s have a look at what installing <code class="docutils literal notranslate"><span class="pre">lcio</span></code> with spack would entail.
+Note that we explicitly disable the ROOT dictionaries in order to limit the number of dependencies</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>spack<span class="w"> </span>spec<span class="w"> </span>-Il<span class="w"> </span>lcio<span class="w"> </span>~rootdict
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Input</span> <span class="n">spec</span>
+<span class="o">--------------------------------</span>
+ <span class="o">-</span>   <span class="n">lcio</span><span class="o">~</span><span class="n">rootdict</span>
+
+<span class="n">Concretized</span>
+<span class="o">--------------------------------</span>
+
+ <span class="o">-</span>   <span class="n">vdwx2aq</span>  <span class="n">lcio</span><span class="o">@</span><span class="mf">2.16</span><span class="o">%</span><span class="n">gcc</span><span class="o">@</span><span class="mf">9.3.0</span><span class="o">~</span><span class="n">examples</span><span class="o">~</span><span class="n">ipo</span><span class="o">~</span><span class="n">jar</span><span class="o">~</span><span class="n">rootdict</span> <span class="n">build_type</span><span class="o">=</span><span class="n">RelWithDebInfo</span> <span class="n">cxxstd</span><span class="o">=</span><span class="mi">17</span> <span class="n">arch</span><span class="o">=</span><span class="n">linux</span><span class="o">-</span><span class="n">ubuntu20</span><span class="mf">.04</span><span class="o">-</span><span class="n">skylake</span>
+<span class="p">[</span><span class="o">+</span><span class="p">]</span>  <span class="n">utzbuq7</span>      <span class="o">^</span><span class="n">cmake</span><span class="o">@</span><span class="mf">3.16.3</span><span class="o">%</span><span class="n">gcc</span><span class="o">@</span><span class="mf">9.3.0</span><span class="o">~</span><span class="n">doc</span><span class="o">+</span><span class="n">ncurses</span><span class="o">+</span><span class="n">openssl</span><span class="o">+</span><span class="n">ownlibs</span><span class="o">~</span><span class="n">qt</span> <span class="n">patches</span><span class="o">=</span><span class="mi">1</span><span class="n">c540040c7e203dd8e27aa20345ecb07fe06570d56410a24a266ae570b1c4c39</span><span class="p">,</span><span class="n">bf695e3febb222da2ed94b3beea600650e4318975da90e4a71d6f31a6d5d8c3d</span> <span class="n">arch</span><span class="o">=</span><span class="n">linux</span><span class="o">-</span><span class="n">ubuntu20</span><span class="mf">.04</span><span class="o">-</span><span class="n">skylake</span>
+<span class="p">[</span><span class="o">+</span><span class="p">]</span>  <span class="n">pljbs5a</span>      <span class="o">^</span><span class="n">sio</span><span class="o">@</span><span class="mf">0.0.4</span><span class="o">%</span><span class="n">gcc</span><span class="o">@</span><span class="mf">9.3.0</span><span class="o">+</span><span class="n">builtin_zlib</span><span class="o">~</span><span class="n">ipo</span> <span class="n">build_type</span><span class="o">=</span><span class="n">RelWithDebInfo</span> <span class="n">cxxstd</span><span class="o">=</span><span class="mi">17</span> <span class="n">arch</span><span class="o">=</span><span class="n">linux</span><span class="o">-</span><span class="n">ubuntu20</span><span class="mf">.04</span><span class="o">-</span><span class="n">skylake</span>
+
+</pre></div>
+</div>
+<p>In this configuration <code class="docutils literal notranslate"><span class="pre">lcio</span></code> has only two dependencies, <code class="docutils literal notranslate"><span class="pre">sio</span></code> and <code class="docutils literal notranslate"><span class="pre">cmake</span></code>, which
+are both already installed in this case. If these dependencies are not yet
+installed, spack will automatically install them for you when using the
+<code class="docutils literal notranslate"><span class="pre">dev-build</span></code> command.</p>
+<section id="installing-a-local-version-with-dev-build">
+<h3>Installing a local version with <code class="docutils literal notranslate"><span class="pre">dev-build</span></code><a class="headerlink" href="#installing-a-local-version-with-dev-build" title="Link to this heading"></a></h3>
+<p>In order to install a local version of LCIO with spack, first we have to clone it into a local directory</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/iLCSoft/LCIO
+</pre></div>
+</div>
+<p>Now we can install this local version via</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>LCIO
+spack<span class="w"> </span>dev-build<span class="w"> </span>lcio@master<span class="w"> </span>~rootdict
+</pre></div>
+</div>
+<p>This should install <code class="docutils literal notranslate"><span class="pre">lcio</span></code> and all dependencies that are not yet fulfilled, giving you the full output of all the build stages ending on something like the following</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">...</span>
+<span class="o">==&gt;</span> <span class="n">lcio</span><span class="p">:</span> <span class="n">Successfully</span> <span class="n">installed</span> <span class="n">lcio</span><span class="o">-</span><span class="n">master</span><span class="o">-</span><span class="mi">7</span><span class="n">dovpqn3kscbg672ham5wcqro7lg45gh</span>
+  <span class="n">Fetch</span><span class="p">:</span> <span class="mf">0.00</span><span class="n">s</span><span class="o">.</span>  <span class="n">Build</span><span class="p">:</span> <span class="mf">1.62</span><span class="n">s</span><span class="o">.</span>  <span class="n">Total</span><span class="p">:</span> <span class="mf">1.62</span><span class="n">s</span><span class="o">.</span>
+<span class="p">[</span><span class="o">+</span><span class="p">]</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">tmadlener</span><span class="o">/</span><span class="n">work</span><span class="o">/</span><span class="n">spack</span><span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">spack</span><span class="o">/</span><span class="n">linux</span><span class="o">-</span><span class="n">ubuntu20</span><span class="mf">.04</span><span class="o">-</span><span class="n">skylake</span><span class="o">/</span><span class="n">gcc</span><span class="o">-</span><span class="mf">9.3.0</span><span class="o">/</span><span class="n">lcio</span><span class="o">-</span><span class="n">master</span><span class="o">-</span><span class="mi">7</span><span class="n">dovpqn3kscbg672ham5wcqro7lg45gh</span>
+</pre></div>
+</div>
+<p>Note, that it is necessary to specify a single concrete version here for <code class="docutils literal notranslate"><span class="pre">lcio</span></code>. We use <code class="docutils literal notranslate"><span class="pre">&#64;master</span></code>.
+This version has to be one that is already available for the package (use <code class="docutils literal notranslate"><span class="pre">spack</span> <span class="pre">info</span></code> to find out which ones are available) and cannot be an arbitrary version.
+It also does not necessarily have to correspond to the actual version of the source code you are currently installing.
+However, it is of course encouraged to use a meaningful version specifier, since this package should also be useable as desired by dependent packages.</p>
+</section>
+<section id="using-the-local-version-as-dependency">
+<h3>Using the local version as dependency<a class="headerlink" href="#using-the-local-version-as-dependency" title="Link to this heading"></a></h3>
+<p>Now that the local version has been installed, it would of course be nice to be able to use it in downstream packages as well.
+As far as spack is concerned, a package that has been built from local sources is not really different from one that has been built from automatically downloaded sources.
+The main difference is that the fact that it has been built from local sources manifests in the spec</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>spack<span class="w"> </span>find<span class="w"> </span>-lv<span class="w"> </span>lcio
+</pre></div>
+</div>
+<p>will yield something like</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">==&gt;</span> <span class="mi">1</span> <span class="n">installed</span> <span class="n">package</span>
+<span class="o">--</span> <span class="n">linux</span><span class="o">-</span><span class="n">ubuntu20</span><span class="mf">.04</span><span class="o">-</span><span class="n">skylake</span> <span class="o">/</span> <span class="n">gcc</span><span class="o">@</span><span class="mf">9.3.0</span> <span class="o">------------------------</span>
+<span class="mi">7</span><span class="n">dovpqn</span> <span class="n">lcio</span><span class="nd">@master</span><span class="o">~</span><span class="n">examples</span><span class="o">~</span><span class="n">ipo</span><span class="o">~</span><span class="n">jar</span><span class="o">~</span><span class="n">rootdict</span> <span class="n">build_type</span><span class="o">=</span><span class="n">RelWithDebInfo</span> <span class="n">cxxstd</span><span class="o">=</span><span class="mi">17</span> <span class="n">dev_path</span><span class="o">=/</span><span class="n">home</span><span class="o">/</span><span class="n">tmadlener</span><span class="o">/</span><span class="n">work</span><span class="o">/</span><span class="n">ILCSoft</span><span class="o">/</span><span class="n">LCIO</span>
+</pre></div>
+</div>
+<p>As you can see the local path from which this version was installed has become part of the spec for the installed package (the <code class="docutils literal notranslate"><span class="pre">dev_path=...</span></code> part of the spec above).
+Hence, also the hash is affected by the fact that it has been built from a local source.</p>
+<p>To use this specific version as a dependency the usual spack syntax can be used, e.g.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>spack<span class="w"> </span>install<span class="w"> </span>marlin<span class="w"> </span>^lcio/7dovpqn
+</pre></div>
+</div>
+<p>will install <code class="docutils literal notranslate"><span class="pre">marlin</span></code> but use the version of <code class="docutils literal notranslate"><span class="pre">lcio</span></code> that we have just built locally.</p>
+</section>
+<section id="more-advanced-usage">
+<h3>More advanced usage<a class="headerlink" href="#more-advanced-usage" title="Link to this heading"></a></h3>
+<p>Note: If you have installed lcio following the description above you might have to uninstall it again first to follow these instructions, because spack will not overwrite an already installed package.</p>
+<p>The above instructions only dealt with installing a package from a local source, but not how to easily get a development environment allowing for a quick edit, compile cycle.
+This can be achieved by using the <code class="docutils literal notranslate"><span class="pre">--drop-in</span></code> and the <code class="docutils literal notranslate"><span class="pre">--before</span></code>/<code class="docutils literal notranslate"><span class="pre">--until</span></code> arguments of the <code class="docutils literal notranslate"><span class="pre">dev-build</span></code> command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>spack<span class="w"> </span>dev-build<span class="w"> </span>--drop-in<span class="w"> </span>bash<span class="w"> </span>--until<span class="w"> </span>cmake<span class="w"> </span>lcio@master<span class="w"> </span>~rootdict
+</pre></div>
+</div>
+<p>This command will first install all necessary dependencies, then run the install process for <code class="docutils literal notranslate"><span class="pre">lcio</span></code> until <strong>after</strong> the <code class="docutils literal notranslate"><span class="pre">cmake</span></code> stage and then drop you into a new bash shell with the proper build environment setup.
+It will also setup a build folder, which follows the naming scheme <code class="docutils literal notranslate"><span class="pre">spack-build-${hash}</span></code>, in this case: <code class="docutils literal notranslate"><span class="pre">spack-build-7dovpqn</span></code>.
+To compile <code class="docutils literal notranslate"><span class="pre">lcio</span></code> simply go into this directory and run <code class="docutils literal notranslate"><span class="pre">make</span></code> in there</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>spack-build-7dovpqn
+make<span class="w"> </span>-j4
+</pre></div>
+</div>
+<p>You are now in an environment where you can easily edit the local source code and re-compile afterwards.</p>
+<p>Once all the development is done, it is still necessary to install everything to the appropriate location.
+This installation has to be registered in the spack database as well. Hence, simply calling <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">install</span></code> in the build directory will not do the trick.
+Another call to <code class="docutils literal notranslate"><span class="pre">dev-build</span></code> is necessary.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>..<span class="w"> </span><span class="c1"># go back to the source directory where you started</span>
+spack<span class="w"> </span>dev-build<span class="w"> </span>lcio@master<span class="w"> </span>~rootdict
+</pre></div>
+</div>
+<p>This will run the whole chain again, but it will not overwrite the build directory.
+Hence, it will not recompile everything again, but simply install all the build artifacts to the appropriate location.
+<code class="docutils literal notranslate"><span class="pre">spack</span> <span class="pre">find</span> <span class="pre">-lv</span> <span class="pre">lcio</span></code> can be used to check if the installation was successful.</p>
+<p><strong>NOTE: You are probably still in the build environment at this stage. To return back to you original shell simply type <code class="docutils literal notranslate"><span class="pre">exit</span></code>.</strong></p>
+</section>
+</section>
+<section id="developing-multiple-packages-or-dependencies-of-other-packages">
+<h2>Developing multiple packages or dependencies of other packages<a class="headerlink" href="#developing-multiple-packages-or-dependencies-of-other-packages" title="Link to this heading"></a></h2>
+<p>Developing on many packages simultaneously using the <code class="docutils literal notranslate"><span class="pre">dev-build</span></code> command can become cumbersome and doesn’t really scale.</p>
+<section id="using-an-environment-to-setup-all-dependencies">
+<h3>Using an environment to setup all dependencies<a class="headerlink" href="#using-an-environment-to-setup-all-dependencies" title="Link to this heading"></a></h3>
+<p>One way to develop on multiple packages simultaneously can be to setup an <a class="reference external" href="https://spack.readthedocs.io/en/latest/environments.html">environment</a> that contains the dependencies of all packages.</p>
+<p>As an example the following definition of an environment has been used to develop on
+<a class="reference external" href="https://github.com/AIDASoft/podio"><code class="docutils literal notranslate"><span class="pre">podio</span></code></a>, <a class="reference external" href="https://github.com/key4hep/EDM4HEP"><code class="docutils literal notranslate"><span class="pre">EDM4HEP</span></code></a> and some other packages.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">spack</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">specs</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">python</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">root@6.20.04 +davix+gsl+math~memstat+minuit+mlp~mysql+opengl~postgres~pythia6+pythia8+python~qt4+r+root7+rootfit+rpath~shadow+sqlite+ssl~table+tbb+threads+tmva+unuran+vc+vdt+vmc+x+xml+xrootd build_type=RelWithDebInfo cxxstd=17 patches=22af3471f3fd87c0fe8917bf9c811c6d806de6c8b9867d30a1e3d383a1b929d7</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dd4hep +geant4</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">geant4</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">heppdt</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">hepmc@2.06.10</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tricktrack</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">py-pyyaml</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">py-jinja2</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cmake</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pythia8</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">evtgen</span>
+<span class="w">  </span><span class="nt">concretization</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">together</span>
+<span class="w">  </span><span class="nt">view</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="nt">packages</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">all</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">compiler</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">gcc@9.3.0</span><span class="p p-Indicator">]</span>
+<span class="w">      </span><span class="nt">variants</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cxxstd=17</span>
+</pre></div>
+</div>
+<p>Assuming this is the content of <code class="docutils literal notranslate"><span class="pre">edm4hep_devel.yaml</span></code> an environment can be created, activated, concretized and installed with the following commands:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>spack<span class="w"> </span>env<span class="w"> </span>create<span class="w"> </span>edm4hep-devel<span class="w"> </span>edm4hep_devel.yaml
+spack<span class="w"> </span>env<span class="w"> </span>activate<span class="w"> </span>-p<span class="w"> </span>edm4hep-devel
+spack<span class="w"> </span>concretize
+spack<span class="w"> </span>install
+</pre></div>
+</div>
+<p>After an environment has been installed, it can easily be activated via</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>spack<span class="w"> </span>env<span class="w"> </span>activate<span class="w"> </span>-p<span class="w"> </span>edm4hep-devel
+</pre></div>
+</div>
+<p>which immediately drops you in an environment with all the packages stated in the environment file above available and properly set up.
+Developing packages that depend on these should then be straight forward, especially for properly setup CMake based projects that can automatically find and configure their dependencies.</p>
+<p>The disadvantage of this approach is that the packages you want to develop on have to be on the top of the stack and if they depend on each other, you still have to properly handle these dependencies on your own.</p>
+</section>
+<section id="environments-and-a-development-workflow">
+<h3>Environments and a development workflow<a class="headerlink" href="#environments-and-a-development-workflow" title="Link to this heading"></a></h3>
+<p>Recently spack gained the ability to setup environments and specify multiple packages that you would like to develop on (See <a class="reference external" href="https://github.com/spack/spack/pull/15256">spack/spack#256</a>).
+It is not yet really documented and it is not yet fully optimized, but it allows for a decent development experience if your package is not too deep down in the stack.
+It is not impossible to develop on packages deep down the software stack, but this can imply frequently recompiling large parts of the software stack, since spack does not yet handle this in the best way, but instead builds all packages that you are not developing on from scratch. Hence, even if a simple relinking would have done the trick, spack will still build a lot of packages again.
+Nevertheless, the feature is in a usable state and this section briefly describes how to use it.
+Especially if you mainly develop on one package but sometimes want to check whether the rest of the stack, that depends on this package still compiles with the latest version, this can be a very useful workflow.</p>
+<p>As an example we will be using the <code class="docutils literal notranslate"><span class="pre">k4simdelphes</span></code> package that depends on <code class="docutils literal notranslate"><span class="pre">edm4hep</span></code>, which in turn depens again on <code class="docutils literal notranslate"><span class="pre">podio</span></code>.
+Suppose we want to change <code class="docutils literal notranslate"><span class="pre">podio</span></code> and <code class="docutils literal notranslate"><span class="pre">edm4hep</span></code> and see if <code class="docutils literal notranslate"><span class="pre">k4simdelphes</span></code> still compiles and works.
+We would then use an environment definition file similar to the usual environments. For this example it has the following content</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">spack</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">spec</span><span class="p">:</span><span class="w"> </span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">k4simdelphes</span>
+<span class="w">  </span><span class="nt">concretization</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">together</span>
+<span class="w">  </span><span class="nt">view</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">  </span><span class="nt">packages</span><span class="p">:</span>
+<span class="w">     </span><span class="nt">all</span><span class="p">:</span>
+<span class="w">       </span><span class="nt">compiler</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">gcc@9.3.0</span><span class="p p-Indicator">]</span>
+<span class="w">       </span><span class="nt">variants</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cxxstd=17</span>
+<span class="w">  </span><span class="nt">develop</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">podio</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">spec</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">podio@master +sio</span>
+<span class="w">      </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">../../../../../podio</span>
+<span class="w">    </span><span class="nt">edm4hep</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">spec</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">edm4hep@master</span>
+<span class="w">      </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">../../../../../EDM4hep</span>
+</pre></div>
+</div>
+<p>The first part is the same as previously, but a new <code class="docutils literal notranslate"><span class="pre">develop</span></code> section containing information about the packages that should be developed on has been added.
+For each package there is a <code class="docutils literal notranslate"><span class="pre">spec</span></code> and a <code class="docutils literal notranslate"><span class="pre">path</span></code> field. The <code class="docutils literal notranslate"><span class="pre">spec</span></code> field tells spack which spec to build, while the <code class="docutils literal notranslate"><span class="pre">path</span></code> field tells spack where the source files are located.
+<strong>The path is relative to the <code class="docutils literal notranslate"><span class="pre">$(prefix)/var/spack/environments/${environment-name}</span></code> directory or an absolute path.</strong></p>
+<p>Assuming that you are currently in the directory that contains local <code class="docutils literal notranslate"><span class="pre">spack</span></code> installation, the following steps are necessary to create the development environment</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/AIDASoft/podio
+git<span class="w"> </span>clone<span class="w"> </span>https://github.com/key4hep/EDM4hep
+spack<span class="w"> </span>env<span class="w"> </span>create<span class="w"> </span>my-development-env<span class="w"> </span>development_env_packages.yaml
+</pre></div>
+</div>
+<p>where <code class="docutils literal notranslate"><span class="pre">development_env_packages.yaml</span></code> is the yaml file with the contents just described above.</p>
+<p>It is now possible to activate this environment via</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>spack<span class="w"> </span>env<span class="w"> </span>activate<span class="w"> </span>-p<span class="w"> </span>my-development-env
+</pre></div>
+</div>
+<p>To install all the packages, including the local versions of <code class="docutils literal notranslate"><span class="pre">podio</span></code> and <code class="docutils literal notranslate"><span class="pre">edm4hep</span></code> it is now enough to simply do <code class="docutils literal notranslate"><span class="pre">spack</span> <span class="pre">install</span></code><strong>in the activated environment</strong>.
+This will build your local copies of <code class="docutils literal notranslate"><span class="pre">podio</span></code> and <code class="docutils literal notranslate"><span class="pre">edm4hep</span></code> and use these versions as dependencies for the <code class="docutils literal notranslate"><span class="pre">k4simdelphes</span></code> package.
+Changes can also be made to either of the two packages.
+To compile only one package without installing it yet, it is easiest to simply go to the directory where the sources are.
+There should now be a few spack related files and a spack build folder among the other source files</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>[...]
+spack-configure-args.txt
+spack-build-env.txt
+spack-build-out.txt
+spack-build-${hash}
+</pre></div>
+</div>
+<p>Here <code class="docutils literal notranslate"><span class="pre">${hash}</span></code> is the same that you get from <code class="docutils literal notranslate"><span class="pre">spack</span> <span class="pre">find</span> <span class="pre">-l</span> <span class="pre">package</span></code>.
+After you have done all the necessary changes you can simply change into this build directory and run <code class="docutils literal notranslate"><span class="pre">make</span></code> to compile the package again.
+Once all your development is done and you want to install the package <code class="docutils literal notranslate"><span class="pre">spack</span> <span class="pre">install</span></code> will run the whole build chain again.
+This means that all the (local) development packages in your environment will only be recompiled as far as necessary, while all other packages that depend on the development packages will be re-built from scratch.</p>
+<p>Once you are done developing, this environment can be used like any other environment simply by running <code class="docutils literal notranslate"><span class="pre">spack</span> <span class="pre">env</span> <span class="pre">activate</span> <span class="pre">my-development-env</span></code> to activate it.</p>
+<section id="adding-another-package-to-develop">
+<h4>Adding another package to develop<a class="headerlink" href="#adding-another-package-to-develop" title="Link to this heading"></a></h4>
+<p>If you now realize that your changes to <code class="docutils literal notranslate"><span class="pre">podio</span></code> or <code class="docutils literal notranslate"><span class="pre">edm4hep</span></code> broke <code class="docutils literal notranslate"><span class="pre">k4simdelphes</span></code> and you need to also implement some changes there, you do not have to define a new environment.
+Instead it is possible to add <code class="docutils literal notranslate"><span class="pre">k4simdelphes</span></code> to the <code class="docutils literal notranslate"><span class="pre">develop</span></code> section via <code class="docutils literal notranslate"><span class="pre">spack</span> <span class="pre">develop</span></code> (assuming you are still in the activated environment and in the same directory where also the <code class="docutils literal notranslate"><span class="pre">podio</span></code> and <code class="docutils literal notranslate"><span class="pre">edm4hep</span></code> sources live)</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/key4hep/k4SimDelphes
+spack<span class="w"> </span>develop<span class="w"> </span>--no-clone<span class="w"> </span>--path<span class="w"> </span>../../../../../k4SimDelphes<span class="w"> </span>k4simdelphes@main
+</pre></div>
+</div>
+<p>Here, the <code class="docutils literal notranslate"><span class="pre">--path</span></code> is again either relative to the environment directory inside spack. It could also be an absolute path.
+You now have to concretize the environment again before you can install the packages.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>spack<span class="w"> </span>concretize<span class="w"> </span>-f
+spack<span class="w"> </span>install
+</pre></div>
+</div>
+<p>Now you can work on <code class="docutils literal notranslate"><span class="pre">k4simdelphes</span></code> in the same way as you can for <code class="docutils literal notranslate"><span class="pre">podio</span></code> or <code class="docutils literal notranslate"><span class="pre">edm4hep</span></code>.
+You can also check that the environment now indeed uses your local version of <code class="docutils literal notranslate"><span class="pre">k4simdelphes</span></code> via</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">spack</span> <span class="n">find</span> <span class="o">-</span><span class="n">lv</span> <span class="n">k4simdelphes</span>
+</pre></div>
+</div>
+<p>which should now yield something along the lines of</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">==&gt;</span> <span class="n">In</span> <span class="n">environment</span> <span class="n">my</span><span class="o">-</span><span class="n">development</span><span class="o">-</span><span class="n">env</span>
+<span class="o">==&gt;</span> <span class="n">Root</span> <span class="n">specs</span>
+<span class="o">-------</span> <span class="n">k4simdelphes</span><span class="nd">@main</span> 
+
+<span class="o">==&gt;</span> <span class="mi">1</span> <span class="n">installed</span> <span class="n">package</span>
+<span class="o">--</span> <span class="n">linux</span><span class="o">-</span><span class="n">ubuntu20</span><span class="mf">.04</span><span class="o">-</span><span class="n">broadwell</span> <span class="o">/</span> <span class="n">gcc</span><span class="o">@</span><span class="mf">9.3.0</span> <span class="o">----------------------</span>
+<span class="n">m5khm2w</span> <span class="n">k4simdelphes</span><span class="nd">@main</span><span class="o">~</span><span class="n">ipo</span> <span class="n">build_type</span><span class="o">=</span><span class="n">RelWithDebInfo</span> <span class="n">dev_path</span><span class="o">=/</span><span class="n">home</span><span class="o">/</span><span class="n">tmadlener</span><span class="o">/</span><span class="n">work</span><span class="o">/</span><span class="n">spack</span><span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">spack</span><span class="o">/</span><span class="n">environments</span><span class="o">/</span><span class="n">test</span><span class="o">-</span><span class="n">devel</span><span class="o">-</span><span class="n">env</span><span class="o">/../../../../../</span><span class="n">k4SimDelphes</span>
+</pre></div>
+</div>
+<p>where the path to the local source files has now again become part of the spec as can be seen by the <code class="docutils literal notranslate"><span class="pre">dev_path=...</span></code> part of the spec.</p>
+</section>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="SinglePackage.html" class="btn btn-neutral float-left" title="Developing a single package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="WritingAlgorithms.html" class="btn btn-neutral float-right" title="Writing Gaudi Algorithms" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Key4hep.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
