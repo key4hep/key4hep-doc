@@ -36,7 +36,8 @@ jobs:
     steps:
       - uses: actions/checkout@v5
         with:
-          ref: gh-pages
+          ref: ${{ github.event.pull_request.head.sha }}
+
       - uses: actions/download-artifact@v5
         with:
           name: github-pages
@@ -56,11 +57,11 @@ jobs:
           preview-branch: gh-pages
           umbrella-dir: pr-preview
           deploy-repository: "key4hep/key4hep-doc"
-          action: deploy
+          action: auto
 
       - name: Remove Preview
         uses: rossjrw/pr-preview-action@v1.6.2
-        if: contains(['closed'], ${{ github.event.action }})
+        if: github.event.action == 'closed' && !github.event.pull_request.merged
         with:
           source-dir: pr-preview-unpacked
           preview-branch: gh-pages
