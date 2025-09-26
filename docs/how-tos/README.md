@@ -3,7 +3,7 @@
 This page contains a few brief How-Tos and Instructions on how to achieve
 certain things within the Key4hep software stack. They are mainly aimed at
 Key4hep users and are mostly designed to be reference material, rather than
-[tutorials](https://key4hep.github.io/key4hep-doc/tutorials/README.html).
+[tutorials](https://key4hep.github.io/key4hep-doc/main/tutorials/README.html).
 
 ```{eval-rst}
 .. toctree::
