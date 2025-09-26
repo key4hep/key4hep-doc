@@ -1,6 +1,16 @@
-name: build
-
-on: [push, pull_request, workflow_dispatch]
+name: Build preview
+on:
+  workflow_call:
+    inputs:
+      ref:
+        description: The git ref for which the preview should be built
+        type: string
+        required: true
+      fail-on-linkcheck:
+        description: Make the whole action fail in case the linkcheck fails
+        type: bool
+        required: false
+        default: false
 
 jobs:
   build:
@@ -8,21 +18,25 @@ jobs:
     strategy:
       fail-fast: false
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v5
+      with:
+        ref: ${{ inputs.ref }}
     - uses: actions/setup-python@v5
       with:
         python-version: 3.12
+        cache: pip
     - name: Install Requirements
       run: |
-        pip install --upgrade pip
-        pip install -r requirements.txt
+          pip --upgrade pip
+          pip install -r requirements.txt
     - name: Fetch external sources
       run: |
-        bash .github/scripts/fetch_external_sources.sh
-    - name: Sphinx build
+        bash .github/scripts/fetch_external_sources
+    - name: Build documentation
+      continue-on-error: ${{ inputs.fail-on-linkcheck == 'false' }}
       run: |
         sphinx-build -M html docs build
         sphinx-build -b linkcheck docs linkcheck
-    - uses: actions/upload-pages-artifact@v3
+    - uses: actions/upload-pages-artifact@v4
       with:
         path: build/html
