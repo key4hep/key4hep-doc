@@ -24,6 +24,7 @@ jobs:
     with:
       ref: ${{ github.event.pull_request.head.sha }}
       linkcheck: true
+      upload-artifact: false
 
   deploy-preview:
     needs: build-preview
