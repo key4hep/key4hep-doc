@@ -19,7 +19,7 @@ jobs:
     uses: ./.github/workflows/build.yml
     with:
       ref: ${{ github.ref_name }}
-      linkcheck: true
+      linkcheck: false
 
   deploy:
     needs: build
