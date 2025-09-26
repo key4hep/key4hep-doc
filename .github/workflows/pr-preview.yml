@@ -20,6 +20,7 @@ jobs:
       linkcheck: false
 
   linkcheck:
+    if: contains(['opened', 'reopened', 'synchronize'], ${{ github.event.action }})
     uses: ./.github/workflows/build.yml
     with:
       ref: ${{ github.event.pull_request.head.sha }}
