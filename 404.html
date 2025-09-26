@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Page not found — redirecting…</title>
+
+  <script>
+  (function() {
+    try {
+      var prefix = "/key4hep-doc"; // <- change if your repo name/prefix differs
+      var path = window.location.pathname || "/";
+
+      // Only redirect if the request is within the repo prefix and not already in /main
+      if (path.startsWith(prefix) && !path.startsWith(prefix + "/main")) {
+        var newUrl = window.location.origin
+                   + prefix + "/main"
+                   + path.slice(prefix.length)
+                   + window.location.search
+                   + window.location.hash;
+
+        // Add canonical link for SEO
+        var link = document.createElement("link");
+        link.rel = "canonical";
+        link.href = newUrl;
+        document.head.appendChild(link);
+
+        // Replace (no back-button entry)
+        window.location.replace(newUrl);
+        return;
+      }
+    } catch (e) {
+      // swallow errors — leave a readable 404 if redirect fails
+      console.error("Redirect script failed:", e);
+    }
+  })();
+  </script>
+
+  <!-- noscript fallback: send users to the repo root main if JS disabled -->
+  <noscript>
+    <meta http-equiv="refresh" content="0;url=/key4hep-doc/main/">
+  </noscript>
+</head>
+<body>
+  <h1>Not found — redirecting…</h1>
+  <p>If you are not redirected automatically, <a id="manual" href="/key4hep-doc/main/">click here</a>.</p>
+  <script>
+    // Update manual link to the best guess target (so users without JS still have a path)
+    (function(){
+      var prefix = "/key4hep-doc";
+      var path = window.location.pathname || "/";
+      if (path.startsWith(prefix) && !path.startsWith(prefix + "/main")) {
+        document.getElementById("manual").href =
+          prefix + "/main" + path.slice(prefix.length) + window.location.search + window.location.hash;
+      }
+    })();
+  </script>
+</body>
+</html>
