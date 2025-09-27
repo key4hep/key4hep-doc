@@ -1,5 +1,10 @@
 # Key4hep
 
+Key4hep is a turnkey software stack for detector optimisation and performance studies for future collider experiments. It provides common libraries and solutions for the generation, simulation, reconstruction, and analysis of events at future colliders, with a strong focus on coherence and re-usability in order to reduce duplication of effort and foster collaboration. Key4hep serves as a common software base for future experiments, allowing project-specific adaptations to be made to accommodate their specific requirements.
+
+Key4hep is a community-driven project, with contributions and adaptations from different
+future collider projects: CEPC, CLIC, EIC, FCC, ILC, Muon Collider.
+
 
 ```{eval-rst}
 .. toctree::
