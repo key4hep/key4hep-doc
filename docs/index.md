@@ -35,6 +35,11 @@ Want to contribute? Look at our **[Contribution Guide](getting_started/CONTRIBUT
 - **[Developer Documentation](developing-key4hep-software/README.md)** - Contribute to and extend Key4hep
 - **[Build Instructions](spack-build-instructions-for-librarians/README.md)** - Advanced build and deployment guides
 
+## License
+Except where otherwise noted, the example programs and other software provided
+by Key4hep are made available under the [OSI](https://opensource.org)-approved [Apache
+2.0](https://opensource.org/license/apache-2-0/).
+
 ## Acknowledgements
 
 Strategic R&D Programme on Technologies for Future Experiments ([CERN-OPEN-2018-006](https://cds.cern.ch/record/2649646/)) [https://ep-rnd.web.cern.ch/](https://ep-rnd.web.cern.ch/)

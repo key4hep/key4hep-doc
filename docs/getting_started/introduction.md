@@ -24,15 +24,3 @@ Key4hep draws significant inspiration from iLCSoft, a common software stack wide
 ### Infrastructure
 
 Key4hep uses the Spack package manager to manage the compilation and deployment of its packages. Spack allows experiments to share build recipes, enabling any experiment to build the stack independently or extend it for their own needs. In addition, the Key4hep stack is also built centrally and deployed to the CVMFS, from where it can be [easily accessed](setup.md).
-
-## License
-
-Except where otherwise noted, the example programs and other software provided
-by Key4hep are made available under the [OSI](https://opensource.org)-approved [Apache
-2.0](https://opensource.org/license/apache-2-0/).
-
-## Acknowledgements
-Strategic R&D Programme on Technologies for Future Experiments ([CERN-OPEN-2018-006](https://cds.cern.ch/record/2649646/)) https://ep-rnd.web.cern.ch/   
-
-European Union’s Horizon 2020 Research and Innovation programme under Grant
-Agreement no. 101004761.
