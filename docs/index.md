@@ -42,7 +42,7 @@ by Key4hep are made available under the [OSI](https://opensource.org)-approved [
 
 ## Acknowledgements
 
-Strategic R&D Programme on Technologies for Future Experiments ([CERN-OPEN-2018-006](https://cds.cern.ch/record/2649646/)) [https://ep-rnd.web.cern.ch/](https://ep-rnd.web.cern.ch/)
+Strategic R&D Programme on Technologies for Future Experiments ([CERN-OPEN-2018-006](https://cds.cern.ch/record/2649646/)). See also [the EP R&D webpage](https://ep-dep.web.cern.ch/rd-experimental-technologies).
 
 European Union's Horizon 2020 Research and Innovation programme under Grant Agreement no. 101004761.
 
