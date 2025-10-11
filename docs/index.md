@@ -101,6 +101,7 @@ European Union's Horizon 2020 Research and Innovation programme under Grant Agre
    :caption: External Resources
    :titlesonly:
    :hidden:
+
    EDM4hep <https://edm4hep.web.cern.ch>
    podio <https://key4hep.web.cern.ch/podio>
    Gaudi (doxygen) <https://gaudi.web.cern.ch/doxygen/v40r0/index.html>
