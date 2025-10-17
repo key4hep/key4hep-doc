@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Running an Event Display with EDM4hep or LCIO input &mdash; Key4hep  documentation</title>
+      <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../../../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../../../../_static/copybutton.js?v=f281be69"></script>
+        <script src="../../../../../_static/design-tabs.js?v=36754332"></script>
+    <script src="../../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" />
+    <link rel="next" title="Running Delphes fast simulation with EDM4hep output" href="../../../../k4simdelphes/doc/starterkit/k4SimDelphes/Readme.html" />
+    <link rel="prev" title="How to run multithreading with k4MarlinWrapper (Gaudi)" href="howtoMultithread.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../../index.html" class="icon icon-home">
+            Key4hep
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../getting_started/introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../getting_started/help.html">Getting help</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../getting_started/setup.html">Getting key4hep</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../getting_started/CONTRIBUTING.html">Contributing</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../../how-tos/README.html">Key4hep How-Tos and Instructions</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../../README.html">Key4hep Tutorials</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Readme.html">Using the Key4hep-Stack for CLIC Simulation and Reconstruction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../key4hep-tutorials/gaudi_ild_reco/README.html">Running ILD simulation and reconstruction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howtoMultithread.html">How to run multithreading with k4MarlinWrapper (Gaudi)</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Running an Event Display with EDM4hep or LCIO input</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#setting-up-an-environment">Setting up an environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#creating-an-input-file">Creating an input file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#running-the-event-display">Running the event display</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#details">Details</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#troubleshooting-using-other-detectors">Troubleshooting / Using other detectors</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../k4simdelphes/doc/starterkit/k4SimDelphes/Readme.html">Running Delphes fast simulation with EDM4hep output</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../developing-key4hep-software/README.html">Developing Key4hep</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../spack-build-instructions-for-librarians/README.html">Building Key4hep: For Librarians</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../talks-and-presentations/README.html">Talks and Presentations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../call-for-logos/README.html">Call for logos</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">External links</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://cern.ch/fccsw">FCC software</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://twiki.cern.ch/twiki/bin/view/CLIC/CLICSoftwareComputing">CLIC software</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://ilcsoft.desy.de/portal">ILC software</a></li>
+<li class="toctree-l1"><a class="reference external" href="http://cepcsoft.ihep.ac.cn/">CEPC software</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://mcd-wiki.web.cern.ch/software/">Muon Collider software</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../index.html">Key4hep</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../../README.html">Key4hep Tutorials</a></li>
+      <li class="breadcrumb-item active">Running an Event Display with EDM4hep or LCIO input</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../../_sources/tutorials/k4marlinwrapper/doc/starterkit/k4MarlinWrapperCLIC/CEDViaWrapper.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <!--
+Copyright (c) 2019-2024 Key4hep-Project.
+
+This file is part of Key4hep.
+See https://key4hep.github.io/key4hep-doc/ for further info.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+<section id="running-an-event-display-with-edm4hep-or-lcio-input">
+<h1>Running an Event Display with EDM4hep or LCIO input<a class="headerlink" href="#running-an-event-display-with-edm4hep-or-lcio-input" title="Link to this heading"></a></h1>
+<p>It is possible to run the <a class="reference external" href="https://github.com/iLCSoft/CED">C Event Display (CED)</a> via a wrapped <a class="reference external" href="https://github.com/iLCSoft/CEDViewer">CEDViewer</a> Marlin Processor. This makes it possible to run the Event Display with EDM4hep input files using an on the fly conversion to LCIO for CED. This introduction shows the basic concepts and also provides a options file that should work for most use cases. This example will be using the CLIC detector but should also work for other DD4hep detector models. The example is fully self contained, if you already have everything set up you can jump directly to <a class="reference internal" href="#running-the-event-display">running the event display</a>.</p>
+<section id="setting-up-an-environment">
+<h2>Setting up an environment<a class="headerlink" href="#setting-up-an-environment" title="Link to this heading"></a></h2>
+<p>The following steps have been tested with the latest Key4hep release which can be setup using</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>/cvmfs/sw.hsf.org/key4hep/setup.sh
+</pre></div>
+</div>
+<p>To get the CLIC detector description we clone the <code class="docutils literal notranslate"><span class="pre">CLICPerformance</span></code> repository</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/iLCSoft/CLICPerformance
+</pre></div>
+</div>
+<p>All the following steps assume that the environment is setup like above and that the detector description is in the <code class="docutils literal notranslate"><span class="pre">CLICPerformance</span></code> directory. All commands start from the directory from which <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span></code> has been executed.</p>
+</section>
+<section id="creating-an-input-file">
+<h2>Creating an input file<a class="headerlink" href="#creating-an-input-file" title="Link to this heading"></a></h2>
+<p>To create an input file for the event display we run a simple detector simulation using <code class="docutils literal notranslate"><span class="pre">ddsim</span></code> and a particle gun that shoots photons. The input file that we create here for illustration purposes has only 10 events, which also means that the creation should only take a few minutes. The steps to create this file are the following</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ddsim<span class="w"> </span>--steeringFile<span class="w"> </span>CLICPerformance/clicConfig/clic_steer.py<span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>--compactFile<span class="w"> </span><span class="nv">$K4GEO</span>/CLIC/compact/CLIC_o3_v14/CLIC_o3_v14.xml<span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>--enableGun<span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>--gun.distribution<span class="w"> </span>uniform<span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>--gun.particle<span class="w"> </span>gamma<span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>--gun.energy<span class="w"> </span><span class="m">10</span>*GeV<span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>--outputFile<span class="w"> </span>gamma_10GeV_edm4hep.root<span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>--numberOfEvents<span class="w"> </span><span class="m">10</span>
+</pre></div>
+</div>
+<p>You should now have a <code class="docutils literal notranslate"><span class="pre">gamma_10GeV_edm4hep.root</span></code> file containing 10 events.</p>
+</section>
+<section id="running-the-event-display">
+<h2>Running the event display<a class="headerlink" href="#running-the-event-display" title="Link to this heading"></a></h2>
+<p>In order to run the event display via the <code class="docutils literal notranslate"><span class="pre">DDCEDViewer</span></code> we use the Marlin wrapper. Here we simply present the most important steps, but do not go over all details of the <code class="docutils literal notranslate"><span class="pre">DDCEDViewer</span></code> configuration, for that it is probably best to directly look at the <a class="reference external" href="https://github.com/iLCSoft/CEDViewer">CEDViewer repository</a> directly. The complete Gaudi configuration can be found in <a class="reference external" href="https://github.com/key4hep/k4MarlinWrapper/blob/master/k4MarlinWrapper/examples/event_display.py"><code class="docutils literal notranslate"><span class="pre">k4MarlinWrapper/examples/event_display.py</span></code></a> which is also installed at <code class="docutils literal notranslate"><span class="pre">$K4MARLINWRAPPER/examples/event_display.py</span></code></p>
+<p>In order to run the event display we first have to start the <code class="docutils literal notranslate"><span class="pre">glced</span></code> server program to which the wrapped <code class="docutils literal notranslate"><span class="pre">CEDViewer</span></code> processor will then connect. Starting the server and running the wrapped processor can be done via</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>glced<span class="w"> </span><span class="p">&amp;</span>
+
+k4run<span class="w"> </span><span class="nv">$K4MARLINWRAPPER</span>/examples/event_display.py<span class="w"> </span>--inputFiles<span class="o">=</span>gamma_10GeV_edm4hep.root
+</pre></div>
+</div>
+<p>If you want to run the event display for a different geometry you can do so with the <code class="docutils literal notranslate"><span class="pre">--compactFile</span></code> argument. However, depending on your detector model you might also need to change some of the <code class="docutils literal notranslate"><span class="pre">DDCEDViewer</span></code> parameters. The default compact file is <code class="docutils literal notranslate"><span class="pre">&quot;CLICPerformance/Visualisation/CLIC_o3_v06_CED/CLIC_o3_v06_CED.xml&quot;</span></code>.</p>
+</section>
+<section id="details">
+<h2>Details<a class="headerlink" href="#details" title="Link to this heading"></a></h2>
+<p>The main work is done by the <code class="docutils literal notranslate"><span class="pre">DDCEDViewer</span></code>, which we use via the <code class="docutils literal notranslate"><span class="pre">MarlinProcessorWrapper</span></code>. It is the following part of example <code class="docutils literal notranslate"><span class="pre">event_display.py</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">Configurables</span> <span class="kn">import</span> <span class="n">MarlinProcessorWrapper</span>
+
+<span class="n">MyCEDViewer</span> <span class="o">=</span> <span class="n">MarlinProcessorWrapper</span><span class="p">(</span><span class="s2">&quot;MyCEDViewer&quot;</span><span class="p">)</span>
+<span class="n">MyCEDViewer</span><span class="o">.</span><span class="n">ProcessorType</span> <span class="o">=</span> <span class="s2">&quot;DDCEDViewer&quot;</span>
+<span class="n">MyCEDViewer</span><span class="o">.</span><span class="n">Parameters</span> <span class="o">=</span> <span class="p">{</span>
+                          <span class="c1"># ... lots of CEDViewer configuration ...</span>
+                          <span class="p">}</span>
+</pre></div>
+</div>
+<p>Some of the more commonly used parameters have self explanatory names.</p>
+</section>
+<section id="troubleshooting-using-other-detectors">
+<h2>Troubleshooting / Using other detectors<a class="headerlink" href="#troubleshooting-using-other-detectors" title="Link to this heading"></a></h2>
+<p>When running this for a detector different than CLD, CLIC or ILD (or a derivative of one of them) you might not see anything in the event display.</p>
+<p>If you are not seeing the detector make sure that it has the proper visualisation attributes, e.g. by comparing it to the compact file used above.
+If you are not seeing any hits, tracks etc. from your event, make sure to add their collection names to the <code class="docutils literal notranslate"><span class="pre">DrawInLayer</span></code> list in the <code class="docutils literal notranslate"><span class="pre">DDCEDViewer</span></code> parameters.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="howtoMultithread.html" class="btn btn-neutral float-left" title="How to run multithreading with k4MarlinWrapper (Gaudi)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../../../k4simdelphes/doc/starterkit/k4SimDelphes/Readme.html" class="btn btn-neutral float-right" title="Running Delphes fast simulation with EDM4hep output" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Key4hep.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

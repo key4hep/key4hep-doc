@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Writing Gaudi Algorithms &mdash; Key4hep  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../_static/copybutton.js?v=f281be69"></script>
+        <script src="../_static/design-tabs.js?v=36754332"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Seeding algorithm PRNG" href="k4fwcore/doc/uniqueIDGen.html" />
+    <link rel="prev" title="Building Key4hep using Spack: For Developers" href="SpackForDevelopers.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Key4hep
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/help.html">Getting help</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/setup.html">Getting key4hep</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/CONTRIBUTING.html">Contributing</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../how-tos/README.html">Key4hep How-Tos and Instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/README.html">Key4hep Tutorials</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="README.html">Developing Key4hep</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Key4hepSoftwareGit.html">Github workflow and contribution guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SinglePackage.html">Developing a single package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SpackForDevelopers.html">Building Key4hep using Spack: For Developers</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Writing Gaudi Algorithms</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#gaudi">Gaudi</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#gaudi-functional">Gaudi::Functional</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#setup">Setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#walkthrough-of-functional-algorithms">Walkthrough of Functional Algorithms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#the-steering-file">The steering file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#initialize-and-finalize">Initialize and finalize</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#debugging-how-to-use-gdb">Debugging: How to use GDB</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#avoiding-const-in-operator">Avoiding const in <code class="docutils literal notranslate"><span class="pre">operator()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="k4fwcore/doc/uniqueIDGen.html">Seeding algorithm PRNG</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../spack-build-instructions-for-librarians/README.html">Building Key4hep: For Librarians</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../talks-and-presentations/README.html">Talks and Presentations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../call-for-logos/README.html">Call for logos</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">External links</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://cern.ch/fccsw">FCC software</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://twiki.cern.ch/twiki/bin/view/CLIC/CLICSoftwareComputing">CLIC software</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://ilcsoft.desy.de/portal">ILC software</a></li>
+<li class="toctree-l1"><a class="reference external" href="http://cepcsoft.ihep.ac.cn/">CEPC software</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://mcd-wiki.web.cern.ch/software/">Muon Collider software</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Key4hep</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="README.html">Developing Key4hep</a></li>
+      <li class="breadcrumb-item active">Writing Gaudi Algorithms</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/developing-key4hep-software/WritingAlgorithms.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="writing-gaudi-algorithms">
+<h1>Writing Gaudi Algorithms<a class="headerlink" href="#writing-gaudi-algorithms" title="Link to this heading"></a></h1>
+<section id="gaudi">
+<h2>Gaudi<a class="headerlink" href="#gaudi" title="Link to this heading"></a></h2>
+<p>Gaudi is an event-processing framework. Algorithms can be defined by users and
+Gaudi will take care of running them for each event. In addition, Gaudi has a
+set of services and tools like logging and support for running in a
+multithreaded environment.</p>
+<p>The relationship between Gaudi with key4hep happens through
+<a class="reference external" href="https://github.com/key4hep/k4FWCore">k4FWCore</a>. k4FWCore has tools and
+utilities needed to be able to use (almost) seamlessly EDM4hep collections in
+Gaudi algorithms. We recommend checking out the
+<a class="reference external" href="https://github.com/key4hep/k4FWCore/tree/main/test/k4FWCoreTest">tests</a> in this
+repository since they contain examples of algorithms (in particular of
+algorithms using <code class="docutils literal notranslate"><span class="pre">Gaudi::Functional</span></code>).</p>
+</section>
+</section>
+<section id="gaudi-functional">
+<h1>Gaudi::Functional<a class="headerlink" href="#gaudi-functional" title="Link to this heading"></a></h1>
+<p>Using <code class="docutils literal notranslate"><span class="pre">Gaudi::Functional</span></code> is the recommended way of creating algorithms. The
+design is simple and at the same time enforces several constraints at
+compile-time, allowing for a quicker development cycle. In particular, we will
+see that our algorithms won’t have an internal state and we obtain the benefit
+of being able to run in a multithreaded environment (almost) trivially<a class="footnote-reference brackets" href="#id2" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>.</p>
+<section id="setup">
+<h2>Setup<a class="headerlink" href="#setup" title="Link to this heading"></a></h2>
+<p>We will need Gaudi, k4FWCore and all their dependencies. Installing these by
+ourselves is not easy but there are software stacks on cvmfs, see this
+<a class="reference internal" href="../getting_started/setup.html"><span class="std std-doc">page</span></a> to set up the key4hep stack.</p>
+<p>The easiest way of having a working repository is to copy the template
+repository that we provide in key4hep:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/key4hep/k4-project-template
+</pre></div>
+</div>
+<p>or ideally with ssh</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>git@github.com:key4hep/k4-project-template
+</pre></div>
+</div>
+<p>This template repository already has the cmake code that will make our
+algorithms know where Gaudi and k4FWCore and to properly link to them. In
+addition there are a few examples that combined with the tests in k4FWCore
+provide an overview of what’s possible to do. The <code class="docutils literal notranslate"><span class="pre">k4-project-template</span></code>
+repository contains a CMake configuration (as described in more detail in the
+previous tutorial) so it can be built with:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>k4-project-template
+mkdir<span class="w"> </span>build<span class="w"> </span>install
+<span class="nb">cd</span><span class="w"> </span>build
+cmake<span class="w"> </span>..<span class="w"> </span>-DCMAKE_INSTALL_PREFIX<span class="o">=</span>../install
+make<span class="w"> </span>-j<span class="w"> </span><span class="m">4</span><span class="w"> </span>install
+</pre></div>
+</div>
+<p>To run the algorithms contained in this repository you can use <code class="docutils literal notranslate"><span class="pre">k4run</span></code>, like:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>k4run<span class="w"> </span>../K4TestFWCore/options/createExampleEventData.py<span class="w"> </span>
+</pre></div>
+</div>
+</section>
+<section id="walkthrough-of-functional-algorithms">
+<h2>Walkthrough of Functional Algorithms<a class="headerlink" href="#walkthrough-of-functional-algorithms" title="Link to this heading"></a></h2>
+<p>Functional algorithms in Gaudi are relatively straightforward to write. For each
+algorithm we want, we have to create a class that will inherit from one of the
+<code class="docutils literal notranslate"><span class="pre">Gaudi::Functional</span></code> classes. The most important function member will be
+<code class="docutils literal notranslate"><span class="pre">operator()</span></code> which is what will run over our events (or over none in case we are
+generating). There are several base classes in Gaudi (see a more complete list
+in https://lhcb.github.io/DevelopKit/03a-gaudi/):</p>
+<ul class="simple">
+<li><p>Consumer, one or more inputs, no outputs</p></li>
+<li><p>Producer, one or more outputs, no inputs</p></li>
+<li><p>Transformer (and MultiTransformer), one or more inputs, one or more outputs</p></li>
+</ul>
+<p>The structure of our class (more precisely structs) will then be, in the general
+case of the transformer:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;GaudiAlg/Transformer.h&quot;</span>
+<span class="c1">// Define BaseClass_t</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;k4FWCore/BaseClass.h&quot;</span>
+
+<span class="k">struct</span><span class="w"> </span><span class="nc">ExampleTransformer</span><span class="w"> </span><span class="k">final</span>
+<span class="w">    </span><span class="o">:</span><span class="w"> </span><span class="n">Gaudi</span><span class="o">::</span><span class="n">Functional</span><span class="o">::</span><span class="n">Transformer</span><span class="o">&lt;</span><span class="n">colltype_out</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">colltype_in</span><span class="o">&amp;</span><span class="p">),</span><span class="w"> </span><span class="n">BaseClass_t</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">  </span><span class="n">ExampleTransformer</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">ISvcLocator</span><span class="o">*</span><span class="w"> </span><span class="n">svcLoc</span><span class="p">);</span>
+<span class="w">  </span><span class="n">colltype_out</span><span class="w"> </span><span class="nf">operator</span><span class="p">()(</span><span class="k">const</span><span class="w"> </span><span class="n">colltype_in</span><span class="o">&amp;</span><span class="w"> </span><span class="n">input</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">override</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>Some key points:</p>
+<ul class="simple">
+<li><p>The magic to make our algorithm work with EDM4hep collections happens by
+including <code class="docutils literal notranslate"><span class="pre">BaseClass.h</span></code> and passing <code class="docutils literal notranslate"><span class="pre">BaseClass_t</span></code> it as one of the template
+arguments to the Gaudi class we are inheriting from.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">operator()</span></code> is const, which means that it can’t modify class members. This is
+intended and helps with multithreading by not having an internal state.</p></li>
+</ul>
+<p>Let’s start with the first template argument. It’s the signature of a function
+that returns one or more outputs and takes as input one or more inputs.
+One possible example would be to have these two lines before the class definition:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">colltype_in</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">edm4hep</span><span class="o">::</span><span class="n">MCParticleCollection</span><span class="p">;</span>
+<span class="k">using</span><span class="w"> </span><span class="n">colltype_out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">edm4hep</span><span class="o">::</span><span class="n">MCParticleCollection</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>and then we have a transformer that will take one <code class="docutils literal notranslate"><span class="pre">MCParticleCollection</span></code> as
+input and return another one. If we have multiple inputs we keep adding
+arguments to the function arguments and if we don’t have any we can leave that
+empty. For the output this is slightly more complicated because if there are
+more than one output we have to return an <code class="docutils literal notranslate"><span class="pre">std::tuple&lt;OutputClass1,</span> <span class="pre">OutputClass2&gt;</span></code>; if there aren’t any outputs we can simply return <code class="docutils literal notranslate"><span class="pre">void</span></code>.</p>
+<p>Then we reach the constructor. We’ll always initialize from the constructor of the
+class we’re inheriting (in this example a <code class="docutils literal notranslate"><span class="pre">Transformer</span></code>) and then we’ll
+initialize a set of <code class="docutils literal notranslate"><span class="pre">KeyValues</span></code>. These <code class="docutils literal notranslate"><span class="pre">KeyValues</span></code> will be how we define the
+names of our inputs and outputs so they can be found by other algorithms, read
+from a file or saved to a file.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="n">ExampleTransformer</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">ISvcLocator</span><span class="o">*</span><span class="w"> </span><span class="n">svcLoc</span><span class="p">)</span>
+<span class="w">      </span><span class="o">:</span><span class="w"> </span><span class="n">Transformer</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">svcLoc</span><span class="p">,</span>
+<span class="w">                    </span><span class="n">KeyValue</span><span class="p">(</span><span class="s">&quot;InputCollection&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;MCParticles&quot;</span><span class="p">),</span>
+<span class="w">                    </span><span class="n">KeyValue</span><span class="p">(</span><span class="s">&quot;OutputCollection&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;NewMCParticles&quot;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="c1">// possibly do something</span>
+<span class="w">                    </span><span class="p">}</span>
+</pre></div>
+</div>
+<p>Here we are defining how we will name our input collection in the steering value
+(<code class="docutils literal notranslate"><span class="pre">InputCollection</span></code>) and giving it a default value. We’re doing the same with the
+output collection. The order is important here: first inputs and then outputs
+and they are ordered. When we have more inputs we just add another line, like
+the one above for the input collection. For outputs, since they are bundled
+together in a <code class="docutils literal notranslate"><span class="pre">std::tuple</span></code> when there are several, we have to enclose the list
+of <code class="docutils literal notranslate"><span class="pre">KeyValue</span></code> with brackets, like</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="n">ExampleMultiTransformer</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">ISvcLocator</span><span class="o">*</span><span class="w"> </span><span class="n">svcLoc</span><span class="p">)</span>
+<span class="w">      </span><span class="o">:</span><span class="w"> </span><span class="n">MultiTransformer</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">svcLoc</span><span class="p">,</span>
+<span class="w">                    </span><span class="n">KeyValue</span><span class="p">(</span><span class="s">&quot;InputCollection&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;MCParticles&quot;</span><span class="p">),</span>
+<span class="w">                    </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">KeyValue</span><span class="p">(</span><span class="s">&quot;OutputCollection1&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;NewMCParticles&quot;</span><span class="p">),</span>
+<span class="w">                    </span><span class="n">KeyValue</span><span class="p">(</span><span class="s">&quot;OutputCollection2&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;SimTrackerHits&quot;</span><span class="p">),</span>
+<span class="w">                    </span><span class="n">KeyValue</span><span class="p">(</span><span class="s">&quot;OutputCollection3&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;UsefulCollection&quot;</span><span class="p">),</span>
+<span class="w">                    </span><span class="p">}</span>
+<span class="w">                    </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="c1">// possibly do something</span>
+<span class="w">                    </span><span class="p">}</span>
+</pre></div>
+</div>
+<p>Then in the <code class="docutils literal notranslate"><span class="pre">operator()</span></code> we can do whatever we want to do with our collections</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="n">colltype_out</span><span class="w"> </span><span class="nf">operator</span><span class="p">()(</span><span class="k">const</span><span class="w"> </span><span class="n">colltype_in</span><span class="o">&amp;</span><span class="w"> </span><span class="n">input</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">coll_out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">edm4hep</span><span class="o">::</span><span class="n">MCParticleCollection</span><span class="p">();</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">particle</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">input</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">auto</span><span class="w"> </span><span class="n">new_particle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">edm4hep</span><span class="o">::</span><span class="n">MutableMCParticle</span><span class="p">();</span>
+<span class="w">      </span><span class="n">new_particle</span><span class="p">.</span><span class="n">setPDG</span><span class="p">(</span><span class="n">particle</span><span class="p">.</span><span class="n">getPDG</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">10</span><span class="p">);</span>
+<span class="w">      </span><span class="n">new_particle</span><span class="p">.</span><span class="n">setGeneratorStatus</span><span class="p">(</span><span class="n">particle</span><span class="p">.</span><span class="n">getGeneratorStatus</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">10</span><span class="p">);</span>
+<span class="w">      </span><span class="n">new_particle</span><span class="p">.</span><span class="n">setSimulatorStatus</span><span class="p">(</span><span class="n">particle</span><span class="p">.</span><span class="n">getSimulatorStatus</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">10</span><span class="p">);</span>
+<span class="w">      </span><span class="n">new_particle</span><span class="p">.</span><span class="n">setCharge</span><span class="p">(</span><span class="n">particle</span><span class="p">.</span><span class="n">getCharge</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">10</span><span class="p">);</span>
+<span class="w">      </span><span class="n">new_particle</span><span class="p">.</span><span class="n">setTime</span><span class="p">(</span><span class="n">particle</span><span class="p">.</span><span class="n">getTime</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">10</span><span class="p">);</span>
+<span class="w">      </span><span class="n">new_particle</span><span class="p">.</span><span class="n">setMass</span><span class="p">(</span><span class="n">particle</span><span class="p">.</span><span class="n">getMass</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">10</span><span class="p">);</span>
+<span class="w">      </span><span class="n">coll_out</span><span class="o">-&gt;</span><span class="n">push_back</span><span class="p">(</span><span class="n">new_particle</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">coll_out</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>When we return several collections we can bundle them in an <code class="docutils literal notranslate"><span class="pre">std::tuple</span></code> like this:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_tuple</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">collection1</span><span class="p">),</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">collection2</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>The complete example for reference can be found in the tests of k4FWCore:
+https://github.com/key4hep/k4FWCore/blob/main/test/k4FWCoreTest/src/components/ExampleFunctionalTransformer.cpp</p>
+</section>
+<section id="the-steering-file">
+<h2>The steering file<a class="headerlink" href="#the-steering-file" title="Link to this heading"></a></h2>
+<p>The steering file is the file where we define which algorithms will run, what
+parameters they will use and how they will do it; what level of logging, if
+using multithreading, etc.</p>
+<p>We start with some imports</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">Gaudi.Configuration</span> <span class="kn">import</span> <span class="n">INFO</span>
+<span class="kn">from</span> <span class="nn">Configurables</span> <span class="kn">import</span> <span class="n">ExampleFunctionalTransformer</span>
+<span class="kn">from</span> <span class="nn">k4FWCore</span> <span class="kn">import</span> <span class="n">ApplicationMgr</span><span class="p">,</span> <span class="n">IOSvc</span>
+</pre></div>
+</div>
+<p>it’s also possible to import everything from <code class="docutils literal notranslate"><span class="pre">Configurables</span></code> but it’s better not
+to so that if we are using IDE or an editor with some kind of analysis it can
+tell us if we are using an undefined variable, for example.</p>
+<p>Then, create <code class="docutils literal notranslate"><span class="pre">IOSvc</span></code> and configure the input:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">io_svc</span> <span class="o">=</span> <span class="n">IOSvc</span><span class="p">()</span>
+
+<span class="n">io_svc</span><span class="o">.</span><span class="n">Input</span> <span class="o">=</span> <span class="s2">&quot;output_k4test_exampledata_producer.root&quot;</span>
+<span class="n">io_svc</span><span class="o">.</span><span class="n">CollectionNames</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;MCParticles&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<p>We select the name of the input file and which collections we’ll make available
+for the rest of the algorithms.</p>
+<p>For the output:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">io_svc</span><span class="o">.</span><span class="n">Output</span> <span class="o">=</span> <span class="s2">&quot;output_k4test_exampledata_transformer.root&quot;</span>
+<span class="c1"># The collections that we don&#39;t drop will also be present in the output file</span>
+<span class="n">io_svc</span><span class="o">.</span><span class="n">outputCommands</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;drop MCParticles&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>we can select which collections we keep in the output file. By default all the collections created during the job will be saved. Check the
+<a class="reference external" href="https://github.com/key4hep/k4FWCore/blob/main/doc/PodioInputOutput.md">relevant
+documentation</a>
+to learn more about <code class="docutils literal notranslate"><span class="pre">IOSvc</span></code>.</p>
+<p>Our algorithm will look like this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">transformer</span> <span class="o">=</span> <span class="n">ExampleFunctionalTransformer</span><span class="p">(</span><span class="s2">&quot;ExampleFunctionalTransformer&quot;</span><span class="p">,</span>
+                                           <span class="n">InputCollection</span><span class="o">=</span><span class="s2">&quot;MCParticles&quot;</span><span class="p">,</span>
+                                           <span class="n">OutputCollection</span><span class="o">=</span><span class="s2">&quot;NewMCParticles&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If we have defined <code class="docutils literal notranslate"><span class="pre">Gaudi::Property</span></code>s for our algorithm it is also possible to
+change them by doing <code class="docutils literal notranslate"><span class="pre">transformer.property</span> <span class="pre">=</span> <span class="pre">value</span></code>; however with the names of
+the collections, if they are provided, they are set when creating the python
+object with our algorithm.</p>
+<p>Finally we define what to run:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ApplicationMgr</span><span class="p">(</span><span class="n">TopAlg</span><span class="o">=</span><span class="p">[</span><span class="n">transformer</span><span class="p">],</span>
+               <span class="n">EvtSel</span><span class="o">=</span><span class="s2">&quot;NONE&quot;</span><span class="p">,</span>
+               <span class="n">EvtMax</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+               <span class="n">ExtSvc</span><span class="o">=</span><span class="p">[],</span>
+               <span class="n">OutputLevel</span><span class="o">=</span><span class="n">INFO</span><span class="p">,</span>
+               <span class="p">)</span>
+</pre></div>
+</div>
+<p>We pass a list of the algorithms in <code class="docutils literal notranslate"><span class="pre">TopAlg</span></code>. In <code class="docutils literal notranslate"><span class="pre">EvtMax</span></code> we set what is the
+maximum number of event that we are processing. Use -1 not to limit it. That
+means if we are processing a file, then read all the events in the file.
+Any extra services can be passed with <code class="docutils literal notranslate"><span class="pre">ExtSvc</span></code>. We set an <code class="docutils literal notranslate"><span class="pre">OutputLevel</span></code> that could be <code class="docutils literal notranslate"><span class="pre">DEBUG</span></code>,
+<code class="docutils literal notranslate"><span class="pre">WARNING</span></code> or <code class="docutils literal notranslate"><span class="pre">INFO</span></code> most of the time.</p>
+</section>
+<section id="initialize-and-finalize">
+<h2>Initialize and finalize<a class="headerlink" href="#initialize-and-finalize" title="Link to this heading"></a></h2>
+<p>There are some occasions where we may want to run some code between the
+constructor and the <code class="docutils literal notranslate"><span class="pre">operator()</span></code>; that is the place for <code class="docutils literal notranslate"><span class="pre">initialize()</span></code>. There is
+also a way of doing something similar after processing with <code class="docutils literal notranslate"><span class="pre">finalize()</span></code>. For that, we
+can add to our classes those functions (we can also add only one of these):</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="n">StatusCode</span><span class="w"> </span><span class="nf">initialize</span><span class="p">()</span><span class="w"> </span><span class="k">override</span><span class="p">;</span>
+<span class="w">  </span><span class="n">StatusCode</span><span class="w"> </span><span class="nf">finalize</span><span class="p">()</span><span class="w"> </span><span class="k">override</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>and then we can implement them.</p>
+<p>Make sure to remember to return the corresponding status code, otherwise
+Gaudi will crash. For example:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">StatusCode</span><span class="w"> </span><span class="nf">MyAlgorithm::initialize</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">// do something</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">StatusCode</span><span class="o">::</span><span class="n">SUCCESS</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="debugging-how-to-use-gdb">
+<h2>Debugging: How to use GDB<a class="headerlink" href="#debugging-how-to-use-gdb" title="Link to this heading"></a></h2>
+<p><a class="reference external" href="https://www.sourceware.org/gdb/">The GNU Project Debugger</a> is supported by
+Gaudi and can be invoked by passing additional <code class="docutils literal notranslate"><span class="pre">--gdb</span></code> parameter to the <code class="docutils literal notranslate"><span class="pre">k4run</span></code>.
+For example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>k4run<span class="w"> </span>../K4TestFWCore/options/createExampleEventData.py<span class="w"> </span>--gdb
+</pre></div>
+</div>
+<p>This will start the GDB and attaches it to the Gaudi steering. After initial
+loading, user can start running of the steering by typing <code class="docutils literal notranslate"><span class="pre">continue</span></code> into the
+GDB console. To interrupt running of the Gaudi steering use <code class="docutils literal notranslate"><span class="pre">CTRL+C</span></code>.</p>
+<p>More details how to run GDB with Gaudi can be found in
+<a class="reference external" href="https://twiki.cern.ch/twiki/bin/view/LHCb/CodeAnalysisTools#Debugging_gaudirun_py_on_Linux_w">LHCb Code Analysis Tools</a> (requires a CERN account to view).</p>
+</section>
+<section id="avoiding-const-in-operator">
+<h2>Avoiding const in <code class="docutils literal notranslate"><span class="pre">operator()</span></code><a class="headerlink" href="#avoiding-const-in-operator" title="Link to this heading"></a></h2>
+<p>There is a way of working around <code class="docutils literal notranslate"><span class="pre">operator()</span></code> being const and that is by adding
+the keyword <code class="docutils literal notranslate"><span class="pre">mutable</span></code> to our data member. This will allow us to change our data
+member inside <code class="docutils literal notranslate"><span class="pre">operator()</span></code> and will cause code that wasn’t compiling because of
+this to compile. Of course, this is not a good idea because unless the member of
+our class is thread-safe, that means that our algorithm is no longer thread-safe
+and running with multiple threads can cause different results. Even worse than
+that, it’s very possible that there are not any errors or crashes but the
+results are simply wrong from having several threads changing a member at the
+same time, for example.</p>
+<hr class="footnotes docutils" />
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id2" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+<p>It’s possible to find algorithms written based on GaudiAlg which is going to be removed from future versions of Gaudi. GaudiAlg was substituted by Gaudi::Algorithm, although the recommended way is to use Gaudi::Functional.</p>
+</aside>
+</aside>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="SpackForDevelopers.html" class="btn btn-neutral float-left" title="Building Key4hep using Spack: For Developers" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="k4fwcore/doc/uniqueIDGen.html" class="btn btn-neutral float-right" title="Seeding algorithm PRNG" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Key4hep.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
