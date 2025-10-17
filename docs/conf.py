@@ -5,7 +5,7 @@
 import os
 
 IN_GITHUB_ACTIONS_CI = os.environ.get("GITHUB_ACTIONS", False)
-
+GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN", None)
 
 project = "Key4hep"
 copyright = "2025, Key4hep"
@@ -47,10 +47,15 @@ if IN_GITHUB_ACTIONS_CI:
     linkcheck_ignore.extend(
         [
             r"https://opensource.org",  # cloudflare blocks requests from github actions
-            r"https://github\.com/[^/]+/[^/]+/commits/.*",  # github does quite some rate limiting
         ]
     )
 
+if GITHUB_TOKEN:
+    linkcheck_request_headers = {
+        "https://github.com": {
+            "Authorization": f"token {GITHUB_TOKEN}",
+        }
+    }
 
 myst_heading_anchors = 4
 
