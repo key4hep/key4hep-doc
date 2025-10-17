@@ -19,6 +19,7 @@ here.
 
     k4marlinwrapper/doc/starterkit/k4MarlinWrapperCLIC/Readme.md
     key4hep-tutorials/gaudi_ild_reco/README.md
+    key4hep-tutorials/gaudi_alg_kinfit/README.md
     k4marlinwrapper/doc/starterkit/k4MarlinWrapperCLIC/howtoMultithread.md
     k4marlinwrapper/doc/starterkit/k4MarlinWrapperCLIC/CEDViaWrapper.md
     k4simdelphes/doc/starterkit/k4SimDelphes/Readme.md

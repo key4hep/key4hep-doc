@@ -58,6 +58,10 @@ if GITHUB_TOKEN:
         }
     }
 
+linkcheck_anchors_ignore_for_url = [
+    r"https://github\.com/.*?/.*?/blob/[a-z0-9]+/.*\..*"
+]
+
 myst_heading_anchors = 4
 
 myst_enable_extensions = ["colon_fence", "html_image"]
