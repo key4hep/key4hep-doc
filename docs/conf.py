@@ -15,7 +15,8 @@ author = "Key4hep"
 exclude_patterns = [
     "_build",
     "Thumbs.db",
-    ".DS_Store" "archive",
+    ".DS_Store",
+    "archive",
     "README.md",
 ]
 
