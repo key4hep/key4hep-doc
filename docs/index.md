@@ -27,7 +27,7 @@ New to Key4hep? Start here:
 - **[Getting Key4hep](getting_started/setup.md)** - Learn how and where Key4hep is available
 - **[Getting Help](getting_started/help.md)** - Find support and community resources
 
-Want to contribute? Look at our **[Contribution Guide](getting_started/CONTRIBUTING.md)**.
+Want to contribute? Look at our **[Contribution Guide](getting_started/CONTRIBUTING.md)**. The majority of Key4hep related repositories is hosted in the [key4hep github organization](https://github.com/key4hep).
 
 ## Main Documentation Sections
 - **[How-to Guides](how-tos/README.md)** - Step-by-step instructions for common tasks
