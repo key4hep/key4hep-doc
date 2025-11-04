@@ -24,7 +24,7 @@
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="How to run multithreading with k4MarlinWrapper (Gaudi)" href="../../k4marlinwrapper/doc/starterkit/k4MarlinWrapperCLIC/howtoMultithread.html" />
+    <link rel="next" title="Replacing an existing Marlin processor with a Gaudi algorithm" href="../gaudi_alg_kinfit/README.html" />
     <link rel="prev" title="Using the Key4hep-Stack for CLIC Simulation and Reconstruction" href="../../k4marlinwrapper/doc/starterkit/k4MarlinWrapperCLIC/Readme.html" /> 
 </head>
 
@@ -60,6 +60,7 @@
 <li class="toctree-l1 current"><a class="reference internal" href="../../README.html">Key4hep Tutorials</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../../k4marlinwrapper/doc/starterkit/k4MarlinWrapperCLIC/Readme.html">Using the Key4hep-Stack for CLIC Simulation and Reconstruction</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Running ILD simulation and reconstruction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gaudi_alg_kinfit/README.html">Replacing an existing Marlin processor with a Gaudi algorithm</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../k4marlinwrapper/doc/starterkit/k4MarlinWrapperCLIC/howtoMultithread.html">How to run multithreading with k4MarlinWrapper (Gaudi)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../k4marlinwrapper/doc/starterkit/k4MarlinWrapperCLIC/CEDViaWrapper.html">Running an Event Display with EDM4hep or LCIO input</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../k4simdelphes/doc/starterkit/k4SimDelphes/Readme.html">Running Delphes fast simulation with EDM4hep output</a></li>
@@ -327,20 +328,10 @@ resp. The corresponding filename constants values in <code class="docutils liter
 <h3>Adapting the options file for EDM4hep<a class="headerlink" href="#adapting-the-options-file-for-edm4hep" title="Link to this heading"></a></h3>
 <p>It is necessary to adapt the Gaudi options file a bit further:</p>
 <ul class="simple">
-<li><p>Replace the <code class="docutils literal notranslate"><span class="pre">LcioEvent</span></code> algorithm with the <code class="docutils literal notranslate"><span class="pre">PodioInput</span></code> algorithm</p>
+<li><p>Remove the <code class="docutils literal notranslate"><span class="pre">LcioEvent</span></code> algorithm and create the <code class="docutils literal notranslate"><span class="pre">IOSvc</span></code> service</p>
 <ul>
-<li><p>Make sure to replace the <code class="docutils literal notranslate"><span class="pre">Files</span></code> option with the <code class="docutils literal notranslate"><span class="pre">collections</span></code> option and to
-populate this option with the list of collections you want to read (see
-below)</p></li>
-</ul>
-</li>
-<li><p>Replace the <code class="docutils literal notranslate"><span class="pre">EventDataSvc</span></code> with the <code class="docutils literal notranslate"><span class="pre">k4DataSvc</span></code> (remember to instantiate it
-with <code class="docutils literal notranslate"><span class="pre">&quot;EventDataSvc&quot;</span></code> as name)</p></li>
-<li><p>Add a <code class="docutils literal notranslate"><span class="pre">PodioOutput</span></code> algorithm to write EDM4hep output (don’t forget to add it
-to the <code class="docutils literal notranslate"><span class="pre">algList</span></code> at the very end)</p>
-<ul>
-<li><p>(For the sake of this exercise) configure this to only write the
-<code class="docutils literal notranslate"><span class="pre">MCParticlesSkimmed</span></code>, <code class="docutils literal notranslate"><span class="pre">PandoraPFOs</span></code> and the <code class="docutils literal notranslate"><span class="pre">RecoMCTruthLink</span></code> collections</p></li>
+<li><p>Populate the <code class="docutils literal notranslate"><span class="pre">CollectionNames</span></code> property of <code class="docutils literal notranslate"><span class="pre">IOSvc</span></code> with the list of collections you want to read (see below).</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">Output</span></code> property of <code class="docutils literal notranslate"><span class="pre">IOSvc</span></code> to specify to which file write the EDM4hep output. (For the sake of this exercise) configure the <code class="docutils literal notranslate"><span class="pre">outputCommands</span></code> property to only write the <code class="docutils literal notranslate"><span class="pre">MCParticlesSkimmed</span></code>, <code class="docutils literal notranslate"><span class="pre">PandoraPFOs</span></code> and the <code class="docutils literal notranslate"><span class="pre">RecoMCTruthLink</span></code> collections.</p></li>
 </ul>
 </li>
 <li><p>Attach the necessary in-memory on-the-fly converters between EDM4hep and LCIO
@@ -355,29 +346,38 @@ before the <code class="docutils literal notranslate"><span class="pre">PodioOut
 Also see below.</p></li>
 </ul>
 </li>
+<li><p>Near the end of the file replace the <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">Configurables</span> <span class="pre">import</span> <span class="pre">ApplicationMgr</span></code> with <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">k4FWCore</span> <span class="pre">import</span> <span class="pre">ApplicationMgr</span></code>.</p></li>
 </ul>
 <p><strong>For all of these steps make sure that you <code class="docutils literal notranslate"><span class="pre">import</span></code> all the necessary tools and
-algorithms from <code class="docutils literal notranslate"><span class="pre">Configurables</span></code>!</strong></p>
+algorithms from <code class="docutils literal notranslate"><span class="pre">Configurables</span></code>! Both <code class="docutils literal notranslate"><span class="pre">IOSvc</span></code> and <code class="docutils literal notranslate"><span class="pre">ApplicationMgr</span></code> services must be imported from <code class="docutils literal notranslate"><span class="pre">k4FWCore</span></code>.</strong></p>
 <p>The top of your file should now look something like this</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">Configurables</span> <span class="kn">import</span> <span class="p">(</span>
-    <span class="n">PodioInput</span><span class="p">,</span> <span class="n">PodioOutput</span><span class="p">,</span> <span class="n">k4DataSvc</span><span class="p">,</span> <span class="n">MarlinProcessorWrapper</span><span class="p">,</span>
+    <span class="n">MarlinProcessorWrapper</span><span class="p">,</span>
     <span class="n">EDM4hep2LcioTool</span><span class="p">,</span> <span class="n">Lcio2EDM4hepTool</span>
     <span class="p">)</span>
 <span class="kn">from</span> <span class="nn">k4MarlinWrapper.parseConstants</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">k4FWCore</span> <span class="kn">import</span> <span class="n">IOSvc</span>
+
 <span class="n">algList</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="n">evtsvc</span> <span class="o">=</span> <span class="n">k4DataSvc</span><span class="p">(</span><span class="s2">&quot;EventDataSvc&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>while the configuration for the input reader and the <code class="docutils literal notranslate"><span class="pre">EDM4hep2LcioTool</span></code> should
-look like this</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">read</span> <span class="o">=</span> <span class="n">PodioInput</span><span class="p">()</span>
-<span class="n">read</span><span class="o">.</span><span class="n">OutputLevel</span> <span class="o">=</span> <span class="n">INFO</span>
-<span class="n">read</span><span class="o">.</span><span class="n">collections</span> <span class="o">=</span> <span class="p">[</span>
+
+<span class="n">io_svc</span> <span class="o">=</span> <span class="n">IOSvc</span><span class="p">()</span>
+<span class="n">io_svc</span><span class="o">.</span><span class="n">OutputLevel</span> <span class="o">=</span> <span class="n">INFO</span>
+<span class="n">io_svc</span><span class="o">.</span><span class="n">CollectionNames</span> <span class="o">=</span> <span class="p">[</span>
     <span class="c1"># ... list of collection names</span>
 <span class="p">]</span>
-<span class="n">algList</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">read</span><span class="p">)</span>
 
-<span class="n">edm4hep2LcioConv</span> <span class="o">=</span> <span class="n">EDM4hep2LcioTool</span><span class="p">()</span>
+<span class="n">io_svc</span><span class="o">.</span><span class="n">Output</span> <span class="o">=</span> <span class="s2">&quot;zh_mumu_reco.edm4hep.root&quot;</span>
+<span class="n">io_svc</span><span class="o">.</span><span class="n">outputCommands</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;drop *&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;keep MCParticlesSkimmed&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;keep PandoraPFOs&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;keep RecoMCTruthLink&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<p>while the configuration for the <code class="docutils literal notranslate"><span class="pre">EDM4hep2LcioTool</span></code> should
+look like this</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">edm4hep2LcioConv</span> <span class="o">=</span> <span class="n">EDM4hep2LcioTool</span><span class="p">()</span>
 <span class="n">edm4hep2LcioConv</span><span class="o">.</span><span class="n">collNameMapping</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;MCParticles&quot;</span><span class="p">:</span> <span class="s2">&quot;MCParticle&quot;</span>
 <span class="p">}</span>
@@ -396,7 +396,7 @@ list of collection names<div class="sd-summary-down docutils">
 </summary><div class="sd-summary-content sd-card-body docutils">
 <p class="sd-card-text">The list of collections that is populated by standard configuration of ILD for
 simulation looks like this. You can simply copy this into the options file</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">read</span><span class="o">.</span><span class="n">collections</span> <span class="o">=</span> <span class="p">[</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">io_svc</span><span class="o">.</span><span class="n">CollectionNames</span> <span class="o">=</span> <span class="p">[</span>
      <span class="s2">&quot;BeamCalCollection&quot;</span><span class="p">,</span>
      <span class="s2">&quot;BeamCalCollectionContributions&quot;</span><span class="p">,</span>
      <span class="s2">&quot;ECalBarrelScHitsEven&quot;</span><span class="p">,</span>
@@ -450,8 +450,7 @@ simulation looks like this. You can simply copy this into the options file</p>
 </pre></div>
 </div>
 </div>
-</details><p>Finally, the <code class="docutils literal notranslate"><span class="pre">PodioOutput</span></code> algorithm and the <code class="docutils literal notranslate"><span class="pre">Lcio2EDM4hepTool</span></code> can be
-configuration should look something like this</p>
+</details><p>Finally, the <code class="docutils literal notranslate"><span class="pre">Lcio2EDM4hepTool</span></code> configuration and <code class="docutils literal notranslate"><span class="pre">ApplicationMgr</span></code> should look something like this</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ... MyPfoAnalysis configuration unchanged</span>
 
 <span class="n">lcio2edm4hepConv</span> <span class="o">=</span> <span class="n">Lcio2EDM4hepTool</span><span class="p">()</span>
@@ -460,27 +459,24 @@ configuration should look something like this</p>
 <span class="p">}</span>
 <span class="n">MyPfoAnalysis</span><span class="o">.</span><span class="n">Lcio2EDM4hepTool</span> <span class="o">=</span> <span class="n">lcio2edm4hepConv</span>
 
-<span class="n">edm4hepOutput</span> <span class="o">=</span> <span class="n">PodioOutput</span><span class="p">()</span>
-<span class="n">edm4hepOutput</span><span class="o">.</span><span class="n">filename</span> <span class="o">=</span> <span class="s2">&quot;zh_mumu_reco.edm4hep.root&quot;</span>
-<span class="n">edm4hepOutput</span><span class="o">.</span><span class="n">outputCommands</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s2">&quot;drop *&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;keep MCParticlesSkimmed&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;keep PandoraPFOs&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;keep RecoMCTruthLink&quot;</span><span class="p">,</span>
-<span class="p">]</span>
+<span class="c1"># algList unchanged</span>
 
-<span class="c1"># ... the complete algList</span>
-<span class="n">algList</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">edm4hepOutput</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">k4FWCore</span> <span class="kn">import</span> <span class="n">ApplicationMgr</span>
 
-<span class="c1"># ... ApplicationMgr config</span>
+<span class="n">ApplicationMgr</span><span class="p">(</span>
+    <span class="n">TopAlg</span><span class="o">=</span><span class="n">algList</span><span class="p">,</span>
+    <span class="n">EvtSel</span><span class="o">=</span><span class="s2">&quot;NONE&quot;</span><span class="p">,</span>
+    <span class="n">EvtMax</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+    <span class="n">OutputLevel</span><span class="o">=</span><span class="n">INFO</span><span class="p">,</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </section>
 <section id="running-the-reconstruction-with-k4run">
 <h3>Running the reconstruction with <code class="docutils literal notranslate"><span class="pre">k4run</span></code><a class="headerlink" href="#running-the-reconstruction-with-k4run" title="Link to this heading"></a></h3>
-<p>After all these adaptions it is now possible to run the full reconstruction
+<p>After all these adaptations it is now possible to run the full reconstruction
 chain on the previously simulated input with <code class="docutils literal notranslate"><span class="pre">k4run</span></code></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>k4run<span class="w"> </span>MarlinStdReco.py<span class="w"> </span>--num-events<span class="o">=</span><span class="m">3</span><span class="w"> </span>--EventDataSvc.input<span class="o">=</span>zh_mumu_SIM.edm4hep.root
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>k4run<span class="w"> </span>MarlinStdReco.py<span class="w"> </span>--num-events<span class="o">=</span><span class="m">3</span><span class="w"> </span>--IOSvc.Input<span class="o">=</span>zh_mumu_SIM.edm4hep.root
 </pre></div>
 </div>
 <p>Here we are again using the command line to specify the input file, we could
@@ -489,7 +485,7 @@ Note also that we explicitly pass in the number of events, this is a workaround
 for <a class="reference external" href="https://github.com/key4hep/k4MarlinWrapper/issues/94">this issue</a>.</p>
 <p>You should now have a <code class="docutils literal notranslate"><span class="pre">zh_mumu_reco.edm4hep.root</span></code> file that contains the
 complete events in all their glory. For a more practical output you can tweak
-the <code class="docutils literal notranslate"><span class="pre">edm4hepOutput.outputCommands</span></code> option in order to keep only “interesting”
+the <code class="docutils literal notranslate"><span class="pre">io_svc.outputCommands</span></code> option in order to keep only “interesting”
 collections. Also note that the REC and DST LCIO output files are still
 produced. Can you reproduce these data tiers for EDM4hep?</p>
 </section>
@@ -501,7 +497,7 @@ produced. Can you reproduce these data tiers for EDM4hep?</p>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="../../k4marlinwrapper/doc/starterkit/k4MarlinWrapperCLIC/Readme.html" class="btn btn-neutral float-left" title="Using the Key4hep-Stack for CLIC Simulation and Reconstruction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="../../k4marlinwrapper/doc/starterkit/k4MarlinWrapperCLIC/howtoMultithread.html" class="btn btn-neutral float-right" title="How to run multithreading with k4MarlinWrapper (Gaudi)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../gaudi_alg_kinfit/README.html" class="btn btn-neutral float-right" title="Replacing an existing Marlin processor with a Gaudi algorithm" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
