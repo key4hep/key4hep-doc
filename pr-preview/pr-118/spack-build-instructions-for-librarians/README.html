@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Building Key4hep: For Librarians &mdash; Key4hep  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../_static/copybutton.js?v=f281be69"></script>
+        <script src="../_static/design-tabs.js?v=36754332"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Setting up Spack" href="spack-setup.html" />
+    <link rel="prev" title="Seeding algorithm PRNG" href="../developing-key4hep-software/k4fwcore/doc/uniqueIDGen.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Key4hep
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/help.html">Getting help</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/setup.html">Getting key4hep</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/CONTRIBUTING.html">Contributing</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../how-tos/README.html">Key4hep How-Tos and Instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/README.html">Key4hep Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developing-key4hep-software/README.html">Developing Key4hep</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Building Key4hep: For Librarians</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="spack-setup.html">Setting up Spack</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../talks-and-presentations/README.html">Talks and Presentations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../call-for-logos/README.html">Call for logos</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">External links</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://cern.ch/fccsw">FCC software</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://twiki.cern.ch/twiki/bin/view/CLIC/CLICSoftwareComputing">CLIC software</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://ilcsoft.desy.de/portal">ILC software</a></li>
+<li class="toctree-l1"><a class="reference external" href="http://cepcsoft.ihep.ac.cn/">CEPC software</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://mcd-wiki.web.cern.ch/software/">Muon Collider software</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Key4hep</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Building Key4hep: For Librarians</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/spack-build-instructions-for-librarians/README.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="building-key4hep-for-librarians">
+<h1>Building Key4hep: For Librarians<a class="headerlink" href="#building-key4hep-for-librarians" title="Link to this heading"></a></h1>
+<p>Key4hep comprises a fairly large number of software and depends on even more externals, so some tooling is needed to efficiently build the whole software stack. The <a class="reference external" href="https://spack.io">spack</a> package manager can be used to build scientific software at scale, and is part of the Key4hep software R&amp;D program.</p>
+<p>A spack install of Key4hep is regularly deployed to <code class="docutils literal notranslate"><span class="pre">/cvmfs/sw.hsf.org/</span></code>, and can be used on lxplus/centos7 just by sourcing the following setup script:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>/cvmfs/sw.hsf.org/key4hep/setup.sh
+</pre></div>
+</div>
+<p>In this page, the workflow to create this installation is documented.</p>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="spack-setup.html">Setting up Spack</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="spack-setup.html#downloading-a-spack-instance">Downloading a spack instance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spack-setup.html#using-spack-environments">Using Spack Environments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spack-setup.html#using-the-key4hep-release-user-environment">Using the key4hep-release-user environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spack-setup.html#configuring-spack">Configuring Spack</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="spack-setup.html#installing-spack">Installing Spack</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spack-setup.html#installing-the-key4hep-package-recipes">Installing the key4hep package recipes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="spack-setup.html#configuring-packages-yaml">Configuring <code class="docutils literal notranslate"><span class="pre">packages.yaml</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="spack-setup.html#configuring-upstreams-yaml">Configuring <code class="docutils literal notranslate"><span class="pre">upstreams.yaml</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="spack-setup.html#setting-up-additional-compilers">Setting up additional compilers</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../developing-key4hep-software/k4fwcore/doc/uniqueIDGen.html" class="btn btn-neutral float-left" title="Seeding algorithm PRNG" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="spack-setup.html" class="btn btn-neutral float-right" title="Setting up Spack" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Key4hep.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
