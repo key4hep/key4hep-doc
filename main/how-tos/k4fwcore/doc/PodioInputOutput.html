@@ -275,7 +275,7 @@ CLI</label><div class="sd-tab-content docutils">
 </div>
 </div>
 </div>
-<p>During processing, at the end of each event from the Gaudi event loop the <code class="docutils literal notranslate"><span class="pre">IOSvc</span></code> will write a frame with the collection present in TES. By default all the collections will be written. The <code class="docutils literal notranslate"><span class="pre">outputCommands</span></code> property of <code class="docutils literal notranslate"><span class="pre">IOSvc</span></code> can be used to specify commands to select which collections should be written. For example, the following commands will skip writing all the collections except for the collections named <code class="docutils literal notranslate"><span class="pre">MCParticles1</span></code>, <code class="docutils literal notranslate"><span class="pre">MCParticles2</span></code> and <code class="docutils literal notranslate"><span class="pre">SimTrackerHits</span></code>:</p>
+<p>During processing, at the end of each event from the Gaudi event loop the <code class="docutils literal notranslate"><span class="pre">IOSvc</span></code> will write a frame with the collections present in TES. By default all the collections will be written. The <code class="docutils literal notranslate"><span class="pre">outputCommands</span></code> property of <code class="docutils literal notranslate"><span class="pre">IOSvc</span></code> can be used to specify commands to select which collections should be written. For example, the following commands will skip writing all the collections except for the collections named <code class="docutils literal notranslate"><span class="pre">MCParticles1</span></code>, <code class="docutils literal notranslate"><span class="pre">MCParticles2</span></code> and <code class="docutils literal notranslate"><span class="pre">SimTrackerHits</span></code>:</p>
 <div class="sd-tab-set docutils">
 <input checked="checked" id="sd-tab-item-12" name="sd-tab-set-6" type="radio">
 </input><label class="sd-tab-label" for="sd-tab-item-12">
@@ -300,6 +300,17 @@ CLI</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
+</div>
+<p>It is also possible to specify entire datatypes for keeping or dropping via the <code class="docutils literal notranslate"><span class="pre">type</span></code> sub-command, e.g. to keep everything but any collection that is of type <code class="docutils literal notranslate"><span class="pre">edm4hep::SimTrackerHitCollection</span></code> one would do:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">io_svc</span><span class="o">.</span><span class="n">outputCommands</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;drop type edm4hep::SimTrackerHitCollection&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<p>The type name here is matched against the type obtained with <code class="docutils literal notranslate"><span class="pre">podio::CollectionBase::getTypeName()</span></code>, i.e. <em>Collection</em> has to be included. Only exact matches are considered for the application of the command.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The commands are processed in order so the last relevant <em>keep</em> or <em>drop</em> for any given collection will decide.</p>
 </div>
 </section>
 </section>
