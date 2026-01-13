@@ -62,7 +62,7 @@ fi
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "$SCRIPT_DIR/utilities.sh"
 
-TOP_LEVEL_FILES=($(grep "fetch_for_file" "$SCRIPT_DIR/fetch_external_sources.sh" | sed 's/fetch_for_file //' | tr -d ' '))
+TOP_LEVEL_FILES=($(grep "fetch_for_file " "$SCRIPT_DIR/fetch_external_sources.sh" | sed 's/fetch_for_file //' | tr -d ' '))
 
 if [ -z "$PR_FILES" ]; then
     echo "No PR files to process"
