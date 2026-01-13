@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Script that tries to identify dependent PRs from the text of the body by
+# Script that tries to identify external PRs from the text of the body by
 # "parsing" it for the phrase 'include PR for preview:'
 #
 # For now we only allow for one such PR
@@ -12,6 +12,9 @@ if [ -z "$PR_NUMBER" ]; then
     exit 1
 fi
 
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "$SCRIPT_DIR/utilities.sh"
+
 # Fetch PR body using GitHub CLI
 PR_BODY=$(gh pr view "$PR_NUMBER" --json body --jq '.body')
 if [ $? -ne 0 ]; then
@@ -20,48 +23,44 @@ if [ $? -ne 0 ]; then
 fi
 
 # Look for patterns like "org/repo#123" or "https://github.com/org/repo/pull/123"
-DEPENDENT_PR_LINE=$(echo "$PR_BODY" | grep "include PR for preview:")
-if [ -n "$DEPENDENT_PR_LINE" ]; then
+EXTERNAL_PR_LINE=$(echo "$PR_BODY" | grep "include PR for preview:")
+if [ -n "$EXTERNAL_PR_LINE" ]; then
     # Try to match org/repo#pr-number format
-    REPO_PR=$(echo "$DEPENDENT_PR_LINE" | grep -oE '[a-zA-Z0-9_.-]+/[a-zA-Z0-9_.-]+#[0-9]+' | head -1)
+    REPO_PR=$(echo "$EXTERNAL_PR_LINE" | grep -oE '[a-zA-Z0-9_.-]+/[a-zA-Z0-9_.-]+#[0-9]+' | head -1)
 
     if [ -n "$REPO_PR" ]; then
         # Convert org/repo#123 format to full GitHub URL
         REPO_NAME=$(echo "$REPO_PR" | cut -d'#' -f1)
-        DEPENDENT_PR=$(echo "$REPO_PR" | cut -d'#' -f2)
-        GITHUB_URL="https://github.com/$REPO_NAME/pull/$DEPENDENT_PR"
+        EXTERNAL_PR=$(echo "$REPO_PR" | cut -d'#' -f2)
+        GITHUB_URL="https://github.com/$REPO_NAME/pull/$EXTERNAL_PR"
     else
-        # Try to match full GitHub URL format
-        GITHUB_URL=$(echo "$DEPENDENT_PR_LINE" | grep -oE 'https://github\.com/[a-zA-Z0-9_.-]+/[a-zA-Z0-9_.-]+/pull/[0-9]+' | head -1)
+        GITHUB_URL=$(echo "$EXTERNAL_PR_LINE" | grep -oE 'https://github\.com/[a-zA-Z0-9_.-]+/[a-zA-Z0-9_.-]+/pull/[0-9]+' | head -1)
     fi
 
     if [ -n "$GITHUB_URL" ]; then
-        echo "Found dependent PR: $GITHUB_URL"
+        echo "Found external PR: $GITHUB_URL"
 
-        DEPENDENT_PR_INFO=$(gh pr view "$GITHUB_URL" --json headRepositoryOwner,headRefName,files --jq '{repo: .headRepositoryOwner.login, branch: .headRefName, files: [.files[].path]}')
+        EXTERNAL_PR_INFO=$(gh pr view "$GITHUB_URL" --json headRepositoryOwner,headRefName,files --jq '{repo: .headRepositoryOwner.login, branch: .headRefName, files: [.files[].path]}')
         if [ $? -ne 0 ]; then
-            echo "Error: Failed to fetch information for dependent PR $GITHUB_URL" >&2
+            echo "Error: Failed to fetch information for external PR $GITHUB_URL" >&2
             exit 1
         fi
 
-        PR_FORK=$(echo "$DEPENDENT_PR_INFO" | jq -r '.repo')
-        PR_BRANCH=$(echo "$DEPENDENT_PR_INFO" | jq -r '.branch')
-        PR_FILES=$(echo "$DEPENDENT_PR_INFO" | jq -r '.files[]')
+        PR_FORK=$(echo "$EXTERNAL_PR_INFO" | jq -r '.repo')
+        PR_BRANCH=$(echo "$EXTERNAL_PR_INFO" | jq -r '.branch')
+        PR_FILES=$(echo "$EXTERNAL_PR_INFO" | jq -r '.files[]')
         echo "Fork/Repository: $PR_FORK"
         echo "Branch: $PR_BRANCH"
         echo "Files: $PR_FILES"
     else
-        echo "Error: No valid dependent PR format found: '${DEPENDENT_PR_LINE}'"
+        echo "Error: No valid external PR format found: '${EXTERNAL_PR_LINE}'"
         exit 1
     fi
 else
-    echo "No dependent PR found"
+    echo "No external PR found"
 fi
 
-# Source utilities to use try_fetch function
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-source "$SCRIPT_DIR/utilities.sh"
-
+# Get the top level md files from the "source of truth"
 TOP_LEVEL_FILES=($(grep "fetch_for_file " "$SCRIPT_DIR/fetch_external_sources.sh" | sed 's/fetch_for_file //' | tr -d ' '))
 
 if [ -z "$PR_FILES" ]; then
@@ -69,7 +68,7 @@ if [ -z "$PR_FILES" ]; then
     exit 0
 fi
 
-echo "Processing dependent PR files..."
+echo "Processing external PR files..."
 for pr_file in $PR_FILES; do
     echo "Processing file: $pr_file"
 
