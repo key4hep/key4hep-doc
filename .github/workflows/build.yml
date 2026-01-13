@@ -16,6 +16,10 @@ on:
         type: boolean
         required: false
         default: true
+      pr-number:
+        description: The PR number for identifying dependent PRs
+        type: string
+        required: false
 
 jobs:
   build:
@@ -34,6 +38,12 @@ jobs:
       run: |
           pip install --upgrade pip
           pip install -r requirements.txt
+    - name: Identify dependent PRs
+      if: ${{ inputs.pr-number != '' }}
+      env:
+        GH_TOKEN: ${{ github.token }}
+      run: |
+        bash .github/scripts/identify_dependent_prs.sh ${{ inputs.pr-number }}
     - name: Fetch external sources
       run: |
         bash .github/scripts/fetch_external_sources.sh

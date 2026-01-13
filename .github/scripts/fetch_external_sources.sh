@@ -45,6 +45,9 @@ try_fetch() {
     done
 }
 
+# Default GitHub organizations to try when fetching external files
+GITHUB_ORGS=${GITHUB_ORGS:-"key4hep HEP-FCC AIDASoft iLCSoft"}
+
 # process one markdown file with content that potentially needs fetching from an
 # external repository
 fetch_for_file() {
@@ -70,7 +73,7 @@ fetch_for_file() {
       mkdir -p ${outputdir}  # make the directory for the output
 
       # Try a few github organizations
-      for org in key4hep HEP-FCC AIDASoft iLCSoft; do
+      for org in ${GITHUB_ORGS}; do
         echo "Trying to fetch from github organization: '${org}'"
         if try_fetch ${org} ${line} ${file_dir}; then
           echo "Fetched successfully from organization '${org}'"
