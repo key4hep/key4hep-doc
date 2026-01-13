@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Default branches to try when fetching files
-FETCH_BRANCHES=${DEFAULT_BRANCHES:-"main master"}
+FETCH_BRANCHES=${FETCH_BRANCHES:-"main master"}
 
 # Try to fetch a file from a github repository
 try_fetch() {
