@@ -38,7 +38,7 @@ if [ -n "$DEPENDENT_PR_LINE" ]; then
     if [ -n "$GITHUB_URL" ]; then
         echo "Found dependent PR: $GITHUB_URL"
 
-        DEPENDENT_PR_INFO=$(gh pr view "$GITHUB_URL" --json headRepository,headRefName --jq '{repo: .headRepository.nameWithOwner, branch: .headRefName}')
+        DEPENDENT_PR_INFO=$(gh pr view "$GITHUB_URL" --json headRepositoryOwner,headRefName --jq '{repo: .headRepositoryOwner.login, branch: .headRefName}')
         if [ $? -ne 0 ]; then
             echo "Error: Failed to fetch information for dependent PR $GITHUB_URL" >&2
             exit 1
