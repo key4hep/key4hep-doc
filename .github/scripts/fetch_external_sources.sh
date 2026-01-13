@@ -7,6 +7,8 @@
 # Initialize force option
 FORCE=false
 
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "$SCRIPT_DIR/utilities.sh"
 
 # Display usage message
 display_usage() {
@@ -32,11 +34,6 @@ for arg in "$@"; do
       ;;
   esac
 done
-
-# NOTE: Fetch this late so that setting the customizations for the functions can
-# take place
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-source "$SCRIPT_DIR/utilities.sh"
 
 # process one markdown file with content that potentially needs fetching from an
 # external repository
