@@ -33,6 +33,19 @@ Check the links validity with:
 sphinx-build -b linkcheck docs linkcheck
 ```
 
+**Note, that we also build a preview of the page when you open a PR, so building locally might not be necessary.**
+
+## Including changes from an external PR
+
+In some cases the changes to the documentation happen in a different repository
+(as we include external resources here). It's possible to make the pipeline that
+builds the PR previews aware of this by using the phrase `include PR for
+preview: <reference to the PR>` in the body of the pull request. **Currently
+only one such external PR is supported.** Accepted formats for the PR reference are
+
+- `<github-org>/<repo>#<pr-number>`
+- url to the PR, i.e. `https://github.com/<github-org>/<repo>/pull/<pr-number>`
+
 ## Deploying to github pages
 
 The deployment to github pages happens via the `gh-pages` branch. On this branch
