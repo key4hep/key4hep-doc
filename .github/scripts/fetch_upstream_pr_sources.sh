@@ -67,34 +67,37 @@ source "$SCRIPT_DIR/utilities.sh"
 TOP_LEVEL_FILES=($(grep "fetch_for_file" "$SCRIPT_DIR/fetch_external_sources.sh" | sed 's/fetch_for_file //' | tr -d ' '))
 
 # Try to fetch all of the files and place them where they should go
-if [ -n "$PR_FILES" ]; then
-    echo "Processing dependent PR files..."
-
-    for pr_file in $PR_FILES; do
-        echo "Processing file: $pr_file"
-
-        # Find which top-level file this PR file belongs to by checking if any top-level file references it
-        for top_file in "${TOP_LEVEL_FILES[@]}"; do
-            # Extract the filename with repository name from the top_file content
-            referenced_file=$(grep "$pr_file" "$top_file" | head -1 | awk '{print $1}')
-            if [ -n "$referenced_file" ]; then
-                file_dir=$(dirname $(realpath "$top_file"))
-                echo "Found reference to $referenced_file in $top_file"
-
-                # Create output directory
-                output_file="$file_dir/$referenced_file"
-                output_dir=$(dirname "$output_file")
-                mkdir -p "$output_dir"
-
-                # Try to fetch the file using the referenced filename (which includes repo name)
-                if try_fetch "$FORK_REPO" "$referenced_file" "$file_dir"; then
-                    echo "Successfully fetched $referenced_file from $FORK_REPO"
-                else
-                    echo "Warning: Could not fetch $referenced_file from $FORK_REPO"
-                    exit 1
-                fi
-                break
-            fi
-        done
-    done
+if [ -z "$PR_FILES" ]; then
+    echo "No PR files to process"
+    exit 0
 fi
+
+echo "Processing dependent PR files..."
+
+for pr_file in $PR_FILES; do
+    echo "Processing file: $pr_file"
+
+    # Find which top-level file this PR file belongs to by checking if any top-level file references it
+    for top_file in "${TOP_LEVEL_FILES[@]}"; do
+        # Extract the filename with repository name from the top_file content
+        referenced_file=$(grep "$pr_file" "$top_file" | head -1 | awk '{print $1}')
+        if [ -n "$referenced_file" ]; then
+            file_dir=$(dirname $(realpath "$top_file"))
+            echo "Found reference to $referenced_file in $top_file"
+
+            # Create output directory
+            output_file="$file_dir/$referenced_file"
+            output_dir=$(dirname "$output_file")
+            mkdir -p "$output_dir"
+
+            # Try to fetch the file using the referenced filename (which includes repo name)
+            if try_fetch "$FORK_REPO" "$referenced_file" "$file_dir"; then
+                echo "Successfully fetched $referenced_file from $FORK_REPO"
+            else
+                echo "Warning: Could not fetch $referenced_file from $FORK_REPO"
+                exit 1
+            fi
+            break
+        fi
+    done
+done
