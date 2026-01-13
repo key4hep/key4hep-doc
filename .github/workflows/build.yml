@@ -38,12 +38,12 @@ jobs:
       run: |
           pip install --upgrade pip
           pip install -r requirements.txt
-    - name: Identify dependent PRs
+    - name: Fetch external sources from upstream PR
       if: ${{ inputs.pr-number != '' }}
       env:
         GH_TOKEN: ${{ github.token }}
       run: |
-        bash .github/scripts/identify_dependent_prs.sh ${{ inputs.pr-number }}
+        bash .github/scripts/fetch_upstream_pr_sources.sh ${{ inputs.pr-number }}
     - name: Fetch external sources
       run: |
         bash .github/scripts/fetch_external_sources.sh
