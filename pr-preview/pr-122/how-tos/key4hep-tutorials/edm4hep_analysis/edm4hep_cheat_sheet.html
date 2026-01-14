@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cheat Sheet: Reading EDM4hep &mdash; Key4hep  documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../../_static/copybutton.js?v=f281be69"></script>
+        <script src="../../../_static/design-tabs.js?v=36754332"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Reading and writing EDM4hep files in Gaudi" href="../../k4fwcore/doc/PodioInputOutput.html" />
+    <link rel="prev" title="EDM4hep - The common event data model" href="edm4hep_api_intro.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            Key4hep
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/help.html">Getting help</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/setup.html">Getting key4hep</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/CONTRIBUTING.html">Contributing</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../README.html">Key4hep How-Tos and Instructions</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="edm4hep_api_intro.html">EDM4hep - The common event data model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="edm4hep_api_intro.html#podio-the-technical-infrastructure-on-which-things-run">podio - The technical infrastructure on which things run</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Cheat Sheet: Reading EDM4hep</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#event-loop">Event loop</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#event-metadata">Event metadata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#working-with-collections">Working with collections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#working-with-collection-elements">Working with collection elements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#working-with-links">Working with links</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#working-with-vertices">Working with vertices</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../k4fwcore/doc/PodioInputOutput.html">Reading and writing EDM4hep files in Gaudi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../k4fwcore/doc/k4run-args.html">Adding custom arguments to <code class="docutils literal notranslate"><span class="pre">k4run</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../k4fwcore/doc/k4run-args.html#interactive-python-prompt">Interactive python prompt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../k4fwcore/doc/algorithmTiming.html">Getting algorithm run time information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../k4marlinwrapper/doc/MarlinWrapperIntroduction.html">Wrapping Marlin processors in Gaudi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../k4edm4hep2lcioconv/doc/LCIO2EDM4hep.html">Standalone conversion from LCIO to EDM4hep</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../k4edm4hep2lcioconv/doc/LCIO2EDM4hep.html#library-usage-of-the-conversion-functions">Library usage of the conversion functions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials/README.html">Key4hep Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developing-key4hep-software/README.html">Developing Key4hep</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../spack-build-instructions-for-librarians/README.html">Building Key4hep: For Librarians</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../talks-and-presentations/README.html">Talks and Presentations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../call-for-logos/README.html">Call for logos</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">External links</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://cern.ch/fccsw">FCC software</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://twiki.cern.ch/twiki/bin/view/CLIC/CLICSoftwareComputing">CLIC software</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://ilcsoft.desy.de/portal">ILC software</a></li>
+<li class="toctree-l1"><a class="reference external" href="http://cepcsoft.ihep.ac.cn/">CEPC software</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://mcd-wiki.web.cern.ch/software/">Muon Collider software</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Key4hep</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../README.html">Key4hep How-Tos and Instructions</a></li>
+      <li class="breadcrumb-item active">Cheat Sheet: Reading EDM4hep</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/how-tos/key4hep-tutorials/edm4hep_analysis/edm4hep_cheat_sheet.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="cheat-sheet-reading-edm4hep">
+<h1>Cheat Sheet: Reading EDM4hep<a class="headerlink" href="#cheat-sheet-reading-edm4hep" title="Link to this heading"></a></h1>
+<p>This section compares:</p>
+<ul class="simple">
+<li><p>analysis of EDM4hep file with podio reader</p></li>
+<li><p>analysis of EDM4hep file with plain ROOT or uproot</p></li>
+<li><p>analysis of legacy LCIO file with LCReader</p></li>
+</ul>
+<section id="event-loop">
+<h2>Event loop<a class="headerlink" href="#event-loop" title="Link to this heading"></a></h2>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-0" name="sd-tab-set-0" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-0">
+C++</label><div class="sd-tab-content docutils">
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-2" name="sd-tab-set-1" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-2">
+EDM4hep - podio</label><div class="sd-tab-content docutils">
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// TODO: write me</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-3" name="sd-tab-set-1" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-3">
+EDM4hep - ROOT</label><div class="sd-tab-content docutils">
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// TODO: write me</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-4" name="sd-tab-set-1" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-4">
+LCIO (legacy)</label><div class="sd-tab-content docutils">
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// TODO: write me</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<input id="sd-tab-item-1" name="sd-tab-set-0" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-1">
+Python</label><div class="sd-tab-content docutils">
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-5" name="sd-tab-set-2" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-5">
+EDM4hep - podio</label><div class="sd-tab-content docutils">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">podio</span> <span class="kn">import</span> <span class="n">root_io</span>
+
+<span class="n">reader</span> <span class="o">=</span> <span class="n">root_io</span><span class="o">.</span><span class="n">Reader</span><span class="p">(</span><span class="s2">&quot;my_file.edm4hep.root&quot;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">reader</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;events&quot;</span><span class="p">):</span>
+    <span class="c1"># do more stuff with this event</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-6" name="sd-tab-set-2" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-6">
+EDM4hep - ROOT</label><div class="sd-tab-content docutils">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ROOT</span>
+
+<span class="n">file</span> <span class="o">=</span> <span class="n">ROOT</span><span class="o">.</span><span class="n">TFile</span><span class="p">(</span><span class="s2">&quot;my_file.edm4hep.root&quot;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">file</span><span class="p">[</span><span class="s2">&quot;events&quot;</span><span class="p">]:</span>
+    <span class="c1"># do more stuff with this event```</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-7" name="sd-tab-set-2" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-7">
+LCIO (legacy)</label><div class="sd-tab-content docutils">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyLCIO</span>
+
+<span class="n">reader</span> <span class="o">=</span> <span class="n">pyLCIO</span><span class="o">.</span><span class="n">IOIMPL</span><span class="o">.</span><span class="n">LCFactory</span><span class="o">.</span><span class="n">getInstance</span><span class="p">()</span><span class="o">.</span><span class="n">createLCReader</span><span class="p">()</span>
+<span class="n">reader</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;my_file.slcio&quot;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">reader</span><span class="p">:</span>
+    <span class="c1"># do more stuff with this event</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="event-metadata">
+<h2>Event metadata<a class="headerlink" href="#event-metadata" title="Link to this heading"></a></h2>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-8" name="sd-tab-set-3" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-8">
+C++</label><div class="sd-tab-content docutils">
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-10" name="sd-tab-set-4" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-10">
+EDM4hep - podio</label><div class="sd-tab-content docutils">
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// TODO: write me</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-11" name="sd-tab-set-4" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-11">
+EDM4hep - ROOT</label><div class="sd-tab-content docutils">
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// TODO: write me</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-12" name="sd-tab-set-4" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-12">
+LCIO (legacy)</label><div class="sd-tab-content docutils">
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// TODO: write me</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<input id="sd-tab-item-9" name="sd-tab-set-3" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-9">
+Python</label><div class="sd-tab-content docutils">
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-13" name="sd-tab-set-5" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-13">
+EDM4hep - podio</label><div class="sd-tab-content docutils">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">reader</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;events&quot;</span><span class="p">):</span>
+    <span class="n">event_header</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;EventHeader&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="nb">print</span><span class="p">(</span> <span class="n">event_header</span><span class="o">.</span><span class="n">getRunNumber</span><span class="p">()</span> <span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span> <span class="n">event_header</span><span class="o">.</span><span class="n">getEventNumber</span><span class="p">()</span> <span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span> <span class="n">event_header</span><span class="o">.</span><span class="n">getTimeStamp</span><span class="p">()</span> <span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">par</span> <span class="ow">in</span> <span class="n">event</span><span class="o">.</span><span class="n">parameters</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span> <span class="n">par</span><span class="p">,</span> <span class="n">event</span><span class="o">.</span><span class="n">get_parameter</span><span class="p">(</span><span class="n">par</span><span class="p">)</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-14" name="sd-tab-set-5" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-14">
+EDM4hep - ROOT</label><div class="sd-tab-content docutils">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">file</span><span class="p">[</span><span class="s2">&quot;events&quot;</span><span class="p">]:</span>
+    <span class="n">event_header</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">EventHeader</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="n">event_header</span><span class="o">.</span><span class="n">runNumber</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">event_header</span><span class="o">.</span><span class="n">eventNumber</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">event_header</span><span class="o">.</span><span class="n">timeStamp</span><span class="p">)</span>
+
+    <span class="c1"># TODO: podio::Frame parameters if possible</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-15" name="sd-tab-set-5" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-15">
+LCIO (legacy)</label><div class="sd-tab-content docutils">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">reader</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span> <span class="n">event</span><span class="o">.</span><span class="n">getRunNumber</span><span class="p">()</span> <span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span> <span class="n">event</span><span class="o">.</span><span class="n">getEventNumber</span><span class="p">()</span> <span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span> <span class="n">event</span><span class="o">.</span><span class="n">getTimeStamp</span><span class="p">()</span> <span class="p">)</span>
+
+    <span class="n">pars</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">getParameters</span><span class="p">()</span>
+
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">pars</span><span class="o">.</span><span class="n">getIntKeys</span><span class="p">(</span><span class="n">pyLCIO</span><span class="o">.</span><span class="n">EVENT</span><span class="o">.</span><span class="n">StringVec</span><span class="p">()):</span>
+        <span class="nb">print</span><span class="p">(</span> <span class="n">key</span><span class="p">,</span> <span class="n">pars</span><span class="o">.</span><span class="n">getIntVal</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">pars</span><span class="o">.</span><span class="n">getFloatKeys</span><span class="p">(</span><span class="n">pyLCIO</span><span class="o">.</span><span class="n">EVENT</span><span class="o">.</span><span class="n">StringVec</span><span class="p">()):</span>
+        <span class="nb">print</span><span class="p">(</span> <span class="n">key</span><span class="p">,</span> <span class="n">pars</span><span class="o">.</span><span class="n">getFloatVal</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">pars</span><span class="o">.</span><span class="n">getDoubleKeys</span><span class="p">(</span><span class="n">pyLCIO</span><span class="o">.</span><span class="n">EVENT</span><span class="o">.</span><span class="n">StringVec</span><span class="p">()):</span>
+        <span class="nb">print</span><span class="p">(</span> <span class="n">key</span><span class="p">,</span> <span class="n">pars</span><span class="o">.</span><span class="n">getDoubleVal</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">pars</span><span class="o">.</span><span class="n">getStringKeys</span><span class="p">(</span><span class="n">pyLCIO</span><span class="o">.</span><span class="n">EVENT</span><span class="o">.</span><span class="n">StringVec</span><span class="p">()):</span>
+        <span class="nb">print</span><span class="p">(</span> <span class="n">key</span><span class="p">,</span> <span class="n">pars</span><span class="o">.</span><span class="n">getStringVal</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="p">)</span>
+
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="working-with-collections">
+<h2>Working with collections<a class="headerlink" href="#working-with-collections" title="Link to this heading"></a></h2>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-16" name="sd-tab-set-6" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-16">
+C++</label><div class="sd-tab-content docutils">
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-18" name="sd-tab-set-7" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-18">
+EDM4hep - podio</label><div class="sd-tab-content docutils">
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// TODO: write me</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-19" name="sd-tab-set-7" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-19">
+EDM4hep - ROOT</label><div class="sd-tab-content docutils">
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// TODO: write me</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-20" name="sd-tab-set-7" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-20">
+LCIO (legacy)</label><div class="sd-tab-content docutils">
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// TODO: write me</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<input id="sd-tab-item-17" name="sd-tab-set-6" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-17">
+Python</label><div class="sd-tab-content docutils">
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-21" name="sd-tab-set-8" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-21">
+EDM4hep - podio</label><div class="sd-tab-content docutils">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">reader</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;events&quot;</span><span class="p">):</span>
+    <span class="c1"># list available collection names</span>
+    <span class="c1"># the set of collections in EDM4hep is the same for all events</span>
+    <span class="nb">print</span> <span class="p">(</span> <span class="n">event</span><span class="o">.</span><span class="n">getAvailableCollections</span><span class="p">()</span> <span class="p">)</span>
+
+    <span class="c1"># get collections</span>
+    <span class="n">mc_col</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;MCParticles&quot;</span><span class="p">)</span>
+    <span class="n">pfo_col</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;PandoraPFOs&quot;</span><span class="p">)</span>
+    <span class="n">hit_col</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;EcalBarrelCollectionRec&quot;</span><span class="p">)</span>
+
+    <span class="c1"># itirate over collection elements</span>
+    <span class="k">for</span> <span class="n">mc</span> <span class="ow">in</span> <span class="n">mc_col</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">mc</span><span class="o">.</span><span class="n">isAvailable</span><span class="p">():</span>
+            <span class="k">continue</span>
+        <span class="c1"># do more stuff with your MCParticles</span>
+    
+    <span class="k">for</span> <span class="n">pfo</span> <span class="ow">in</span> <span class="n">pfo_col</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">pfo</span><span class="o">.</span><span class="n">isAvailable</span><span class="p">():</span>
+            <span class="k">continue</span>
+        <span class="c1"># do more stuff with your PFOs</span>
+
+    <span class="k">for</span> <span class="n">hit</span> <span class="ow">in</span> <span class="n">hit_col</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">hit</span><span class="o">.</span><span class="n">isAvailable</span><span class="p">():</span>
+            <span class="k">continue</span>
+        <span class="c1"># do more stuff with your hits</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-22" name="sd-tab-set-8" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-22">
+EDM4hep - ROOT</label><div class="sd-tab-content docutils">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># list available collection names</span>
+<span class="c1"># the set of collections in EDM4hep is the same for all events</span>
+<span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">file</span><span class="p">[</span><span class="s2">&quot;podio_metadata&quot;</span><span class="p">]:</span>
+    <span class="k">for</span> <span class="n">col_info</span> <span class="ow">in</span> <span class="n">entry</span><span class="o">.</span><span class="n">events___CollectionTypeInfo</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">col_info</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+<span class="c1"># uproot version</span>
+<span class="k">for</span> <span class="n">col_name</span> <span class="ow">in</span> <span class="n">uproot_file</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;podio_metadata&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">arrays</span><span class="p">(</span><span class="s2">&quot;events___CollectionTypeInfo.name&quot;</span><span class="p">)[</span><span class="s2">&quot;events___CollectionTypeInfo.name&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">col_name</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">reader</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;events&quot;</span><span class="p">):</span>
+    <span class="c1"># get collections</span>
+    <span class="n">mc_col</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">MCParticles</span>
+    <span class="n">pfo_col</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">PandoraPFOs</span>
+    <span class="n">hit_col</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">EcalBarrelCollectionRec</span>
+
+    <span class="c1"># itirate over collection elements</span>
+    <span class="k">for</span> <span class="n">mc</span> <span class="ow">in</span> <span class="n">mc_col</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">mc</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="c1"># do more stuff with your MCParticles</span>
+    
+    <span class="k">for</span> <span class="n">pfo</span> <span class="ow">in</span> <span class="n">pfo_col</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">pfo</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="c1"># do more stuff with your PFOs</span>
+
+    <span class="k">for</span> <span class="n">hit</span> <span class="ow">in</span> <span class="n">hit_col</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">hit</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="c1"># do more stuff with your hits</span>
+
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-23" name="sd-tab-set-8" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-23">
+LCIO (legacy)</label><div class="sd-tab-content docutils">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">reader</span><span class="p">:</span>
+    <span class="c1"># list available collection names</span>
+    <span class="c1"># set of collections in LCIO was not necessarily the same for all events</span>
+    <span class="nb">print</span><span class="p">(</span> <span class="n">event</span><span class="o">.</span><span class="n">getCollectionNames</span><span class="p">()</span> <span class="p">)</span>
+
+    <span class="n">mc_col</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">getCollection</span><span class="p">(</span><span class="s2">&quot;MCParticle&quot;</span><span class="p">)</span>
+    <span class="n">pfo_col</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">getCollection</span><span class="p">(</span><span class="s2">&quot;PandoraPFOs&quot;</span><span class="p">)</span>
+    <span class="n">hit_col</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">getCollection</span><span class="p">(</span><span class="s2">&quot;EcalBarrelCollectionRec&quot;</span><span class="p">)</span>
+
+    <span class="c1"># itirate over collection elements</span>
+    <span class="k">for</span> <span class="n">mc</span> <span class="ow">in</span> <span class="n">mc_col</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">mc</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="c1"># do more stuff with your MCParticles</span>
+    
+    <span class="k">for</span> <span class="n">pfo</span> <span class="ow">in</span> <span class="n">pfo_col</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">pfo</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="c1"># do more stuff with your PFOs</span>
+
+    <span class="k">for</span> <span class="n">hit</span> <span class="ow">in</span> <span class="n">hit_col</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">hit</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="c1"># do more stuff with your hits</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="working-with-collection-elements">
+<h2>Working with collection elements<a class="headerlink" href="#working-with-collection-elements" title="Link to this heading"></a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>All object properties can be checked in the corresponding class API docs:
+<a class="reference external" href="https://edm4hep.web.cern.ch/namespaceedm4hep.html">https://edm4hep.web.cern.ch/namespaceedm4hep.html</a></p>
+</div>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-24" name="sd-tab-set-9" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-24">
+C++</label><div class="sd-tab-content docutils">
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-26" name="sd-tab-set-10" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-26">
+EDM4hep - podio</label><div class="sd-tab-content docutils">
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// TODO: write me</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-27" name="sd-tab-set-10" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-27">
+EDM4hep - ROOT</label><div class="sd-tab-content docutils">
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// TODO: write me</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-28" name="sd-tab-set-10" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-28">
+LCIO (legacy)</label><div class="sd-tab-content docutils">
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// TODO: write me</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<input id="sd-tab-item-25" name="sd-tab-set-9" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-25">
+Python</label><div class="sd-tab-content docutils">
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-29" name="sd-tab-set-11" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-29">
+EDM4hep - podio</label><div class="sd-tab-content docutils">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">reader</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;events&quot;</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">pfo</span> <span class="ow">in</span> <span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;PandoraPFOs&quot;</span><span class="p">):</span>
+        <span class="c1"># storage properties</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;element index inside the collection:&quot;</span><span class="p">,</span> <span class="n">pfo</span><span class="o">.</span><span class="n">id</span><span class="p">()</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;collection ID where element is stored:&quot;</span><span class="p">,</span> <span class="n">pfo</span><span class="o">.</span><span class="n">id</span><span class="p">()</span><span class="o">.</span><span class="n">collectionID</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;collection name where element is stored:&quot;</span><span class="p">,</span> <span class="n">event</span><span class="o">.</span><span class="n">getName</span><span class="p">(</span> <span class="n">pfo</span><span class="o">.</span><span class="n">id</span><span class="p">()</span><span class="o">.</span><span class="n">collectionID</span> <span class="p">)</span> <span class="p">)</span>
+
+        <span class="c1"># physics properties</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;E:&quot;</span><span class="p">,</span> <span class="n">pfo</span><span class="o">.</span><span class="n">getEnergy</span><span class="p">())</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;px&quot;</span><span class="p">,</span> <span class="n">pfo</span><span class="o">.</span><span class="n">getMomentum</span><span class="p">()</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;py&quot;</span><span class="p">,</span> <span class="n">pfo</span><span class="o">.</span><span class="n">getMomentum</span><span class="p">()</span><span class="o">.</span><span class="n">y</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;pz&quot;</span><span class="p">,</span> <span class="n">pfo</span><span class="o">.</span><span class="n">getMomentum</span><span class="p">()</span><span class="o">.</span><span class="n">z</span><span class="p">)</span>
+
+        <span class="c1"># related objects</span>
+        <span class="k">for</span> <span class="n">cluster</span> <span class="ow">in</span> <span class="n">pfo</span><span class="o">.</span><span class="n">getClusters</span><span class="p">():</span>
+            <span class="c1"># do something with your cluster</span>
+            <span class="k">for</span> <span class="n">hit</span> <span class="ow">in</span> <span class="n">cluster</span><span class="o">.</span><span class="n">getHits</span><span class="p">():</span>
+                <span class="c1"># do something with your hit</span>
+
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-30" name="sd-tab-set-11" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-30">
+EDM4hep - ROOT</label><div class="sd-tab-content docutils">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># helper map to get the collection names of the related objects</span>
+<span class="n">col_id2name</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">file</span><span class="p">[</span><span class="s2">&quot;podio_metadata&quot;</span><span class="p">]:</span>
+    <span class="k">for</span> <span class="n">col_info</span> <span class="ow">in</span> <span class="n">entry</span><span class="o">.</span><span class="n">events___CollectionTypeInfo</span><span class="p">:</span>
+        <span class="n">col_id2name</span><span class="p">[</span><span class="n">col_info</span><span class="o">.</span><span class="n">collectionID</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">col_info</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">file</span><span class="p">[</span><span class="s2">&quot;events&quot;</span><span class="p">]:</span>
+    <span class="k">for</span> <span class="n">pfo</span> <span class="ow">in</span> <span class="n">event</span><span class="o">.</span><span class="n">PandoraPFOs</span><span class="p">:</span>
+        <span class="c1"># storage properties</span>
+        <span class="c1"># Not directly possible from the object.</span>
+
+        <span class="c1"># physics properties</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;E:&quot;</span><span class="p">,</span> <span class="n">pfo</span><span class="o">.</span><span class="n">energy</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;px&quot;</span><span class="p">,</span> <span class="n">pfo</span><span class="o">.</span><span class="n">momentum</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;py&quot;</span><span class="p">,</span> <span class="n">pfo</span><span class="o">.</span><span class="n">momentum</span><span class="o">.</span><span class="n">y</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;pz&quot;</span><span class="p">,</span> <span class="n">pfo</span><span class="o">.</span><span class="n">momentum</span><span class="o">.</span><span class="n">z</span><span class="p">)</span>
+
+        <span class="c1"># related objects</span>
+        <span class="k">for</span> <span class="n">cluster_it</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">pfo</span><span class="o">.</span><span class="n">clusters_begin</span><span class="p">,</span> <span class="n">pfo</span><span class="o">.</span><span class="n">clusters_end</span><span class="p">):</span>
+            <span class="n">cluster_index</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">_PandoraPFOs_clusters</span><span class="p">[</span><span class="n">cluster_it</span><span class="p">]</span><span class="o">.</span><span class="n">index</span>
+            <span class="n">cluster_col_id</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">_PandoraPFOs_clusters</span><span class="p">[</span><span class="n">cluster_it</span><span class="p">]</span><span class="o">.</span><span class="n">collectionID</span>
+            <span class="n">cluster_col_name</span> <span class="o">=</span> <span class="n">col_id2name</span><span class="p">[</span><span class="n">cluster_col_id</span><span class="p">]</span>
+
+            <span class="n">cluster</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">cluster_col_name</span><span class="p">)[</span><span class="n">cluster_index</span><span class="p">]</span>
+            <span class="c1"># do something with your cluster</span>
+
+            <span class="k">for</span> <span class="n">hit_it</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">cluster</span><span class="o">.</span><span class="n">hits_begin</span><span class="p">,</span> <span class="n">cluster</span><span class="o">.</span><span class="n">hits_end</span><span class="p">):</span>
+                <span class="n">hit_index</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;_</span><span class="si">{</span><span class="n">cluster_col_name</span><span class="si">}</span><span class="s2">_hits&quot;</span><span class="p">)[</span><span class="n">hit_it</span><span class="p">]</span><span class="o">.</span><span class="n">index</span>
+                <span class="n">hit_col_id</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;_</span><span class="si">{</span><span class="n">cluster_col_name</span><span class="si">}</span><span class="s2">_hits&quot;</span><span class="p">)[</span><span class="n">hit_it</span><span class="p">]</span><span class="o">.</span><span class="n">collectionID</span>
+                <span class="n">hit_col_name</span> <span class="o">=</span>  <span class="n">col_id2name</span><span class="p">[</span><span class="n">hit_col_id</span><span class="p">]</span>
+
+                <span class="n">hit</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">hit_col_name</span><span class="p">)[</span><span class="n">hit_index</span><span class="p">]</span>
+                <span class="c1"># do something with your hit</span>
+
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-31" name="sd-tab-set-11" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-31">
+LCIO (legacy)</label><div class="sd-tab-content docutils">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">reader</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">pfo</span> <span class="ow">in</span> <span class="n">event</span><span class="o">.</span><span class="n">getCollection</span><span class="p">(</span><span class="s2">&quot;PandoraPFOs&quot;</span><span class="p">):</span>
+        <span class="c1"># storage properties</span>
+        <span class="c1"># Not directly possible from the object.</span>
+
+        <span class="c1"># physics properties</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;E:&quot;</span><span class="p">,</span> <span class="n">pfo</span><span class="o">.</span><span class="n">getEnergy</span><span class="p">())</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;px&quot;</span><span class="p">,</span> <span class="n">pfo</span><span class="o">.</span><span class="n">getMomentum</span><span class="p">()[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;py&quot;</span><span class="p">,</span> <span class="n">pfo</span><span class="o">.</span><span class="n">getMomentum</span><span class="p">()[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;pz&quot;</span><span class="p">,</span> <span class="n">pfo</span><span class="o">.</span><span class="n">getMomentum</span><span class="p">()[</span><span class="mi">2</span><span class="p">])</span>
+
+        <span class="c1"># related objects</span>
+        <span class="k">for</span> <span class="n">cluster</span> <span class="ow">in</span> <span class="n">pfo</span><span class="o">.</span><span class="n">getClusters</span><span class="p">():</span>
+            <span class="c1"># do something with your cluster</span>
+
+            <span class="k">for</span> <span class="n">hit</span> <span class="ow">in</span> <span class="n">cluster</span><span class="o">.</span><span class="n">getCalorimeterHits</span><span class="p">():</span>
+                <span class="c1"># do something with your hit</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="working-with-links">
+<h2>Working with links<a class="headerlink" href="#working-with-links" title="Link to this heading"></a></h2>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-32" name="sd-tab-set-12" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-32">
+C++</label><div class="sd-tab-content docutils">
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-34" name="sd-tab-set-13" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-34">
+EDM4hep - podio</label><div class="sd-tab-content docutils">
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// TODO: write me</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-35" name="sd-tab-set-13" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-35">
+EDM4hep - ROOT</label><div class="sd-tab-content docutils">
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// TODO: write me</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-36" name="sd-tab-set-13" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-36">
+LCIO (legacy)</label><div class="sd-tab-content docutils">
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// TODO: write me</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<input id="sd-tab-item-33" name="sd-tab-set-12" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-33">
+Python</label><div class="sd-tab-content docutils">
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-37" name="sd-tab-set-14" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-37">
+EDM4hep - podio</label><div class="sd-tab-content docutils">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">reader</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;events&quot;</span><span class="p">):</span>
+    <span class="c1"># itirating over link collections</span>
+    <span class="k">for</span> <span class="n">link</span> <span class="ow">in</span> <span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;RecoMCTruthLink&quot;</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;RecoParticle </span><span class="si">{</span><span class="n">link</span><span class="o">.</span><span class="n">getFrom</span><span class="p">()</span><span class="si">}</span><span class="s2"> is linked to MCParticle </span><span class="si">{</span><span class="n">link</span><span class="o">.</span><span class="n">getTo</span><span class="p">()</span><span class="si">}</span><span class="s2"> with weight </span><span class="si">{</span><span class="n">link</span><span class="o">.</span><span class="n">getWeight</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">link</span> <span class="ow">in</span> <span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;EcalBarrelRelationsSimRec&quot;</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;CaloHit </span><span class="si">{</span><span class="n">link</span><span class="o">.</span><span class="n">getFrom</span><span class="p">()</span><span class="si">}</span><span class="s2"> is linked to SimCaloHit </span><span class="si">{</span><span class="n">link</span><span class="o">.</span><span class="n">getTo</span><span class="p">()</span><span class="si">}</span><span class="s2"> with weight </span><span class="si">{</span><span class="n">link</span><span class="o">.</span><span class="n">getWeight</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># extracting links for specific objects (manual search)</span>
+    <span class="k">for</span> <span class="n">pfo</span> <span class="ow">in</span> <span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;PandoraPFOs&quot;</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;RecoParticle </span><span class="si">{</span><span class="n">pfo</span><span class="si">}</span><span class="s2"> is linked to: &quot;</span><span class="p">)</span>
+        <span class="n">links</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">link</span> <span class="ow">in</span> <span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;RecoMCTruthLink&quot;</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">link</span><span class="o">.</span><span class="n">getFrom</span><span class="p">()</span> <span class="o">!=</span> <span class="n">pfo</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="n">links</span><span class="p">[</span><span class="n">link</span><span class="o">.</span><span class="n">getTo</span><span class="p">()]</span> <span class="o">=</span> <span class="n">link</span><span class="o">.</span><span class="n">getWeight</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">mc</span><span class="p">,</span> <span class="n">weight</span> <span class="ow">in</span> <span class="n">links</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot; --- MCParticle </span><span class="si">{</span><span class="n">mc</span><span class="si">}</span><span class="s2"> with weight </span><span class="si">{</span><span class="n">weight</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+
+    <span class="c1"># extracting links for specific objects (LinkNavigator)</span>
+    <span class="c1"># TODO: needs a fix for mutable types https://github.com/AIDASoft/podio/issues/918</span>
+
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-38" name="sd-tab-set-14" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-38">
+EDM4hep - ROOT</label><div class="sd-tab-content docutils">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># helper map to get the collection names of the related objects</span>
+<span class="n">col_id2name</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">file</span><span class="p">[</span><span class="s2">&quot;podio_metadata&quot;</span><span class="p">]:</span>
+    <span class="k">for</span> <span class="n">col_info</span> <span class="ow">in</span> <span class="n">entry</span><span class="o">.</span><span class="n">events___CollectionTypeInfo</span><span class="p">:</span>
+        <span class="n">col_id2name</span><span class="p">[</span><span class="n">col_info</span><span class="o">.</span><span class="n">collectionID</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">col_info</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">file</span><span class="p">[</span><span class="s2">&quot;events&quot;</span><span class="p">]:</span>
+    <span class="c1"># itirating over links</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">link</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">RecoMCTruthLink</span><span class="p">):</span>
+        <span class="n">from_obj_col_id</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">_RecoMCTruthLink_from</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">collectionID</span>
+        <span class="n">from_obj_index</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">_RecoMCTruthLink_from</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">index</span>
+        <span class="n">from_obj</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">col_id2name</span><span class="p">[</span><span class="n">from_obj_col_id</span><span class="p">])[</span><span class="n">from_obj_index</span><span class="p">]</span>
+
+        <span class="n">to_obj_col_id</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">_RecoMCTruthLink_from</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">collectionID</span>
+        <span class="n">to_obj_index</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">_RecoMCTruthLink_from</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">index</span>
+        <span class="n">to_obj</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">col_id2name</span><span class="p">[</span><span class="n">to_obj_col_id</span><span class="p">])[</span><span class="n">to_obj_index</span><span class="p">]</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;RecoParticle </span><span class="si">{</span><span class="n">from_obj</span><span class="si">}</span><span class="s2"> is linked to MCParticle </span><span class="si">{</span><span class="n">to_obj</span><span class="si">}</span><span class="s2"> with weight </span><span class="si">{</span><span class="n">link</span><span class="o">.</span><span class="n">weight</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">link</span> <span class="ow">in</span> <span class="n">event</span><span class="o">.</span><span class="n">EcalBarrelRelationsSimRec</span><span class="p">:</span>
+        <span class="n">from_obj_col_id</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">_EcalBarrelRelationsSimRec_from</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">collectionID</span>
+        <span class="n">from_obj_index</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">_EcalBarrelRelationsSimRec_from</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">index</span>
+        <span class="n">from_obj</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">col_id2name</span><span class="p">[</span><span class="n">from_obj_col_id</span><span class="p">])[</span><span class="n">from_obj_index</span><span class="p">]</span>
+
+        <span class="n">to_obj_col_id</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">_EcalBarrelRelationsSimRec_from</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">collectionID</span>
+        <span class="n">to_obj_index</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">_EcalBarrelRelationsSimRec_from</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">index</span>
+        <span class="n">to_obj</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">col_id2name</span><span class="p">[</span><span class="n">to_obj_col_id</span><span class="p">])[</span><span class="n">to_obj_index</span><span class="p">]</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;CaloHit </span><span class="si">{</span><span class="n">from_obj</span><span class="si">}</span><span class="s2"> is linked to SimCaloHit </span><span class="si">{</span><span class="n">to_obj</span><span class="si">}</span><span class="s2"> with weight </span><span class="si">{</span><span class="n">link</span><span class="o">.</span><span class="n">weight</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># extracting links for specific objects (manual search)</span>
+    <span class="k">for</span> <span class="n">pfo</span> <span class="ow">in</span> <span class="n">event</span><span class="o">.</span><span class="n">PandoraPFOs</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;RecoParticle </span><span class="si">{</span><span class="n">pfo</span><span class="si">}</span><span class="s2"> is linked to: &quot;</span><span class="p">)</span>
+        <span class="n">links</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">link</span> <span class="ow">in</span> <span class="n">event</span><span class="o">.</span><span class="n">RecoMCTruthLink</span><span class="p">:</span>
+            <span class="n">from_obj_col_id</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">_RecoMCTruthLink_from</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">collectionID</span>
+            <span class="n">from_obj_index</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">_RecoMCTruthLink_from</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">index</span>
+            <span class="n">from_obj</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">col_id2name</span><span class="p">[</span><span class="n">from_obj_col_id</span><span class="p">])[</span><span class="n">from_obj_index</span><span class="p">]</span>
+
+            <span class="n">to_obj_col_id</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">_RecoMCTruthLink_from</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">collectionID</span>
+            <span class="n">to_obj_index</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">_RecoMCTruthLink_from</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">index</span>
+            <span class="n">to_obj</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">col_id2name</span><span class="p">[</span><span class="n">to_obj_col_id</span><span class="p">])[</span><span class="n">to_obj_index</span><span class="p">]</span>
+
+            <span class="k">if</span> <span class="n">from_obj</span> <span class="o">!=</span> <span class="n">pfo</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="n">links</span><span class="p">[</span><span class="n">to_obj</span><span class="p">]</span> <span class="o">=</span> <span class="n">link</span><span class="o">.</span><span class="n">weight</span>
+        <span class="k">for</span> <span class="n">mc</span><span class="p">,</span> <span class="n">weight</span> <span class="ow">in</span> <span class="n">links</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot; --- MCParticle </span><span class="si">{</span><span class="n">mc</span><span class="si">}</span><span class="s2"> with weight </span><span class="si">{</span><span class="n">weight</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+
+    <span class="c1"># extracting links for specific objects (LinkNavigator)</span>
+    <span class="c1"># TODO: needs a fix for mutable types https://github.com/AIDASoft/podio/issues/918</span>
+
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-39" name="sd-tab-set-14" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-39">
+LCIO (legacy)</label><div class="sd-tab-content docutils">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">reader</span><span class="p">:</span>
+    <span class="c1"># itirating over links</span>
+    <span class="k">for</span> <span class="n">link</span> <span class="ow">in</span> <span class="n">event</span><span class="o">.</span><span class="n">getCollection</span><span class="p">(</span><span class="s2">&quot;RecoMCTruthLink&quot;</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;RecoParticle </span><span class="si">{</span><span class="n">link</span><span class="o">.</span><span class="n">getFrom</span><span class="p">()</span><span class="si">}</span><span class="s2"> is linked to MCParticle </span><span class="si">{</span><span class="n">link</span><span class="o">.</span><span class="n">getTo</span><span class="p">()</span><span class="si">}</span><span class="s2"> with weight </span><span class="si">{</span><span class="n">link</span><span class="o">.</span><span class="n">getWeight</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">link</span> <span class="ow">in</span> <span class="n">event</span><span class="o">.</span><span class="n">getCollection</span><span class="p">(</span><span class="s2">&quot;EcalBarrelRelationsSimRec&quot;</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;CaloHit </span><span class="si">{</span><span class="n">link</span><span class="o">.</span><span class="n">getFrom</span><span class="p">()</span><span class="si">}</span><span class="s2"> is linked to SimCaloHit </span><span class="si">{</span><span class="n">link</span><span class="o">.</span><span class="n">getTo</span><span class="p">()</span><span class="si">}</span><span class="s2"> with weight </span><span class="si">{</span><span class="n">link</span><span class="o">.</span><span class="n">getWeight</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># extracting links for specific objects (manual search)</span>
+    <span class="k">for</span> <span class="n">pfo</span> <span class="ow">in</span> <span class="n">event</span><span class="o">.</span><span class="n">getCollection</span><span class="p">(</span><span class="s2">&quot;PandoraPFOs&quot;</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;RecoParticle </span><span class="si">{</span><span class="n">pfo</span><span class="si">}</span><span class="s2"> is linked to: &quot;</span><span class="p">)</span>
+        <span class="n">links</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">link</span> <span class="ow">in</span> <span class="n">event</span><span class="o">.</span><span class="n">getCollection</span><span class="p">(</span><span class="s2">&quot;RecoMCTruthLink&quot;</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">link</span><span class="o">.</span><span class="n">getFrom</span><span class="p">()</span> <span class="o">!=</span> <span class="n">pfo</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="n">links</span><span class="p">[</span><span class="n">link</span><span class="o">.</span><span class="n">getTo</span><span class="p">()]</span> <span class="o">=</span> <span class="n">link</span><span class="o">.</span><span class="n">getWeight</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">mc</span><span class="p">,</span> <span class="n">weight</span> <span class="ow">in</span> <span class="n">links</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot; --- MCParticle </span><span class="si">{</span><span class="n">mc</span><span class="si">}</span><span class="s2"> with weight </span><span class="si">{</span><span class="n">weight</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># extracting links for specific objects (LCRelationNavigator)</span>
+    <span class="n">nav</span> <span class="o">=</span> <span class="n">pyLCIO</span><span class="o">.</span><span class="n">UTIL</span><span class="o">.</span><span class="n">LCRelationNavigator</span><span class="p">(</span> <span class="n">event</span><span class="o">.</span><span class="n">getCollection</span><span class="p">(</span><span class="s2">&quot;RecoMCTruthLink&quot;</span><span class="p">)</span> <span class="p">)</span>
+    <span class="k">for</span> <span class="n">pfo</span> <span class="ow">in</span> <span class="n">event</span><span class="o">.</span><span class="n">getCollection</span><span class="p">(</span><span class="s2">&quot;PandoraPFOs&quot;</span><span class="p">):</span>
+        <span class="n">objects</span> <span class="o">=</span> <span class="n">nav</span><span class="o">.</span><span class="n">getRelatedToObjects</span><span class="p">(</span><span class="n">pfo</span><span class="p">)</span>
+        <span class="n">weights</span> <span class="o">=</span> <span class="n">nav</span><span class="o">.</span><span class="n">getRelatedToObjects</span><span class="p">(</span><span class="n">pfo</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">mc</span><span class="p">,</span> <span class="n">weight</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">objects</span><span class="p">,</span> <span class="n">weights</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot; --- MCParticle </span><span class="si">{</span><span class="n">mc</span><span class="si">}</span><span class="s2"> with weight </span><span class="si">{</span><span class="n">weight</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="working-with-vertices">
+<h2>Working with vertices<a class="headerlink" href="#working-with-vertices" title="Link to this heading"></a></h2>
+<p>TBD</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="edm4hep_api_intro.html" class="btn btn-neutral float-left" title="EDM4hep - The common event data model" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../k4fwcore/doc/PodioInputOutput.html" class="btn btn-neutral float-right" title="Reading and writing EDM4hep files in Gaudi" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Key4hep.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
