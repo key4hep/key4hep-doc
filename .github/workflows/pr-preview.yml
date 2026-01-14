@@ -18,6 +18,7 @@ jobs:
     with:
       ref: ${{ github.event.pull_request.head.sha }}
       linkcheck: false
+      pr-number: ${{ github.event.number }}
 
   linkcheck:
     if: contains(['opened', 'reopened', 'synchronize'], ${{ github.event.action }})
@@ -26,6 +27,7 @@ jobs:
       ref: ${{ github.event.pull_request.head.sha }}
       linkcheck: true
       upload-artifact: false
+      pr-number: ${{ github.event.number }}
 
   deploy-preview:
     needs: build-preview

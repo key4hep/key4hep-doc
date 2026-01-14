@@ -7,6 +7,9 @@
 # Initialize force option
 FORCE=false
 
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "$SCRIPT_DIR/utilities.sh"
+
 # Display usage message
 display_usage() {
   echo "Usage: $(basename $0) [--force|-f] [--help|-h]"
@@ -31,19 +34,6 @@ for arg in "$@"; do
       ;;
   esac
 done
-
-# Try to fetch a file from a github repository
-try_fetch() {
-    local org=${1}
-    local file=${2}
-    local outputbase=${3}
-    local repo=$(echo ${file} | awk -F '/' '{print $1}')
-    local repo_file=${file/${repo}/}
-
-    for branch in main master; do
-      curl --fail --silent https://raw.githubusercontent.com/${org}/${repo}/${branch}/${repo_file#/} -o ${outputbase}/${file} && break
-    done
-}
 
 # process one markdown file with content that potentially needs fetching from an
 # external repository
