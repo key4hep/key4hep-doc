@@ -14,7 +14,7 @@ babel==2.14.0
     # via sphinx
 beautifulsoup4==4.12.2
     # via nbconvert
-bleach==6.1.0
+bleach[css]==6.1.0
     # via nbconvert
 certifi==2024.7.4
     # via requests
@@ -72,7 +72,7 @@ myst-parser==2.0.0
     # via -r requirements.in
 nbclient==0.9.0
     # via nbconvert
-nbconvert==7.13.0
+nbconvert==7.17.0
     # via notedown
 nbformat==5.9.2
     # via
@@ -158,7 +158,7 @@ sphinxcontrib-qthelp==1.0.6
 sphinxcontrib-serializinghtml==1.1.9
     # via sphinx
 tinycss2==1.2.1
-    # via nbconvert
+    # via bleach
 tornado==6.5.1
     # via jupyter-client
 traitlets==5.14.0
