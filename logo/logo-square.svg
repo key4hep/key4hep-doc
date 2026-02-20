@@ -2,9 +2,11 @@
 <svg
    id="Layer_1"
    version="1.1"
-   viewBox="292 10 120 120"
+   viewBox="292 10 87.599998 106.7"
    sodipodi:docname="logo-square.svg"
    inkscape:version="1.4.3 (0d15f75042, 2025-12-25)"
+   width="87.599998"
+   height="106.7"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -20,12 +22,12 @@
      inkscape:deskcolor="#d1d1d1"
      showguides="true"
      inkscape:zoom="2.4857143"
-     inkscape:cx="155.8908"
-     inkscape:cy="90.114943"
+     inkscape:cx="136.98276"
+     inkscape:cy="84.482758"
      inkscape:window-width="1632"
-     inkscape:window-height="1836"
+     inkscape:window-height="612"
      inkscape:window-x="1632"
-     inkscape:window-y="0"
+     inkscape:window-y="612"
      inkscape:window-maximized="0"
      inkscape:current-layer="Layer_1" />
   <!-- Generator: Adobe Illustrator 30.0.0, SVG Export Plug-In . SVG Version: 2.1.1 Build 123)  -->
@@ -48,14 +50,16 @@
   </defs>
   <polygon
      class="st0"
-     points="362.4 122.3 334.3 81.1 314.6 109.2 310.5 106.3 334.3 72.3 366.6 119.5 362.4 122.3"
-     id="polygon8" />
+     points="334.3,72.3 366.6,119.5 362.4,122.3 334.3,81.1 314.6,109.2 310.5,106.3 "
+     id="polygon8"
+     transform="translate(-18.5,-5.6)" />
   <polygon
      class="st0"
-     points="380.7 99.3 336.5 69.3 395.3 29.9 398.1 34 345.5 69.3 383.5 95.2 380.7 99.3"
-     id="polygon9" />
+     points="345.5,69.3 383.5,95.2 380.7,99.3 336.5,69.3 395.3,29.9 398.1,34 "
+     id="polygon9"
+     transform="translate(-18.5,-5.6)" />
   <path
      class="st0"
-     d="M334.3,67l-16.6-23.2,4.1-2.9,12.5,17.4c6.8-10,28.5-42.1,28.9-42.7l4.6,1.4-33.3,50Z"
+     d="m 315.8,61.4 -16.6,-23.2 4.1,-2.9 12.5,17.4 c 6.8,-10 28.5,-42.1 28.9,-42.7 l 4.6,1.4 -33.3,50 z"
      id="path9" />
 </svg>
