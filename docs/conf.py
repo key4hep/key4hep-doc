@@ -12,6 +12,7 @@ copyright = "2025, Key4hep"
 author = "Key4hep"
 html_static_path = ["static"]
 html_logo = "static/logo.png"
+html_favicon = "static/favicon.png"
 
 exclude_patterns = [
     "_build",
