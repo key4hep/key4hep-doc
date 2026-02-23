@@ -10,7 +10,9 @@ GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN", None)
 project = "Key4hep"
 copyright = "2025, Key4hep"
 author = "Key4hep"
-# html_logo = "starterkit.png"
+html_static_path = ["static"]
+html_logo = "static/logo.png"
+html_favicon = "static/favicon.png"
 
 exclude_patterns = [
     "_build",

@@ -22,7 +22,6 @@
     developing-key4hep-software/README.md
     spack-build-instructions-for-librarians/README.md
     talks-and-presentations/README.md
-    call-for-logos/README.md
 
 .. toctree::
     :maxdepth: 2
