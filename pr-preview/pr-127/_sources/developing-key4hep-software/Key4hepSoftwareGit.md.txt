@@ -186,8 +186,7 @@ git push [the remote name] [the branch you want to push]
 
 ## Need help?
 
-In case you have any questions on this guide, or need help to sort out
-an issue with a repository, feel free to drop a mail to
-key4hep-sw at CERN, and we'll be happy to help you.
-Alternatively create an issue in the [bug tracker](https://github.com/key4hep)
-![smile](https://twiki.cern.ch/twiki/pub/TWiki/SmiliesPlugin/smile.gif "smile").
+In case you have any questions on this guide, or need help to sort out an issue
+with a repository, feel free to drop a mail to key4hep-sw at CERN, and we'll be
+happy to help you. Alternatively create an issue in the [bug
+tracker](https://github.com/key4hep).
