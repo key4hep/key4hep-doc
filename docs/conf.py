@@ -45,6 +45,7 @@ source_suffix = {
 
 linkcheck_ignore = [
     r"https://twiki.cern.ch/twiki/bin/view",  # TWikis might need login
+    r"https://github\.com/.*/commits/",  # rate-limited web pages
 ]
 if IN_GITHUB_ACTIONS_CI:
     linkcheck_ignore.extend(
