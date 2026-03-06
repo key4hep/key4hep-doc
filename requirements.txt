@@ -52,7 +52,7 @@ jupyter-core==5.5.1
     #   nbformat
 jupyterlab-pygments==0.3.0
     # via nbconvert
-markdown==3.5.1
+markdown==3.8.1
     # via sphinx-markdown-tables
 markdown-it-py==3.0.0
     # via
