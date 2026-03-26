@@ -1,20 +1,54 @@
 #!/usr/bin/env python3
 
+import fnmatch
 import html
 import json
 import pathlib
-import sys
+import yaml
 from collections import defaultdict
 
 from jinja2 import Environment, FileSystemLoader
 
-sys.path.insert(0, str(pathlib.Path(__file__).parent))
-from filtering import load_filter_config, is_algorithm_excluded, filter_properties
+TEMPLATE = pathlib.Path(__file__).parent / "templates" / "algorithm_overview.md.jinja2"
 
 
-DEFAULT_TEMPLATE = (
-    pathlib.Path(__file__).parent / "templates" / "algorithm_overview.md.jinja2"
-)
+def _matches_any(value, patterns):
+    """Return True if value matches any of the glob patterns (case-sensitive)."""
+    return any(fnmatch.fnmatchcase(value, p) for p in patterns)
+
+
+def load_filter_config(config_path):
+    """Load and return the exclude lists from a YAML filter config file."""
+    if config_path is None:
+        return {"packages": [], "libs": [], "properties": []}
+
+    with open(config_path) as f:
+        config = yaml.safe_load(f)
+
+    exclude = config.get("filter", {}).get("exclude", {})
+    return {
+        "packages": exclude.get("packages", []),
+        "libs": exclude.get("libs", []),
+        "properties": exclude.get("properties", []),
+    }
+
+
+def is_algorithm_excluded(cfg, exclude):
+    """Return True if the algorithm should be excluded based on package or lib."""
+    return _matches_any(cfg["package"], exclude["packages"]) or _matches_any(
+        cfg["lib"], exclude["libs"]
+    )
+
+
+def filter_properties(properties, exclude):
+    """Remove properties whose names match any pattern in exclude['properties']."""
+    if not exclude["properties"]:
+        return properties
+    return {
+        k: v
+        for k, v in properties.items()
+        if not _matches_any(k, exclude["properties"])
+    }
 
 
 def load_algorithms(input_path):
@@ -25,8 +59,7 @@ def load_algorithms(input_path):
 def apply_filters(algorithms, filter_config):
     result = {}
     for name, info in algorithms.items():
-        cfg = {"package": info["package"], "lib": info["lib"]}
-        if is_algorithm_excluded(cfg, filter_config):
+        if is_algorithm_excluded(info, filter_config):
             continue
         result[name] = {
             **info,
@@ -83,7 +116,7 @@ def main(args):
     packages = group_by_package(algorithms)
     total_algorithms = sum(len(algs) for algs in packages.values())
 
-    output = render_page(args.template, packages, total_algorithms)
+    output = render_page(TEMPLATE, packages, total_algorithms)
 
     with open(args.output, "w") as f:
         f.write(output)
@@ -113,12 +146,6 @@ if __name__ == "__main__":
         help="Output MyST markdown file path",
         type=pathlib.Path,
         required=True,
-    )
-    parser.add_argument(
-        "--template",
-        help="Path to the Jinja2 template",
-        type=pathlib.Path,
-        default=DEFAULT_TEMPLATE,
     )
     parser.add_argument(
         "--filter-config",
