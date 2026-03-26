@@ -35,6 +35,12 @@ Want to contribute? Look at our **[Contribution Guide](getting_started/CONTRIBUT
 - **[Developer Documentation](developing-key4hep-software/README.md)** - Contribute to and extend Key4hep
 - **[Build Instructions](spack-build-instructions-for-librarians/README.md)** - Advanced build and deployment guides
 
+In general we aim at keeping the *How-to Guides* rather brief and to the point
+to make them accessible for newcomers. More detailed descriptions are provided
+in the *Developer Documentation* section. Here we also try to document some of
+the conventions (aka "tribal knowledge") that has been built up over time as
+well as some reasoning behind them.
+
 ## License
 Except where otherwise noted, the example programs and other software provided
 by Key4hep are made available under the [OSI](https://opensource.org)-approved [Apache
