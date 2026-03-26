@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 
-import fnmatch
 import json
 import logging
 import tqdm
 import pathlib
-import yaml
 
 from collections.abc import Iterable
+
+from filtering import load_filter_config, is_algorithm_excluded, filter_properties
 
 import Configurables
 
@@ -57,11 +57,6 @@ def _filter_for_json(value):
     return value
 
 
-def _matches_any(value, patterns):
-    """Return True if value matches any of the glob patterns (case-sensitive)."""
-    return any(fnmatch.fnmatchcase(value, p) for p in patterns)
-
-
 def get_properties(comp_name):
     """Get all available properties for a given name and try to get their
     default values if available"""
@@ -84,22 +79,6 @@ def get_properties(comp_name):
     return props
 
 
-def load_filter_config(config_path):
-    """Load and return the exclude lists from a YAML filter config file."""
-    if config_path is None:
-        return {"packages": [], "libs": [], "properties": []}
-
-    with open(config_path) as f:
-        config = yaml.safe_load(f)
-
-    exclude = config.get("filter", {}).get("exclude", {})
-    return {
-        "packages": exclude.get("packages", []),
-        "libs": exclude.get("libs", []),
-        "properties": exclude.get("properties", []),
-    }
-
-
 def main(args):
     """Main"""
     cfgDb = Configuration.cfgDb
@@ -109,18 +88,10 @@ def main(args):
     pkgs = {}
 
     for name, cfg in tqdm.tqdm(cfgDb.items()):
-        if _matches_any(cfg["package"], exclude_cfg["packages"]):
-            continue
-        if _matches_any(cfg["lib"], exclude_cfg["libs"]):
+        if is_algorithm_excluded(cfg, exclude_cfg):
             continue
 
-        properties = get_properties(name)
-        if exclude_cfg["properties"]:
-            properties = {
-                k: v
-                for k, v in properties.items()
-                if not _matches_any(k, exclude_cfg["properties"])
-            }
+        properties = filter_properties(get_properties(name), exclude_cfg)
 
         pkgs[name] = {
             "lib": cfg["lib"],
