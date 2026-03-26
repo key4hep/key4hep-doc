@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 
+import fnmatch
 import json
 import logging
 import tqdm
-import sys
 import pathlib
+import yaml
 
 from collections.abc import Iterable
 
@@ -56,6 +57,11 @@ def _filter_for_json(value):
     return value
 
 
+def _matches_any(value, patterns):
+    """Return True if value matches any of the glob patterns (case-sensitive)."""
+    return any(fnmatch.fnmatchcase(value, p) for p in patterns)
+
+
 def get_properties(comp_name):
     """Get all available properties for a given name and try to get their
     default values if available"""
@@ -78,17 +84,48 @@ def get_properties(comp_name):
     return props
 
 
+def load_filter_config(config_path):
+    """Load and return the exclude lists from a YAML filter config file."""
+    if config_path is None:
+        return {"packages": [], "libs": [], "properties": []}
+
+    with open(config_path) as f:
+        config = yaml.safe_load(f)
+
+    exclude = config.get("filter", {}).get("exclude", {})
+    return {
+        "packages": exclude.get("packages", []),
+        "libs": exclude.get("libs", []),
+        "properties": exclude.get("properties", []),
+    }
+
+
 def main(args):
     """Main"""
     cfgDb = Configuration.cfgDb
 
+    exclude_cfg = load_filter_config(args.filter_config)
+
     pkgs = {}
 
     for name, cfg in tqdm.tqdm(cfgDb.items()):
+        if _matches_any(cfg["package"], exclude_cfg["packages"]):
+            continue
+        if _matches_any(cfg["lib"], exclude_cfg["libs"]):
+            continue
+
+        properties = get_properties(name)
+        if exclude_cfg["properties"]:
+            properties = {
+                k: v
+                for k, v in properties.items()
+                if not _matches_any(k, exclude_cfg["properties"])
+            }
+
         pkgs[name] = {
             "lib": cfg["lib"],
             "package": cfg["package"],
-            "properties": get_properties(name),
+            "properties": properties,
         }
 
     with open(args.outputfile, "w") as outfile:
@@ -107,6 +144,12 @@ if __name__ == "__main__":
         help="The name of the output json file containing information about found algorithms",
         type=pathlib.Path,
         default="env_algorithms.json",
+    )
+    parser.add_argument(
+        "--filter-config",
+        help="Path to a YAML file specifying filter rules (packages, libs, properties to exclude)",
+        type=pathlib.Path,
+        default=None,
     )
 
     args = parser.parse_args()
