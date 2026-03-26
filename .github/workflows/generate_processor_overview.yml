@@ -29,7 +29,8 @@ jobs:
             python3 scripts/collect_marlin_processor_info.py -o marlin_processors.json
             python3 scripts/generate_algorithm_page.py -i marlin_processors.json \
               -o processor-overview.md \
-              --template scripts/templates/processor_overview.md.jinja2
+              --template scripts/templates/processor_overview.md.jinja2 \
+              --filter-config scripts/filter_marlin.yaml
       - uses: actions/upload-artifact@v6
         id: upload-artifact
         with:
