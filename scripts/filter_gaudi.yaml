@@ -1,0 +1,22 @@
+filter:
+  exclude:
+    packages:
+      - Gaudi*
+      - TinyExperiment*
+    properties:
+      - OutputLevel
+      - Audit*
+      - CheckToolDeps
+      - RootCLID
+      - AutoRetrieveTools
+      - ExtraInputs
+      - ExtraOutputs
+      - Timeline
+      - ErrorMax
+      - Enable
+      - MonitorService
+      - Cardinality
+      - RegisterForContextService
+      - NeededResources
+      - Asynchronous
+      - FilterCircularDependencies
