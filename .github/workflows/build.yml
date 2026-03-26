@@ -25,6 +25,11 @@ on:
         required: false
         type: string
         default: ''
+      proc-info-artifact-id:
+        description: The artifact ID to download for the processor overview
+        required: false
+        type: string
+        default: ''
 
 jobs:
   build:
@@ -53,6 +58,16 @@ jobs:
       if: ${{ inputs.alg-info-artifact-id != '' }}
       run: |
         mv artifact_download/algorithm-overview.md docs/
+    - name: Download processor overview
+      if: ${{ inputs.proc-info-artifact-id != '' }}
+      uses: actions/download-artifact@v5
+      with:
+        name: processor_overview-${{ inputs.ref }}
+        path: artifact_download/
+    - name: Move processor info
+      if: ${{ inputs.proc-info-artifact-id != '' }}
+      run: |
+        mv artifact_download/processor-overview.md docs/
     - name: Fetch external sources from upstream PR
       if: ${{ inputs.pr-number != '' }}
       env:
