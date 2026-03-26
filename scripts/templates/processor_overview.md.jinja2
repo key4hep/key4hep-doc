@@ -8,137 +8,37 @@ Total: **{{ total_algorithms }} processors**.
 
 ```{raw} html
 <style>
-#processor-overview {
-  margin: 1em 0;
-}
-#processor-overview .proc-filter-bar {
-  display: flex;
-  align-items: center;
-  gap: 1em;
-  margin-bottom: 1em;
-  flex-wrap: wrap;
-}
-#processor-overview #proc-search {
-  flex: 1;
-  min-width: 220px;
-  padding: 0.4em 0.6em;
-  font-size: 1em;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-}
-#processor-overview #proc-stats {
-  font-size: 0.88em;
-  color: #666;
-  white-space: nowrap;
-}
-#processor-overview .proc-cards-container {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25em;
-}
-#processor-overview .proc-card {
-  border: 1px solid #e4e4e4;
-  border-radius: 3px;
-  overflow: hidden;
-}
-#processor-overview .proc-card-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.28em 0.6em;
-  cursor: pointer;
-  user-select: none;
-  background: #fafafa;
-}
-#processor-overview .proc-card-header:hover {
-  background: #f2f2f2;
-}
-#processor-overview .proc-name {
-  font-family: monospace;
-  font-size: 0.9em;
-}
-#processor-overview .proc-card-toggle {
-  font-size: 0.68em;
-  color: #aaa;
-  display: inline-block;
-  transition: transform 0.15s;
-}
-#processor-overview .proc-card.expanded .proc-card-toggle {
-  transform: rotate(90deg);
-}
-#processor-overview .proc-card-body {
-  display: none;
-  padding: 0.5em 0.8em;
-  border-top: 1px solid #e8e8e8;
-  background: #fff;
-  overflow-x: auto;
-}
-#processor-overview .proc-card.expanded .proc-card-body {
-  display: block;
-}
-#processor-overview .proc-description {
+{% include "_overview_common.css.jinja2" %}
+#algorithm-overview .alg-description {
   font-size: 0.9em;
   color: #444;
   margin: 0 0 0.6em 0;
 }
-#processor-overview .proc-props-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 0.88em;
-}
-#processor-overview .proc-props-table th {
-  text-align: left;
-  padding: 0.3em 0.5em;
-  border-bottom: 2px solid #ddd;
-  background: #f6f6f6;
-  font-size: 0.9em;
-}
-#processor-overview .proc-props-table td {
-  padding: 0.22em 0.5em;
-  border-bottom: 1px solid #f0f0f0;
-  vertical-align: top;
-}
-#processor-overview .proc-props-table tr:last-child td {
-  border-bottom: none;
-}
-#processor-overview .proc-props-table td:first-child {
+#algorithm-overview .alg-props-table td:nth-child(3) {
   white-space: nowrap;
-}
-#processor-overview .proc-props-table td:nth-child(2) {
-  white-space: nowrap;
-}
-#processor-overview .proc-props-table td:nth-child(3) {
-  white-space: nowrap;
-}
-#processor-overview .proc-no-results {
-  padding: 1.5em;
-  text-align: center;
-  color: #999;
-  font-style: italic;
 }
 </style>
 
-<div id="processor-overview">
-  <div class="proc-filter-bar">
-    <input type="text" id="proc-search" placeholder="Filter by name…" autocomplete="off" />
-    <span id="proc-stats">Showing {{ total_algorithms }} of {{ total_algorithms }} processors</span>
+<div id="algorithm-overview">
+  <div class="alg-filter-bar">
+    <input type="text" id="alg-search" placeholder="Filter by name…" autocomplete="off" />
+    <span id="alg-stats">Showing {{ total_algorithms }} of {{ total_algorithms }} processors</span>
   </div>
 
-  <div class="proc-cards-container">
+  <div class="alg-cards-container">
   {%- for package, processors in packages.items() %}
   {%- for proc in processors %}
-    <div class="proc-card" data-name="{{ proc.name | e }}">
-      <div class="proc-card-header">
-        <span class="proc-name">{{ proc.name | e }}</span>
-        <span class="proc-card-toggle">&#9658;</span>
+    <div class="alg-card" data-name="{{ proc.name | e }}">
+      <div class="alg-card-header">
+        <span class="alg-name">{{ proc.name | e }}</span>
+        <span class="alg-card-toggle">&#9658;</span>
       </div>
-      <div class="proc-card-body">
+      <div class="alg-card-body">
         {%- if proc.description %}
-        <p class="proc-description">{{ proc.description | e }}</p>
+        <p class="alg-description">{{ proc.description | e }}</p>
         {%- endif %}
         {%- if proc.properties %}
-        <table class="proc-props-table">
+        <table class="alg-props-table">
           <thead>
             <tr>
               <th>Parameter</th>
@@ -165,7 +65,7 @@ Total: **{{ total_algorithms }} processors**.
     </div>
   {%- endfor %}
   {%- endfor %}
-  <div class="proc-no-results" style="display:none;">No processors match your filter.</div>
+  <div class="alg-no-results" style="display:none;">No processors match your filter.</div>
   </div>
 </div>
 
@@ -173,15 +73,15 @@ Total: **{{ total_algorithms }} processors**.
 (function () {
   var totalProcessors = {{ total_algorithms }};
 
-  var searchInput = document.getElementById('proc-search');
-  var statsEl = document.getElementById('proc-stats');
-  var overview = document.getElementById('processor-overview');
-  var noResults = overview.querySelector('.proc-no-results');
+  var searchInput = document.getElementById('alg-search');
+  var statsEl = document.getElementById('alg-stats');
+  var overview = document.getElementById('algorithm-overview');
+  var noResults = overview.querySelector('.alg-no-results');
 
-  // Toggle processor card expand/collapse
-  overview.querySelectorAll('.proc-card-header').forEach(function (header) {
+  // Toggle card expand/collapse
+  overview.querySelectorAll('.alg-card-header').forEach(function (header) {
     header.addEventListener('click', function () {
-      header.closest('.proc-card').classList.toggle('expanded');
+      header.closest('.alg-card').classList.toggle('expanded');
     });
   });
 
@@ -202,7 +102,7 @@ Total: **{{ total_algorithms }} processors**.
     var query = searchInput.value.trim().toLowerCase();
     var visibleCards = 0;
 
-    overview.querySelectorAll('.proc-card').forEach(function (card) {
+    overview.querySelectorAll('.alg-card').forEach(function (card) {
       if (!query) {
         card.style.display = '';
         visibleCards++;
@@ -225,7 +125,7 @@ Total: **{{ total_algorithms }} processors**.
     var hash = decodeURIComponent(window.location.hash.slice(1));
     if (!hash) return;
     var target = null;
-    overview.querySelectorAll('.proc-card').forEach(function (c) {
+    overview.querySelectorAll('.alg-card').forEach(function (c) {
       if (c.dataset.name === hash) target = c;
     });
     if (!target) return;
