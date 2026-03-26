@@ -28,6 +28,7 @@
     :caption: Reference
 
     algorithm-overview.md
+    processor-overview.md
 
 .. toctree::
     :maxdepth: 2
