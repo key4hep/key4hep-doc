@@ -7,8 +7,6 @@ import pathlib
 
 from collections.abc import Iterable
 
-from filtering import load_filter_config, is_algorithm_excluded, filter_properties
-
 import Configurables
 
 from Gaudi import Configuration
@@ -82,20 +80,13 @@ def main(args):
     """Main"""
     cfgDb = Configuration.cfgDb
 
-    exclude_cfg = load_filter_config(args.filter_config)
-
     pkgs = {}
 
     for name, cfg in tqdm.tqdm(cfgDb.items()):
-        if is_algorithm_excluded(cfg, exclude_cfg):
-            continue
-
-        properties = filter_properties(get_properties(name), exclude_cfg)
-
         pkgs[name] = {
             "lib": cfg["lib"],
             "package": cfg["package"],
-            "properties": properties,
+            "properties": get_properties(name),
         }
 
     with open(args.outputfile, "w") as outfile:
@@ -115,12 +106,5 @@ if __name__ == "__main__":
         type=pathlib.Path,
         default="env_algorithms.json",
     )
-    parser.add_argument(
-        "--filter-config",
-        help="Path to a YAML file specifying filter rules (packages, libs, properties to exclude)",
-        type=pathlib.Path,
-        default=None,
-    )
-
     args = parser.parse_args()
     main(args)
