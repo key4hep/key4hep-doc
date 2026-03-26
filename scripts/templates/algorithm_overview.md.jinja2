@@ -9,30 +9,7 @@ Total: **{{ total_algorithms }} algorithms** across **{{ total_packages }} packa
 
 ```{raw} html
 <style>
-#algorithm-overview {
-  margin: 1em 0;
-}
-#algorithm-overview .alg-filter-bar {
-  display: flex;
-  align-items: center;
-  gap: 1em;
-  margin-bottom: 1em;
-  flex-wrap: wrap;
-}
-#algorithm-overview #alg-search {
-  flex: 1;
-  min-width: 220px;
-  padding: 0.4em 0.6em;
-  font-size: 1em;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-}
-#algorithm-overview #alg-stats {
-  font-size: 0.88em;
-  color: #666;
-  white-space: nowrap;
-}
+{% include "_overview_common.css.jinja2" %}
 #algorithm-overview .alg-package-group {
   margin-bottom: 0.6em;
   border: 1px solid #ddd;
@@ -73,33 +50,9 @@ Total: **{{ total_algorithms }} algorithms** across **{{ total_packages }} packa
 }
 #algorithm-overview .alg-cards-container {
   padding: 0.4em;
-  display: flex;
-  flex-direction: column;
-  gap: 0.25em;
 }
 #algorithm-overview .alg-package-group.collapsed .alg-cards-container {
   display: none;
-}
-#algorithm-overview .alg-card {
-  border: 1px solid #e4e4e4;
-  border-radius: 3px;
-  overflow: hidden;
-}
-#algorithm-overview .alg-card-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.28em 0.6em;
-  cursor: pointer;
-  user-select: none;
-  background: #fafafa;
-}
-#algorithm-overview .alg-card-header:hover {
-  background: #f2f2f2;
-}
-#algorithm-overview .alg-name {
-  font-family: monospace;
-  font-size: 0.9em;
 }
 #algorithm-overview .alg-card-right {
   display: flex;
@@ -113,57 +66,6 @@ Total: **{{ total_algorithms }} algorithms** across **{{ total_packages }} packa
   padding: 0.1em 0.45em;
   border-radius: 3px;
   font-family: monospace;
-}
-#algorithm-overview .alg-card-toggle {
-  font-size: 0.68em;
-  color: #aaa;
-  display: inline-block;
-  transition: transform 0.15s;
-}
-#algorithm-overview .alg-card.expanded .alg-card-toggle {
-  transform: rotate(90deg);
-}
-#algorithm-overview .alg-card-body {
-  display: none;
-  padding: 0.5em 0.8em;
-  border-top: 1px solid #e8e8e8;
-  background: #fff;
-  overflow-x: auto;
-}
-#algorithm-overview .alg-card.expanded .alg-card-body {
-  display: block;
-}
-#algorithm-overview .alg-props-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 0.88em;
-}
-#algorithm-overview .alg-props-table th {
-  text-align: left;
-  padding: 0.3em 0.5em;
-  border-bottom: 2px solid #ddd;
-  background: #f6f6f6;
-  font-size: 0.9em;
-}
-#algorithm-overview .alg-props-table td {
-  padding: 0.22em 0.5em;
-  border-bottom: 1px solid #f0f0f0;
-  vertical-align: top;
-}
-#algorithm-overview .alg-props-table tr:last-child td {
-  border-bottom: none;
-}
-#algorithm-overview .alg-props-table td:first-child {
-  white-space: nowrap;
-}
-#algorithm-overview .alg-props-table td:nth-child(2) {
-  white-space: nowrap;
-}
-#algorithm-overview .alg-no-results {
-  padding: 1.5em;
-  text-align: center;
-  color: #999;
-  font-style: italic;
 }
 </style>
 
