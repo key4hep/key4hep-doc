@@ -20,6 +20,11 @@ on:
         description: The PR number for identifying dependent PRs
         type: string
         required: false
+      alg-info-artifact-id:
+        description: The artifact ID to download for the algorithm overview
+        required: false
+        type: string
+        default: ''
 
 jobs:
   build:
@@ -38,6 +43,16 @@ jobs:
       run: |
           pip install --upgrade pip
           pip install -r requirements.txt
+    - name: Download algorithm overview
+      if: ${{ inputs.alg-info-artifact-id != '' }}
+      uses: actions/download-artifact@v5
+      with:
+        name: algorithm_overview-${{ inputs.ref }}
+        path: artifact_download/
+    - name: Move info
+      if: ${{ inputs.alg-info-artifact-id != '' }}
+      run: |
+        mv artifact_download/algorithm-overview.md docs/
     - name: Fetch external sources from upstream PR
       if: ${{ inputs.pr-number != '' }}
       env:

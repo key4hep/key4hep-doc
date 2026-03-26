@@ -1,24 +1,36 @@
 name: Build/Deploy PR preview
 
 on:
-  pull_request_target:
-    types:
-      - opened
-      - reopened
-      - synchronize
-      - closed
+  # pull_request:
+  #   types:
+  #     - opened
+  #     - reopened
+  #     - synchronize
+  #     - closed
+  workflow_dispatch:
+  push:
+    branches:
+     - gaudi-alg-doc
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
+  generate-alg-info:
+    uses: ./.github/workflows/generate_algorithm_overview.yml
+    with:
+      ref: ${{ github.event.pull_request.head.sha || github.sha }}
+
   build-preview:
+    needs: generate-alg-info
     uses: ./.github/workflows/build.yml
     with:
-      ref: ${{ github.event.pull_request.head.sha }}
+      ref: ${{ github.event.pull_request.head.sha || github.sha }}
       linkcheck: false
       pr-number: ${{ github.event.number }}
+      alg-info-artifact-id: ${{ needs.generate-alg-info.outputs.artifact-id }}
+
 
   linkcheck:
     if: contains(['opened', 'reopened', 'synchronize'], ${{ github.event.action }})
@@ -39,7 +51,7 @@ jobs:
     steps:
       - uses: actions/checkout@v5
         with:
-          ref: ${{ github.event.pull_request.head.sha }}
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
 
       - uses: actions/download-artifact@v5
         with:
@@ -54,13 +66,14 @@ jobs:
 
       - name: Deploy Preview
         uses: rossjrw/pr-preview-action@v1.6.2
-        if: contains(['opened', 'reopened', 'synchronize'], ${{ github.event.action }})
+        # if: contains(['opened', 'reopened', 'synchronize'], ${{ github.event.action }})
         with:
           source-dir: pr-preview-unpacked
           preview-branch: gh-pages
           umbrella-dir: pr-preview
+          pr-number: 132
           deploy-repository: "key4hep/key4hep-doc"
-          action: auto
+          action: deploy
 
       - name: Remove Preview
         uses: rossjrw/pr-preview-action@v1.6.2
