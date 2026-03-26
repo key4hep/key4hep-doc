@@ -15,9 +15,6 @@ book.pdf
 build
 linkcheck
 
-# generated documentation artifacts
-docs/algorithm-overview.md
-
 # external repositories
 k4marlinwrapper/
 k4simdelphes/
