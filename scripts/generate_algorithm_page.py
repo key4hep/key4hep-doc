@@ -77,6 +77,7 @@ def group_by_package(algorithms):
             {
                 "name": name,
                 "lib": info["lib"],
+                "description": info.get("description", ""),
                 "properties": info["properties"],
             }
         )

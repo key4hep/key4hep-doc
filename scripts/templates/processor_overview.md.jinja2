@@ -1,0 +1,244 @@
+# Marlin Processor Overview
+
+This page lists all Marlin processors available in the Key4hep software stack,
+collected from the active environment. Use the search box to filter by processor
+name. Click a processor name to reveal its parameters.
+
+Total: **{{ total_algorithms }} processors**.
+
+```{raw} html
+<style>
+#processor-overview {
+  margin: 1em 0;
+}
+#processor-overview .proc-filter-bar {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  margin-bottom: 1em;
+  flex-wrap: wrap;
+}
+#processor-overview #proc-search {
+  flex: 1;
+  min-width: 220px;
+  padding: 0.4em 0.6em;
+  font-size: 1em;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+#processor-overview #proc-stats {
+  font-size: 0.88em;
+  color: #666;
+  white-space: nowrap;
+}
+#processor-overview .proc-cards-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25em;
+}
+#processor-overview .proc-card {
+  border: 1px solid #e4e4e4;
+  border-radius: 3px;
+  overflow: hidden;
+}
+#processor-overview .proc-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.28em 0.6em;
+  cursor: pointer;
+  user-select: none;
+  background: #fafafa;
+}
+#processor-overview .proc-card-header:hover {
+  background: #f2f2f2;
+}
+#processor-overview .proc-name {
+  font-family: monospace;
+  font-size: 0.9em;
+}
+#processor-overview .proc-card-toggle {
+  font-size: 0.68em;
+  color: #aaa;
+  display: inline-block;
+  transition: transform 0.15s;
+}
+#processor-overview .proc-card.expanded .proc-card-toggle {
+  transform: rotate(90deg);
+}
+#processor-overview .proc-card-body {
+  display: none;
+  padding: 0.5em 0.8em;
+  border-top: 1px solid #e8e8e8;
+  background: #fff;
+  overflow-x: auto;
+}
+#processor-overview .proc-card.expanded .proc-card-body {
+  display: block;
+}
+#processor-overview .proc-description {
+  font-size: 0.9em;
+  color: #444;
+  margin: 0 0 0.6em 0;
+}
+#processor-overview .proc-props-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88em;
+}
+#processor-overview .proc-props-table th {
+  text-align: left;
+  padding: 0.3em 0.5em;
+  border-bottom: 2px solid #ddd;
+  background: #f6f6f6;
+  font-size: 0.9em;
+}
+#processor-overview .proc-props-table td {
+  padding: 0.22em 0.5em;
+  border-bottom: 1px solid #f0f0f0;
+  vertical-align: top;
+}
+#processor-overview .proc-props-table tr:last-child td {
+  border-bottom: none;
+}
+#processor-overview .proc-props-table td:first-child {
+  white-space: nowrap;
+}
+#processor-overview .proc-props-table td:nth-child(2) {
+  white-space: nowrap;
+}
+#processor-overview .proc-props-table td:nth-child(3) {
+  white-space: nowrap;
+}
+#processor-overview .proc-no-results {
+  padding: 1.5em;
+  text-align: center;
+  color: #999;
+  font-style: italic;
+}
+</style>
+
+<div id="processor-overview">
+  <div class="proc-filter-bar">
+    <input type="text" id="proc-search" placeholder="Filter by name…" autocomplete="off" />
+    <span id="proc-stats">Showing {{ total_algorithms }} of {{ total_algorithms }} processors</span>
+  </div>
+
+  <div class="proc-cards-container">
+  {%- for package, processors in packages.items() %}
+  {%- for proc in processors %}
+    <div class="proc-card" data-name="{{ proc.name | e }}">
+      <div class="proc-card-header">
+        <span class="proc-name">{{ proc.name | e }}</span>
+        <span class="proc-card-toggle">&#9658;</span>
+      </div>
+      <div class="proc-card-body">
+        {%- if proc.description %}
+        <p class="proc-description">{{ proc.description | e }}</p>
+        {%- endif %}
+        {%- if proc.properties %}
+        <table class="proc-props-table">
+          <thead>
+            <tr>
+              <th>Parameter</th>
+              <th>Type</th>
+              <th>Default</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            {%- for prop_name, prop_info in proc.properties.items() %}
+            <tr>
+              <td><code>{{ prop_name | e }}</code></td>
+              <td><code>{{ prop_info.get("type", "") | e }}</code></td>
+              <td>{{ prop_info.value | render_prop_value }}</td>
+              <td>{{ prop_info.description | e }}</td>
+            </tr>
+            {%- endfor %}
+          </tbody>
+        </table>
+        {%- else %}
+        <em>No parameters available.</em>
+        {%- endif %}
+      </div>
+    </div>
+  {%- endfor %}
+  {%- endfor %}
+  <div class="proc-no-results" style="display:none;">No processors match your filter.</div>
+  </div>
+</div>
+
+<script>
+(function () {
+  var totalProcessors = {{ total_algorithms }};
+
+  var searchInput = document.getElementById('proc-search');
+  var statsEl = document.getElementById('proc-stats');
+  var overview = document.getElementById('processor-overview');
+  var noResults = overview.querySelector('.proc-no-results');
+
+  // Toggle processor card expand/collapse
+  overview.querySelectorAll('.proc-card-header').forEach(function (header) {
+    header.addEventListener('click', function () {
+      header.closest('.proc-card').classList.toggle('expanded');
+    });
+  });
+
+  function debounce(fn, delay) {
+    var timer;
+    return function () {
+      clearTimeout(timer);
+      timer = setTimeout(fn, delay);
+    };
+  }
+
+  function updateStats(visibleCards) {
+    statsEl.textContent =
+      'Showing ' + visibleCards + ' of ' + totalProcessors + ' processors';
+  }
+
+  function filterCards() {
+    var query = searchInput.value.trim().toLowerCase();
+    var visibleCards = 0;
+
+    overview.querySelectorAll('.proc-card').forEach(function (card) {
+      if (!query) {
+        card.style.display = '';
+        visibleCards++;
+        return;
+      }
+      var name = (card.dataset.name || '').toLowerCase();
+      var matches = name.indexOf(query) !== -1;
+      card.style.display = matches ? '' : 'none';
+      if (matches) visibleCards++;
+    });
+
+    noResults.style.display = visibleCards === 0 ? '' : 'none';
+    updateStats(visibleCards);
+  }
+
+  searchInput.addEventListener('input', debounce(filterCards, 200));
+
+  // URL hash deep-linking: #ProcessorName expands and scrolls to that card
+  function handleHash() {
+    var hash = decodeURIComponent(window.location.hash.slice(1));
+    if (!hash) return;
+    var target = null;
+    overview.querySelectorAll('.proc-card').forEach(function (c) {
+      if (c.dataset.name === hash) target = c;
+    });
+    if (!target) return;
+    target.classList.add('expanded');
+    setTimeout(function () {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 100);
+  }
+
+  window.addEventListener('hashchange', handleHash);
+  handleHash();
+
+  updateStats(totalProcessors);
+})();
+</script>
+```
