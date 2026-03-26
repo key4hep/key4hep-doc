@@ -29,7 +29,6 @@ logging.getLogger("ConfigurableDb").setLevel(logging.CRITICAL)
 
 def _filter_for_json(value):
     """Filter value representation such that it can be dumped to json"""
-
     if isinstance(value, set):
         # Sets cannot be json serialized and empty sets get converted to 'set()`
         # by turning them to strings`
@@ -51,7 +50,7 @@ def _filter_for_json(value):
     ):
         return f"{value}"
 
-    if isinstance(value, Iterable):
+    if isinstance(value, Iterable) and not isinstance(value, str):
         return [_filter_for_json(v) for v in value]
 
     return value
