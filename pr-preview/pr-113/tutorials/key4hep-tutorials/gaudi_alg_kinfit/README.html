@@ -9,6 +9,7 @@
       <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/copybutton.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css" type="text/css" />
+    <link rel="shortcut icon" href="../../../_static/favicon.png"/>
   <!--[if lt IE 9]>
     <script src="../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -38,6 +39,7 @@
           
           <a href="../../../index.html" class="icon icon-home">
             Key4hep
+              <img src="../../../_static/logo.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -75,7 +77,6 @@
 <p class="caption" role="heading"><span class="caption-text">More Information</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../talks-and-presentations/README.html">Talks and Presentations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../call-for-logos/README.html">Call for logos</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Community Resources</span></p>
 <ul>
@@ -1339,6 +1340,28 @@ the output (as we have configured the <code class="docutils literal notranslate"
 <span class="go">  + OUTPUT &#39;FilteredParticles&#39;</span>
 <span class="go">[...]</span>
 </pre></div>
+</div>
+</div>
+</details><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+My algorithm is configured correctly but still not run<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">In case you have <a class="reference internal" href="#algorithm-in-top-alg"><span class="std std-ref">correctly configured your algorithm</span></a>
+but it looks like the <code class="docutils literal notranslate"><span class="pre">operator()</span></code> is never entered you most likely have to
+adapt your <em>event selection</em> in the <code class="docutils literal notranslate"><span class="pre">ApplicationMgr</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ApplicationMgr</span><span class="p">(</span>
+    <span class="n">EvtSel</span><span class="o">=</span><span class="s2">&quot;NONE&quot;</span><span class="p">,</span>
+    <span class="c1"># other arguments</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p class="sd-card-text">It is important to use <code class="docutils literal notranslate"><span class="pre">NONE</span></code> in all-caps here as otherwise no algorithm will run
+during the event loop.</p>
 </div>
 </div>
 </details><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">

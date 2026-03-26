@@ -82,7 +82,6 @@ European Union's Horizon 2020 Research and Innovation programme under Grant Agre
     :hidden:
 
     talks-and-presentations/README.md
-    call-for-logos/README.md
 
 .. toctree::
     :maxdepth: 2
