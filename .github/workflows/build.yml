@@ -43,10 +43,10 @@ jobs:
       env:
         GH_TOKEN: ${{ github.token }}
       run: |
-        bash .github/scripts/fetch_upstream_pr_sources.sh ${{ inputs.pr-number }}
+        bash scripts/fetch_upstream_pr_sources.sh ${{ inputs.pr-number }}
     - name: Fetch external sources
       run: |
-        bash .github/scripts/fetch_external_sources.sh
+        bash scripts/fetch_external_sources.sh
     - name: Build documentation
       run: |
         sphinx-build -M html docs build
