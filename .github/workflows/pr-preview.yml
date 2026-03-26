@@ -65,7 +65,7 @@ jobs:
           rm -r doc_artifact
 
       - name: Deploy Preview
-        uses: rossjrw/pr-preview-action@v1.6.2
+        uses: rossjrw/pr-preview-action@v1.8
         # if: contains(['opened', 'reopened', 'synchronize'], ${{ github.event.action }})
         with:
           source-dir: pr-preview-unpacked
@@ -76,7 +76,7 @@ jobs:
           action: deploy
 
       - name: Remove Preview
-        uses: rossjrw/pr-preview-action@v1.6.2
+        uses: rossjrw/pr-preview-action@v1.8
         if: github.event.action == 'closed' && !github.event.pull_request.merged
         with:
           source-dir: pr-preview-unpacked
