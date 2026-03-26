@@ -120,8 +120,8 @@
 <p>Two builds with the key4hep stack are distributed on cvmfs. The releases happen
 every few months on demand (for example, if there is a new important feature or
 a breaking change) and at the moment AlmaLinux 9 (EL9, Rocky Linux 9), Ubuntu
-22.04 are supported. Some older releases also were built for CentOS7. For
-sourcing the releases, run:</p>
+Ubuntu 24.04 are supported. Some older releases also were built for CentOS7 and
+Ubuntu 22.04. For sourcing the releases, run:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>/cvmfs/sw.hsf.org/key4hep/setup.sh
 </pre></div>
 </div>
@@ -132,10 +132,13 @@ the latest version of most of the packages are available:</p>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">setup.sh</span></code> script always points to the latest build and it will change
 without warning. However, after sourcing the script some information will be
-displayed with instructions on how to reproduce the current environment.
-<strong>Nightly builds are intended for development and testing and they will be
+displayed with instructions on how to reproduce the current environment.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Nightly builds are intended for development and testing and they will be
 deleted after some time from <code class="docutils literal notranslate"><span class="pre">/cvmfs</span></code>. They will also introduce new features
-unannounced, so don’t use these for anything else than development!</strong></p>
+unannounced, so don’t use these for anything else than development!</p>
+</div>
 </section>
 </section>
 

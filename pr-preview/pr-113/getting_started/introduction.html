@@ -53,8 +53,8 @@
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#notable-stack-components">Notable stack components</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#data-model">Data-model</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#framework">Framework</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#event-data-model">Event Data Model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#event-processing-framework">Event Processing Framework</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#detector-description">Detector description</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#interoperability-with-ilcsoft">Interoperability with iLCSoft</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#infrastructure">Infrastructure</a></li>
@@ -124,26 +124,62 @@
 <h1>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h1>
 <section id="notable-stack-components">
 <h2>Notable stack components<a class="headerlink" href="#notable-stack-components" title="Link to this heading"></a></h2>
-<p>The Key4hep software stack includes a variety of components, featuring both general-purpose solutions and elements specific to High Energy Physics (HEP). It integrates well-established HEP libraries like ROOT, Geant4, DD4hep, and Gaudi, along with components developed specifically to support the stack.</p>
-<section id="data-model">
-<h3>Data-model<a class="headerlink" href="#data-model" title="Link to this heading"></a></h3>
-<p>A data model defines the structures needed to represent and store event information in a persistent store. The key4hep software stack uses a common event data model called EDM4hep, which is used by various stack components. EDM4hep is implemented with the PODIO data model generator.</p>
+<p>The Key4hep software stack includes a variety of components, featuring both
+general-purpose solutions and elements specific to High Energy Physics (HEP). It
+integrates well-established HEP libraries like ROOT, Geant4, DD4hep, and Gaudi,
+along with components developed specifically to support the stack.</p>
+<section id="event-data-model">
+<h3>Event Data Model<a class="headerlink" href="#event-data-model" title="Link to this heading"></a></h3>
+<p>The Event Data Model (EDM) defines the structures needed to represent and store
+event information. The Key4hep software stack uses a common EDM called
+<a class="reference external" href="https://edm4hep.web.cern.ch">EDM4hep</a>, which is used by various stack
+components. EDM4hep is implemented with the
+<a class="reference external" href="https://key4hep.web.cern.ch/podio">PODIO</a> data model generator.</p>
 </section>
-<section id="framework">
-<h3>Framework<a class="headerlink" href="#framework" title="Link to this heading"></a></h3>
-<p>An event-processing application framework allows for defining and orchestrating the execution of complex workflows, such as event reconstruction, including handling data transformations and their interdependencies. For its processing framework, Key4hep adopted Gaudi, a widely used framework established in experiments like LHCb and ATLAS. To support Gaudi’s integration within the stack, Key4hep provides k4FWCore, which enables the use of EDM4hep in Gaudi-based applications.</p>
+<section id="event-processing-framework">
+<h3>Event Processing Framework<a class="headerlink" href="#event-processing-framework" title="Link to this heading"></a></h3>
+<p>An event processing framework, sometimes also just referred to as <em>framework</em>,
+allows for defining and orchestrating the execution of complex workflows, such
+as event reconstruction, including handling data transformations and their
+interdependencies. For its framework, Key4hep adopted Gaudi, a widely used
+framework established in experiments like LHCb and ATLAS. To support Gaudi’s
+integration within the stack, Key4hep provides
+<a class="reference external" href="https://github.com/key4hep/k4FWCore">k4FWCore</a>, which enables the use of
+EDM4hep in Gaudi based applications.</p>
 </section>
 <section id="detector-description">
 <h3>Detector description<a class="headerlink" href="#detector-description" title="Link to this heading"></a></h3>
-<p>Key4hep uses the DD4hep toolkit for detector description. DD4hep is a well-established tool in the HEP community, providing a unified approach to describing a detector’s geometry, materials, readout, and calibration.</p>
+<p>Key4hep uses the toolkit for detector description.
+<a class="reference external" href="https://dd4hep.web.cern.ch">DD4hep</a> is a well-established tool in the HEP
+community, providing a unified approach to describing a detector’s geometry,
+materials, readout, and calibration.</p>
 </section>
 <section id="interoperability-with-ilcsoft">
 <h3>Interoperability with iLCSoft<a class="headerlink" href="#interoperability-with-ilcsoft" title="Link to this heading"></a></h3>
-<p>Key4hep draws significant inspiration from iLCSoft, a common software stack widely used by the linear collider community. To support interoperability and simplify the transition between the two stacks, several tools have been developed. Among them, k4EDM4hep2LcioConv facilitates the conversion between EDM4hep and the LCIO data model used in iLCSoft, while k4MarlinWrapper enables the integration of processors from the iLCSoft framework with Gaudi-based frameworks.</p>
+<p>Key4hep draws significant inspiration from iLCSoft, a common software stack
+widely used by the linear collider community. To support interoperability and
+simplify the transition between the two stacks, several tools have been
+developed. Among them,
+<a class="reference external" href="https://github.com/key4hep/k4EDM4hep2LcioConv">k4EDM4hep2LcioConv</a> facilitates
+the conversion between EDM4hep and the LCIO data model used in iLCSoft, while
+k4MarlinWrapper enables the integration of processors from the iLCSoft framework
+with Gaudi-based frameworks.</p>
 </section>
 <section id="infrastructure">
 <h3>Infrastructure<a class="headerlink" href="#infrastructure" title="Link to this heading"></a></h3>
-<p>Key4hep uses the Spack package manager to manage the compilation and deployment of its packages. Spack allows experiments to share build recipes, enabling any experiment to build the stack independently or extend it for their own needs. In addition, the Key4hep stack is also built centrally and deployed to the CVMFS, from where it can be <a class="reference internal" href="setup.html"><span class="std std-doc">easily accessed</span></a>.</p>
+<p>Key4hep uses the <a class="reference external" href="https://spack.io/">Spack package manager</a> to manage the
+compilation and deployment of its packages. Spack allows experiments to share
+build recipes, enabling any experiment to build the stack independently or
+extend it for their own needs. In addition, the Key4hep stack is also built
+centrally and deployed to the CVMFS, from where it can be <a class="reference internal" href="setup.html"><span class="std std-doc">easily
+accessed</span></a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>We are currently switching the way we build and deploy the Key4hep software
+stack. For users this switch will be mostly transparent and for a transition
+period the spack basded setup and installation will remain available in
+parallel.</p>
+</div>
 </section>
 </section>
 </section>
