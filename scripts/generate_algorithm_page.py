@@ -83,7 +83,7 @@ def group_by_package(algorithms):
         )
     for pkg in groups:
         groups[pkg].sort(key=lambda a: a["name"])
-    return dict(sorted(groups.items()))
+    return dict(sorted(groups.items(), key=lambda item: (item[0] == "", item[0])))
 
 
 def _render_prop_value(value):
