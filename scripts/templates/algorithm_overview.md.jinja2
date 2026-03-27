@@ -10,62 +10,13 @@ Total: **{{ total_algorithms }} algorithms** across **{{ total_packages }} packa
 ```{raw} html
 <style>
 {% include "_overview_common.css.jinja2" %}
-#algorithm-overview .alg-package-group {
-  margin-bottom: 0.6em;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  overflow: hidden;
+#algorithm-overview .alg-props-table td:nth-child(2) {
+  max-width: 20em;
 }
-#algorithm-overview .alg-package-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.45em 0.8em;
-  background: #f0f0f0;
-  cursor: pointer;
-  user-select: none;
-}
-#algorithm-overview .alg-package-header:hover {
-  background: #e5e5e5;
-}
-#algorithm-overview .alg-package-name {
-  font-weight: bold;
-  font-family: monospace;
-  font-size: 0.95em;
-}
-#algorithm-overview .alg-package-meta {
-  display: flex;
-  align-items: center;
-  gap: 0.5em;
-  font-size: 0.83em;
-  color: #555;
-}
-#algorithm-overview .alg-package-toggle {
-  display: inline-block;
-  transition: transform 0.15s;
-  font-size: 0.75em;
-}
-#algorithm-overview .alg-package-group.collapsed .alg-package-toggle {
-  transform: rotate(-90deg);
-}
-#algorithm-overview .alg-cards-container {
-  padding: 0.4em;
-}
-#algorithm-overview .alg-package-group.collapsed .alg-cards-container {
-  display: none;
-}
-#algorithm-overview .alg-card-right {
-  display: flex;
-  align-items: center;
-  gap: 0.4em;
-}
-#algorithm-overview .alg-lib-badge {
-  font-size: 0.73em;
-  background: #ddeeff;
-  color: #224;
-  padding: 0.1em 0.45em;
-  border-radius: 3px;
-  font-family: monospace;
+#algorithm-overview .alg-props-table td:nth-child(2) code {
+  white-space: pre-wrap;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 </style>
 
@@ -78,7 +29,7 @@ Total: **{{ total_algorithms }} algorithms** across **{{ total_packages }} packa
   {%- for package, algorithms in packages.items() %}
   <div class="alg-package-group" data-package="{{ package | e }}">
     <div class="alg-package-header">
-      <span class="alg-package-name">{{ package | e }}</span>
+      <span class="alg-package-name">{{ (package if package else "(unknown)") | e }}</span>
       <span class="alg-package-meta">
         <span class="alg-package-count">{{ algorithms | length }} algorithm{%- if algorithms | length != 1 %}s{%- endif %}</span>
         <span class="alg-package-toggle">&#9660;</span>
@@ -90,11 +41,16 @@ Total: **{{ total_algorithms }} algorithms** across **{{ total_packages }} packa
         <div class="alg-card-header">
           <span class="alg-name">{{ alg.name | e }}</span>
           <span class="alg-card-right">
+            {%- if alg.lib %}
             <span class="alg-lib-badge">{{ alg.lib | e }}</span>
+            {%- endif %}
             <span class="alg-card-toggle">&#9658;</span>
           </span>
         </div>
         <div class="alg-card-body">
+          {%- if alg.description %}
+          <p class="alg-description">{{ alg.description | e }}</p>
+          {%- endif %}
           {%- if alg.properties %}
           <table class="alg-props-table">
             <thead>
@@ -126,98 +82,6 @@ Total: **{{ total_algorithms }} algorithms** across **{{ total_packages }} packa
 </div>
 
 <script>
-(function () {
-  var totalAlgorithms = {{ total_algorithms }};
-  var totalPackages = {{ total_packages }};
-
-  var searchInput = document.getElementById('alg-search');
-  var statsEl = document.getElementById('alg-stats');
-  var overview = document.getElementById('algorithm-overview');
-
-  // Toggle package group collapse/expand
-  overview.querySelectorAll('.alg-package-header').forEach(function (header) {
-    header.addEventListener('click', function () {
-      header.closest('.alg-package-group').classList.toggle('collapsed');
-    });
-  });
-
-  // Toggle algorithm card expand/collapse
-  overview.querySelectorAll('.alg-card-header').forEach(function (header) {
-    header.addEventListener('click', function () {
-      header.closest('.alg-card').classList.toggle('expanded');
-    });
-  });
-
-  function debounce(fn, delay) {
-    var timer;
-    return function () {
-      clearTimeout(timer);
-      timer = setTimeout(fn, delay);
-    };
-  }
-
-  function updateStats(visibleCards, visiblePackages) {
-    statsEl.textContent =
-      'Showing ' + visibleCards + ' of ' + totalAlgorithms +
-      ' algorithms in ' + visiblePackages + ' packages';
-  }
-
-  function filterCards() {
-    var query = searchInput.value.trim().toLowerCase();
-    var visibleCards = 0;
-
-    overview.querySelectorAll('.alg-card').forEach(function (card) {
-      if (!query) {
-        card.style.display = '';
-        visibleCards++;
-        return;
-      }
-      var name = (card.dataset.name || '').toLowerCase();
-      var lib  = (card.dataset.lib  || '').toLowerCase();
-      var pkg  = (card.dataset.package || '').toLowerCase();
-      var matches = name.indexOf(query) !== -1 ||
-                    lib.indexOf(query)  !== -1 ||
-                    pkg.indexOf(query)  !== -1;
-      card.style.display = matches ? '' : 'none';
-      if (matches) visibleCards++;
-    });
-
-    var visiblePackages = 0;
-    overview.querySelectorAll('.alg-package-group').forEach(function (group) {
-      var anyVisible = false;
-      group.querySelectorAll('.alg-card').forEach(function (c) {
-        if (c.style.display !== 'none') anyVisible = true;
-      });
-      group.style.display = anyVisible ? '' : 'none';
-      if (anyVisible) visiblePackages++;
-    });
-
-    updateStats(visibleCards, visiblePackages);
-  }
-
-  searchInput.addEventListener('input', debounce(filterCards, 200));
-
-  // URL hash deep-linking: #AlgorithmName expands and scrolls to that card
-  function handleHash() {
-    var hash = decodeURIComponent(window.location.hash.slice(1));
-    if (!hash) return;
-    var target = null;
-    overview.querySelectorAll('.alg-card').forEach(function (c) {
-      if (c.dataset.name === hash) target = c;
-    });
-    if (!target) return;
-    var group = target.closest('.alg-package-group');
-    if (group) group.classList.remove('collapsed');
-    target.classList.add('expanded');
-    setTimeout(function () {
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }, 100);
-  }
-
-  window.addEventListener('hashchange', handleHash);
-  handleHash();
-
-  updateStats(totalAlgorithms, totalPackages);
-})();
+{% include "_overview_common.js.jinja2" %}
 </script>
 ```

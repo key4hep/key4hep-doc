@@ -22,10 +22,70 @@
   color: #666;
   white-space: nowrap;
 }
+#algorithm-overview .alg-package-group {
+  margin-bottom: 0.6em;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  overflow: hidden;
+}
+#algorithm-overview .alg-package-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.45em 0.8em;
+  background: #f0f0f0;
+  cursor: pointer;
+  user-select: none;
+}
+#algorithm-overview .alg-package-header:hover {
+  background: #e5e5e5;
+}
+#algorithm-overview .alg-package-name {
+  font-weight: bold;
+  font-family: monospace;
+  font-size: 0.95em;
+}
+#algorithm-overview .alg-package-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  font-size: 0.83em;
+  color: #555;
+}
+#algorithm-overview .alg-package-toggle {
+  display: inline-block;
+  transition: transform 0.15s;
+  font-size: 0.75em;
+}
+#algorithm-overview .alg-package-group.collapsed .alg-package-toggle {
+  transform: rotate(-90deg);
+}
 #algorithm-overview .alg-cards-container {
   display: flex;
   flex-direction: column;
   gap: 0.25em;
+  padding: 0.4em;
+}
+#algorithm-overview .alg-package-group.collapsed .alg-cards-container {
+  display: none;
+}
+#algorithm-overview .alg-card-right {
+  display: flex;
+  align-items: center;
+  gap: 0.4em;
+}
+#algorithm-overview .alg-lib-badge {
+  font-size: 0.73em;
+  background: #ddeeff;
+  color: #224;
+  padding: 0.1em 0.45em;
+  border-radius: 3px;
+  font-family: monospace;
+}
+#algorithm-overview .alg-description {
+  font-size: 0.9em;
+  color: #444;
+  margin: 0 0 0.6em 0;
 }
 #algorithm-overview .alg-card {
   border: 1px solid #e4e4e4;

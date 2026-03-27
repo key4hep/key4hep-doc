@@ -2,18 +2,14 @@
 
 This page lists all Marlin processors available in the Key4hep software stack,
 collected from the active environment. Use the search box to filter by processor
-name. Click a processor name to reveal its parameters.
+name, package, or library. Click a package header to collapse or expand it; click
+a processor name to reveal its parameters.
 
-Total: **{{ total_algorithms }} processors**.
+Total: **{{ total_algorithms }} processors** across **{{ total_packages }} packages**.
 
 ```{raw} html
 <style>
 {% include "_overview_common.css.jinja2" %}
-#algorithm-overview .alg-description {
-  font-size: 0.9em;
-  color: #444;
-  margin: 0 0 0.6em 0;
-}
 #algorithm-overview .alg-props-table td:nth-child(3) {
   max-width: 20em;
 }
@@ -26,124 +22,68 @@ Total: **{{ total_algorithms }} processors**.
 
 <div id="algorithm-overview">
   <div class="alg-filter-bar">
-    <input type="text" id="alg-search" placeholder="Filter by name…" autocomplete="off" />
-    <span id="alg-stats">Showing {{ total_algorithms }} of {{ total_algorithms }} processors</span>
+    <input type="text" id="alg-search" placeholder="Filter by name, package, or library…" autocomplete="off" />
+    <span id="alg-stats">Showing {{ total_algorithms }} of {{ total_algorithms }} algorithms in {{ total_packages }} packages</span>
   </div>
 
-  <div class="alg-cards-container">
   {%- for package, processors in packages.items() %}
-  {%- for proc in processors %}
-    <div class="alg-card" data-name="{{ proc.name | e }}">
-      <div class="alg-card-header">
-        <span class="alg-name">{{ proc.name | e }}</span>
-        <span class="alg-card-toggle">&#9658;</span>
-      </div>
-      <div class="alg-card-body">
-        {%- if proc.description %}
-        <p class="alg-description">{{ proc.description | e }}</p>
-        {%- endif %}
-        {%- if proc.properties %}
-        <table class="alg-props-table">
-          <thead>
-            <tr>
-              <th>Parameter</th>
-              <th>Type</th>
-              <th>Default</th>
-              <th>Description</th>
-            </tr>
-          </thead>
-          <tbody>
-            {%- for prop_name, prop_info in proc.properties.items() %}
-            <tr>
-              <td><code>{{ prop_name | e }}</code></td>
-              <td><code>{{ prop_info.get("type", "") | e }}</code></td>
-              <td>{{ prop_info.value | render_prop_value }}</td>
-              <td>{{ prop_info.description | e }}</td>
-            </tr>
-            {%- endfor %}
-          </tbody>
-        </table>
-        {%- else %}
-        <em>No parameters available.</em>
-        {%- endif %}
-      </div>
+  <div class="alg-package-group" data-package="{{ package | e }}">
+    <div class="alg-package-header">
+      <span class="alg-package-name">{{ (package if package else "(unknown)") | e }}</span>
+      <span class="alg-package-meta">
+        <span class="alg-package-count">{{ processors | length }} algorithm{%- if processors | length != 1 %}s{%- endif %}</span>
+        <span class="alg-package-toggle">&#9660;</span>
+      </span>
     </div>
-  {%- endfor %}
-  {%- endfor %}
-  <div class="alg-no-results" style="display:none;">No processors match your filter.</div>
+    <div class="alg-cards-container">
+      {%- for proc in processors %}
+      <div class="alg-card" data-name="{{ proc.name | e }}" data-lib="{{ proc.lib | e }}" data-package="{{ package | e }}">
+        <div class="alg-card-header">
+          <span class="alg-name">{{ proc.name | e }}</span>
+          <span class="alg-card-right">
+            {%- if proc.lib %}
+            <span class="alg-lib-badge">{{ proc.lib | e }}</span>
+            {%- endif %}
+            <span class="alg-card-toggle">&#9658;</span>
+          </span>
+        </div>
+        <div class="alg-card-body">
+          {%- if proc.description %}
+          <p class="alg-description">{{ proc.description | e }}</p>
+          {%- endif %}
+          {%- if proc.properties %}
+          <table class="alg-props-table">
+            <thead>
+              <tr>
+                <th>Parameter</th>
+                <th>Type</th>
+                <th>Default</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              {%- for prop_name, prop_info in proc.properties.items() %}
+              <tr>
+                <td><code>{{ prop_name | e }}</code></td>
+                <td><code>{{ prop_info.get("type", "") | e }}</code></td>
+                <td>{{ prop_info.value | render_prop_value }}</td>
+                <td>{{ prop_info.description | e }}</td>
+              </tr>
+              {%- endfor %}
+            </tbody>
+          </table>
+          {%- else %}
+          <em>No parameters available.</em>
+          {%- endif %}
+        </div>
+      </div>
+      {%- endfor %}
+    </div>
   </div>
+  {%- endfor %}
 </div>
 
 <script>
-(function () {
-  var totalProcessors = {{ total_algorithms }};
-
-  var searchInput = document.getElementById('alg-search');
-  var statsEl = document.getElementById('alg-stats');
-  var overview = document.getElementById('algorithm-overview');
-  var noResults = overview.querySelector('.alg-no-results');
-
-  // Toggle card expand/collapse
-  overview.querySelectorAll('.alg-card-header').forEach(function (header) {
-    header.addEventListener('click', function () {
-      header.closest('.alg-card').classList.toggle('expanded');
-    });
-  });
-
-  function debounce(fn, delay) {
-    var timer;
-    return function () {
-      clearTimeout(timer);
-      timer = setTimeout(fn, delay);
-    };
-  }
-
-  function updateStats(visibleCards) {
-    statsEl.textContent =
-      'Showing ' + visibleCards + ' of ' + totalProcessors + ' processors';
-  }
-
-  function filterCards() {
-    var query = searchInput.value.trim().toLowerCase();
-    var visibleCards = 0;
-
-    overview.querySelectorAll('.alg-card').forEach(function (card) {
-      if (!query) {
-        card.style.display = '';
-        visibleCards++;
-        return;
-      }
-      var name = (card.dataset.name || '').toLowerCase();
-      var matches = name.indexOf(query) !== -1;
-      card.style.display = matches ? '' : 'none';
-      if (matches) visibleCards++;
-    });
-
-    noResults.style.display = visibleCards === 0 ? '' : 'none';
-    updateStats(visibleCards);
-  }
-
-  searchInput.addEventListener('input', debounce(filterCards, 200));
-
-  // URL hash deep-linking: #ProcessorName expands and scrolls to that card
-  function handleHash() {
-    var hash = decodeURIComponent(window.location.hash.slice(1));
-    if (!hash) return;
-    var target = null;
-    overview.querySelectorAll('.alg-card').forEach(function (c) {
-      if (c.dataset.name === hash) target = c;
-    });
-    if (!target) return;
-    target.classList.add('expanded');
-    setTimeout(function () {
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }, 100);
-  }
-
-  window.addEventListener('hashchange', handleHash);
-  handleHash();
-
-  updateStats(totalProcessors);
-})();
+{% include "_overview_common.js.jinja2" %}
 </script>
 ```
