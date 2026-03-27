@@ -55,6 +55,60 @@ def comment_text(node) -> str:
     return (node.text or "").strip()
 
 
+_LIBRARY_PATH_RE = re.compile(r"<!-- Loading shared library : (.*) \((.*)\)-->")
+
+
+def get_loaded_libs(raw: bytes) -> list:
+    """Parse the loaded libraries from the Marlin -x dump and return a list of them"""
+    libs = []
+    for line in raw.splitlines():
+        decoded = line.decode().strip()
+        if "<marlin>" in decoded:
+            break
+        lib_match = _LIBRARY_PATH_RE.match(decoded)
+        if lib_match:
+            libs.append(lib_match.group(1))
+    return libs
+
+
+# We try several possibilities for filtering processors
+_PROC_RES = [
+    re.compile(r"(\S+)::newProcessor\(\)"),
+    re.compile(r"(\S+)::processEvent\(EVENT::LCEvent\*\)"),
+]
+
+
+def extract_procs_from_libs(loaded_libs):
+    """Extract the processors that are defined in each library and return a dict
+    mapping each processor to its library"""
+    processor_libs = {}
+    for lib in loaded_libs:
+        name = pathlib.Path(lib).name
+        lib_stem = re.sub(r"\.so.*$", "", name)
+        if lib_stem.startswith("lib"):
+            lib_stem = lib_stem[3:]
+
+        result = subprocess.run(
+            ["readelf", "-sWC", lib],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.DEVNULL,
+        )
+
+        for rawline in result.stdout.splitlines():
+            line = rawline.decode()
+            for rgx in _PROC_RES:
+                proc_match = rgx.search(line)
+                if proc_match:
+                    processor_libs[proc_match.group(1)] = lib_stem
+                    # Strip of namespaces etc because they usually do not show
+                    # up in the name that is used to register them with the
+                    # MarlinProcessorMgr
+                    processor_libs[proc_match.group(1).split("::")[-1]] = lib_stem
+                    break
+
+    return processor_libs
+
+
 # Matches commented-out parameters, e.g.:
 #   <!--parameter name="Verbosity" type="string">DEBUG </parameter-->
 _COMMENTED_PARAM_RE = re.compile(
@@ -62,9 +116,9 @@ _COMMENTED_PARAM_RE = re.compile(
 )
 
 
-def parse_processors(xml_bytes: bytes) -> dict:
+def parse_processors(xml_bytes: bytes, processor_libs: dict) -> dict:
     """Parse processor definitions from Marlin -x XML output and return a json
-    dictionary
+    dictionary. processor_libs maps processor type names to their library stem.
     """
     root = etree.parse(BytesIO(xml_bytes)).getroot()
     processors = {}
@@ -132,9 +186,10 @@ def parse_processors(xml_bytes: bytes) -> dict:
             else:
                 prev_comment = ""
 
+        lib = processor_libs.get(proc_type, "")
         processors[proc_type] = {
-            "lib": "",
-            "package": "",
+            "lib": lib,
+            "package": lib,
             "description": proc_description,
             "properties": properties,
         }
@@ -150,7 +205,12 @@ def main(args):
         print("ERROR: No XML content found in Marlin output.", file=sys.stderr)
         sys.exit(1)
 
-    processors = parse_processors(xml_bytes)
+    loaded_libs = get_loaded_libs(raw)
+    processor_libs = extract_procs_from_libs(loaded_libs)
+    print(processor_libs)
+    print(len(processor_libs))
+
+    processors = parse_processors(xml_bytes, processor_libs)
 
     with open(args.outputfile, "w") as outfile:
         json.dump(processors, outfile)
