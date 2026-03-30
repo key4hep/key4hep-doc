@@ -12,6 +12,7 @@ copyright = "2025, Key4hep"
 author = "Key4hep"
 html_static_path = ["static"]
 html_css_files = ["overview.css"]
+html_js_files = [("overview.js", {"defer": "defer"})]
 html_logo = "static/logo.png"
 html_favicon = "static/favicon.png"
 

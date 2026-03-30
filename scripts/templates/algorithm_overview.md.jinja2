@@ -1,7 +1,7 @@
 Total: **{{ total_algorithms }} {{ item_label }}s** across **{{ total_packages }} packages**.
 
 ```{raw} html
-<div id="algorithm-overview">
+<div id="algorithm-overview" data-total="{{ total_algorithms }}" data-packages="{{ total_packages }}">
   <div class="alg-filter-bar">
     <input type="text" id="alg-search" placeholder="Filter by name, package, or library…" autocomplete="off" />
     <span id="alg-stats">Showing {{ total_algorithms }} of {{ total_algorithms }} {{ item_label }}s in {{ total_packages }} packages</span>
@@ -64,7 +64,4 @@ Total: **{{ total_algorithms }} {{ item_label }}s** across **{{ total_packages }
   {%- endfor %}
 </div>
 
-<script>
-{% include "_overview_common.js.jinja2" %}
-</script>
 ```

@@ -1,10 +1,12 @@
 (function () {
-  var totalItems = {{ total_algorithms }};
-  var totalPackages = {{ total_packages }};
+  var overview = document.getElementById('algorithm-overview');
+  if (!overview) return;
+
+  var totalItems = parseInt(overview.dataset.total, 10);
+  var totalPackages = parseInt(overview.dataset.packages, 10);
 
   var searchInput = document.getElementById('alg-search');
   var statsEl = document.getElementById('alg-stats');
-  var overview = document.getElementById('algorithm-overview');
 
   // Toggle package group collapse/expand
   overview.querySelectorAll('.alg-package-header').forEach(function (header) {
