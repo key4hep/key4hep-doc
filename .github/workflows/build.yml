@@ -21,9 +21,15 @@ on:
         type: string
         required: false
         default: ''
+      generate-overviews:
+        description: Run the overview generation jobs (not needed for linkcheck-only runs)
+        type: boolean
+        required: false
+        default: true
 
 jobs:
   generate-alg-overview:
+    if: ${{ inputs.generate-overviews }}
     uses: ./.github/workflows/generate_overview.yml
     with:
       ref: ${{ inputs.ref }}
@@ -34,6 +40,7 @@ jobs:
       filter-config: scripts/filter_gaudi.yaml
 
   generate-proc-overview:
+    if: ${{ inputs.generate-overviews }}
     uses: ./.github/workflows/generate_overview.yml
     with:
       ref: ${{ inputs.ref }}
@@ -59,11 +66,13 @@ jobs:
           pip install --upgrade pip
           pip install -r requirements.txt
     - name: Download algorithm overview
+      if: ${{ inputs.generate-overviews }}
       uses: actions/download-artifact@v6
       with:
         name: docs-algorithm-overview.md
         path: docs/
     - name: Download processor overview
+      if: ${{ inputs.generate-overviews }}
       uses: actions/download-artifact@v6
       with:
         name: docs-processor-overview.md
