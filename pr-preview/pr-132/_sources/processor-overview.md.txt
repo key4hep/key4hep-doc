@@ -7,7 +7,7 @@ a processor name to reveal its parameters.
 Total: **212 processors** across **20 packages**.
 
 ```{raw} html
-<div id="algorithm-overview" data-total="212" data-packages="20">
+<div id="algorithm-overview" data-total="212" data-packages="20" data-item-label="processor">
   <div class="alg-filter-bar">
     <input type="text" id="alg-search" placeholder="Filter by name, package, or library…" autocomplete="off" />
     <span id="alg-stats">Showing 212 of 212 processors in 20 packages</span>

@@ -23,7 +23,7 @@
         <script src="_static/clipboard.min.js?v=a7894cd8"></script>
         <script src="_static/copybutton.js?v=f281be69"></script>
         <script src="_static/design-tabs.js?v=36754332"></script>
-        <script src="_static/overview.js?v=2c007fd5"></script>
+        <script defer="defer" src="_static/overview.js?v=10d314a6"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -111,7 +111,7 @@ collected from the active environment. Use the search box to filter by algorithm
 name, package, or library. Click a package header to collapse or expand it; click
 an algorithm name to reveal its properties.
 Total: <strong>196 algorithms</strong> across <strong>25 packages</strong>.</p>
-<div id="algorithm-overview" data-total="196" data-packages="25">
+<div id="algorithm-overview" data-total="196" data-packages="25" data-item-label="algorithm">
   <div class="alg-filter-bar">
     <input type="text" id="alg-search" placeholder="Filter by name, package, or library…" autocomplete="off" />
     <span id="alg-stats">Showing 196 of 196 algorithms in 25 packages</span>
@@ -624,19 +624,19 @@ Total: <strong>196 algorithms</strong> across <strong>25 packages</strong>.</p>
               </tr>
               <tr>
                 <td><code>xyPlaneProbes</code></td>
-                <td><code>vector&lt;vector&lt;double&gt;,allocator&lt;vector&lt;double&gt; &gt; &gt;</code></td>
+                <td><code>vector&lt;vector&lt;double&gt;&gt;</code></td>
                 <td><code>[]</code></td>
                 <td> xy-plane probe definitions [MagFieldScanner] </td>
               </tr>
               <tr>
                 <td><code>zPlaneProbes</code></td>
-                <td><code>vector&lt;vector&lt;double&gt;,allocator&lt;vector&lt;double&gt; &gt; &gt;</code></td>
+                <td><code>vector&lt;vector&lt;double&gt;&gt;</code></td>
                 <td><code>[]</code></td>
                 <td> z-plane probe definitions [MagFieldScanner] </td>
               </tr>
               <tr>
                 <td><code>tubeProbes</code></td>
-                <td><code>vector&lt;vector&lt;double&gt;,allocator&lt;vector&lt;double&gt; &gt; &gt;</code></td>
+                <td><code>vector&lt;vector&lt;double&gt;&gt;</code></td>
                 <td><code>[]</code></td>
                 <td> Tube probe definitions [MagFieldScanner] </td>
               </tr>
@@ -1929,37 +1929,37 @@ Total: <strong>196 algorithms</strong> across <strong>25 packages</strong>.</p>
               </tr>
               <tr>
                 <td><code>upstreamParameters</code></td>
-                <td><code>vector&lt;vector&lt;double&gt;,allocator&lt;vector&lt;double&gt; &gt; &gt;</code></td>
+                <td><code>vector&lt;vector&lt;double&gt;&gt;</code></td>
                 <td><code>[]</code></td>
                 <td> Upstream parameters [CorrectCaloClusters] </td>
               </tr>
               <tr>
                 <td><code>upstreamFormulas</code></td>
-                <td><code>vector&lt;vector&lt;string&gt;,allocator&lt;vector&lt;string&gt; &gt; &gt;</code></td>
+                <td><code>vector&lt;vector&lt;string&gt;&gt;</code></td>
                 <td><code>[]</code></td>
                 <td> Upstream formulas (in ROOT notation) [CorrectCaloClusters] </td>
               </tr>
               <tr>
                 <td><code>downstreamParameters</code></td>
-                <td><code>vector&lt;vector&lt;double&gt;,allocator&lt;vector&lt;double&gt; &gt; &gt;</code></td>
+                <td><code>vector&lt;vector&lt;double&gt;&gt;</code></td>
                 <td><code>[]</code></td>
                 <td> Downstream parameters [CorrectCaloClusters] </td>
               </tr>
               <tr>
                 <td><code>downstreamFormulas</code></td>
-                <td><code>vector&lt;vector&lt;string&gt;,allocator&lt;vector&lt;string&gt; &gt; &gt;</code></td>
+                <td><code>vector&lt;vector&lt;string&gt;&gt;</code></td>
                 <td><code>[]</code></td>
                 <td> Downstream formulas (in ROOT notation) [CorrectCaloClusters] </td>
               </tr>
               <tr>
                 <td><code>benchmarkParametrization</code></td>
-                <td><code>vector&lt;vector&lt;double&gt;,allocator&lt;vector&lt;double&gt; &gt; &gt;</code></td>
+                <td><code>vector&lt;vector&lt;double&gt;&gt;</code></td>
                 <td><code>[]</code></td>
                 <td> Benchmark formula parameters [CorrectCaloClusters] </td>
               </tr>
               <tr>
                 <td><code>benchmarkFormulas</code></td>
-                <td><code>vector&lt;vector&lt;string&gt;,allocator&lt;vector&lt;string&gt; &gt; &gt;</code></td>
+                <td><code>vector&lt;vector&lt;string&gt;&gt;</code></td>
                 <td><code>[]</code></td>
                 <td> Benchmark formulas (in ROOT notation) [CorrectCaloClusters] </td>
               </tr>
@@ -4672,7 +4672,7 @@ Total: <strong>196 algorithms</strong> across <strong>25 packages</strong>.</p>
               </tr>
               <tr>
                 <td><code>thetaRecalcWeights</code></td>
-                <td><code>vector&lt;vector&lt;double&gt;,allocator&lt;vector&lt;double&gt; &gt; &gt;</code></td>
+                <td><code>vector&lt;vector&lt;double&gt;&gt;</code></td>
                 <td><code>[[-1.0, 3.0, 3.0, 3.0, 4.25, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0]]</code></td>
                 <td> Weights for each detector layer for theta position log-weighting. If negative use linear weight. [AugmentClustersFCCee] </td>
               </tr>
@@ -5423,7 +5423,7 @@ Total: <strong>196 algorithms</strong> across <strong>25 packages</strong>.</p>
               </tr>
               <tr>
                 <td><code>activeVolumesTheta</code></td>
-                <td><code>vector&lt;vector&lt;double&gt;,allocator&lt;vector&lt;double&gt; &gt; &gt;</code></td>
+                <td><code>vector&lt;vector&lt;double&gt;&gt;</code></td>
                 <td><code>[]</code></td>
                 <td>  [CreateFCCeeCaloNeighbours] </td>
               </tr>
@@ -5590,7 +5590,7 @@ Total: <strong>196 algorithms</strong> across <strong>25 packages</strong>.</p>
               </tr>
               <tr>
                 <td><code>activeVolumesTheta</code></td>
-                <td><code>vector&lt;vector&lt;double&gt;,allocator&lt;vector&lt;double&gt; &gt; &gt;</code></td>
+                <td><code>vector&lt;vector&lt;double&gt;&gt;</code></td>
                 <td><code>[]</code></td>
                 <td>  [CreateFCCeeCaloNoiseLevelMap] </td>
               </tr>
@@ -5679,7 +5679,7 @@ Total: <strong>196 algorithms</strong> across <strong>25 packages</strong>.</p>
               </tr>
               <tr>
                 <td><code>activeVolumesTheta</code></td>
-                <td><code>vector&lt;vector&lt;double&gt;,allocator&lt;vector&lt;double&gt; &gt; &gt;</code></td>
+                <td><code>vector&lt;vector&lt;double&gt;&gt;</code></td>
                 <td><code>[]</code></td>
                 <td>  [CreateFCCeeCaloXTalkNeighbours] </td>
               </tr>
@@ -13196,31 +13196,31 @@ Total: <strong>196 algorithms</strong> across <strong>25 packages</strong>.</p>
               </tr>
               <tr>
                 <td><code>stepCollections</code></td>
-                <td><code>vector&lt;vector&lt;string&gt;,allocator&lt;vector&lt;string&gt; &gt; &gt;</code></td>
+                <td><code>vector&lt;vector&lt;string&gt;&gt;</code></td>
                 <td><code>[]</code></td>
                 <td> Integer to add to the dummy values written to the edm [ConformalTracking] </td>
               </tr>
               <tr>
                 <td><code>stepParametersNames</code></td>
-                <td><code>vector&lt;vector&lt;string&gt;,allocator&lt;vector&lt;string&gt; &gt; &gt;</code></td>
+                <td><code>vector&lt;vector&lt;string&gt;&gt;</code></td>
                 <td><code>[]</code></td>
                 <td> Integer to add to the dummy values written to the edm [ConformalTracking] </td>
               </tr>
               <tr>
                 <td><code>stepParametersValues</code></td>
-                <td><code>vector&lt;vector&lt;double&gt;,allocator&lt;vector&lt;double&gt; &gt; &gt;</code></td>
+                <td><code>vector&lt;vector&lt;double&gt;&gt;</code></td>
                 <td><code>[]</code></td>
                 <td> Integer to add to the dummy values written to the edm [ConformalTracking] </td>
               </tr>
               <tr>
                 <td><code>stepParametersFlags</code></td>
-                <td><code>vector&lt;vector&lt;string&gt;,allocator&lt;vector&lt;string&gt; &gt; &gt;</code></td>
+                <td><code>vector&lt;vector&lt;string&gt;&gt;</code></td>
                 <td><code>[]</code></td>
                 <td> Integer to add to the dummy values written to the edm [ConformalTracking] </td>
               </tr>
               <tr>
                 <td><code>stepParametersFunctions</code></td>
-                <td><code>vector&lt;vector&lt;string&gt;,allocator&lt;vector&lt;string&gt; &gt; &gt;</code></td>
+                <td><code>vector&lt;vector&lt;string&gt;&gt;</code></td>
                 <td><code>[]</code></td>
                 <td> Integer to add to the dummy values written to the edm [ConformalTracking] </td>
               </tr>
@@ -13643,7 +13643,7 @@ Total: <strong>196 algorithms</strong> across <strong>25 packages</strong>.</p>
               </tr>
               <tr>
                 <td><code>BackgroundFileNames</code></td>
-                <td><code>vector&lt;vector&lt;string&gt;,allocator&lt;vector&lt;string&gt; &gt; &gt;</code></td>
+                <td><code>vector&lt;vector&lt;string&gt;&gt;</code></td>
                 <td><code>[]</code></td>
                 <td> Name of the edm4hep input file(s) with background. [OverlayTiming] </td>
               </tr>
