@@ -4,6 +4,7 @@
 
   var totalItems = parseInt(overview.dataset.total, 10);
   var totalPackages = parseInt(overview.dataset.packages, 10);
+  var itemLabel = overview.dataset.itemLabel || 'algorithm';
 
   var searchInput = document.getElementById('alg-search');
   var statsEl = document.getElementById('alg-stats');
@@ -33,7 +34,7 @@
   function updateStats(visibleCards, visiblePackages) {
     statsEl.textContent =
       'Showing ' + visibleCards + ' of ' + totalItems +
-      ' algorithms in ' + visiblePackages + ' packages';
+      ' ' + itemLabel + 's in ' + visiblePackages + ' packages';
   }
 
   function filterCards() {

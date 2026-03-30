@@ -93,12 +93,14 @@ def _render_prop_value(value):
     return f"<code>{html.escape(str(value))}</code>"
 
 
-def render_page(template_path, packages, total_algorithms, item_label, property_label):
+def render_page(template_path, packages, item_label, property_label):
     env = Environment(
         loader=FileSystemLoader(str(template_path.parent)),
         autoescape=False,
     )
     env.filters["render_prop_value"] = _render_prop_value
+    total_algorithms = sum(len(algs) for algs in packages.values())
+
     template = env.get_template(template_path.name)
     return template.render(
         packages=packages,
@@ -117,19 +119,11 @@ def main(args):
         algorithms = apply_filters(algorithms, filter_config)
 
     packages = group_by_package(algorithms)
-    total_algorithms = sum(len(algs) for algs in packages.values())
 
-    output = render_page(
-        TEMPLATE, packages, total_algorithms, args.item_label, args.property_label
-    )
+    output = render_page(TEMPLATE, packages, args.item_label, args.property_label)
 
     with open(args.output, "w") as f:
         f.write(output)
-
-    print(
-        f"Generated {args.output} with {total_algorithms} algorithms "
-        f"in {len(packages)} packages"
-    )
 
 
 if __name__ == "__main__":
