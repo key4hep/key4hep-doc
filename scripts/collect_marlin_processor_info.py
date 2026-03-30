@@ -21,13 +21,8 @@ def run_marlin_x():
 
 
 def extract_xml(raw_output: bytes) -> bytes:
-    """Strip non-XML lines (e.g. INFO log lines) from Marlin -x stdout.
-
-    Marlin -x mixes XML with log messages such as:
-        PersistencyIO    INFO  +++ Set Streamer to dd4hep::OpaqueDataBlock
-    These lines are identified by a log-level keyword with surrounding spaces
-    and discarded. Everything else from the <?xml declaration onward is kept.
-    """
+    """Strip non-XML lines (e.g. INFO log lines) from Marlin -x stdout and
+    return only the XML content starting from the <?xml declaration."""
     log_line_re = re.compile(r"^\S+\s{2,}(INFO|WARNING|ERROR|DEBUG|MESSAGE|SILENT)\s")
 
     lines = raw_output.splitlines(keepends=True)
@@ -59,7 +54,7 @@ _LIBRARY_PATH_RE = re.compile(r"<!-- Loading shared library : (.*) \((.*)\)-->")
 
 
 def get_loaded_libs(raw: bytes) -> list:
-    """Parse the loaded libraries from the Marlin -x dump and return a list of them"""
+    """Return the list of shared libraries loaded by Marlin, extracted from the raw Marlin -x output."""
     libs = []
     for line in raw.splitlines():
         decoded = line.decode().strip()
@@ -117,7 +112,7 @@ _COMMENTED_PARAM_RE = re.compile(
 
 
 def parse_processors(xml_bytes: bytes, processor_libs: dict) -> dict:
-    """Parse processor definitions from Marlin -x XML output and return a json
+    """Parse processor definitions from Marlin -x XML output and return a
     dictionary. processor_libs maps processor type names to their library stem.
     """
     root = etree.parse(BytesIO(xml_bytes)).getroot()
@@ -207,8 +202,6 @@ def main(args):
 
     loaded_libs = get_loaded_libs(raw)
     processor_libs = extract_procs_from_libs(loaded_libs)
-    print(processor_libs)
-    print(len(processor_libs))
 
     processors = parse_processors(xml_bytes, processor_libs)
 
