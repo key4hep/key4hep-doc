@@ -61,12 +61,12 @@ jobs:
     - name: Download algorithm overview
       uses: actions/download-artifact@v6
       with:
-        name: docs/algorithm-overview.md
+        name: docs-algorithm-overview.md
         path: docs/
     - name: Download processor overview
       uses: actions/download-artifact@v6
       with:
-        name: docs/processor-overview.md
+        name: docs-processor-overview.md
         path: docs/
     - name: Fetch external sources from upstream PR
       if: ${{ inputs.pr-number != '' }}

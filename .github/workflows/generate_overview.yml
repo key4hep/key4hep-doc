@@ -52,8 +52,11 @@ jobs:
               "${{ inputs.placeholder }}" \
               --filter-config ${{ inputs.filter-config }} \
               "${args[@]}"
+      - name: Compute artifact name
+        id: artifact-name
+        run: echo "name=$(echo '${{ inputs.placeholder }}' | tr '/' '-')" >> "$GITHUB_OUTPUT"
       - uses: actions/upload-artifact@v6
         id: upload
         with:
-          name: ${{ inputs.placeholder }}
+          name: ${{ steps.artifact-name.outputs.name }}
           path: ${{ inputs.placeholder }}
