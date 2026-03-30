@@ -16,7 +16,7 @@ pip install -r requirements.txt
 First fetch the documentation pages from other key4hep repositories:
 
 ```sh
-github/scripts/fetch_external_sources.sh
+scripts/fetch_external_sources.sh
 ```
 
 If the sources already exist but you want to update them, use the `--force` option.
