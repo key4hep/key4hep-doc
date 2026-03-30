@@ -10,6 +10,7 @@ from collections.abc import Iterable
 import Configurables
 
 from Gaudi import Configuration
+from GaudiConfig2._db import _DB as _gc2_db
 from GaudiKernel.DataHandle import DataHandle
 from GaudiKernel.GaudiHandles import (
     ServiceHandle,
@@ -66,9 +67,13 @@ def get_properties(comp_name):
         # want to have those values properly
         prop_vals = comp.getDefaultProperties()
 
+        cpp_type = comp.getType()
+        gc2_props = _gc2_db[cpp_type].get("properties", {}) if cpp_type in _gc2_db else {}
+
         for name, (value, desc) in properties.items():
             val = prop_vals[name]
-            props[f"{name}"] = {"value": _filter_for_json(val), "description": desc}
+            prop_type = gc2_props[name][0] if name in gc2_props else ""
+            props[f"{name}"] = {"type": prop_type, "value": _filter_for_json(val), "description": desc}
 
     except (AttributeError, RuntimeError):
         pass

@@ -10,10 +10,10 @@ Total: **{{ total_algorithms }} algorithms** across **{{ total_packages }} packa
 ```{raw} html
 <style>
 {% include "_overview_common.css.jinja2" %}
-#algorithm-overview .alg-props-table td:nth-child(2) {
+#algorithm-overview .alg-props-table td:nth-child(3) {
   max-width: 20em;
 }
-#algorithm-overview .alg-props-table td:nth-child(2) code {
+#algorithm-overview .alg-props-table td:nth-child(3) code {
   white-space: pre-wrap;
   word-break: break-word;
   overflow-wrap: break-word;
@@ -56,6 +56,7 @@ Total: **{{ total_algorithms }} algorithms** across **{{ total_packages }} packa
             <thead>
               <tr>
                 <th>Property</th>
+                <th>Type</th>
                 <th>Default</th>
                 <th>Description</th>
               </tr>
@@ -64,6 +65,7 @@ Total: **{{ total_algorithms }} algorithms** across **{{ total_packages }} packa
               {%- for prop_name, prop_info in alg.properties.items() %}
               <tr>
                 <td><code>{{ prop_name | e }}</code></td>
+                <td><code>{{ prop_info.get("type", "") | e }}</code></td>
                 <td>{{ prop_info.value | render_prop_value }}</td>
                 <td>{{ prop_info.description | e }}</td>
               </tr>
