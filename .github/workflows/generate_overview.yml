@@ -52,6 +52,7 @@ jobs:
               "${{ inputs.placeholder }}" \
               --filter-config ${{ inputs.filter-config }} \
               "${args[@]}"
+            chmod a+r "${{ inputs.placeholder }}"
       - name: Compute artifact name
         id: artifact-name
         run: echo "name=$(echo '${{ inputs.placeholder }}' | tr '/' '-')" >> "$GITHUB_OUTPUT"
