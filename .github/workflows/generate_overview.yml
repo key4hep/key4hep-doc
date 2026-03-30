@@ -30,16 +30,10 @@ on:
         description: Singular label for each property (e.g. property or parameter)
         type: string
         default: property
-    outputs:
-      artifact-id:
-        description: The ID of the artifact containing the generated output file
-        value: ${{ jobs.generate.outputs.artifact-id }}
 
 jobs:
   generate:
     runs-on: ubuntu-latest
-    outputs:
-      artifact-id: ${{ steps.upload.outputs.artifact-id }}
     steps:
       - uses: actions/checkout@v6
         with:
@@ -62,7 +56,6 @@ jobs:
         id: artifact-name
         run: echo "name=$(echo '${{ inputs.output }}' | tr '/' '-')" >> "$GITHUB_OUTPUT"
       - uses: actions/upload-artifact@v6
-        id: upload
         with:
           name: ${{ steps.artifact-name.outputs.name }}
           path: ${{ inputs.output }}
