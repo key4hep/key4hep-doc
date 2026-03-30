@@ -2,6 +2,7 @@
 
 import json
 import logging
+import re
 import tqdm
 import pathlib
 
@@ -55,6 +56,20 @@ def _filter_for_json(value):
     return value
 
 
+def _filter_prop_type(prop_name, properties):
+    """Filter the property type to try and make it a bit more readable"""
+    if prop_name not in properties:
+        return ""
+
+    prop_type = properties[prop_name][0]
+    # Reformat vectors and other STL constructs
+    prop_type = re.sub(
+        r"std::vector<(.+?),\s*std::allocator<\1>\s*>", r"vector<\1>", prop_type
+    )
+    prop_type = re.sub(r"std::", "", prop_type)
+    return prop_type
+
+
 def get_properties(comp_name):
     """Get all available properties for a given name and try to get their
     default values if available"""
@@ -68,12 +83,17 @@ def get_properties(comp_name):
         prop_vals = comp.getDefaultProperties()
 
         cpp_type = comp.getType()
-        gc2_props = _gc2_db[cpp_type].get("properties", {}) if cpp_type in _gc2_db else {}
+        gc2_props = (
+            _gc2_db[cpp_type].get("properties", {}) if cpp_type in _gc2_db else {}
+        )
 
-        for name, (value, desc) in properties.items():
+        for name, (_, desc) in properties.items():
             val = prop_vals[name]
-            prop_type = gc2_props[name][0] if name in gc2_props else ""
-            props[f"{name}"] = {"type": prop_type, "value": _filter_for_json(val), "description": desc}
+            props[f"{name}"] = {
+                "type": _filter_prop_type(name, gc2_props),
+                "value": _filter_for_json(val),
+                "description": desc,
+            }
 
     except (AttributeError, RuntimeError):
         pass
