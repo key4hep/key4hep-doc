@@ -20,22 +20,32 @@ on:
         description: The PR number for identifying dependent PRs
         type: string
         required: false
-      alg-info-artifact-id:
-        description: The artifact ID to download for the algorithm overview
-        required: false
-        type: string
-        default: ''
-      proc-info-artifact-id:
-        description: The artifact ID to download for the processor overview
-        required: false
-        type: string
         default: ''
 
 jobs:
+  generate-alg-overview:
+    uses: ./.github/workflows/generate_overview.yml
+    with:
+      ref: ${{ inputs.ref }}
+      collect-script: scripts/collect_gaudi_alg_info.py
+      placeholder: docs/algorithm-overview.md
+      item-label: algorithm
+      property-label: property
+      filter-config: scripts/filter_gaudi.yaml
+
+  generate-proc-overview:
+    uses: ./.github/workflows/generate_overview.yml
+    with:
+      ref: ${{ inputs.ref }}
+      collect-script: scripts/collect_marlin_processor_info.py
+      placeholder: docs/processor-overview.md
+      item-label: processor
+      property-label: parameter
+      filter-config: scripts/filter_marlin.yaml
+
   build:
+    needs: [generate-alg-overview, generate-proc-overview]
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
     steps:
     - uses: actions/checkout@v6
       with:
@@ -49,25 +59,15 @@ jobs:
           pip install --upgrade pip
           pip install -r requirements.txt
     - name: Download algorithm overview
-      if: ${{ inputs.alg-info-artifact-id != '' }}
-      uses: actions/download-artifact@v5
+      uses: actions/download-artifact@v6
       with:
-        name: algorithm_overview-${{ inputs.ref }}
-        path: artifact_download/
-    - name: Move info
-      if: ${{ inputs.alg-info-artifact-id != '' }}
-      run: |
-        mv artifact_download/algorithm-overview.md docs/
+        name: docs/algorithm-overview.md
+        path: docs/
     - name: Download processor overview
-      if: ${{ inputs.proc-info-artifact-id != '' }}
-      uses: actions/download-artifact@v5
+      uses: actions/download-artifact@v6
       with:
-        name: processor_overview-${{ inputs.ref }}
-        path: artifact_download/
-    - name: Move processor info
-      if: ${{ inputs.proc-info-artifact-id != '' }}
-      run: |
-        mv artifact_download/processor-overview.md docs/
+        name: docs/processor-overview.md
+        path: docs/
     - name: Fetch external sources from upstream PR
       if: ${{ inputs.pr-number != '' }}
       env:

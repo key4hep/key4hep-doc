@@ -17,25 +17,12 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  generate-alg-info:
-    uses: ./.github/workflows/generate_algorithm_overview.yml
-    with:
-      ref: ${{ github.event.pull_request.head.sha || github.sha }}
-
-  generate-proc-info:
-    uses: ./.github/workflows/generate_processor_overview.yml
-    with:
-      ref: ${{ github.event.pull_request.head.sha || github.sha }}
-
   build-preview:
-    needs: [generate-alg-info, generate-proc-info]
     uses: ./.github/workflows/build.yml
     with:
       ref: ${{ github.event.pull_request.head.sha || github.sha }}
       linkcheck: false
       pr-number: ${{ github.event.number }}
-      alg-info-artifact-id: ${{ needs.generate-alg-info.outputs.artifact-id }}
-      proc-info-artifact-id: ${{ needs.generate-proc-info.outputs.artifact-id }}
 
 
   linkcheck:

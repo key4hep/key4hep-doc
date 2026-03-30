@@ -95,7 +95,7 @@ def _render_prop_value(value):
     return f"<code>{html.escape(str(value))}</code>"
 
 
-def render_page(template_path, packages, total_algorithms):
+def render_page(template_path, packages, total_algorithms, item_label, property_label):
     env = Environment(
         loader=FileSystemLoader(str(template_path.parent)),
         autoescape=False,
@@ -106,6 +106,8 @@ def render_page(template_path, packages, total_algorithms):
         packages=packages,
         total_algorithms=total_algorithms,
         total_packages=len(packages),
+        item_label=item_label,
+        property_label=property_label,
     )
 
 
@@ -119,7 +121,7 @@ def main(args):
     packages = group_by_package(algorithms)
     total_algorithms = sum(len(algs) for algs in packages.values())
 
-    output = render_page(args.template, packages, total_algorithms)
+    output = render_page(args.template, packages, total_algorithms, args.item_label, args.property_label)
 
     with open(args.output, "w") as f:
         f.write(output)
@@ -161,6 +163,16 @@ if __name__ == "__main__":
         help="Path to a YAML file with filter rules (packages, libs, properties to exclude)",
         type=pathlib.Path,
         default=None,
+    )
+    parser.add_argument(
+        "--item-label",
+        help="Singular label for each item, e.g. 'algorithm' or 'processor'",
+        default="algorithm",
+    )
+    parser.add_argument(
+        "--property-label",
+        help="Singular label for each property, e.g. 'property' or 'parameter'",
+        default="property",
     )
 
     args = parser.parse_args()

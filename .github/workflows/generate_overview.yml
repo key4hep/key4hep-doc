@@ -1,0 +1,59 @@
+name: Generate overview
+on:
+  workflow_call:
+    inputs:
+      ref:
+        description: The git ref to check out
+        type: string
+        required: true
+      collect-script:
+        description: Python script that collects component info and writes JSON
+        type: string
+        required: true
+      placeholder:
+        description: Markdown file with page title and intro text (relative to repo root)
+        type: string
+        required: true
+      item-label:
+        description: Singular label for each item (e.g. algorithm or processor)
+        type: string
+        default: algorithm
+      property-label:
+        description: Singular label for each property (e.g. property or parameter)
+        type: string
+        default: property
+      filter-config:
+        description: Path to a YAML filter config file (optional)
+        type: string
+        default: ''
+    outputs:
+      artifact-id:
+        description: The ID of the artifact containing the generated markdown file
+        value: ${{ jobs.generate.outputs.artifact-id }}
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    outputs:
+      artifact-id: ${{ steps.upload.outputs.artifact-id }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ inputs.ref }}
+      - uses: cvmfs-contrib/github-action-cvmfs@v5
+      - uses: aidasoft/run-lcg-view@v5
+        with:
+          container: ubuntu2404
+          view-path: /cvmfs/sw-nightlies.hsf.org/key4hep
+          run: |
+            args=(--item-label "${{ inputs.item-label }}" --property-label "${{ inputs.property-label }}")
+            [[ -n "${{ inputs.filter-config }}" ]] && args+=(--filter-config "${{ inputs.filter-config }}")
+            bash scripts/generate_overview.sh \
+              "${{ inputs.collect-script }}" \
+              "${{ inputs.placeholder }}" \
+              "${args[@]}"
+      - uses: actions/upload-artifact@v6
+        id: upload
+        with:
+          name: ${{ inputs.placeholder }}
+          path: ${{ inputs.placeholder }}

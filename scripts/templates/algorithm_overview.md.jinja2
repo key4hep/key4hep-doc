@@ -1,68 +1,49 @@
-# Gaudi Algorithm Overview
-
-This page lists all Gaudi algorithms available in the Key4hep software stack,
-collected from the active environment. Use the search box to filter by algorithm
-name, package, or library. Click a package header to collapse or expand it; click
-an algorithm name to reveal its properties.
-
-Total: **{{ total_algorithms }} algorithms** across **{{ total_packages }} packages**.
+Total: **{{ total_algorithms }} {{ item_label }}s** across **{{ total_packages }} packages**.
 
 ```{raw} html
-<style>
-{% include "_overview_common.css.jinja2" %}
-#algorithm-overview .alg-props-table td:nth-child(3) {
-  max-width: 20em;
-}
-#algorithm-overview .alg-props-table td:nth-child(3) code {
-  white-space: pre-wrap;
-  word-break: break-word;
-  overflow-wrap: break-word;
-}
-</style>
-
 <div id="algorithm-overview">
   <div class="alg-filter-bar">
     <input type="text" id="alg-search" placeholder="Filter by name, package, or library…" autocomplete="off" />
-    <span id="alg-stats">Showing {{ total_algorithms }} of {{ total_algorithms }} algorithms in {{ total_packages }} packages</span>
+    <span id="alg-stats">Showing {{ total_algorithms }} of {{ total_algorithms }} {{ item_label }}s in {{ total_packages }} packages</span>
   </div>
 
-  {%- for package, algorithms in packages.items() %}
+  {%- for package, items in packages.items() %}
   <div class="alg-package-group" data-package="{{ package | e }}">
     <div class="alg-package-header">
       <span class="alg-package-name">{{ (package if package else "(unknown)") | e }}</span>
       <span class="alg-package-meta">
-        <span class="alg-package-count">{{ algorithms | length }} algorithm{%- if algorithms | length != 1 %}s{%- endif %}</span>
+        <span class="alg-package-count">{{ items | length }} {{ item_label }}{%- if items | length != 1 %}s{%- endif %}</span>
         <span class="alg-package-toggle">&#9660;</span>
       </span>
     </div>
     <div class="alg-cards-container">
-      {%- for alg in algorithms %}
-      <div class="alg-card" data-name="{{ alg.name | e }}" data-lib="{{ alg.lib | e }}" data-package="{{ package | e }}">
+      {%- for item in items %}
+      <div class="alg-card" data-name="{{ item.name | e }}" data-lib="{{ item.lib | e }}" data-package="{{ package | e }}">
         <div class="alg-card-header">
-          <span class="alg-name">{{ alg.name | e }}</span>
+          <span class="alg-name">{{ item.name | e }}</span>
           <span class="alg-card-right">
-            {%- if alg.lib %}
-            <span class="alg-lib-badge">{{ alg.lib | e }}</span>
+            {%- if item.lib %}
+            <span class="alg-lib-badge">{{ item.lib | e }}</span>
             {%- endif %}
             <span class="alg-card-toggle">&#9658;</span>
           </span>
         </div>
         <div class="alg-card-body">
-          {%- if alg.description %}
-          <p class="alg-description">{{ alg.description | e }}</p>
+          {%- if item.description %}
+          <p class="alg-description">{{ item.description | e }}</p>
           {%- endif %}
-          {%- if alg.properties %}
+          {%- if item.properties %}
           <table class="alg-props-table">
             <thead>
               <tr>
-                <th>Property</th>
+                <th>{{ property_label | capitalize }}</th>
                 <th>Type</th>
                 <th>Default</th>
                 <th>Description</th>
               </tr>
             </thead>
             <tbody>
-              {%- for prop_name, prop_info in alg.properties.items() %}
+              {%- for prop_name, prop_info in item.properties.items() %}
               <tr>
                 <td><code>{{ prop_name | e }}</code></td>
                 <td><code>{{ prop_info.get("type", "") | e }}</code></td>
@@ -73,7 +54,7 @@ Total: **{{ total_algorithms }} algorithms** across **{{ total_packages }} packa
             </tbody>
           </table>
           {%- else %}
-          <em>No properties available.</em>
+          <em>No {{ property_label }}s available.</em>
           {%- endif %}
         </div>
       </div>
