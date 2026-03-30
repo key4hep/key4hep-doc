@@ -9,9 +9,7 @@ from collections import defaultdict
 
 from jinja2 import Environment, FileSystemLoader
 
-DEFAULT_TEMPLATE = (
-    pathlib.Path(__file__).parent / "templates" / "algorithm_overview.md.jinja2"
-)
+TEMPLATE = pathlib.Path(__file__).parent / "templates" / "algorithm_overview.md.jinja2"
 
 
 def _matches_any(value, patterns):
@@ -121,7 +119,9 @@ def main(args):
     packages = group_by_package(algorithms)
     total_algorithms = sum(len(algs) for algs in packages.values())
 
-    output = render_page(args.template, packages, total_algorithms, args.item_label, args.property_label)
+    output = render_page(
+        TEMPLATE, packages, total_algorithms, args.item_label, args.property_label
+    )
 
     with open(args.output, "w") as f:
         f.write(output)
@@ -151,12 +151,6 @@ if __name__ == "__main__":
         help="Output MyST markdown file path",
         type=pathlib.Path,
         required=True,
-    )
-    parser.add_argument(
-        "--template",
-        help="Path to the Jinja2 template",
-        type=pathlib.Path,
-        default=DEFAULT_TEMPLATE,
     )
     parser.add_argument(
         "--filter-config",
