@@ -10,8 +10,12 @@ on:
         description: Python script that collects component info and writes JSON
         type: string
         required: true
-      placeholder:
-        description: Markdown file with page title and intro text (relative to repo root)
+      stub:
+        description: Markdown stub with page title and intro text (relative to repo root)
+        type: string
+        required: true
+      output:
+        description: Path for the generated output file (relative to repo root)
         type: string
         required: true
       filter-config:
@@ -28,7 +32,7 @@ on:
         default: property
     outputs:
       artifact-id:
-        description: The ID of the artifact containing the generated markdown file
+        description: The ID of the artifact containing the generated output file
         value: ${{ jobs.generate.outputs.artifact-id }}
 
 jobs:
@@ -49,15 +53,16 @@ jobs:
             args=(--item-label "${{ inputs.item-label }}" --property-label "${{ inputs.property-label }}")
             bash scripts/generate_overview.sh \
               "${{ inputs.collect-script }}" \
-              "${{ inputs.placeholder }}" \
+              "${{ inputs.stub }}" \
+              --output "${{ inputs.output }}" \
               --filter-config ${{ inputs.filter-config }} \
               "${args[@]}"
-            chmod a+r "${{ inputs.placeholder }}"
+            chmod a+r "${{ inputs.output }}"
       - name: Compute artifact name
         id: artifact-name
-        run: echo "name=$(echo '${{ inputs.placeholder }}' | tr '/' '-')" >> "$GITHUB_OUTPUT"
+        run: echo "name=$(echo '${{ inputs.output }}' | tr '/' '-')" >> "$GITHUB_OUTPUT"
       - uses: actions/upload-artifact@v6
         id: upload
         with:
           name: ${{ steps.artifact-name.outputs.name }}
-          path: ${{ inputs.placeholder }}
+          path: ${{ inputs.output }}

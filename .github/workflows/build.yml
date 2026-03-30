@@ -34,7 +34,8 @@ jobs:
     with:
       ref: ${{ inputs.ref }}
       collect-script: scripts/collect_gaudi_alg_info.py
-      placeholder: docs/algorithm-overview.md
+      stub: docs/algorithm-overview.stub.md
+      output: docs/algorithm-overview.md
       item-label: algorithm
       property-label: property
       filter-config: scripts/filter_gaudi.yaml
@@ -45,7 +46,8 @@ jobs:
     with:
       ref: ${{ inputs.ref }}
       collect-script: scripts/collect_marlin_processor_info.py
-      placeholder: docs/processor-overview.md
+      stub: docs/processor-overview.stub.md
+      output: docs/processor-overview.md
       item-label: processor
       property-label: parameter
       filter-config: scripts/filter_marlin.yaml

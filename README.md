@@ -46,12 +46,12 @@ documentation as described above
 ```bash
 scripts/generate_overview.sh \
     scripts/collect_gaudi_alg_info.py \
-    docs/algorithm-overview.md \
+    docs/algorithm-overview.stub.md \
     --filter-config scripts/filter_gaudi.yaml
 
 scripts/generate_overview.sh \
     scripts/collect_marlin_processor_info.py \
-    docs/processor-overview.md \
+    docs/processor-overview.stub.md \
     --filter-config scripts/filter_marlin.yaml \
     --item-label processor \
     --property-label parameter
@@ -64,8 +64,8 @@ The `generate_overview.sh` script essentially does the following three things
   file with the necessary inline HTML for nice rendering. This also applies some
   filtering to avoid picking up algorithms from the Gaudi test suite as well as
   removing commonly available properties that are usually not interesting
-- It concatenates this generated table to the existing documentation stub (this
-  is the second argument to the script)
+- It concatenates the generated table with the stub file (the second argument)
+  and writes the result to the expected outpufile
 
 ## Including changes from an external PR
 
