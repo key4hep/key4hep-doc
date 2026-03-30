@@ -136,7 +136,7 @@ limitations under the License.
 <h2>UniqueIDGenSvc service<a class="headerlink" href="#uniqueidgensvc-service" title="Link to this heading"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">UniqueIDGenSvc</span></code> Gaudi service can generate unique <code class="docutils literal notranslate"><span class="pre">size_t</span></code> values that can be used as PRNG seeds, based on an event number, run number, and algorithm name.</p>
 <p>The service can be included in a steering file by:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">Configurables</span> <span class="kn">import</span> <span class="n">UniqueIDGenSvc</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">Configurables</span><span class="w"> </span><span class="kn">import</span> <span class="n">UniqueIDGenSvc</span>
 <span class="n">uidgen_svc</span> <span class="o">=</span> <span class="n">UniqueIDGenSvc</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -197,7 +197,7 @@ The name of input <code class="docutils literal notranslate"><span class="pre">E
 </div>
 <p>Then, declare a member variable for the service interface and locate the service during algorithm initialization:</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">private</span><span class="o">:</span>
-<span class="w">  </span><span class="n">SmartIF</span><span class="o">&lt;</span><span class="n">IUniqueIDGenSvc</span><span class="o">&gt;</span><span class="w"> </span><span class="n">m_uniqueIDSvc</span><span class="p">{</span><span class="k">nullptr</span><span class="p">};</span>
+<span class="w">  </span><span class="n">SmartIF</span><span class="o">&lt;</span><span class="n">IUniqueIDGenSvc</span><span class="o">&gt;</span><span class="w"> </span><span class="n">m_uniqueIDSvc</span><span class="p">{</span><span class="nb">nullptr</span><span class="p">};</span>
 
 <span class="k">public</span><span class="o">:</span>
 <span class="w">  </span><span class="n">StatusCode</span><span class="w"> </span><span class="n">initialize</span><span class="p">()</span><span class="w"> </span><span class="k">final</span><span class="w"> </span><span class="p">{</span>

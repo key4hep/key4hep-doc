@@ -142,13 +142,13 @@ limitations under the License.
 <section id="accessing-event-data">
 <h2>Accessing event data<a class="headerlink" href="#accessing-event-data" title="Link to this heading"></a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">IOSvc</span></code> is an external Gaudi service for reading and writing EDM4hep files. The service should be imported from <code class="docutils literal notranslate"><span class="pre">k4FWCore</span></code> and named “IOSvc” as other components may look for it under this name.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">k4FWCore</span> <span class="kn">import</span> <span class="n">IOSvc</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">k4FWCore</span><span class="w"> </span><span class="kn">import</span> <span class="n">IOSvc</span>
 
 <span class="n">io_svc</span> <span class="o">=</span> <span class="n">IOSvc</span><span class="p">(</span><span class="s2">&quot;IOSvc&quot;</span><span class="p">)</span> <span class="c1"># or just IOSvc() as &quot;IOSvc&quot; name is used by default</span>
 </pre></div>
 </div>
 <p>After instantiation the service should be register as an external service in the <code class="docutils literal notranslate"><span class="pre">ApplicationMgr</span></code>. Similarly, it’s important to import the <code class="docutils literal notranslate"><span class="pre">ApplicationMgr</span></code> from <code class="docutils literal notranslate"><span class="pre">k4FWCore</span></code>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">k4FWCore</span> <span class="kn">import</span> <span class="n">ApplicationMgr</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">k4FWCore</span><span class="w"> </span><span class="kn">import</span> <span class="n">ApplicationMgr</span>
 
 <span class="n">ApplicationMgr</span><span class="p">(</span>
     <span class="c1"># other args</span>

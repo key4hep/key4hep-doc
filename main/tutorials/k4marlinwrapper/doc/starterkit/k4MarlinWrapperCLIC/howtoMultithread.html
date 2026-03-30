@@ -161,7 +161,7 @@ limitations under the License.
 <section id="how-to-run-with-inter-event-parallelism">
 <h3>How to run with inter-event parallelism<a class="headerlink" href="#how-to-run-with-inter-event-parallelism" title="Link to this heading"></a></h3>
 <p>The following components are used to achieve parallelism:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">Configurables</span> <span class="kn">import</span> <span class="p">(</span><span class="n">HiveWhiteBoard</span><span class="p">,</span> <span class="n">HiveSlimEventLoopMgr</span><span class="p">,</span> <span class="n">AvalancheSchedulerSvc</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">Configurables</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span><span class="n">HiveWhiteBoard</span><span class="p">,</span> <span class="n">HiveSlimEventLoopMgr</span><span class="p">,</span> <span class="n">AvalancheSchedulerSvc</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>These 3 components need to be configured to adapt the level of parallelism to the sequence, algorithms and hardware to be used.</p>
@@ -193,7 +193,7 @@ limitations under the License.
 <span class="n">slimeventloopmgr</span> <span class="o">=</span> <span class="n">HiveSlimEventLoopMgr</span><span class="p">(</span><span class="n">SchedulerName</span><span class="o">=</span><span class="s2">&quot;AvalancheSchedulerSvc&quot;</span><span class="p">,</span> <span class="n">OutputLevel</span><span class="o">=</span><span class="n">DEBUG</span><span class="p">)</span>
 <span class="n">scheduler</span> <span class="o">=</span> <span class="n">AvalancheSchedulerSvc</span><span class="p">(</span><span class="n">ThreadPoolSize</span><span class="o">=</span><span class="n">threads</span><span class="p">,</span> <span class="n">OutputLevel</span><span class="o">=</span><span class="n">WARNING</span><span class="p">)</span>
 
-<span class="kn">from</span> <span class="nn">Configurables</span> <span class="kn">import</span> <span class="n">ApplicationMgr</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">Configurables</span><span class="w"> </span><span class="kn">import</span> <span class="n">ApplicationMgr</span>
 <span class="n">ApplicationMgr</span><span class="p">(</span> <span class="n">TopAlg</span> <span class="o">=</span> <span class="p">[</span><span class="n">seq</span><span class="p">],</span>
                 <span class="n">EvtSel</span> <span class="o">=</span> <span class="s1">&#39;NONE&#39;</span><span class="p">,</span>
                 <span class="n">EvtMax</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
@@ -210,8 +210,8 @@ limitations under the License.
 <li><p>Set the <code class="docutils literal notranslate"><span class="pre">GaudiSequencer</span></code> sequential property to true</p></li>
 <li><p>Pass the created <code class="docutils literal notranslate"><span class="pre">GaudiSequencer</span></code> to the Application Manager in the <code class="docutils literal notranslate"><span class="pre">TopAlg</span></code>: <code class="docutils literal notranslate"><span class="pre">TopAlg</span> <span class="pre">=</span> <span class="pre">[seq]</span></code></p></li>
 </ul>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">Configurables</span> <span class="kn">import</span> <span class="n">MarlinProcessorWrapper</span>
-<span class="kn">from</span> <span class="nn">Configurables</span> <span class="kn">import</span> <span class="p">(</span><span class="n">GaudiSequencer</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">Configurables</span><span class="w"> </span><span class="kn">import</span> <span class="n">MarlinProcessorWrapper</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">Configurables</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span><span class="n">GaudiSequencer</span><span class="p">)</span>
 
 <span class="n">cardinality</span> <span class="o">=</span> <span class="mi">1</span>
 
@@ -237,7 +237,7 @@ limitations under the License.
     <span class="n">Sequential</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="n">OutputLevel</span><span class="o">=</span><span class="n">VERBOSE</span><span class="p">)</span>
 
-<span class="kn">from</span> <span class="nn">Configurables</span> <span class="kn">import</span> <span class="n">ApplicationMgr</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">Configurables</span><span class="w"> </span><span class="kn">import</span> <span class="n">ApplicationMgr</span>
 <span class="n">ApplicationMgr</span><span class="p">(</span> <span class="n">TopAlg</span> <span class="o">=</span> <span class="p">[</span><span class="n">seq</span><span class="p">],</span>
                 <span class="n">EvtSel</span> <span class="o">=</span> <span class="s1">&#39;NONE&#39;</span><span class="p">,</span>
                 <span class="n">EvtMax</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
