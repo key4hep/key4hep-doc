@@ -62,10 +62,17 @@ def _filter_prop_type(prop_name, properties):
         return ""
 
     prop_type = properties[prop_name][0]
-    # Reformat vectors and other STL constructs
-    prop_type = re.sub(
-        r"std::vector<(.+?),\s*std::allocator<\1>\s*>", r"vector<\1>", prop_type
-    )
+    # Remove the std::allocator part from vectors
+    prev = None
+    while prop_type != prev:
+        prev = prop_type
+        prop_type = re.sub(
+            r"std::vector<(.+?),\s*std::allocator<\1\s*>\s*>",
+            r"std::vector<\1>",
+            prop_type,
+        )
+
+    # Remove the std namespace because it takes up too much unnecessary space otherwise
     prop_type = re.sub(r"std::", "", prop_type)
     return prop_type
 

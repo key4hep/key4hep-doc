@@ -21,3 +21,4 @@ k4simdelphes/
 key4hep-tutorials
 k4fwcore/
 k4edm4hep2lcioconv
+/scripts/__pycache__/
