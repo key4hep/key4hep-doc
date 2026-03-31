@@ -22,6 +22,8 @@ from GaudiKernel.GaudiHandles import (
     PublicToolHandleArray,
 )
 
+from environment import get_package_from_lib, find_library
+
 # Silence some Gaudi logging
 logging.getLogger("PropertyProxy").setLevel(logging.CRITICAL)
 logging.getLogger("ConfigurableDb").setLevel(logging.CRITICAL)
@@ -115,9 +117,11 @@ def main(args):
     pkgs = {}
 
     for name, cfg in tqdm.tqdm(cfgDb.items()):
+        lib_path = find_library(cfg["lib"])
+        lib_stem, pkg = get_package_from_lib(lib_path)
         pkgs[name] = {
-            "lib": cfg["lib"],
-            "package": cfg["package"],
+            "lib": lib_stem or cfg["lib"],
+            "package": pkg or cfg["package"],
             "properties": get_properties(name),
         }
 

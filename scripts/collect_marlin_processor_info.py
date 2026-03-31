@@ -9,6 +9,8 @@ from io import BytesIO
 
 from lxml import etree
 
+from environment import get_package_from_lib
+
 
 def run_marlin_x():
     """Run 'Marlin -x' and return stdout as bytes"""
@@ -64,35 +66,6 @@ def get_loaded_libs(raw: bytes) -> list:
         if lib_match:
             libs.append(lib_match.group(1))
     return libs
-
-
-_KEY4HEP_PKG_RGX = re.compile(
-    r"/cvmfs/sw(?:-nightlies)?\.hsf\.org/key4hep/releases/20[0-9]{2}-[01][0-9]-[0-3][0-9]/x86_64-(?:ubuntu24\.04|almalinux9)-(?:.*?)-(?:opt|dbg)/(.*?)/(.*?)/lib/(.*)"
-)
-_LCG_VIEW_PKG_RGX = re.compile(
-    r"/cvmfs/sft(?:-nightlies).cern.ch/lcg/nightlies/.*?/.*?/(.*?)/.*?/x86_64-(?:el9|ubuntu24)-gcc14-(?:opt|dbg)/lib/(.*)"
-)
-
-
-def get_package_from_lib(lib):
-    """Get the package name from the library"""
-    lib_path = pathlib.Path(lib)
-    lib_stem = lib_path.name
-
-    lib_match = _KEY4HEP_PKG_RGX.match(lib)
-    if lib_match:
-        return (lib_stem, lib_match.group(1))
-
-    lib_match = _LCG_VIEW_PKG_RGX.match(str(lib_path.resolve()))
-    if lib_match:
-        return (lib_stem, lib_match.group(1))
-
-    # Fall back to simply using the stripped lib name in case we don't succeed
-    # with matching above
-    pkg_name = re.sub(r"\.so.*$", "", lib_stem)
-    pkg_name = re.sub(r"^lib", "", pkg_name)
-
-    return (lib_stem, pkg_name)
 
 
 # We try several possibilities for filtering processors
