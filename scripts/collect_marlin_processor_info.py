@@ -66,6 +66,35 @@ def get_loaded_libs(raw: bytes) -> list:
     return libs
 
 
+_KEY4HEP_PKG_RGX = re.compile(
+    r"/cvmfs/sw(?:-nightlies)?\.hsf\.org/key4hep/releases/20[0-9]{2}-[01][0-9]-[0-3][0-9]/x86_64-(?:ubuntu24\.04|almalinux9)-(?:.*?)-(?:opt|dbg)/(.*?)/(.*?)/lib/(.*)"
+)
+_LCG_VIEW_PKG_RGX = re.compile(
+    r"/cvmfs/sft(?:-nightlies).cern.ch/lcg/nightlies/.*?/.*?/(.*?)/.*?/x86_64-(?:el9|ubuntu24)-gcc14-(?:opt|dbg)/lib/(.*)"
+)
+
+
+def get_package_from_lib(lib):
+    """Get the package name from the library"""
+    lib_path = pathlib.Path(lib)
+    lib_stem = lib_path.name
+
+    lib_match = _KEY4HEP_PKG_RGX.match(lib)
+    if lib_match:
+        return (lib_stem, lib_match.group(1))
+
+    lib_match = _LCG_VIEW_PKG_RGX.match(str(lib_path.resolve()))
+    if lib_match:
+        return (lib_stem, lib_match.group(1))
+
+    # Fall back to simply using the stripped lib name in case we don't succeed
+    # with matching above
+    pkg_name = re.sub(r"\.so.*$", "", lib_stem)
+    pkg_name = re.sub(r"^lib", "", pkg_name)
+
+    return (lib_stem, pkg_name)
+
+
 # We try several possibilities for filtering processors
 _PROC_RES = [
     re.compile(r"(\S+)::newProcessor\(\)"),
@@ -78,11 +107,6 @@ def extract_procs_from_libs(loaded_libs):
     mapping each processor to its library"""
     processor_libs = {}
     for lib in loaded_libs:
-        name = pathlib.Path(lib).name
-        lib_stem = re.sub(r"\.so.*$", "", name)
-        if lib_stem.startswith("lib"):
-            lib_stem = lib_stem[3:]
-
         result = subprocess.run(
             ["readelf", "-sWC", lib],
             stdout=subprocess.PIPE,
@@ -94,11 +118,11 @@ def extract_procs_from_libs(loaded_libs):
             for rgx in _PROC_RES:
                 proc_match = rgx.search(line)
                 if proc_match:
-                    processor_libs[proc_match.group(1)] = lib_stem
-                    # Strip of namespaces etc because they usually do not show
+                    processor_libs[proc_match.group(1)] = lib
+                    # Strip off namespaces etc because they usually do not show
                     # up in the name that is used to register them with the
                     # MarlinProcessorMgr
-                    processor_libs[proc_match.group(1).split("::")[-1]] = lib_stem
+                    processor_libs[proc_match.group(1).split("::")[-1]] = lib
                     break
 
     return processor_libs
@@ -182,9 +206,10 @@ def parse_processors(xml_bytes: bytes, processor_libs: dict) -> dict:
                 prev_comment = ""
 
         lib = processor_libs.get(proc_type, "")
+        lib, pkg = get_package_from_lib(processor_libs.get(proc_type, ""))
         processors[proc_type] = {
             "lib": lib,
-            "package": lib,
+            "package": pkg,
             "description": proc_description,
             "properties": properties,
         }
