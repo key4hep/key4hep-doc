@@ -3,7 +3,6 @@
 import json
 import logging
 import re
-import tqdm
 import pathlib
 
 from collections.abc import Iterable
@@ -27,6 +26,9 @@ from environment import get_package_from_lib, find_library
 # Silence some Gaudi logging
 logging.getLogger("PropertyProxy").setLevel(logging.CRITICAL)
 logging.getLogger("ConfigurableDb").setLevel(logging.CRITICAL)
+
+# Silence the environment logger
+logging.getLogger("environment").setLevel(logging.CRITICAL)
 
 
 def _filter_for_json(value):
@@ -116,7 +118,7 @@ def main(args):
 
     pkgs = {}
 
-    for name, cfg in tqdm.tqdm(cfgDb.items()):
+    for name, cfg in cfgDb.items():
         lib_path = find_library(cfg["lib"])
         lib_stem, pkg = get_package_from_lib(lib_path)
         pkgs[name] = {
