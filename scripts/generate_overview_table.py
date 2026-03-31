@@ -92,21 +92,20 @@ def apply_filters(algorithms, filter_config):
 
 
 def group_by_package(algorithms, pkg_repo_map):
-    groups = defaultdict(list)
+    groups = defaultdict(lambda: {"url": "", "packages": []})
     for name, info in algorithms.items():
         pkg_name, url = get_package_repo(info["package"], pkg_repo_map)
-        print(f"{name=}, {info['package']} -> {pkg_name}, {url}")
-        groups[pkg_name].append(
+        groups[pkg_name]["url"] = url
+        groups[pkg_name]["packages"].append(
             {
                 "name": name,
                 "lib": info["lib"],
-                "url": url,
                 "description": info.get("description", ""),
                 "properties": info["properties"],
             }
         )
     for pkg in groups:
-        groups[pkg].sort(key=lambda a: a["name"])
+        groups[pkg]["packages"].sort(key=lambda a: a["name"])
     return dict(sorted(groups.items(), key=lambda item: (item[0] == "", item[0])))
 
 
@@ -125,7 +124,7 @@ def render_page(template_path, packages, item_label, property_label):
         autoescape=False,
     )
     env.filters["render_prop_value"] = _render_prop_value
-    total_algorithms = sum(len(algs) for algs in packages.values())
+    total_algorithms = sum(len(group["packages"]) for group in packages.values())
 
     template = env.get_template(template_path.name)
     return template.render(

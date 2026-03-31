@@ -34,16 +34,19 @@
   justify-content: space-between;
   padding: 0.45em 0.8em;
   background: #f0f0f0;
-  cursor: pointer;
-  user-select: none;
-}
-#algorithm-overview .alg-package-header:hover {
-  background: #e5e5e5;
 }
 #algorithm-overview .alg-package-name {
   font-weight: bold;
   font-family: monospace;
   font-size: 0.95em;
+}
+#algorithm-overview a.alg-package-name {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: #aaa;
+}
+#algorithm-overview a.alg-package-name:hover {
+  text-decoration-color: currentColor;
 }
 #algorithm-overview .alg-package-meta {
   display: flex;
@@ -51,6 +54,13 @@
   gap: 0.5em;
   font-size: 0.83em;
   color: #555;
+  cursor: pointer;
+  user-select: none;
+  padding: 0.15em 0.3em;
+  border-radius: 3px;
+}
+#algorithm-overview .alg-package-meta:hover {
+  background: #e5e5e5;
 }
 #algorithm-overview .alg-package-toggle {
   display: inline-block;
