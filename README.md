@@ -40,7 +40,7 @@ sphinx-build -b linkcheck docs linkcheck
 It's not strictly necessary to generate the overview tables of the existing
 Gaudi algorithms and Marlin processors, but if you want to have them locally,
 you will need to generate them first **inside a Key4hep software environment**.
-In order to reproduce the official documentation run before building the
+In order to (almost) reproduce the official documentation run before building the
 documentation as described above
 
 ```bash
@@ -66,6 +66,11 @@ The `generate_overview.sh` script essentially does the following three things
   removing commonly available properties that are usually not interesting
 - It concatenates the generated table with the stub file (the second argument)
   and writes the result to the expected outpufile
+  
+Using the invocation above it does not yet do the mapping of package names to
+github repositories. See the *Collect github repositories* step in
+[`generate_overview.yml`](.github/workflows/generate_overview.yml) for how to do
+that.
 
 ## Including changes from an external PR
 

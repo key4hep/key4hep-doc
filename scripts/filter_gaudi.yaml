@@ -3,6 +3,7 @@ filter:
     packages:
       - Gaudi*
       - TinyExperiment*
+      - gaudi
     properties:
       - OutputLevel
       - Audit*

@@ -4,12 +4,8 @@
 
 set -euo pipefail
 
-ITEM_LABEL="algorithm"
-PROPERTY_LABEL="property"
-FILTER_CONFIG=""
-
 display_usage() {
-    echo "Usage: $(basename $0) COLLECT_SCRIPT STUB [--output OUTPUT] [--json-output FILE] [--filter-config FILTER_CONFIG] [--item-label ITEM_LABEL] [--property-label PROP_LABEL]"
+    echo "Usage: $(basename $0) COLLECT_SCRIPT STUB [--json-output FILE] [-- GENERATE_TABLE_ARGS...]"
 }
 
 if [[ $# -eq 1 && ( "$1" == "-h" || "$1" == "--help" ) ]]; then
@@ -19,11 +15,8 @@ if [[ $# -eq 1 && ( "$1" == "-h" || "$1" == "--help" ) ]]; then
     echo "STUB               Read-only markdown file with page title and intro text"
     echo ""
     echo "Optional:"
-    echo "  --output           Path for the generated output file (default: STUB with .stub stripped)"
     echo "  --json-output      Path for the intermediate JSON file (default: temp file)"
-    echo "  --item-label       Singular label for each item (default: algorithm)"
-    echo "  --property-label   Singular label for each property (default: property)"
-    echo "  --filter-config    YAML file with filter rules passed to generate_overview_table.py"
+    echo "  Any other arguments are passed directly to generate_overview_table.py"
     exit 0
 fi
 
@@ -37,28 +30,19 @@ STUB="$2"
 shift 2
 
 JSON_OUTPUT=""
-OUTPUT=""
+TABLE_EXTRA_ARGS=()
 
 while [[ $# -gt 0 ]]; do
     case "$1" in
-        --output)          OUTPUT="$2"; shift 2 ;;
         --json-output)     JSON_OUTPUT="$2"; shift 2 ;;
-        --item-label)      ITEM_LABEL="$2"; shift 2 ;;
-        --property-label)  PROPERTY_LABEL="$2"; shift 2 ;;
-        --filter-config)   FILTER_CONFIG="$2"; shift 2 ;;
-        *)
-            echo "Unknown argument: $1";
-            display_usage
-            exit 1 ;;
+        *)                 TABLE_EXTRA_ARGS+=("$1"); shift ;;
     esac
 done
 
-if [[ -z "${OUTPUT}" ]]; then
-    if [[ "${STUB}" == *.stub.md ]]; then
-        OUTPUT="${STUB%.stub.md}.md"
-    else
-        OUTPUT="${STUB}"
-    fi
+if [[ "${STUB}" == *.stub.md ]]; then
+    OUTPUT="${STUB%.stub.md}.md"
+else
+    OUTPUT="${STUB}"
 fi
 
 JSON_TMP=""
@@ -72,16 +56,9 @@ trap 'rm -f "${TABLE_TMP}" "${JSON_TMP}"' EXIT
 
 python3 "${COLLECT_SCRIPT}" -o "${JSON_OUTPUT}"
 
-TABLE_ARGS=(
-    -i "${JSON_OUTPUT}"
-    -o "${TABLE_TMP}"
-    --item-label "${ITEM_LABEL}"
-    --property-label "${PROPERTY_LABEL}"
-)
-if [ -n "${FILTER_CONFIG}" ]; then
-    TABLE_ARGS+=(--filter-config "${FILTER_CONFIG}")
-fi
-
-python3 scripts/generate_overview_table.py "${TABLE_ARGS[@]}"
+python3 scripts/generate_overview_table.py \
+    -i "${JSON_OUTPUT}" \
+    -o "${TABLE_TMP}" \
+    "${TABLE_EXTRA_ARGS[@]}"
 
 cat "${STUB}" "${TABLE_TMP}" > "${OUTPUT}"
