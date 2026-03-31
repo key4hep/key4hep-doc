@@ -84,6 +84,7 @@
   align-items: center;
   gap: 0.4em;
 }
+#algorithm-overview-intro .alg-lib-badge,
 #algorithm-overview .alg-lib-badge {
   font-size: 0.73em;
   background: #ddeeff;
