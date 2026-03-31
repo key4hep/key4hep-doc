@@ -9,10 +9,10 @@
   var searchInput = document.getElementById('alg-search');
   var statsEl = document.getElementById('alg-stats');
 
-  // Toggle package group collapse/expand
-  overview.querySelectorAll('.alg-package-header').forEach(function (header) {
-    header.addEventListener('click', function () {
-      header.closest('.alg-package-group').classList.toggle('collapsed');
+  // Toggle package group collapse/expand (only on the right-hand meta/count area)
+  overview.querySelectorAll('.alg-package-meta').forEach(function (meta) {
+    meta.addEventListener('click', function () {
+      meta.closest('.alg-package-group').classList.toggle('collapsed');
     });
   });
 
