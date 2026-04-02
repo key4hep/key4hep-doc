@@ -364,12 +364,12 @@ Also see below.</p></li>
 <p><strong>For all of these steps make sure that you <code class="docutils literal notranslate"><span class="pre">import</span></code> all the necessary tools and
 algorithms from <code class="docutils literal notranslate"><span class="pre">Configurables</span></code>! Both <code class="docutils literal notranslate"><span class="pre">IOSvc</span></code> and <code class="docutils literal notranslate"><span class="pre">ApplicationMgr</span></code> services must be imported from <code class="docutils literal notranslate"><span class="pre">k4FWCore</span></code>.</strong></p>
 <p>The top of your file should now look something like this</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">Configurables</span> <span class="kn">import</span> <span class="p">(</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">Configurables</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">MarlinProcessorWrapper</span><span class="p">,</span>
     <span class="n">EDM4hep2LcioTool</span><span class="p">,</span> <span class="n">Lcio2EDM4hepTool</span>
     <span class="p">)</span>
-<span class="kn">from</span> <span class="nn">k4MarlinWrapper.parseConstants</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="kn">from</span> <span class="nn">k4FWCore</span> <span class="kn">import</span> <span class="n">IOSvc</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">k4MarlinWrapper.parseConstants</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">k4FWCore</span><span class="w"> </span><span class="kn">import</span> <span class="n">IOSvc</span>
 
 <span class="n">algList</span> <span class="o">=</span> <span class="p">[]</span>
 
@@ -474,7 +474,7 @@ simulation looks like this. You can simply copy this into the options file</p>
 
 <span class="c1"># algList unchanged</span>
 
-<span class="kn">from</span> <span class="nn">k4FWCore</span> <span class="kn">import</span> <span class="n">ApplicationMgr</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">k4FWCore</span><span class="w"> </span><span class="kn">import</span> <span class="n">ApplicationMgr</span>
 
 <span class="n">ApplicationMgr</span><span class="p">(</span>
     <span class="n">TopAlg</span><span class="o">=</span><span class="n">algList</span><span class="p">,</span>

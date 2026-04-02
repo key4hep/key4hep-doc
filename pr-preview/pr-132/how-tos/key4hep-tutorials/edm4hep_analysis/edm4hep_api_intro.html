@@ -215,8 +215,8 @@ an executable via CMake.</p>
 <input id="sd-tab-item-1" name="sd-tab-set-0" type="radio">
 </input><label class="sd-tab-label" data-sync-id="python-examples" for="sd-tab-item-1">
 Python</label><div class="sd-tab-content docutils">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">podio.reading</span> <span class="kn">import</span> <span class="n">get_reader</span>  <span class="c1"># for the generic reader</span>
-<span class="kn">from</span> <span class="nn">podio.root_io</span> <span class="kn">import</span> <span class="n">Reader</span>  <span class="c1"># for TTree (i.e. ROOTReader)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">podio.reading</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_reader</span>  <span class="c1"># for the generic reader</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">podio.root_io</span><span class="w"> </span><span class="kn">import</span> <span class="n">Reader</span>  <span class="c1"># for TTree (i.e. ROOTReader)</span>
 
 <span class="c1"># The generic reader is obtained from get reader and a (list of) filename(s)</span>
 <span class="n">reader</span> <span class="o">=</span> <span class="n">get_reader</span><span class="p">(</span><span class="s2">&quot;&lt;input-file-name&gt;&quot;</span><span class="p">)</span>
@@ -744,7 +744,7 @@ C++</label><div class="sd-tab-content docutils">
 <input id="sd-tab-item-9" name="sd-tab-set-4" type="radio">
 </input><label class="sd-tab-label" data-sync-id="python-examples" for="sd-tab-item-9">
 Python</label><div class="sd-tab-content docutils">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">podio</span> <span class="kn">import</span> <span class="n">root_io</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">podio</span><span class="w"> </span><span class="kn">import</span> <span class="n">root_io</span>
 
 <span class="n">reader</span> <span class="o">=</span> <span class="n">root_io</span><span class="o">.</span><span class="n">Reader</span><span class="p">(</span><span class="s2">&quot;some_file_containing_edm4hep_data.root&quot;</span><span class="p">)</span>
 
