@@ -60,6 +60,18 @@ def _filter_for_json(value):
     return value
 
 
+_STL_REPLACEMENTS = (
+    (
+        r"std::vector<(.+?),\s*std::allocator<\1\s*>\s*>",
+        r"std::vector<\1>",
+    ),
+    (
+        r"std::map<(.*?),\s*(.*?),\s*std::less<\1\s*>\s*,std::allocator<std::pair<\1 const\s*,\2\s*>\s*>\s*>",
+        r"std::map<\1, \2>",
+    ),
+)
+
+
 def _filter_prop_type(prop_name, properties):
     """Filter the property type to try and make it a bit more readable"""
     if prop_name not in properties:
@@ -70,11 +82,8 @@ def _filter_prop_type(prop_name, properties):
     prev = None
     while prop_type != prev:
         prev = prop_type
-        prop_type = re.sub(
-            r"std::vector<(.+?),\s*std::allocator<\1\s*>\s*>",
-            r"std::vector<\1>",
-            prop_type,
-        )
+        for pattern, repl in _STL_REPLACEMENTS:
+            prop_type = re.sub(pattern, repl, prop_type)
 
     # Remove the std namespace because it takes up too much unnecessary space otherwise
     prop_type = re.sub(r"std::", "", prop_type)
