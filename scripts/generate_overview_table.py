@@ -151,6 +151,7 @@ def main(args):
     packages = group_by_package(algorithms, repo_map)
 
     output = render_page(TEMPLATE, packages, args.item_label, args.property_label)
+    print(f"Rendered {len(output)} characters for the overview table")
 
     with open(args.output, "w") as f:
         f.write(output)
