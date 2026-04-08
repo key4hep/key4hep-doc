@@ -90,6 +90,13 @@ European Union's Horizon 2020 Research and Innovation programme under Grant Agre
     talks-and-presentations/README.md
 
 .. toctree::
+    :maxdepth: 1
+    :caption: Reference
+
+    algorithm-overview.md
+    processor-overview.md
+
+.. toctree::
     :maxdepth: 2
     :caption: Community Resources
     :titlesonly:

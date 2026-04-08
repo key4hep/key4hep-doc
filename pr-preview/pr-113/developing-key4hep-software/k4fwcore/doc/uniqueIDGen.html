@@ -9,6 +9,7 @@
       <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/copybutton.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/overview.css" type="text/css" />
     <link rel="shortcut icon" href="../../../_static/favicon.png"/>
   <!--[if lt IE 9]>
     <script src="../../../_static/js/html5shiv.min.js"></script>
@@ -22,6 +23,7 @@
         <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
         <script src="../../../_static/copybutton.js?v=f281be69"></script>
         <script src="../../../_static/design-tabs.js?v=36754332"></script>
+        <script defer="defer" src="../../../_static/overview.js?v=96af7809"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
@@ -77,6 +79,11 @@
 <p class="caption" role="heading"><span class="caption-text">More Information</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../talks-and-presentations/README.html">Talks and Presentations</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../algorithm-overview.html">Gaudi Algorithm Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../processor-overview.html">Marlin Processor Overview</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Community Resources</span></p>
 <ul>
@@ -144,7 +151,7 @@ limitations under the License.
 <h2>UniqueIDGenSvc service<a class="headerlink" href="#uniqueidgensvc-service" title="Link to this heading"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">UniqueIDGenSvc</span></code> Gaudi service can generate unique <code class="docutils literal notranslate"><span class="pre">size_t</span></code> values that can be used as PRNG seeds, based on an event number, run number, and algorithm name.</p>
 <p>The service can be included in a steering file by:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">Configurables</span> <span class="kn">import</span> <span class="n">UniqueIDGenSvc</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">Configurables</span><span class="w"> </span><span class="kn">import</span> <span class="n">UniqueIDGenSvc</span>
 <span class="n">uidgen_svc</span> <span class="o">=</span> <span class="n">UniqueIDGenSvc</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -205,7 +212,7 @@ The name of input <code class="docutils literal notranslate"><span class="pre">E
 </div>
 <p>Then, declare a member variable for the service interface and locate the service during algorithm initialization:</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">private</span><span class="o">:</span>
-<span class="w">  </span><span class="n">SmartIF</span><span class="o">&lt;</span><span class="n">IUniqueIDGenSvc</span><span class="o">&gt;</span><span class="w"> </span><span class="n">m_uniqueIDSvc</span><span class="p">{</span><span class="k">nullptr</span><span class="p">};</span>
+<span class="w">  </span><span class="n">SmartIF</span><span class="o">&lt;</span><span class="n">IUniqueIDGenSvc</span><span class="o">&gt;</span><span class="w"> </span><span class="n">m_uniqueIDSvc</span><span class="p">{</span><span class="nb">nullptr</span><span class="p">};</span>
 
 <span class="k">public</span><span class="o">:</span>
 <span class="w">  </span><span class="n">StatusCode</span><span class="w"> </span><span class="n">initialize</span><span class="p">()</span><span class="w"> </span><span class="k">final</span><span class="w"> </span><span class="p">{</span>
