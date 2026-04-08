@@ -1,0 +1,86 @@
+## What's on this page?
+
+```{raw} html
+<div id="algorithm-overview-intro">
+<p>This table has been automatically collected from a Key4hep environment. Use the
+search box to filter by algorithm name, package, or library. Click a package
+header to collapse or expand it; click an algorithm name to reveal its
+properties. The <span class="alg-lib-badge">tags</span> denote the library name
+where the algorithm is found in the environment.</p>
+</div>
+```
+
+## {{ item_label }}s
+
+Total: **{{ total_algorithms }} {{ item_label }}s** across **{{ total_packages }} packages**.
+
+
+```{raw} html
+<div id="algorithm-overview" data-total="{{ total_algorithms }}" data-packages="{{ total_packages }}" data-item-label="{{ item_label }}">
+  <div class="alg-filter-bar">
+    <input type="text" id="alg-search" placeholder="Filter by name, package, or library…" autocomplete="off" />
+    <span id="alg-stats">Showing {{ total_algorithms }} of {{ total_algorithms }} {{ item_label }}s in {{ total_packages }} packages</span>
+  </div>
+
+  {%- for package, group in packages.items() %}
+  <div class="alg-package-group" data-package="{{ package | e }}">
+    <div class="alg-package-header">
+      {%- if group.url %}
+      <a class="alg-package-name" href="{{ group.url | e }}" target="_blank" rel="noopener noreferrer">{{ (package if package else "(unknown)") | e }}</a>
+      {%- else %}
+      <span class="alg-package-name">{{ (package if package else "(unknown)") | e }}</span>
+      {%- endif %}
+      <span class="alg-package-meta">
+        <span class="alg-package-count">{{ group.packages | length }} {{ item_label }}{%- if group.packages | length != 1 %}s{%- endif %}</span>
+        <span class="alg-package-toggle">&#9660;</span>
+      </span>
+    </div>
+    <div class="alg-cards-container">
+      {%- for item in group.packages %}
+      <div class="alg-card" data-name="{{ item.name | e }}" data-lib="{{ item.lib | e }}" data-package="{{ package | e }}">
+        <div class="alg-card-header">
+          <span class="alg-name">{{ item.name | e }}</span>
+          <span class="alg-card-right">
+            {%- if item.lib %}
+            <span class="alg-lib-badge">{{ item.lib | e }}</span>
+            {%- endif %}
+            <span class="alg-card-toggle">&#9658;</span>
+          </span>
+        </div>
+        <div class="alg-card-body">
+          {%- if item.description %}
+          <p class="alg-description">{{ item.description | e }}</p>
+          {%- endif %}
+          {%- if item.properties %}
+          <table class="alg-props-table">
+            <thead>
+              <tr>
+                <th>{{ property_label | capitalize }}</th>
+                <th>Type</th>
+                <th>Default</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              {%- for prop_name, prop_info in item.properties.items() %}
+              <tr>
+                <td><code>{{ prop_name | e }}</code></td>
+                <td><code>{{ prop_info.get("type", "") | e }}</code></td>
+                <td>{{ prop_info.value | render_prop_value }}</td>
+                <td>{{ prop_info.description | e }}</td>
+              </tr>
+              {%- endfor %}
+            </tbody>
+          </table>
+          {%- else %}
+          <em>No {{ property_label }}s available.</em>
+          {%- endif %}
+        </div>
+      </div>
+      {%- endfor %}
+    </div>
+  </div>
+  {%- endfor %}
+</div>
+
+```

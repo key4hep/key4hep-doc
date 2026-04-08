@@ -35,6 +35,43 @@ sphinx-build -b linkcheck docs linkcheck
 
 **Note, that we also build a preview of the page when you open a PR, so building locally might not be necessary.**
 
+### Generating / building algorithm overview pages
+
+It's not strictly necessary to generate the overview tables of the existing
+Gaudi algorithms and Marlin processors, but if you want to have them locally,
+you will need to generate them first **inside a Key4hep software environment**.
+In order to (almost) reproduce the official documentation run before building the
+documentation as described above
+
+```bash
+scripts/generate_overview.sh \
+    scripts/collect_gaudi_alg_info.py \
+    docs/algorithm-overview.stub.md \
+    --filter-config scripts/filter_gaudi.yaml
+
+scripts/generate_overview.sh \
+    scripts/collect_marlin_processor_info.py \
+    docs/processor-overview.stub.md \
+    --filter-config scripts/filter_marlin.yaml \
+    --item-label processor \
+    --property-label parameter
+```
+
+The `generate_overview.sh` script essentially does the following three things
+- Call the collection script that produces an output in JSON (this is the first
+  argument to the script)
+- Pass that JSON output to `generate_overview_table.py` that generates an `.md`
+  file with the necessary inline HTML for nice rendering. This also applies some
+  filtering to avoid picking up algorithms from the Gaudi test suite as well as
+  removing commonly available properties that are usually not interesting
+- It concatenates the generated table with the stub file (the second argument)
+  and writes the result to the expected outpufile
+  
+Using the invocation above it does not yet do the mapping of package names to
+github repositories. See the *Collect github repositories* step in
+[`generate_overview.yml`](.github/workflows/generate_overview.yml) for how to do
+that.
+
 ## Including changes from an external PR
 
 In some cases the changes to the documentation happen in a different repository

@@ -1,0 +1,69 @@
+name: Generate overview
+on:
+  workflow_call:
+    inputs:
+      ref:
+        description: The git ref to check out
+        type: string
+        required: true
+      collect-script:
+        description: Python script that collects component info and writes JSON
+        type: string
+        required: true
+      stub:
+        description: Markdown stub with page title and intro text (relative to repo root)
+        type: string
+        required: true
+      output:
+        description: Path for the generated output file (relative to repo root)
+        type: string
+        required: true
+      filter-config:
+        description: Path to a YAML filter config file
+        type: string
+        required: true
+      item-label:
+        description: Singular label for each item (e.g. algorithm or processor)
+        type: string
+        default: algorithm
+      property-label:
+        description: Singular label for each property (e.g. property or parameter)
+        type: string
+        default: property
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ inputs.ref }}
+      - name: Collect github repositories
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh search repos --owner=key4hep --archived=false --visibility=public --json name,url > key4hep_repositories.json
+          gh search repos --owner=hep-fcc --archived=false --visibility=public --json name,url > hep-fcc_repositories.json
+          gh search repos --owner=ilcsoft --archived=false --visibility=public --json name,url > ilcsoft_repositories.json
+      - uses: cvmfs-contrib/github-action-cvmfs@v5
+      - uses: aidasoft/run-lcg-view@v5
+        with:
+          container: ubuntu2404
+          view-path: /cvmfs/sw-nightlies.hsf.org/key4hep
+          run: |
+            args=(--item-label "${{ inputs.item-label }}" --property-label "${{ inputs.property-label }}")
+            bash scripts/generate_overview.sh \
+              "${{ inputs.collect-script }}" \
+              "${{ inputs.stub }}" \
+              --output "${{ inputs.output }}" \
+              --filter-config ${{ inputs.filter-config }} \
+              --repo-maps *_repositories.json \
+              "${args[@]}"
+            chmod a+r "${{ inputs.output }}"
+      - name: Compute artifact name
+        id: artifact-name
+        run: echo "name=$(echo '${{ inputs.output }}' | tr '/' '-')" >> "$GITHUB_OUTPUT"
+      - uses: actions/upload-artifact@v6
+        with:
+          name: ${{ steps.artifact-name.outputs.name }}
+          path: ${{ inputs.output }}

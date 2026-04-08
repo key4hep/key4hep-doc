@@ -35,6 +35,13 @@ for arg in "$@"; do
   esac
 done
 
+# Files for which no fetch attempt should be done as they will be generated
+# locally but potentially only after this script is run
+EXCLUDE_LIST=(
+  "algorithm-overview.md"
+  "processor-overview.md"
+)
+
 # process one markdown file with content that potentially needs fetching from an
 # external repository
 fetch_for_file() {
@@ -46,6 +53,9 @@ fetch_for_file() {
   while read -r line; do
     # Check if line is non-empty and ends on .md
     if [ -n "${line}" ] && [[ "${line}" == *.md ]] || [[ "${line}" == *.png ]]; then
+      if [[ " ${EXCLUDE_LIST[*]} " == *" ${line} "* ]]; then
+        continue
+      fi
       # If the file exists do nothing, otherwise pull it in from github
       local file_to_fetch=${file_dir}/${line}
       if [ "${FORCE}" = true ]; then

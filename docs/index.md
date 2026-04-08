@@ -24,6 +24,13 @@
     talks-and-presentations/README.md
 
 .. toctree::
+    :maxdepth: 1
+    :caption: Reference
+
+    algorithm-overview.md
+    processor-overview.md
+
+.. toctree::
     :maxdepth: 2
     :includehidden:
     :caption: External links

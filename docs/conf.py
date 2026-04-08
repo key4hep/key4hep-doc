@@ -3,6 +3,7 @@
 # from starterkit_ci.sphinx_config import *  # NOQA
 
 import os
+import shutil
 
 IN_GITHUB_ACTIONS_CI = os.environ.get("GITHUB_ACTIONS", False)
 GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN", None)
@@ -11,6 +12,8 @@ project = "Key4hep"
 copyright = "2025, Key4hep"
 author = "Key4hep"
 html_static_path = ["static"]
+html_css_files = ["overview.css"]
+html_js_files = [("overview.js", {"defer": "defer"})]
 html_logo = "static/logo.png"
 html_favicon = "static/favicon.png"
 
@@ -20,7 +23,20 @@ exclude_patterns = [
     ".DS_Store",
     "archive",
     "README.md",
+    "*.stub.md",
 ]
+
+# Copy the stub to the expected location in case overview table generation
+# hasn't run yet
+_docs_dir = os.path.dirname(__file__)
+for _stub, _output in [
+    ("algorithm-overview.stub.md", "algorithm-overview.md"),
+    ("processor-overview.stub.md", "processor-overview.md"),
+]:
+    _output_path = os.path.join(_docs_dir, _output)
+    _stub_path = os.path.join(_docs_dir, _stub)
+    if not os.path.exists(_output_path):
+        shutil.copy(_stub_path, _output_path)
 
 html_theme = "sphinx_rtd_theme"
 

@@ -20,12 +20,41 @@ on:
         description: The PR number for identifying dependent PRs
         type: string
         required: false
+        default: ''
+      generate-overviews:
+        description: Run the overview generation jobs (not needed for linkcheck-only runs)
+        type: boolean
+        required: false
+        default: true
 
 jobs:
+  generate-alg-overview:
+    if: ${{ inputs.generate-overviews }}
+    uses: ./.github/workflows/generate_overview.yml
+    with:
+      ref: ${{ inputs.ref }}
+      collect-script: scripts/collect_gaudi_alg_info.py
+      stub: docs/algorithm-overview.stub.md
+      output: docs/algorithm-overview.md
+      item-label: algorithm
+      property-label: property
+      filter-config: scripts/filter_gaudi.yaml
+
+  generate-proc-overview:
+    if: ${{ inputs.generate-overviews }}
+    uses: ./.github/workflows/generate_overview.yml
+    with:
+      ref: ${{ inputs.ref }}
+      collect-script: scripts/collect_marlin_processor_info.py
+      stub: docs/processor-overview.stub.md
+      output: docs/processor-overview.md
+      item-label: processor
+      property-label: parameter
+      filter-config: scripts/filter_marlin.yaml
+
   build:
+    needs: [generate-alg-overview, generate-proc-overview]
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
     steps:
     - uses: actions/checkout@v6
       with:
@@ -38,6 +67,18 @@ jobs:
       run: |
           pip install --upgrade pip
           pip install -r requirements.txt
+    - name: Download algorithm overview
+      if: ${{ inputs.generate-overviews }}
+      uses: actions/download-artifact@v6
+      with:
+        name: docs-algorithm-overview.md
+        path: docs/
+    - name: Download processor overview
+      if: ${{ inputs.generate-overviews }}
+      uses: actions/download-artifact@v6
+      with:
+        name: docs-processor-overview.md
+        path: docs/
     - name: Fetch external sources from upstream PR
       if: ${{ inputs.pr-number != '' }}
       env:
