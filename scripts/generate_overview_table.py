@@ -138,16 +138,20 @@ def render_page(template_path, packages, item_label, property_label):
 
 def main(args):
     algorithms = load_algorithms(args.input)
+    print(f"Loaded information about {len(algorithms)} algorithms / processors")
 
     if args.filter_config:
         filter_config = load_filter_config(args.filter_config)
         algorithms = apply_filters(algorithms, filter_config)
+
+    print(f"Rendering {len(algorithms)} algorithms / processors after filtering")
 
     repo_map = _load_repo_map(args.repo_maps)
 
     packages = group_by_package(algorithms, repo_map)
 
     output = render_page(TEMPLATE, packages, args.item_label, args.property_label)
+    print(f"Rendered {len(output)} characters for the overview table")
 
     with open(args.output, "w") as f:
         f.write(output)

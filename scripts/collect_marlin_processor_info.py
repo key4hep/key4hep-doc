@@ -199,9 +199,11 @@ def main(args):
         sys.exit(1)
 
     loaded_libs = get_loaded_libs(raw)
+    print(f"Loaded {len(loaded_libs)} libraries from MARLIN_DLL")
     processor_libs = extract_procs_from_libs(loaded_libs)
 
     processors = parse_processors(xml_bytes, processor_libs)
+    print(f"Collected {len(processors)} processors")
 
     with open(args.outputfile, "w") as outfile:
         json.dump(processors, outfile)

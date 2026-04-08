@@ -136,6 +136,8 @@ def main(args):
             "properties": get_properties(name),
         }
 
+    print(f"Collected information for {len(pkgs)} algorithms")
+
     with open(args.outputfile, "w") as outfile:
         json.dump(pkgs, outfile)
 

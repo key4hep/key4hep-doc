@@ -30,19 +30,23 @@ STUB="$2"
 shift 2
 
 JSON_OUTPUT=""
+OUTPUT=""
 TABLE_EXTRA_ARGS=()
 
 while [[ $# -gt 0 ]]; do
     case "$1" in
         --json-output)     JSON_OUTPUT="$2"; shift 2 ;;
+        --output)          OUTPUT="$2"; shift 2 ;;
         *)                 TABLE_EXTRA_ARGS+=("$1"); shift ;;
     esac
 done
 
-if [[ "${STUB}" == *.stub.md ]]; then
-    OUTPUT="${STUB%.stub.md}.md"
-else
-    OUTPUT="${STUB}"
+if [[ -z "${OUTPUT}" ]]; then
+    if [[ "${STUB}" == *.stub.md ]]; then
+        OUTPUT="${STUB%.stub.md}.md"
+    else
+        OUTPUT="${STUB}"
+    fi
 fi
 
 JSON_TMP=""
@@ -54,11 +58,15 @@ fi
 TABLE_TMP=$(mktemp --suffix=.md)
 trap 'rm -f "${TABLE_TMP}" "${JSON_TMP}"' EXIT
 
+set -x
 python3 "${COLLECT_SCRIPT}" -o "${JSON_OUTPUT}"
 
 python3 scripts/generate_overview_table.py \
     -i "${JSON_OUTPUT}" \
     -o "${TABLE_TMP}" \
     "${TABLE_EXTRA_ARGS[@]}"
+set +x
 
+echo "Generated lines of table: "$(wc -l ${TABLE_TMP})
 cat "${STUB}" "${TABLE_TMP}" > "${OUTPUT}"
+echo "Final document lines: "$(wc -l "${OUTPUT}")
