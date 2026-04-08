@@ -32,6 +32,7 @@ Want to contribute? Look at our **[Contribution Guide](getting_started/CONTRIBUT
 ## Main Documentation Sections
 - **[How-to Guides](how-tos/README.md)** - Step-by-step instructions for common tasks
 - **[Tutorials](tutorials/README.md)** - Learn Key4hep through hands-on examples
+- **[Algorithm Overview](algorithm-overview.md)** - See all existing algorithms
 - **[Developer Documentation](developing-key4hep-software/README.md)** - Contribute to and extend Key4hep
 - **[Build Instructions](spack-build-instructions-for-librarians/README.md)** - Advanced build and deployment guides
 
@@ -73,6 +74,13 @@ European Union's Horizon 2020 Research and Innovation programme under Grant Agre
     tutorials/README.md
 
 .. toctree::
+    :maxdepth: 1
+    :caption: Reference
+
+    algorithm-overview.md
+    processor-overview.md
+
+.. toctree::
     :maxdepth: 3
     :caption: Developer Resources
     :titlesonly:
@@ -88,13 +96,6 @@ European Union's Horizon 2020 Research and Innovation programme under Grant Agre
     :hidden:
 
     talks-and-presentations/README.md
-
-.. toctree::
-    :maxdepth: 1
-    :caption: Reference
-
-    algorithm-overview.md
-    processor-overview.md
 
 .. toctree::
     :maxdepth: 2
