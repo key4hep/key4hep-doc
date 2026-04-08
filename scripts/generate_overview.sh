@@ -54,6 +54,7 @@ fi
 TABLE_TMP=$(mktemp --suffix=.md)
 trap 'rm -f "${TABLE_TMP}" "${JSON_TMP}"' EXIT
 
+set -x
 python3 "${COLLECT_SCRIPT}" -o "${JSON_OUTPUT}"
 
 python3 scripts/generate_overview_table.py \
@@ -62,3 +63,5 @@ python3 scripts/generate_overview_table.py \
     "${TABLE_EXTRA_ARGS[@]}"
 
 cat "${STUB}" "${TABLE_TMP}" > "${OUTPUT}"
+echo "Final document has "$(wc -l "${OUTPUT}")" lines"
+set +x
