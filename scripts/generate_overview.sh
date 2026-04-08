@@ -67,6 +67,6 @@ python3 scripts/generate_overview_table.py \
     "${TABLE_EXTRA_ARGS[@]}"
 set +x
 
-echo "Generated "$(wc -l ${TABLE_TMP})" lines of table"
+echo "Generated lines of table: "$(wc -l ${TABLE_TMP})
 cat "${STUB}" "${TABLE_TMP}" > "${OUTPUT}"
-echo "Final document has "$(wc -l "${OUTPUT}")" lines"
+echo "Final document lines: "$(wc -l "${OUTPUT}")
