@@ -30,19 +30,23 @@ STUB="$2"
 shift 2
 
 JSON_OUTPUT=""
+OUTPUT=""
 TABLE_EXTRA_ARGS=()
 
 while [[ $# -gt 0 ]]; do
     case "$1" in
         --json-output)     JSON_OUTPUT="$2"; shift 2 ;;
+        --output)          OUTPUT="$2"; shift 2 ;;
         *)                 TABLE_EXTRA_ARGS+=("$1"); shift ;;
     esac
 done
 
-if [[ "${STUB}" == *.stub.md ]]; then
-    OUTPUT="${STUB%.stub.md}.md"
-else
-    OUTPUT="${STUB}"
+if [[ -z "${OUTPUT}" ]]; then
+    if [[ "${STUB}" == *.stub.md ]]; then
+        OUTPUT="${STUB%.stub.md}.md"
+    else
+        OUTPUT="${STUB}"
+    fi
 fi
 
 JSON_TMP=""
