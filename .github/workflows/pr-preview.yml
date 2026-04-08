@@ -1,16 +1,12 @@
 name: Build/Deploy PR preview
 
 on:
-  # pull_request:
-  #   types:
-  #     - opened
-  #     - reopened
-  #     - synchronize
-  #     - closed
-  workflow_dispatch:
-  push:
-    branches:
-     - gaudi-alg-doc
+  pull_request_target:
+    types:
+      - opened
+      - reopened
+      - synchronize
+      - closed
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -20,10 +16,9 @@ jobs:
   build-preview:
     uses: ./.github/workflows/build.yml
     with:
-      ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      ref: ${{ github.event.pull_request.head.sha }}
       linkcheck: false
       pr-number: ${{ github.event.number }}
-
 
   linkcheck:
     if: contains(['opened', 'reopened', 'synchronize'], ${{ github.event.action }})
@@ -45,7 +40,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
         with:
-          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          ref: ${{ github.event.pull_request.head.sha }}
 
       - uses: actions/download-artifact@v6
         with:
@@ -59,18 +54,17 @@ jobs:
           rm -r doc_artifact
 
       - name: Deploy Preview
-        uses: rossjrw/pr-preview-action@v1.8
-        # if: contains(['opened', 'reopened', 'synchronize'], ${{ github.event.action }})
+        uses: rossjrw/pr-preview-action@v1.6.2
+        if: contains(['opened', 'reopened', 'synchronize'], ${{ github.event.action }})
         with:
           source-dir: pr-preview-unpacked
           preview-branch: gh-pages
           umbrella-dir: pr-preview
-          pr-number: 132
           deploy-repository: "key4hep/key4hep-doc"
-          action: deploy
+          action: auto
 
       - name: Remove Preview
-        uses: rossjrw/pr-preview-action@v1.8
+        uses: rossjrw/pr-preview-action@v1.6.2
         if: github.event.action == 'closed' && !github.event.pull_request.merged
         with:
           source-dir: pr-preview-unpacked
