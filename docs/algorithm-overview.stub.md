@@ -8,7 +8,7 @@ click an algorithm name to reveal its properties.
 ```{note}
 The table below is automatically generated from the Key4hep nightlies. It is
 likely to still contain some issues (e.g. in the reporting of `Property` types
-or in the description). In case you spot something, please open an issue on https://github.com/key4hep/key4hep-doc (a *Blank issue* is enough).
+or in the description). In case you spot something, please open an issue on [key4hep/key4hep-doc](https://github.com/key4hep/key4hep-doc) (a *Blank issue* is enough).
 ```
 
 ## Why no descriptions for the algorithms?
