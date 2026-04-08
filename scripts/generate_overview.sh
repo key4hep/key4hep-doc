@@ -61,7 +61,8 @@ python3 scripts/generate_overview_table.py \
     -i "${JSON_OUTPUT}" \
     -o "${TABLE_TMP}" \
     "${TABLE_EXTRA_ARGS[@]}"
+set +x
 
+echo "Generated "$(wc -l ${TABLE_TMP})" lines of table"
 cat "${STUB}" "${TABLE_TMP}" > "${OUTPUT}"
 echo "Final document has "$(wc -l "${OUTPUT}")" lines"
-set +x
