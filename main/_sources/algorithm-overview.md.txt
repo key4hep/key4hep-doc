@@ -8,7 +8,7 @@ click an algorithm name to reveal its properties.
 ```{note}
 The table below is automatically generated from the Key4hep nightlies. It is
 likely to still contain some issues (e.g. in the reporting of `Property` types
-or in the description). In case you spot something, please open an issue on https://github.com/key4hep/key4hep-doc (a *Blank issue* is enough).
+or in the description). In case you spot something, please open an issue on [key4hep/key4hep-doc](https://github.com/key4hep/key4hep-doc) (a *Blank issue* is enough).
 ```
 
 ## Why no descriptions for the algorithms?
@@ -28,7 +28,7 @@ where the algorithm is found in the environment.</p>
 </div>
 ```
 
-## algorithms
+## Algorithms
 
 Total: **191 algorithms** across **12 packages**.
 
@@ -3279,7 +3279,7 @@ Total: **191 algorithms** across **12 packages**.
               <tr>
                 <td><code>CrossingAngle</code></td>
                 <td><code>double</code></td>
-                <td><code>4.6508567e-310</code></td>
+                <td><code>4.6659042e-310</code></td>
                 <td> Half the crossing angle beam in [rad] [unknown owner type] </td>
               </tr>
               <tr>
@@ -6202,13 +6202,13 @@ Total: **191 algorithms** across **12 packages**.
               <tr>
                 <td><code>ehECal</code></td>
                 <td><code>double</code></td>
-                <td><code>6.8497636e+180</code></td>
+                <td><code>7.7366984e+228</code></td>
                 <td> e/h of the ECal [unknown owner type] </td>
               </tr>
               <tr>
                 <td><code>ehHCal</code></td>
                 <td><code>double</code></td>
-                <td><code>5.9476699e+228</code></td>
+                <td><code>7.3448386e+223</code></td>
                 <td> e/h of the HCal [unknown owner type] </td>
               </tr>
             </tbody>
