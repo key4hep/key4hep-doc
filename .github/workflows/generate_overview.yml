@@ -42,9 +42,9 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh search repos --owner=key4hep --archived=false --visibility=public --json name,url > key4hep_repositories.json
-          gh search repos --owner=hep-fcc --archived=false --visibility=public --json name,url > hep-fcc_repositories.json
-          gh search repos --owner=ilcsoft --archived=false --visibility=public --json name,url > ilcsoft_repositories.json
+          gh search repos --owner=key4hep --archived=false --visibility=public --json name,url --limit 100 > key4hep_repositories.json
+          gh search repos --owner=hep-fcc --archived=false --visibility=public --json name,url --limit 100 > hep-fcc_repositories.json
+          gh search repos --owner=ilcsoft --archived=false --visibility=public --json name,url --limit 100 > ilcsoft_repositories.json
       - uses: cvmfs-contrib/github-action-cvmfs@v5
       - uses: aidasoft/run-lcg-view@v5
         with:
