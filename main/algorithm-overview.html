@@ -138,11 +138,11 @@ where the algorithm is found in the environment.</p>
 </div></section>
 <section id="algorithms">
 <h2>Algorithms<a class="headerlink" href="#algorithms" title="Link to this heading"></a></h2>
-<p>Total: <strong>191 algorithms</strong> across <strong>12 packages</strong>.</p>
-<div id="algorithm-overview" data-total="191" data-packages="12" data-item-label="algorithm">
+<p>Total: <strong>195 algorithms</strong> across <strong>12 packages</strong>.</p>
+<div id="algorithm-overview" data-total="195" data-packages="12" data-item-label="algorithm">
   <div class="alg-filter-bar">
     <input type="text" id="alg-search" placeholder="Filter by name, package, or library…" autocomplete="off" />
-    <span id="alg-stats">Showing 191 of 191 algorithms in 12 packages</span>
+    <span id="alg-stats">Showing 195 of 195 algorithms in 12 packages</span>
   </div>
   <div class="alg-package-group" data-package="k4ActsTracking">
     <div class="alg-package-header">
@@ -3384,7 +3384,7 @@ where the algorithm is found in the environment.</p>
               <tr>
                 <td><code>CrossingAngle</code></td>
                 <td><code>double</code></td>
-                <td><code>4.6659042e-310</code></td>
+                <td><code>4.6781356e-310</code></td>
                 <td> Half the crossing angle beam in [rad] [unknown owner type] </td>
               </tr>
               <tr>
@@ -4089,7 +4089,7 @@ where the algorithm is found in the environment.</p>
     <div class="alg-package-header">
       <a class="alg-package-name" href="https://github.com/HEP-FCC/k4RecCalorimeter" target="_blank" rel="noopener noreferrer">k4RecCalorimeter</a>
       <span class="alg-package-meta">
-        <span class="alg-package-count">67 algorithms</span>
+        <span class="alg-package-count">71 algorithms</span>
         <span class="alg-package-toggle">&#9660;</span>
       </span>
     </div>
@@ -4449,6 +4449,77 @@ where the algorithm is found in the environment.</p>
           </table>
         </div>
       </div>
+      <div class="alg-card" data-name="CaloAddNoise2Digits" data-lib="libk4RecFCCeeCalorimeterPlugins.so" data-package="k4RecCalorimeter">
+        <div class="alg-card-header">
+          <span class="alg-name">CaloAddNoise2Digits</span>
+          <span class="alg-card-right">
+            <span class="alg-lib-badge">libk4RecFCCeeCalorimeterPlugins.so</span>
+            <span class="alg-card-toggle">&#9658;</span>
+          </span>
+        </div>
+        <div class="alg-card-body">
+          <table class="alg-props-table">
+            <thead>
+              <tr>
+                <th>Property</th>
+                <th>Type</th>
+                <th>Default</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>InputCollection</code></td>
+                <td><code>vector&lt;DataObjID&gt;</code></td>
+                <td><code>[&quot;DigitsFloat&quot;]</code></td>
+                <td>  [k4FWCore::details::Transformer&lt;edm4hep::TimeSeriesCollection (edm4hep::TimeSeriesCollection const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
+              </tr>
+              <tr>
+                <td><code>OutputCollection</code></td>
+                <td><code>vector&lt;DataObjID&gt;</code></td>
+                <td><code>[&quot;DigitsWithNoiseFloat&quot;]</code></td>
+                <td>  [k4FWCore::details::Transformer&lt;edm4hep::TimeSeriesCollection (edm4hep::TimeSeriesCollection const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
+              </tr>
+              <tr>
+                <td><code>noiseInfoFileName</code></td>
+                <td><code>string</code></td>
+                <td><code>NoiseInfo.root</code></td>
+                <td> Name of file to store noise samples, means, cov, and corr matrices [CaloAddNoise2Digits] </td>
+              </tr>
+              <tr>
+                <td><code>noiseEnergy</code></td>
+                <td><code>float</code></td>
+                <td><code>0.1</code></td>
+                <td> Noise energy for Gaussian (mean) - in GeV [CaloAddNoise2Digits] </td>
+              </tr>
+              <tr>
+                <td><code>noiseWidth</code></td>
+                <td><code>float</code></td>
+                <td><code>0.05</code></td>
+                <td> Noise width - in GeV as well [CaloAddNoise2Digits] </td>
+              </tr>
+              <tr>
+                <td><code>noiseSimSamples</code></td>
+                <td><code>int</code></td>
+                <td><code>1000</code></td>
+                <td> Number of samples for noise simulation [CaloAddNoise2Digits] </td>
+              </tr>
+              <tr>
+                <td><code>noiseSeed</code></td>
+                <td><code>int</code></td>
+                <td><code>32</code></td>
+                <td> Seed for the random number generator [CaloAddNoise2Digits] </td>
+              </tr>
+              <tr>
+                <td><code>pulseSamplingLength</code></td>
+                <td><code>int</code></td>
+                <td><code>30</code></td>
+                <td> Number of samples in pulse [CaloAddNoise2Digits] </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
       <div class="alg-card" data-name="CaloCellPositionsTool" data-lib="libk4RecCalorimeterPlugins.so" data-package="k4RecCalorimeter">
         <div class="alg-card-header">
           <span class="alg-name">CaloCellPositionsTool</span>
@@ -4485,6 +4556,178 @@ where the algorithm is found in the environment.</p>
                 <td><code>ServiceHandle</code></td>
                 <td><code>GeoSvc</code></td>
                 <td> Geometry service [CaloCellPositionsTool] </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="alg-card" data-name="CaloDigitizerFunc" data-lib="libk4RecFCCeeCalorimeterPlugins.so" data-package="k4RecCalorimeter">
+        <div class="alg-card-header">
+          <span class="alg-name">CaloDigitizerFunc</span>
+          <span class="alg-card-right">
+            <span class="alg-lib-badge">libk4RecFCCeeCalorimeterPlugins.so</span>
+            <span class="alg-card-toggle">&#9658;</span>
+          </span>
+        </div>
+        <div class="alg-card-body">
+          <table class="alg-props-table">
+            <thead>
+              <tr>
+                <th>Property</th>
+                <th>Type</th>
+                <th>Default</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>InputCollection</code></td>
+                <td><code>vector&lt;DataObjID&gt;</code></td>
+                <td><code>[&quot;SimCaloHitsCollection&quot;]</code></td>
+                <td>  [k4FWCore::details::Transformer&lt;edm4hep::TimeSeriesCollection (edm4hep::SimCalorimeterHitCollection const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
+              </tr>
+              <tr>
+                <td><code>OutputCollection</code></td>
+                <td><code>vector&lt;DataObjID&gt;</code></td>
+                <td><code>[&quot;DigitsFloat&quot;]</code></td>
+                <td>  [k4FWCore::details::Transformer&lt;edm4hep::TimeSeriesCollection (edm4hep::SimCalorimeterHitCollection const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
+              </tr>
+              <tr>
+                <td><code>pulseType</code></td>
+                <td><code>string</code></td>
+                <td><code>Gaussian</code></td>
+                <td> Type of pulse to create [CaloDigitizerFunc] </td>
+              </tr>
+              <tr>
+                <td><code>pulseInitTime</code></td>
+                <td><code>float</code></td>
+                <td><code>0.0</code></td>
+                <td> Initial time of the pulse [CaloDigitizerFunc] </td>
+              </tr>
+              <tr>
+                <td><code>pulseEndTime</code></td>
+                <td><code>float</code></td>
+                <td><code>750.0</code></td>
+                <td> End time of the pulse [CaloDigitizerFunc] </td>
+              </tr>
+              <tr>
+                <td><code>pulseSamplingLength</code></td>
+                <td><code>int</code></td>
+                <td><code>30</code></td>
+                <td> Number of samples in pulse [CaloDigitizerFunc] </td>
+              </tr>
+              <tr>
+                <td><code>mu</code></td>
+                <td><code>float</code></td>
+                <td><code>100.0</code></td>
+                <td> Mean of Gaussian pulse [CaloDigitizerFunc] </td>
+              </tr>
+              <tr>
+                <td><code>sigma</code></td>
+                <td><code>float</code></td>
+                <td><code>20.0</code></td>
+                <td> Sigma of Gaussian pulse [CaloDigitizerFunc] </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="alg-card" data-name="CaloFilterFunc" data-lib="libk4RecFCCeeCalorimeterPlugins.so" data-package="k4RecCalorimeter">
+        <div class="alg-card-header">
+          <span class="alg-name">CaloFilterFunc</span>
+          <span class="alg-card-right">
+            <span class="alg-lib-badge">libk4RecFCCeeCalorimeterPlugins.so</span>
+            <span class="alg-card-toggle">&#9658;</span>
+          </span>
+        </div>
+        <div class="alg-card-body">
+          <table class="alg-props-table">
+            <thead>
+              <tr>
+                <th>Property</th>
+                <th>Type</th>
+                <th>Default</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>InputCollection</code></td>
+                <td><code>vector&lt;DataObjID&gt;</code></td>
+                <td><code>[&quot;TimeSeriesCollection&quot;]</code></td>
+                <td>  [k4FWCore::details::MultiTransformer&lt;std::tuple&lt;edm4hep::TimeSeriesCollection,podio::UserDataCollection&lt;int,void&gt;,podio::UserDataCollection&lt;float,void&gt; &gt; (edm4hep::TimeSeriesCollection const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
+              </tr>
+              <tr>
+                <td><code>OutputCollectionFilteredPulse</code></td>
+                <td><code>vector&lt;DataObjID&gt;</code></td>
+                <td><code>[&quot;FilteredDigitsCollection&quot;]</code></td>
+                <td>  [k4FWCore::details::MultiTransformer&lt;std::tuple&lt;edm4hep::TimeSeriesCollection,podio::UserDataCollection&lt;int,void&gt;,podio::UserDataCollection&lt;float,void&gt; &gt; (edm4hep::TimeSeriesCollection const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
+              </tr>
+              <tr>
+                <td><code>OutputCollectionMatchedSampleIdx</code></td>
+                <td><code>vector&lt;DataObjID&gt;</code></td>
+                <td><code>[&quot;MatchedSampleIdx&quot;]</code></td>
+                <td>  [k4FWCore::details::MultiTransformer&lt;std::tuple&lt;edm4hep::TimeSeriesCollection,podio::UserDataCollection&lt;int,void&gt;,podio::UserDataCollection&lt;float,void&gt; &gt; (edm4hep::TimeSeriesCollection const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
+              </tr>
+              <tr>
+                <td><code>OutputCollectionMatchedSampleEnergy</code></td>
+                <td><code>vector&lt;DataObjID&gt;</code></td>
+                <td><code>[&quot;MatchedSampleEnergy&quot;]</code></td>
+                <td>  [k4FWCore::details::MultiTransformer&lt;std::tuple&lt;edm4hep::TimeSeriesCollection,podio::UserDataCollection&lt;int,void&gt;,podio::UserDataCollection&lt;float,void&gt; &gt; (edm4hep::TimeSeriesCollection const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
+              </tr>
+              <tr>
+                <td><code>filterName</code></td>
+                <td><code>string</code></td>
+                <td><code>Matched_Gaussian</code></td>
+                <td> Name of the filter to apply [CaloFilterFunc] </td>
+              </tr>
+              <tr>
+                <td><code>mu</code></td>
+                <td><code>float</code></td>
+                <td><code>50.0</code></td>
+                <td> Mean of Gaussian pulse [CaloFilterFunc] </td>
+              </tr>
+              <tr>
+                <td><code>sigma</code></td>
+                <td><code>float</code></td>
+                <td><code>20.0</code></td>
+                <td> Sigma of Gaussian pulse [CaloFilterFunc] </td>
+              </tr>
+              <tr>
+                <td><code>filterTemplateSize</code></td>
+                <td><code>int</code></td>
+                <td><code>5</code></td>
+                <td> Size of the filter template [CaloFilterFunc] </td>
+              </tr>
+              <tr>
+                <td><code>pulseInitTime</code></td>
+                <td><code>float</code></td>
+                <td><code>0.0</code></td>
+                <td> Initial time of the pulse [CaloFilterFunc] </td>
+              </tr>
+              <tr>
+                <td><code>pulseEndTime</code></td>
+                <td><code>float</code></td>
+                <td><code>750.0</code></td>
+                <td> End time of the pulse [CaloFilterFunc] </td>
+              </tr>
+              <tr>
+                <td><code>pulseSamplingLength</code></td>
+                <td><code>int</code></td>
+                <td><code>30</code></td>
+                <td> Number of samples in pulse [CaloFilterFunc] </td>
+              </tr>
+              <tr>
+                <td><code>noiseInfoFileName</code></td>
+                <td><code>string</code></td>
+                <td><code>NoiseInfo.root</code></td>
+                <td> Name of file to load noise corr matrix from [CaloFilterFunc] </td>
+              </tr>
+              <tr>
+                <td><code>invCorrMatName</code></td>
+                <td><code>string</code></td>
+                <td><code>InvertedCorrelationMatrix</code></td>
+                <td> Name of ROOT TMatrixD that represents the inverse of the correlation matrix of the noise [CaloFilterFunc] </td>
               </tr>
             </tbody>
           </table>
@@ -4925,6 +5168,65 @@ where the algorithm is found in the environment.</p>
                 <td><code>unsigned int</code></td>
                 <td><code>0</code></td>
                 <td> Number of calorimeter systems [CaloTowerToolFCCee] </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="alg-card" data-name="CaloWhitening" data-lib="libk4RecFCCeeCalorimeterPlugins.so" data-package="k4RecCalorimeter">
+        <div class="alg-card-header">
+          <span class="alg-name">CaloWhitening</span>
+          <span class="alg-card-right">
+            <span class="alg-lib-badge">libk4RecFCCeeCalorimeterPlugins.so</span>
+            <span class="alg-card-toggle">&#9658;</span>
+          </span>
+        </div>
+        <div class="alg-card-body">
+          <table class="alg-props-table">
+            <thead>
+              <tr>
+                <th>Property</th>
+                <th>Type</th>
+                <th>Default</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>InputCollection</code></td>
+                <td><code>vector&lt;DataObjID&gt;</code></td>
+                <td><code>[&quot;DigitsFloat&quot;]</code></td>
+                <td>  [k4FWCore::details::Transformer&lt;edm4hep::TimeSeriesCollection (edm4hep::TimeSeriesCollection const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
+              </tr>
+              <tr>
+                <td><code>OutputCollection</code></td>
+                <td><code>vector&lt;DataObjID&gt;</code></td>
+                <td><code>[&quot;WhitenedDigitsCollection&quot;]</code></td>
+                <td>  [k4FWCore::details::Transformer&lt;edm4hep::TimeSeriesCollection (edm4hep::TimeSeriesCollection const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
+              </tr>
+              <tr>
+                <td><code>noiseInfoFileName</code></td>
+                <td><code>string</code></td>
+                <td><code>NoiseInfo.root</code></td>
+                <td> Name of file to load noise corr matrix from [CaloWhitening] </td>
+              </tr>
+              <tr>
+                <td><code>invCorrMatName</code></td>
+                <td><code>string</code></td>
+                <td><code>InvertedCorrelationMatrix</code></td>
+                <td> Name of ROOT TMatrixD that represents the inverse of the correlation matrix of the noise [CaloWhitening] </td>
+              </tr>
+              <tr>
+                <td><code>muVecName</code></td>
+                <td><code>string</code></td>
+                <td><code>NoiseSampleMat_MeansVector</code></td>
+                <td> Name of ROOT TVectorD that represents the mean vector of the noise [CaloWhitening] </td>
+              </tr>
+              <tr>
+                <td><code>filterName</code></td>
+                <td><code>string</code></td>
+                <td><code>ZCA</code></td>
+                <td> Name of the whitening filter to apply [CaloWhitening] </td>
               </tr>
             </tbody>
           </table>
@@ -6015,7 +6317,7 @@ where the algorithm is found in the environment.</p>
               <tr>
                 <td><code>geometryTool</code></td>
                 <td><code>PrivateToolHandle</code></td>
-                <td><code>TubeLayerPhiEtaCaloTool</code></td>
+                <td><code></code></td>
                 <td> Handle for the geometry tool [unknown owner type] </td>
               </tr>
             </tbody>
