@@ -3279,7 +3279,7 @@ Total: **195 algorithms** across **12 packages**.
               <tr>
                 <td><code>CrossingAngle</code></td>
                 <td><code>double</code></td>
-                <td><code>4.6563594e-310</code></td>
+                <td><code>4.6850137e-310</code></td>
                 <td> Half the crossing angle beam in [rad] [unknown owner type] </td>
               </tr>
               <tr>
@@ -7730,6 +7730,12 @@ Total: **195 algorithms** across **12 packages**.
                 <td>  [CalorimeterToolBase] </td>
               </tr>
               <tr>
+                <td><code>CaloCellConstantsSvc</code></td>
+                <td><code>ServiceHandle</code></td>
+                <td><code>k4::recCalo::CaloCellConstantsSvc</code></td>
+                <td>  [CalorimeterToolBase] </td>
+              </tr>
+              <tr>
                 <td><code>activeVolumeName</code></td>
                 <td><code>string</code></td>
                 <td><code>layerVolume</code></td>
@@ -8102,6 +8108,12 @@ Total: **195 algorithms** across **12 packages**.
                 <td><code>GeoSvc</code></td>
                 <td><code>ServiceHandle</code></td>
                 <td><code>GeoSvc</code></td>
+                <td>  [CalorimeterToolBase] </td>
+              </tr>
+              <tr>
+                <td><code>CaloCellConstantsSvc</code></td>
+                <td><code>ServiceHandle</code></td>
+                <td><code>k4::recCalo::CaloCellConstantsSvc</code></td>
                 <td>  [CalorimeterToolBase] </td>
               </tr>
               <tr>
@@ -9303,6 +9315,12 @@ Total: **195 algorithms** across **12 packages**.
                 <td>  [CalorimeterToolBase] </td>
               </tr>
               <tr>
+                <td><code>CaloCellConstantsSvc</code></td>
+                <td><code>ServiceHandle</code></td>
+                <td><code>k4::recCalo::CaloCellConstantsSvc</code></td>
+                <td>  [CalorimeterToolBase] </td>
+              </tr>
+              <tr>
                 <td><code>activeVolumeName</code></td>
                 <td><code>string</code></td>
                 <td><code>LAr_sensitive</code></td>
@@ -9365,6 +9383,12 @@ Total: **195 algorithms** across **12 packages**.
                 <td><code>GeoSvc</code></td>
                 <td><code>ServiceHandle</code></td>
                 <td><code>GeoSvc</code></td>
+                <td>  [CalorimeterToolBase] </td>
+              </tr>
+              <tr>
+                <td><code>CaloCellConstantsSvc</code></td>
+                <td><code>ServiceHandle</code></td>
+                <td><code>k4::recCalo::CaloCellConstantsSvc</code></td>
                 <td>  [CalorimeterToolBase] </td>
               </tr>
               <tr>
