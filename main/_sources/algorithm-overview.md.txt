@@ -30,14 +30,14 @@ where the algorithm is found in the environment.</p>
 
 ## Algorithms
 
-Total: **195 algorithms** across **12 packages**.
+Total: **196 algorithms** across **12 packages**.
 
 
 ```{raw} html
-<div id="algorithm-overview" data-total="195" data-packages="12" data-item-label="algorithm">
+<div id="algorithm-overview" data-total="196" data-packages="12" data-item-label="algorithm">
   <div class="alg-filter-bar">
     <input type="text" id="alg-search" placeholder="Filter by name, package, or library…" autocomplete="off" />
-    <span id="alg-stats">Showing 195 of 195 algorithms in 12 packages</span>
+    <span id="alg-stats">Showing 196 of 196 algorithms in 12 packages</span>
   </div>
   <div class="alg-package-group" data-package="k4ActsTracking">
     <div class="alg-package-header">
@@ -741,7 +741,7 @@ Total: **195 algorithms** across **12 packages**.
     <div class="alg-package-header">
       <a class="alg-package-name" href="https://github.com/key4hep/k4FWCore" target="_blank" rel="noopener noreferrer">k4FWCore</a>
       <span class="alg-package-meta">
-        <span class="alg-package-count">13 algorithms</span>
+        <span class="alg-package-count">14 algorithms</span>
         <span class="alg-package-toggle">&#9660;</span>
       </span>
     </div>
@@ -1062,6 +1062,149 @@ Total: **195 algorithms** across **12 packages**.
         </div>
         <div class="alg-card-body">
           <em>No propertys available.</em>
+        </div>
+      </div>
+      <div class="alg-card" data-name="OverlayTiming" data-lib="libk4FWCorePlugins.so" data-package="k4FWCore">
+        <div class="alg-card-header">
+          <span class="alg-name">OverlayTiming</span>
+          <span class="alg-card-right">
+            <span class="alg-lib-badge">libk4FWCorePlugins.so</span>
+            <span class="alg-card-toggle">&#9658;</span>
+          </span>
+        </div>
+        <div class="alg-card-body">
+          <table class="alg-props-table">
+            <thead>
+              <tr>
+                <th>Property</th>
+                <th>Type</th>
+                <th>Default</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>EventHeader</code></td>
+                <td><code>DataObjID</code></td>
+                <td><code>EventHeader</code></td>
+                <td>  [k4FWCore::details::MultiTransformer&lt;std::tuple&lt;edm4hep::MCParticleCollection,std::vector&lt;edm4hep::SimTrackerHitCollection,std::allocator&lt;edm4hep::SimTrackerHitCollection&gt; &gt;,std::vector&lt;edm4hep::SimCalorimeterHitCollection,std::allocator&lt;edm4hep::SimCalorimeterHitCollection&gt; &gt;,std::vector&lt;edm4hep::CaloHitContributionCollection,std::allocator&lt;edm4hep::CaloHitContributionCollection&gt; &gt; &gt; (edm4hep::EventHeaderCollection const&amp;,edm4hep::MCParticleCollection const&amp;,std::vector&lt;edm4hep::SimTrackerHitCollection const*,std::allocator&lt;edm4hep::SimTrackerHitCollection const*&gt; &gt; const&amp;,std::vector&lt;edm4hep::SimCalorimeterHitCollection const*,std::allocator&lt;edm4hep::SimCalorimeterHitCollection const*&gt; &gt; const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
+              </tr>
+              <tr>
+                <td><code>MCParticles</code></td>
+                <td><code>DataObjID</code></td>
+                <td><code>DefaultMCParticles</code></td>
+                <td>  [k4FWCore::details::MultiTransformer&lt;std::tuple&lt;edm4hep::MCParticleCollection,std::vector&lt;edm4hep::SimTrackerHitCollection,std::allocator&lt;edm4hep::SimTrackerHitCollection&gt; &gt;,std::vector&lt;edm4hep::SimCalorimeterHitCollection,std::allocator&lt;edm4hep::SimCalorimeterHitCollection&gt; &gt;,std::vector&lt;edm4hep::CaloHitContributionCollection,std::allocator&lt;edm4hep::CaloHitContributionCollection&gt; &gt; &gt; (edm4hep::EventHeaderCollection const&amp;,edm4hep::MCParticleCollection const&amp;,std::vector&lt;edm4hep::SimTrackerHitCollection const*,std::allocator&lt;edm4hep::SimTrackerHitCollection const*&gt; &gt; const&amp;,std::vector&lt;edm4hep::SimCalorimeterHitCollection const*,std::allocator&lt;edm4hep::SimCalorimeterHitCollection const*&gt; &gt; const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
+              </tr>
+              <tr>
+                <td><code>SimTrackerHits</code></td>
+                <td><code>vector&lt;DataObjID&gt;</code></td>
+                <td><code>[&quot;DefaultSimTrackerHits&quot;]</code></td>
+                <td>  [k4FWCore::details::MultiTransformer&lt;std::tuple&lt;edm4hep::MCParticleCollection,std::vector&lt;edm4hep::SimTrackerHitCollection,std::allocator&lt;edm4hep::SimTrackerHitCollection&gt; &gt;,std::vector&lt;edm4hep::SimCalorimeterHitCollection,std::allocator&lt;edm4hep::SimCalorimeterHitCollection&gt; &gt;,std::vector&lt;edm4hep::CaloHitContributionCollection,std::allocator&lt;edm4hep::CaloHitContributionCollection&gt; &gt; &gt; (edm4hep::EventHeaderCollection const&amp;,edm4hep::MCParticleCollection const&amp;,std::vector&lt;edm4hep::SimTrackerHitCollection const*,std::allocator&lt;edm4hep::SimTrackerHitCollection const*&gt; &gt; const&amp;,std::vector&lt;edm4hep::SimCalorimeterHitCollection const*,std::allocator&lt;edm4hep::SimCalorimeterHitCollection const*&gt; &gt; const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
+              </tr>
+              <tr>
+                <td><code>SimCalorimeterHits</code></td>
+                <td><code>vector&lt;DataObjID&gt;</code></td>
+                <td><code>[&quot;DefaultSimCalorimeterHits&quot;]</code></td>
+                <td>  [k4FWCore::details::MultiTransformer&lt;std::tuple&lt;edm4hep::MCParticleCollection,std::vector&lt;edm4hep::SimTrackerHitCollection,std::allocator&lt;edm4hep::SimTrackerHitCollection&gt; &gt;,std::vector&lt;edm4hep::SimCalorimeterHitCollection,std::allocator&lt;edm4hep::SimCalorimeterHitCollection&gt; &gt;,std::vector&lt;edm4hep::CaloHitContributionCollection,std::allocator&lt;edm4hep::CaloHitContributionCollection&gt; &gt; &gt; (edm4hep::EventHeaderCollection const&amp;,edm4hep::MCParticleCollection const&amp;,std::vector&lt;edm4hep::SimTrackerHitCollection const*,std::allocator&lt;edm4hep::SimTrackerHitCollection const*&gt; &gt; const&amp;,std::vector&lt;edm4hep::SimCalorimeterHitCollection const*,std::allocator&lt;edm4hep::SimCalorimeterHitCollection const*&gt; &gt; const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
+              </tr>
+              <tr>
+                <td><code>OutputMCParticles</code></td>
+                <td><code>DataObjID</code></td>
+                <td><code>NewMCParticles</code></td>
+                <td>  [k4FWCore::details::MultiTransformer&lt;std::tuple&lt;edm4hep::MCParticleCollection,std::vector&lt;edm4hep::SimTrackerHitCollection,std::allocator&lt;edm4hep::SimTrackerHitCollection&gt; &gt;,std::vector&lt;edm4hep::SimCalorimeterHitCollection,std::allocator&lt;edm4hep::SimCalorimeterHitCollection&gt; &gt;,std::vector&lt;edm4hep::CaloHitContributionCollection,std::allocator&lt;edm4hep::CaloHitContributionCollection&gt; &gt; &gt; (edm4hep::EventHeaderCollection const&amp;,edm4hep::MCParticleCollection const&amp;,std::vector&lt;edm4hep::SimTrackerHitCollection const*,std::allocator&lt;edm4hep::SimTrackerHitCollection const*&gt; &gt; const&amp;,std::vector&lt;edm4hep::SimCalorimeterHitCollection const*,std::allocator&lt;edm4hep::SimCalorimeterHitCollection const*&gt; &gt; const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
+              </tr>
+              <tr>
+                <td><code>OutputSimTrackerHits</code></td>
+                <td><code>vector&lt;DataObjID&gt;</code></td>
+                <td><code>[&quot;MCParticles1&quot;]</code></td>
+                <td>  [k4FWCore::details::MultiTransformer&lt;std::tuple&lt;edm4hep::MCParticleCollection,std::vector&lt;edm4hep::SimTrackerHitCollection,std::allocator&lt;edm4hep::SimTrackerHitCollection&gt; &gt;,std::vector&lt;edm4hep::SimCalorimeterHitCollection,std::allocator&lt;edm4hep::SimCalorimeterHitCollection&gt; &gt;,std::vector&lt;edm4hep::CaloHitContributionCollection,std::allocator&lt;edm4hep::CaloHitContributionCollection&gt; &gt; &gt; (edm4hep::EventHeaderCollection const&amp;,edm4hep::MCParticleCollection const&amp;,std::vector&lt;edm4hep::SimTrackerHitCollection const*,std::allocator&lt;edm4hep::SimTrackerHitCollection const*&gt; &gt; const&amp;,std::vector&lt;edm4hep::SimCalorimeterHitCollection const*,std::allocator&lt;edm4hep::SimCalorimeterHitCollection const*&gt; &gt; const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
+              </tr>
+              <tr>
+                <td><code>OutputSimCalorimeterHits</code></td>
+                <td><code>vector&lt;DataObjID&gt;</code></td>
+                <td><code>[&quot;MCParticles2&quot;]</code></td>
+                <td>  [k4FWCore::details::MultiTransformer&lt;std::tuple&lt;edm4hep::MCParticleCollection,std::vector&lt;edm4hep::SimTrackerHitCollection,std::allocator&lt;edm4hep::SimTrackerHitCollection&gt; &gt;,std::vector&lt;edm4hep::SimCalorimeterHitCollection,std::allocator&lt;edm4hep::SimCalorimeterHitCollection&gt; &gt;,std::vector&lt;edm4hep::CaloHitContributionCollection,std::allocator&lt;edm4hep::CaloHitContributionCollection&gt; &gt; &gt; (edm4hep::EventHeaderCollection const&amp;,edm4hep::MCParticleCollection const&amp;,std::vector&lt;edm4hep::SimTrackerHitCollection const*,std::allocator&lt;edm4hep::SimTrackerHitCollection const*&gt; &gt; const&amp;,std::vector&lt;edm4hep::SimCalorimeterHitCollection const*,std::allocator&lt;edm4hep::SimCalorimeterHitCollection const*&gt; &gt; const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
+              </tr>
+              <tr>
+                <td><code>OutputCaloHitContributions</code></td>
+                <td><code>vector&lt;DataObjID&gt;</code></td>
+                <td><code>[&quot;OverlayCaloHitContributions&quot;]</code></td>
+                <td>  [k4FWCore::details::MultiTransformer&lt;std::tuple&lt;edm4hep::MCParticleCollection,std::vector&lt;edm4hep::SimTrackerHitCollection,std::allocator&lt;edm4hep::SimTrackerHitCollection&gt; &gt;,std::vector&lt;edm4hep::SimCalorimeterHitCollection,std::allocator&lt;edm4hep::SimCalorimeterHitCollection&gt; &gt;,std::vector&lt;edm4hep::CaloHitContributionCollection,std::allocator&lt;edm4hep::CaloHitContributionCollection&gt; &gt; &gt; (edm4hep::EventHeaderCollection const&amp;,edm4hep::MCParticleCollection const&amp;,std::vector&lt;edm4hep::SimTrackerHitCollection const*,std::allocator&lt;edm4hep::SimTrackerHitCollection const*&gt; &gt; const&amp;,std::vector&lt;edm4hep::SimCalorimeterHitCollection const*,std::allocator&lt;edm4hep::SimCalorimeterHitCollection const*&gt; &gt; const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
+              </tr>
+              <tr>
+                <td><code>RandomBx</code></td>
+                <td><code>bool</code></td>
+                <td><code>False</code></td>
+                <td> If true, place the physics event at a random bunch crossing (overrides PhysicsBX) [OverlayTiming] </td>
+              </tr>
+              <tr>
+                <td><code>PhysicsBX</code></td>
+                <td><code>int</code></td>
+                <td><code>1</code></td>
+                <td> Position of the physics event within the bunch train [OverlayTiming] </td>
+              </tr>
+              <tr>
+                <td><code>NBunchtrain</code></td>
+                <td><code>int</code></td>
+                <td><code>1</code></td>
+                <td> Number of bunch crossings in the bunch train [OverlayTiming] </td>
+              </tr>
+              <tr>
+                <td><code>StartBackgroundEventIndex</code></td>
+                <td><code>int</code></td>
+                <td><code>-1</code></td>
+                <td> Index of the background event to start from (-1 means start from the beginning) [OverlayTiming] </td>
+              </tr>
+              <tr>
+                <td><code>BackgroundFileNames</code></td>
+                <td><code>vector&lt;vector&lt;string&gt;&gt;</code></td>
+                <td><code>[]</code></td>
+                <td> List of groups of background input files, one group per overlay stream [OverlayTiming] </td>
+              </tr>
+              <tr>
+                <td><code>NumberBackground</code></td>
+                <td><code>vector&lt;double&gt;</code></td>
+                <td><code>[]</code></td>
+                <td> Number of background events to overlay per stream (fixed or Poisson mean) [OverlayTiming] </td>
+              </tr>
+              <tr>
+                <td><code>Poisson_random_NOverlay</code></td>
+                <td><code>vector&lt;bool&gt;</code></td>
+                <td><code>[]</code></td>
+                <td> If true, draw the number of events from a Poisson distribution with mean NumberBackground [OverlayTiming] </td>
+              </tr>
+              <tr>
+                <td><code>BackgroundMCParticleCollectionName</code></td>
+                <td><code>string</code></td>
+                <td><code>MCParticle</code></td>
+                <td> Name of the MCParticle collection in the background files [OverlayTiming] </td>
+              </tr>
+              <tr>
+                <td><code>Delta_t</code></td>
+                <td><code>float</code></td>
+                <td><code>0.5</code></td>
+                <td> Time between consecutive bunch crossings (ns) [OverlayTiming] </td>
+              </tr>
+              <tr>
+                <td><code>TimeWindows</code></td>
+                <td><code>map&lt;string, vector&lt;float&gt;&gt;</code></td>
+                <td><code>[]</code></td>
+                <td> Map from collection name to [t_min, t_max] (ns) defining the acceptance window. Required for every SimTrackerHit and SimCalorimeterHit collection. [OverlayTiming] </td>
+              </tr>
+              <tr>
+                <td><code>AllowReusingBackgroundFiles</code></td>
+                <td><code>bool</code></td>
+                <td><code>False</code></td>
+                <td> If true, wrap around the background file when events are exhausted [OverlayTiming] </td>
+              </tr>
+              <tr>
+                <td><code>CopyCellIDMetadata</code></td>
+                <td><code>bool</code></td>
+                <td><code>False</code></td>
+                <td> Copy cell ID encoding metadata from input to output collections [OverlayTiming] </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
       <div class="alg-card" data-name="PodioInput" data-lib="libk4FWCorePlugins.so" data-package="k4FWCore">
@@ -3279,7 +3422,7 @@ Total: **195 algorithms** across **12 packages**.
               <tr>
                 <td><code>CrossingAngle</code></td>
                 <td><code>double</code></td>
-                <td><code>4.6850137e-310</code></td>
+                <td><code>4.6415742e-310</code></td>
                 <td> Half the crossing angle beam in [rad] [unknown owner type] </td>
               </tr>
               <tr>
@@ -3984,7 +4127,7 @@ Total: **195 algorithms** across **12 packages**.
     <div class="alg-package-header">
       <a class="alg-package-name" href="https://github.com/HEP-FCC/k4RecCalorimeter" target="_blank" rel="noopener noreferrer">k4RecCalorimeter</a>
       <span class="alg-package-meta">
-        <span class="alg-package-count">71 algorithms</span>
+        <span class="alg-package-count">72 algorithms</span>
         <span class="alg-package-toggle">&#9660;</span>
       </span>
     </div>
@@ -6504,13 +6647,13 @@ Total: **195 algorithms** across **12 packages**.
               <tr>
                 <td><code>ehECal</code></td>
                 <td><code>double</code></td>
-                <td><code>7.7366984e+228</code></td>
+                <td><code>2.1999303e-152</code></td>
                 <td> e/h of the ECal [unknown owner type] </td>
               </tr>
               <tr>
                 <td><code>ehHCal</code></td>
                 <td><code>double</code></td>
-                <td><code>7.3448386e+223</code></td>
+                <td><code>1.8767345e-152</code></td>
                 <td> e/h of the HCal [unknown owner type] </td>
               </tr>
             </tbody>
@@ -8281,6 +8424,119 @@ Total: **195 algorithms** across **12 packages**.
                 <td><code>ServiceHandle</code></td>
                 <td><code>GeoSvc</code></td>
                 <td>  [NoiseCaloCellsFromFileTool] </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="alg-card" data-name="NoiseCaloCellsTurbineEndcapFromFileTool" data-lib="libk4RecFCCeeCalorimeterPlugins.so" data-package="k4RecCalorimeter">
+        <div class="alg-card-header">
+          <span class="alg-name">NoiseCaloCellsTurbineEndcapFromFileTool</span>
+          <span class="alg-card-right">
+            <span class="alg-lib-badge">libk4RecFCCeeCalorimeterPlugins.so</span>
+            <span class="alg-card-toggle">&#9658;</span>
+          </span>
+        </div>
+        <div class="alg-card-body">
+          <table class="alg-props-table">
+            <thead>
+              <tr>
+                <th>Property</th>
+                <th>Type</th>
+                <th>Default</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>cellPositionsTool</code></td>
+                <td><code>PrivateToolHandle</code></td>
+                <td><code>CellPositionsDummyTool/CellPositionsDummyTool</code></td>
+                <td> Handle for tool to retrieve cell positions [NoiseCaloCellsTurbineEndcapFromFileTool] </td>
+              </tr>
+              <tr>
+                <td><code>addPileup</code></td>
+                <td><code>bool</code></td>
+                <td><code>True</code></td>
+                <td> Add pileup contribution to the electronics noise? (only if read from file) [NoiseCaloCellsTurbineEndcapFromFileTool] </td>
+              </tr>
+              <tr>
+                <td><code>setNoiseOffset</code></td>
+                <td><code>bool</code></td>
+                <td><code>False</code></td>
+                <td> Set a noise offset per cell [NoiseCaloCellsTurbineEndcapFromFileTool] </td>
+              </tr>
+              <tr>
+                <td><code>noiseFileName</code></td>
+                <td><code>string</code></td>
+                <td><code></code></td>
+                <td> Name of the file with noise constants [NoiseCaloCellsTurbineEndcapFromFileTool] </td>
+              </tr>
+              <tr>
+                <td><code>scaleFactor</code></td>
+                <td><code>float</code></td>
+                <td><code>1.0</code></td>
+                <td> Factor to apply to the noise values [NoiseCaloCellsTurbineEndcapFromFileTool] </td>
+              </tr>
+              <tr>
+                <td><code>readoutName</code></td>
+                <td><code>string</code></td>
+                <td><code>ECalEndcapTurbine</code></td>
+                <td> Name of the detector readout [NoiseCaloCellsTurbineEndcapFromFileTool] </td>
+              </tr>
+              <tr>
+                <td><code>activeFieldName</code></td>
+                <td><code>string</code></td>
+                <td><code>layer</code></td>
+                <td> Name of active layers for sampling calorimeter [NoiseCaloCellsTurbineEndcapFromFileTool] </td>
+              </tr>
+              <tr>
+                <td><code>pileupNoiseRMSHistoName</code></td>
+                <td><code>string</code></td>
+                <td><code>h_pileup_layer</code></td>
+                <td> Name of pileup noise RMS histogram [NoiseCaloCellsTurbineEndcapFromFileTool] </td>
+              </tr>
+              <tr>
+                <td><code>elecNoiseRMSHistoName</code></td>
+                <td><code>string</code></td>
+                <td><code>h_elecNoise_layer</code></td>
+                <td> Name of electronics noise RMS histogram [NoiseCaloCellsTurbineEndcapFromFileTool] </td>
+              </tr>
+              <tr>
+                <td><code>elecNoiseOffsetHistoName</code></td>
+                <td><code>string</code></td>
+                <td><code>h_mean_pileup_layer</code></td>
+                <td> Name of electronics noise offset histogram [NoiseCaloCellsTurbineEndcapFromFileTool] </td>
+              </tr>
+              <tr>
+                <td><code>pileupNoiseOffsetHistoName</code></td>
+                <td><code>string</code></td>
+                <td><code>h_pileup_layer</code></td>
+                <td> Name of pileup noise offset histogram [NoiseCaloCellsTurbineEndcapFromFileTool] </td>
+              </tr>
+              <tr>
+                <td><code>filterNoiseThreshold</code></td>
+                <td><code>double</code></td>
+                <td><code>3.0</code></td>
+                <td> Energy threshold (cells with Ecell &lt; offset + filterThreshold*m_cellNoise removed) [NoiseCaloCellsTurbineEndcapFromFileTool] </td>
+              </tr>
+              <tr>
+                <td><code>useAbsInFilter</code></td>
+                <td><code>bool</code></td>
+                <td><code>False</code></td>
+                <td> If set, cell filtering condition becomes: drop cell if abs(Ecell-offset) &lt; filterThreshold*m_cellNoise [NoiseCaloCellsTurbineEndcapFromFileTool] </td>
+              </tr>
+              <tr>
+                <td><code>numWheels</code></td>
+                <td><code>unsigned int</code></td>
+                <td><code>3</code></td>
+                <td> Number of wheels [NoiseCaloCellsTurbineEndcapFromFileTool] </td>
+              </tr>
+              <tr>
+                <td><code>GeoSvc</code></td>
+                <td><code>ServiceHandle</code></td>
+                <td><code>GeoSvc</code></td>
+                <td>  [NoiseCaloCellsTurbineEndcapFromFileTool] </td>
               </tr>
             </tbody>
           </table>
@@ -10359,7 +10615,7 @@ Total: **195 algorithms** across **12 packages**.
     <div class="alg-package-header">
       <a class="alg-package-name" href="https://github.com/key4hep/k4Reco" target="_blank" rel="noopener noreferrer">k4Reco</a>
       <span class="alg-package-meta">
-        <span class="alg-package-count">7 algorithms</span>
+        <span class="alg-package-count">6 algorithms</span>
         <span class="alg-package-toggle">&#9660;</span>
       </span>
     </div>
@@ -10937,149 +11193,6 @@ Total: **195 algorithms** across **12 packages**.
                 <td><code>string</code></td>
                 <td><code>GeoSvc</code></td>
                 <td> The name of the GeoSvc instance [GaudiLumiCalClusterer] </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="alg-card" data-name="OverlayTiming" data-lib="libk4RecoPlugins.so" data-package="k4Reco">
-        <div class="alg-card-header">
-          <span class="alg-name">OverlayTiming</span>
-          <span class="alg-card-right">
-            <span class="alg-lib-badge">libk4RecoPlugins.so</span>
-            <span class="alg-card-toggle">&#9658;</span>
-          </span>
-        </div>
-        <div class="alg-card-body">
-          <table class="alg-props-table">
-            <thead>
-              <tr>
-                <th>Property</th>
-                <th>Type</th>
-                <th>Default</th>
-                <th>Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><code>EventHeader</code></td>
-                <td><code>DataObjID</code></td>
-                <td><code>EventHeader</code></td>
-                <td>  [k4FWCore::details::MultiTransformer&lt;std::tuple&lt;edm4hep::MCParticleCollection,std::vector&lt;edm4hep::SimTrackerHitCollection,std::allocator&lt;edm4hep::SimTrackerHitCollection&gt; &gt;,std::vector&lt;edm4hep::SimCalorimeterHitCollection,std::allocator&lt;edm4hep::SimCalorimeterHitCollection&gt; &gt;,std::vector&lt;edm4hep::CaloHitContributionCollection,std::allocator&lt;edm4hep::CaloHitContributionCollection&gt; &gt; &gt; (edm4hep::EventHeaderCollection const&amp;,edm4hep::MCParticleCollection const&amp;,std::vector&lt;edm4hep::SimTrackerHitCollection const*,std::allocator&lt;edm4hep::SimTrackerHitCollection const*&gt; &gt; const&amp;,std::vector&lt;edm4hep::SimCalorimeterHitCollection const*,std::allocator&lt;edm4hep::SimCalorimeterHitCollection const*&gt; &gt; const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
-              </tr>
-              <tr>
-                <td><code>MCParticles</code></td>
-                <td><code>DataObjID</code></td>
-                <td><code>DefaultMCParticles</code></td>
-                <td>  [k4FWCore::details::MultiTransformer&lt;std::tuple&lt;edm4hep::MCParticleCollection,std::vector&lt;edm4hep::SimTrackerHitCollection,std::allocator&lt;edm4hep::SimTrackerHitCollection&gt; &gt;,std::vector&lt;edm4hep::SimCalorimeterHitCollection,std::allocator&lt;edm4hep::SimCalorimeterHitCollection&gt; &gt;,std::vector&lt;edm4hep::CaloHitContributionCollection,std::allocator&lt;edm4hep::CaloHitContributionCollection&gt; &gt; &gt; (edm4hep::EventHeaderCollection const&amp;,edm4hep::MCParticleCollection const&amp;,std::vector&lt;edm4hep::SimTrackerHitCollection const*,std::allocator&lt;edm4hep::SimTrackerHitCollection const*&gt; &gt; const&amp;,std::vector&lt;edm4hep::SimCalorimeterHitCollection const*,std::allocator&lt;edm4hep::SimCalorimeterHitCollection const*&gt; &gt; const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
-              </tr>
-              <tr>
-                <td><code>SimTrackerHits</code></td>
-                <td><code>vector&lt;DataObjID&gt;</code></td>
-                <td><code>[&quot;DefaultSimTrackerHits&quot;]</code></td>
-                <td>  [k4FWCore::details::MultiTransformer&lt;std::tuple&lt;edm4hep::MCParticleCollection,std::vector&lt;edm4hep::SimTrackerHitCollection,std::allocator&lt;edm4hep::SimTrackerHitCollection&gt; &gt;,std::vector&lt;edm4hep::SimCalorimeterHitCollection,std::allocator&lt;edm4hep::SimCalorimeterHitCollection&gt; &gt;,std::vector&lt;edm4hep::CaloHitContributionCollection,std::allocator&lt;edm4hep::CaloHitContributionCollection&gt; &gt; &gt; (edm4hep::EventHeaderCollection const&amp;,edm4hep::MCParticleCollection const&amp;,std::vector&lt;edm4hep::SimTrackerHitCollection const*,std::allocator&lt;edm4hep::SimTrackerHitCollection const*&gt; &gt; const&amp;,std::vector&lt;edm4hep::SimCalorimeterHitCollection const*,std::allocator&lt;edm4hep::SimCalorimeterHitCollection const*&gt; &gt; const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
-              </tr>
-              <tr>
-                <td><code>SimCalorimeterHits</code></td>
-                <td><code>vector&lt;DataObjID&gt;</code></td>
-                <td><code>[&quot;DefaultSimCalorimeterHits&quot;]</code></td>
-                <td>  [k4FWCore::details::MultiTransformer&lt;std::tuple&lt;edm4hep::MCParticleCollection,std::vector&lt;edm4hep::SimTrackerHitCollection,std::allocator&lt;edm4hep::SimTrackerHitCollection&gt; &gt;,std::vector&lt;edm4hep::SimCalorimeterHitCollection,std::allocator&lt;edm4hep::SimCalorimeterHitCollection&gt; &gt;,std::vector&lt;edm4hep::CaloHitContributionCollection,std::allocator&lt;edm4hep::CaloHitContributionCollection&gt; &gt; &gt; (edm4hep::EventHeaderCollection const&amp;,edm4hep::MCParticleCollection const&amp;,std::vector&lt;edm4hep::SimTrackerHitCollection const*,std::allocator&lt;edm4hep::SimTrackerHitCollection const*&gt; &gt; const&amp;,std::vector&lt;edm4hep::SimCalorimeterHitCollection const*,std::allocator&lt;edm4hep::SimCalorimeterHitCollection const*&gt; &gt; const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
-              </tr>
-              <tr>
-                <td><code>OutputMCParticles</code></td>
-                <td><code>DataObjID</code></td>
-                <td><code>NewMCParticles</code></td>
-                <td>  [k4FWCore::details::MultiTransformer&lt;std::tuple&lt;edm4hep::MCParticleCollection,std::vector&lt;edm4hep::SimTrackerHitCollection,std::allocator&lt;edm4hep::SimTrackerHitCollection&gt; &gt;,std::vector&lt;edm4hep::SimCalorimeterHitCollection,std::allocator&lt;edm4hep::SimCalorimeterHitCollection&gt; &gt;,std::vector&lt;edm4hep::CaloHitContributionCollection,std::allocator&lt;edm4hep::CaloHitContributionCollection&gt; &gt; &gt; (edm4hep::EventHeaderCollection const&amp;,edm4hep::MCParticleCollection const&amp;,std::vector&lt;edm4hep::SimTrackerHitCollection const*,std::allocator&lt;edm4hep::SimTrackerHitCollection const*&gt; &gt; const&amp;,std::vector&lt;edm4hep::SimCalorimeterHitCollection const*,std::allocator&lt;edm4hep::SimCalorimeterHitCollection const*&gt; &gt; const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
-              </tr>
-              <tr>
-                <td><code>OutputSimTrackerHits</code></td>
-                <td><code>vector&lt;DataObjID&gt;</code></td>
-                <td><code>[&quot;MCParticles1&quot;]</code></td>
-                <td>  [k4FWCore::details::MultiTransformer&lt;std::tuple&lt;edm4hep::MCParticleCollection,std::vector&lt;edm4hep::SimTrackerHitCollection,std::allocator&lt;edm4hep::SimTrackerHitCollection&gt; &gt;,std::vector&lt;edm4hep::SimCalorimeterHitCollection,std::allocator&lt;edm4hep::SimCalorimeterHitCollection&gt; &gt;,std::vector&lt;edm4hep::CaloHitContributionCollection,std::allocator&lt;edm4hep::CaloHitContributionCollection&gt; &gt; &gt; (edm4hep::EventHeaderCollection const&amp;,edm4hep::MCParticleCollection const&amp;,std::vector&lt;edm4hep::SimTrackerHitCollection const*,std::allocator&lt;edm4hep::SimTrackerHitCollection const*&gt; &gt; const&amp;,std::vector&lt;edm4hep::SimCalorimeterHitCollection const*,std::allocator&lt;edm4hep::SimCalorimeterHitCollection const*&gt; &gt; const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
-              </tr>
-              <tr>
-                <td><code>OutputSimCalorimeterHits</code></td>
-                <td><code>vector&lt;DataObjID&gt;</code></td>
-                <td><code>[&quot;MCParticles2&quot;]</code></td>
-                <td>  [k4FWCore::details::MultiTransformer&lt;std::tuple&lt;edm4hep::MCParticleCollection,std::vector&lt;edm4hep::SimTrackerHitCollection,std::allocator&lt;edm4hep::SimTrackerHitCollection&gt; &gt;,std::vector&lt;edm4hep::SimCalorimeterHitCollection,std::allocator&lt;edm4hep::SimCalorimeterHitCollection&gt; &gt;,std::vector&lt;edm4hep::CaloHitContributionCollection,std::allocator&lt;edm4hep::CaloHitContributionCollection&gt; &gt; &gt; (edm4hep::EventHeaderCollection const&amp;,edm4hep::MCParticleCollection const&amp;,std::vector&lt;edm4hep::SimTrackerHitCollection const*,std::allocator&lt;edm4hep::SimTrackerHitCollection const*&gt; &gt; const&amp;,std::vector&lt;edm4hep::SimCalorimeterHitCollection const*,std::allocator&lt;edm4hep::SimCalorimeterHitCollection const*&gt; &gt; const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
-              </tr>
-              <tr>
-                <td><code>OutputCaloHitContributions</code></td>
-                <td><code>vector&lt;DataObjID&gt;</code></td>
-                <td><code>[&quot;OverlayCaloHitContributions&quot;]</code></td>
-                <td>  [k4FWCore::details::MultiTransformer&lt;std::tuple&lt;edm4hep::MCParticleCollection,std::vector&lt;edm4hep::SimTrackerHitCollection,std::allocator&lt;edm4hep::SimTrackerHitCollection&gt; &gt;,std::vector&lt;edm4hep::SimCalorimeterHitCollection,std::allocator&lt;edm4hep::SimCalorimeterHitCollection&gt; &gt;,std::vector&lt;edm4hep::CaloHitContributionCollection,std::allocator&lt;edm4hep::CaloHitContributionCollection&gt; &gt; &gt; (edm4hep::EventHeaderCollection const&amp;,edm4hep::MCParticleCollection const&amp;,std::vector&lt;edm4hep::SimTrackerHitCollection const*,std::allocator&lt;edm4hep::SimTrackerHitCollection const*&gt; &gt; const&amp;,std::vector&lt;edm4hep::SimCalorimeterHitCollection const*,std::allocator&lt;edm4hep::SimCalorimeterHitCollection const*&gt; &gt; const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
-              </tr>
-              <tr>
-                <td><code>RandomBx</code></td>
-                <td><code>bool</code></td>
-                <td><code>False</code></td>
-                <td> Place the physics event at an random position in the train: overrides PhysicsBX [OverlayTiming] </td>
-              </tr>
-              <tr>
-                <td><code>PhysicsBX</code></td>
-                <td><code>int</code></td>
-                <td><code>1</code></td>
-                <td> Number of the Bunch crossing of the physics event [OverlayTiming] </td>
-              </tr>
-              <tr>
-                <td><code>NBunchtrain</code></td>
-                <td><code>int</code></td>
-                <td><code>1</code></td>
-                <td> Number of bunches in a bunch train [OverlayTiming] </td>
-              </tr>
-              <tr>
-                <td><code>StartBackgroundEventIndex</code></td>
-                <td><code>int</code></td>
-                <td><code>-1</code></td>
-                <td> Which background event to startWith [OverlayTiming] </td>
-              </tr>
-              <tr>
-                <td><code>BackgroundFileNames</code></td>
-                <td><code>vector&lt;vector&lt;string&gt;&gt;</code></td>
-                <td><code>[]</code></td>
-                <td> Name of the edm4hep input file(s) with background. [OverlayTiming] </td>
-              </tr>
-              <tr>
-                <td><code>NumberBackground</code></td>
-                <td><code>vector&lt;double&gt;</code></td>
-                <td><code>[]</code></td>
-                <td> Number of Background events to overlay - either fixed or Poisson mean [OverlayTiming] </td>
-              </tr>
-              <tr>
-                <td><code>Poisson_random_NOverlay</code></td>
-                <td><code>vector&lt;bool&gt;</code></td>
-                <td><code>[]</code></td>
-                <td> Draw random number of Events to overlay from Poisson distribution with mean value NumberBackground [OverlayTiming] </td>
-              </tr>
-              <tr>
-                <td><code>BackgroundMCParticleCollectionName</code></td>
-                <td><code>string</code></td>
-                <td><code>MCParticle</code></td>
-                <td> The name of the MCParticle collection in the background files [OverlayTiming] </td>
-              </tr>
-              <tr>
-                <td><code>Delta_t</code></td>
-                <td><code>float</code></td>
-                <td><code>0.5</code></td>
-                <td> Time difference between BXs in the BXtrain [OverlayTiming] </td>
-              </tr>
-              <tr>
-                <td><code>TimeWindows</code></td>
-                <td><code>map&lt;string, vector&lt;float&gt;&gt;</code></td>
-                <td><code>[]</code></td>
-                <td> Time windows for the different collections [OverlayTiming] </td>
-              </tr>
-              <tr>
-                <td><code>AllowReusingBackgroundFiles</code></td>
-                <td><code>bool</code></td>
-                <td><code>False</code></td>
-                <td> If true the same background file can be used for the same event [OverlayTiming] </td>
-              </tr>
-              <tr>
-                <td><code>CopyCellIDMetadata</code></td>
-                <td><code>bool</code></td>
-                <td><code>False</code></td>
-                <td> If metadata is found in the signal file, copy it to the output file, replacing the old names with the new names [OverlayTiming] </td>
               </tr>
             </tbody>
           </table>
