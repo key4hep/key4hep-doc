@@ -1061,7 +1061,30 @@ Total: **196 algorithms** across **12 packages**.
           </span>
         </div>
         <div class="alg-card-body">
-          <em>No propertys available.</em>
+          <table class="alg-props-table">
+            <thead>
+              <tr>
+                <th>Property</th>
+                <th>Type</th>
+                <th>Default</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>ThrowIfDuplicate</code></td>
+                <td><code>bool</code></td>
+                <td><code>True</code></td>
+                <td> Throw an exception if a metadata parameter is already set [MetadataSvc] </td>
+              </tr>
+              <tr>
+                <td><code>SkipIfSameValue</code></td>
+                <td><code>bool</code></td>
+                <td><code>False</code></td>
+                <td> Silently skip putting a metadata parameter if the existing value is the same as the new value [MetadataSvc] </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
       <div class="alg-card" data-name="OverlayTiming" data-lib="libk4FWCorePlugins.so" data-package="k4FWCore">
@@ -3422,7 +3445,7 @@ Total: **196 algorithms** across **12 packages**.
               <tr>
                 <td><code>CrossingAngle</code></td>
                 <td><code>double</code></td>
-                <td><code>4.6495083e-310</code></td>
+                <td><code>4.6760603e-310</code></td>
                 <td> Half the crossing angle beam in [rad] [unknown owner type] </td>
               </tr>
               <tr>
@@ -6647,13 +6670,13 @@ Total: **196 algorithms** across **12 packages**.
               <tr>
                 <td><code>ehECal</code></td>
                 <td><code>double</code></td>
-                <td><code>2.1999303e-152</code></td>
+                <td><code>5.9814756e-154</code></td>
                 <td> e/h of the ECal [unknown owner type] </td>
               </tr>
               <tr>
                 <td><code>ehHCal</code></td>
                 <td><code>double</code></td>
-                <td><code>1.8767345e-152</code></td>
+                <td><code>6.0198676e+21</code></td>
                 <td> e/h of the HCal [unknown owner type] </td>
               </tr>
             </tbody>
