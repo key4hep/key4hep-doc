@@ -139,11 +139,11 @@ where the algorithm is found in the environment.</p>
 </div></section>
 <section id="algorithms">
 <h2>Algorithms<a class="headerlink" href="#algorithms" title="Link to this heading"></a></h2>
-<p>Total: <strong>196 algorithms</strong> across <strong>12 packages</strong>.</p>
-<div id="algorithm-overview" data-total="196" data-packages="12" data-item-label="algorithm">
+<p>Total: <strong>198 algorithms</strong> across <strong>12 packages</strong>.</p>
+<div id="algorithm-overview" data-total="198" data-packages="12" data-item-label="algorithm">
   <div class="alg-filter-bar">
     <input type="text" id="alg-search" placeholder="Filter by name, package, or library…" autocomplete="off" />
-    <span id="alg-stats">Showing 196 of 196 algorithms in 12 packages</span>
+    <span id="alg-stats">Showing 198 of 198 algorithms in 12 packages</span>
   </div>
   <div class="alg-package-group" data-package="k4ActsTracking">
     <div class="alg-package-header">
@@ -3551,7 +3551,7 @@ where the algorithm is found in the environment.</p>
               <tr>
                 <td><code>CrossingAngle</code></td>
                 <td><code>double</code></td>
-                <td><code>4.6760603e-310</code></td>
+                <td><code>4.6711869e-310</code></td>
                 <td> Half the crossing angle beam in [rad] [unknown owner type] </td>
               </tr>
               <tr>
@@ -4256,7 +4256,7 @@ where the algorithm is found in the environment.</p>
     <div class="alg-package-header">
       <a class="alg-package-name" href="https://github.com/HEP-FCC/k4RecCalorimeter" target="_blank" rel="noopener noreferrer">k4RecCalorimeter</a>
       <span class="alg-package-meta">
-        <span class="alg-package-count">72 algorithms</span>
+        <span class="alg-package-count">73 algorithms</span>
         <span class="alg-package-toggle">&#9660;</span>
       </span>
     </div>
@@ -9121,6 +9121,167 @@ where the algorithm is found in the environment.</p>
           </table>
         </div>
       </div>
+      <div class="alg-card" data-name="SimulateSiPMwithContrib" data-lib="libk4RecCalorimeterPlugins.so" data-package="k4RecCalorimeter">
+        <div class="alg-card-header">
+          <span class="alg-name">SimulateSiPMwithContrib</span>
+          <span class="alg-card-right">
+            <span class="alg-lib-badge">libk4RecCalorimeterPlugins.so</span>
+            <span class="alg-card-toggle">&#9658;</span>
+          </span>
+        </div>
+        <div class="alg-card-body">
+          <table class="alg-props-table">
+            <thead>
+              <tr>
+                <th>Property</th>
+                <th>Type</th>
+                <th>Default</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>signalLength</code></td>
+                <td><code>double</code></td>
+                <td><code>200.0</code></td>
+                <td> signal length in ns [SimulateSiPMwithContrib] </td>
+              </tr>
+              <tr>
+                <td><code>sampling</code></td>
+                <td><code>double</code></td>
+                <td><code>0.1</code></td>
+                <td> SiPM sampling rate in ns [SimulateSiPMwithContrib] </td>
+              </tr>
+              <tr>
+                <td><code>risetime</code></td>
+                <td><code>double</code></td>
+                <td><code>1.0</code></td>
+                <td> signal rise time in ns [SimulateSiPMwithContrib] </td>
+              </tr>
+              <tr>
+                <td><code>falltimeFast</code></td>
+                <td><code>double</code></td>
+                <td><code>6.5</code></td>
+                <td> signal fast component decay time in ns [SimulateSiPMwithContrib] </td>
+              </tr>
+              <tr>
+                <td><code>SiPMsize</code></td>
+                <td><code>double</code></td>
+                <td><code>1.3</code></td>
+                <td> width of photosensitive area in mm [SimulateSiPMwithContrib] </td>
+              </tr>
+              <tr>
+                <td><code>cellpitch</code></td>
+                <td><code>double</code></td>
+                <td><code>10.0</code></td>
+                <td> SiPM cell size in um [SimulateSiPMwithContrib] </td>
+              </tr>
+              <tr>
+                <td><code>recovery</code></td>
+                <td><code>double</code></td>
+                <td><code>10.0</code></td>
+                <td> SiPM cell recovery time in ns [SimulateSiPMwithContrib] </td>
+              </tr>
+              <tr>
+                <td><code>DCR</code></td>
+                <td><code>double</code></td>
+                <td><code>120000.0</code></td>
+                <td> SiPM DCR [SimulateSiPMwithContrib] </td>
+              </tr>
+              <tr>
+                <td><code>Xtalk</code></td>
+                <td><code>double</code></td>
+                <td><code>0.01</code></td>
+                <td> SiPM crosstalk [SimulateSiPMwithContrib] </td>
+              </tr>
+              <tr>
+                <td><code>afterpulse</code></td>
+                <td><code>double</code></td>
+                <td><code>0.03</code></td>
+                <td> afterpulse probability [SimulateSiPMwithContrib] </td>
+              </tr>
+              <tr>
+                <td><code>SNR</code></td>
+                <td><code>double</code></td>
+                <td><code>20.0</code></td>
+                <td> SNR value in dB [SimulateSiPMwithContrib] </td>
+              </tr>
+              <tr>
+                <td><code>gateStart</code></td>
+                <td><code>double</code></td>
+                <td><code>5.0</code></td>
+                <td> Integration gate starting time in ns [SimulateSiPMwithContrib] </td>
+              </tr>
+              <tr>
+                <td><code>gateLength</code></td>
+                <td><code>double</code></td>
+                <td><code>95.0</code></td>
+                <td> Integration gate length in ns [SimulateSiPMwithContrib] </td>
+              </tr>
+              <tr>
+                <td><code>threshold</code></td>
+                <td><code>double</code></td>
+                <td><code>1.5</code></td>
+                <td> Integration threshold [SimulateSiPMwithContrib] </td>
+              </tr>
+              <tr>
+                <td><code>params</code></td>
+                <td><code>map&lt;string, double&gt;</code></td>
+                <td><code>[]</code></td>
+                <td> optional parameters [SimulateSiPMwithContrib] </td>
+              </tr>
+              <tr>
+                <td><code>isCherenkov</code></td>
+                <td><code>bool</code></td>
+                <td><code>False</code></td>
+                <td> switch to select if you are processing scintillation or Cherenkov hits [SimulateSiPMwithContrib] </td>
+              </tr>
+              <tr>
+                <td><code>wavelength</code></td>
+                <td><code>vector&lt;double&gt;</code></td>
+                <td><code>[1000.0, 100.0]</code></td>
+                <td> wavelength vector in nm (decreasing order) [SimulateSiPMwithContrib] </td>
+              </tr>
+              <tr>
+                <td><code>sipmEfficiency</code></td>
+                <td><code>vector&lt;double&gt;</code></td>
+                <td><code>[1.0, 1.0]</code></td>
+                <td> SiPM efficiency vs wavelength [SimulateSiPMwithContrib] </td>
+              </tr>
+              <tr>
+                <td><code>scintDecaytime</code></td>
+                <td><code>double</code></td>
+                <td><code>2.8</code></td>
+                <td> scintillation decay time in ns [SimulateSiPMwithContrib] </td>
+              </tr>
+              <tr>
+                <td><code>suppressionTreshold</code></td>
+                <td><code>double</code></td>
+                <td><code>0.001</code></td>
+                <td> Threshold on ADC integral to reject digi hit [SimulateSiPMwithContrib] </td>
+              </tr>
+              <tr>
+                <td><code>inputHitCollection</code></td>
+                <td><code>k4FWCore::DataHandle&lt;edm4hep::SimCalorimeterHitCollection&gt;</code></td>
+                <td><code></code></td>
+                <td> input calo collection name [unknown owner type] </td>
+              </tr>
+              <tr>
+                <td><code>outputHitCollection</code></td>
+                <td><code>k4FWCore::DataHandle&lt;edm4hep::CalorimeterHitCollection&gt;</code></td>
+                <td><code></code></td>
+                <td> output calo collection name [unknown owner type] </td>
+              </tr>
+              <tr>
+                <td><code>outputLinkCollection</code></td>
+                <td><code>k4FWCore::DataHandle&lt;podio::LinkCollection&lt;edm4hep::CalorimeterHit,edm4hep::SimCalorimeterHit&gt; &gt;</code></td>
+                <td><code></code></td>
+                <td> output links collection name [unknown owner type] </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
       <div class="alg-card" data-name="SimulateSiPMwithEdep" data-lib="libk4RecCalorimeterPlugins.so" data-package="k4RecCalorimeter">
         <div class="alg-card-header">
           <span class="alg-name">SimulateSiPMwithEdep</span>
@@ -9857,7 +10018,7 @@ where the algorithm is found in the environment.</p>
     <div class="alg-package-header">
       <a class="alg-package-name" href="https://github.com/key4hep/k4RecTracker" target="_blank" rel="noopener noreferrer">k4RecTracker</a>
       <span class="alg-package-meta">
-        <span class="alg-package-count">12 algorithms</span>
+        <span class="alg-package-count">13 algorithms</span>
         <span class="alg-package-toggle">&#9660;</span>
       </span>
     </div>
@@ -10241,9 +10402,9 @@ where the algorithm is found in the environment.</p>
           </table>
         </div>
       </div>
-      <div class="alg-card" data-name="GGTF_tracking" data-lib="libTracking.so" data-package="k4RecTracker">
+      <div class="alg-card" data-name="GGTFTrackFinder" data-lib="libTracking.so" data-package="k4RecTracker">
         <div class="alg-card-header">
-          <span class="alg-name">GGTF_tracking</span>
+          <span class="alg-name">GGTFTrackFinder</span>
           <span class="alg-card-right">
             <span class="alg-lib-badge">libTracking.so</span>
             <span class="alg-card-toggle">&#9658;</span>
@@ -10264,63 +10425,45 @@ where the algorithm is found in the environment.</p>
                 <td><code>InputPlanarHitCollections</code></td>
                 <td><code>vector&lt;DataObjID&gt;</code></td>
                 <td><code>[&quot;InputPlanarHitCollections&quot;]</code></td>
-                <td>  [k4FWCore::details::MultiTransformer&lt;std::tuple&lt;extension::TrackCollection&gt; (std::vector&lt;edm4hep::TrackerHitPlaneCollection const*,std::allocator&lt;edm4hep::TrackerHitPlaneCollection const*&gt; &gt; const&amp;,std::vector&lt;extension::SenseWireHitCollection const*,std::allocator&lt;extension::SenseWireHitCollection const*&gt; &gt; const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
+                <td>  [k4FWCore::details::MultiTransformer&lt;std::tuple&lt;edm4hep::TrackCollection&gt; (std::vector&lt;edm4hep::TrackerHitPlaneCollection const*,std::allocator&lt;edm4hep::TrackerHitPlaneCollection const*&gt; &gt; const&amp;,std::vector&lt;edm4hep::SenseWireHitCollection const*,std::allocator&lt;edm4hep::SenseWireHitCollection const*&gt; &gt; const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
               </tr>
               <tr>
                 <td><code>InputWireHitCollections</code></td>
                 <td><code>vector&lt;DataObjID&gt;</code></td>
                 <td><code>[&quot;InputWireHitCollections&quot;]</code></td>
-                <td>  [k4FWCore::details::MultiTransformer&lt;std::tuple&lt;extension::TrackCollection&gt; (std::vector&lt;edm4hep::TrackerHitPlaneCollection const*,std::allocator&lt;edm4hep::TrackerHitPlaneCollection const*&gt; &gt; const&amp;,std::vector&lt;extension::SenseWireHitCollection const*,std::allocator&lt;extension::SenseWireHitCollection const*&gt; &gt; const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
+                <td>  [k4FWCore::details::MultiTransformer&lt;std::tuple&lt;edm4hep::TrackCollection&gt; (std::vector&lt;edm4hep::TrackerHitPlaneCollection const*,std::allocator&lt;edm4hep::TrackerHitPlaneCollection const*&gt; &gt; const&amp;,std::vector&lt;edm4hep::SenseWireHitCollection const*,std::allocator&lt;edm4hep::SenseWireHitCollection const*&gt; &gt; const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
               </tr>
               <tr>
                 <td><code>OutputTracksGGTF</code></td>
                 <td><code>vector&lt;DataObjID&gt;</code></td>
                 <td><code>[&quot;OutputTracksGGTF&quot;]</code></td>
-                <td>  [k4FWCore::details::MultiTransformer&lt;std::tuple&lt;extension::TrackCollection&gt; (std::vector&lt;edm4hep::TrackerHitPlaneCollection const*,std::allocator&lt;edm4hep::TrackerHitPlaneCollection const*&gt; &gt; const&amp;,std::vector&lt;extension::SenseWireHitCollection const*,std::allocator&lt;extension::SenseWireHitCollection const*&gt; &gt; const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
+                <td>  [k4FWCore::details::MultiTransformer&lt;std::tuple&lt;edm4hep::TrackCollection&gt; (std::vector&lt;edm4hep::TrackerHitPlaneCollection const*,std::allocator&lt;edm4hep::TrackerHitPlaneCollection const*&gt; &gt; const&amp;,std::vector&lt;edm4hep::SenseWireHitCollection const*,std::allocator&lt;edm4hep::SenseWireHitCollection const*&gt; &gt; const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
               </tr>
               <tr>
                 <td><code>ModelPath</code></td>
                 <td><code>string</code></td>
                 <td><code></code></td>
-                <td> ModelPath [GGTF_tracking] </td>
+                <td> ModelPath [GGTFTrackFinder] </td>
               </tr>
               <tr>
                 <td><code>Tbeta</code></td>
                 <td><code>double</code></td>
                 <td><code>0.6</code></td>
-                <td> tbeta [GGTF_tracking] </td>
+                <td> tbeta: threshold used to identify core points in clusters (tracks) [GGTFTrackFinder] </td>
               </tr>
               <tr>
                 <td><code>Td</code></td>
                 <td><code>double</code></td>
                 <td><code>0.3</code></td>
-                <td> td [GGTF_tracking] </td>
-              </tr>
-              <tr>
-                <td><code>GeoSvcName</code></td>
-                <td><code>string</code></td>
-                <td><code>GeoSvc</code></td>
-                <td> The name of the GeoSvc instance [GGTF_tracking] </td>
-              </tr>
-              <tr>
-                <td><code>UidSvcName</code></td>
-                <td><code>string</code></td>
-                <td><code>uidSvc</code></td>
-                <td> The name of the UniqueIDGenSvc instance [GGTF_tracking] </td>
-              </tr>
-              <tr>
-                <td><code>DchName</code></td>
-                <td><code>string</code></td>
-                <td><code>DCH_v2</code></td>
-                <td> Name of the Drift Chamber detector [GGTF_tracking] </td>
+                <td> td: radius around a core point used to assign nearby hits to its cluster [GGTFTrackFinder] </td>
               </tr>
             </tbody>
           </table>
         </div>
       </div>
-      <div class="alg-card" data-name="GenFitter" data-lib="libTracking.so" data-package="k4RecTracker">
+      <div class="alg-card" data-name="GenfitTrackFitter" data-lib="libTracking.so" data-package="k4RecTracker">
         <div class="alg-card-header">
-          <span class="alg-name">GenFitter</span>
+          <span class="alg-name">GenfitTrackFitter</span>
           <span class="alg-card-right">
             <span class="alg-lib-badge">libTracking.so</span>
             <span class="alg-card-toggle">&#9658;</span>
@@ -10338,16 +10481,231 @@ where the algorithm is found in the environment.</p>
             </thead>
             <tbody>
               <tr>
-                <td><code>inputHits</code></td>
-                <td><code>k4FWCore::DataHandle&lt;edm4hep::TrackerHit3DCollection&gt;</code></td>
-                <td><code>inputHits</code></td>
-                <td> Input tracker hit collection name [unknown owner type] </td>
+                <td><code>InputTracks</code></td>
+                <td><code>vector&lt;DataObjID&gt;</code></td>
+                <td><code>[&quot;InputTracks&quot;]</code></td>
+                <td>  [k4FWCore::details::MultiTransformer&lt;std::tuple&lt;edm4hep::TrackCollection,edm4hep::TrackCollection,edm4hep::TrackerHitPlaneCollection&gt; (edm4hep::TrackCollection const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
               </tr>
               <tr>
-                <td><code>outputTracks</code></td>
-                <td><code>k4FWCore::DataHandle&lt;edm4hep::TrackCollection&gt;</code></td>
-                <td><code>outputTracks</code></td>
-                <td> Output track collection name [unknown owner type] </td>
+                <td><code>OutputFittedTracks</code></td>
+                <td><code>vector&lt;DataObjID&gt;</code></td>
+                <td><code>[&quot;Fitted_tracks&quot;]</code></td>
+                <td>  [k4FWCore::details::MultiTransformer&lt;std::tuple&lt;edm4hep::TrackCollection,edm4hep::TrackCollection,edm4hep::TrackerHitPlaneCollection&gt; (edm4hep::TrackCollection const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
+              </tr>
+              <tr>
+                <td><code>OutputFittedTracksWithFilteredHits</code></td>
+                <td><code>vector&lt;DataObjID&gt;</code></td>
+                <td><code>[&quot;Fitted_tracks_with_filtered_hits&quot;]</code></td>
+                <td>  [k4FWCore::details::MultiTransformer&lt;std::tuple&lt;edm4hep::TrackCollection,edm4hep::TrackCollection,edm4hep::TrackerHitPlaneCollection&gt; (edm4hep::TrackCollection const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
+              </tr>
+              <tr>
+                <td><code>OutputFittedHits</code></td>
+                <td><code>vector&lt;DataObjID&gt;</code></td>
+                <td><code>[&quot;Fitted_hits&quot;]</code></td>
+                <td>  [k4FWCore::details::MultiTransformer&lt;std::tuple&lt;edm4hep::TrackCollection,edm4hep::TrackCollection,edm4hep::TrackerHitPlaneCollection&gt; (edm4hep::TrackCollection const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
+              </tr>
+              <tr>
+                <td><code>GeoSvc</code></td>
+                <td><code>ServiceHandle</code></td>
+                <td><code>GeoSvc</code></td>
+                <td> Detector geometry service [GenfitTrackFitter] </td>
+              </tr>
+              <tr>
+                <td><code>DCHName</code></td>
+                <td><code>string</code></td>
+                <td><code>DCH_v2</code></td>
+                <td> DCHName in the detector description (used to retrieve DCH geometry and material information) [GenfitTrackFitter] </td>
+              </tr>
+              <tr>
+                <td><code>UseBrems</code></td>
+                <td><code>bool</code></td>
+                <td><code>False</code></td>
+                <td> Include Bremsstrahlung energy loss and noise in the fit [GenfitTrackFitter] </td>
+              </tr>
+              <tr>
+                <td><code>FitterType</code></td>
+                <td><code>string</code></td>
+                <td><code>DAF</code></td>
+                <td> Fitter type to use [https://indico.cern.ch/event/258092/papers/1588579/files/4253-genfit.pdf]: &#39;DAF&#39;, &#39;KALMAN&#39;, or &#39;KALMAN_REF&#39; [GenfitTrackFitter] </td>
+              </tr>
+              <tr>
+                <td><code>BetaInit</code></td>
+                <td><code>double</code></td>
+                <td><code>100.0</code></td>
+                <td> Initial annealing parameter (if m_Fitter_type == &#39;DAF&#39;) [https://indico.cern.ch/event/258092/papers/1588579/files/4253-genfit.pdf] [GenfitTrackFitter] </td>
+              </tr>
+              <tr>
+                <td><code>BetaFinal</code></td>
+                <td><code>double</code></td>
+                <td><code>0.05</code></td>
+                <td> Final annealing parameter (if m_Fitter_type == &#39;DAF&#39;) [https://indico.cern.ch/event/258092/papers/1588579/files/4253-genfit.pdf] [GenfitTrackFitter] </td>
+              </tr>
+              <tr>
+                <td><code>BetaSteps</code></td>
+                <td><code>int</code></td>
+                <td><code>15</code></td>
+                <td> Number of steps in the annealing schedule (if m_Fitter_type == &#39;DAF&#39;) [https://indico.cern.ch/event/258092/papers/1588579/files/4253-genfit.pdf] [GenfitTrackFitter] </td>
+              </tr>
+              <tr>
+                <td><code>ParticleHypothesisList</code></td>
+                <td><code>vector&lt;int&gt;</code></td>
+                <td><code>[211]</code></td>
+                <td> List of particle hypotheses to consider: {11,13,211,321,2212} -&gt; e, mu, pi, K, p [GenfitTrackFitter] </td>
+              </tr>
+              <tr>
+                <td><code>UseFirstHitAsReference</code></td>
+                <td><code>bool</code></td>
+                <td><code>False</code></td>
+                <td> If true, the first hit is used as the reference point for track initialization [GenfitTrackFitter] </td>
+              </tr>
+              <tr>
+                <td><code>InitializationType</code></td>
+                <td><code>int</code></td>
+                <td><code>1</code></td>
+                <td> Method for initializing track parameters before fitting: 0: first two hits (position from first hit, momentum from direction between first and second hit); 1: refined initialization using ComputeInitialParameters(Bz); 2: initialize from a track state (position from reference point, momentum from helix parameters); 3: use user-provided InitPosition and InitMomentum [GenfitTrackFitter] </td>
+              </tr>
+              <tr>
+                <td><code>Sigma_d0</code></td>
+                <td><code>double</code></td>
+                <td><code>0.05</code></td>
+                <td> Initial uncertainty on d0 (mm) for the initial covariance matrix when InitializationType = 0,1,3. [GenfitTrackFitter] </td>
+              </tr>
+              <tr>
+                <td><code>Sigma_phi</code></td>
+                <td><code>double</code></td>
+                <td><code>0.1</code></td>
+                <td> Initial uncertainty on phi (rad) for the initial covariance matrix when InitializationType = 0,1,3. [GenfitTrackFitter] </td>
+              </tr>
+              <tr>
+                <td><code>OmegaFactor</code></td>
+                <td><code>double</code></td>
+                <td><code>0.5</code></td>
+                <td> Scaling factor for omega uncertainty for the initial covariance matrix when InitializationType = 0,1,3.The actual sigma_omega is computed as OmegaFactor * |omega| [GenfitTrackFitter] </td>
+              </tr>
+              <tr>
+                <td><code>Z0Factor</code></td>
+                <td><code>double</code></td>
+                <td><code>0.1</code></td>
+                <td> Scaling factor for z0 uncertainty for the initial covariance matrix when InitializationType = 0,1,3.The actual sigma_z0 is computed as Z0Factor * |z0| [GenfitTrackFitter] </td>
+              </tr>
+              <tr>
+                <td><code>Sigma_tanLambda</code></td>
+                <td><code>double</code></td>
+                <td><code>0.1</code></td>
+                <td> Initial uncertainty on tanLambda for the initial covariance matrix when InitializationType = 0,1,3. [GenfitTrackFitter] </td>
+              </tr>
+              <tr>
+                <td><code>TrackStateLocation</code></td>
+                <td><code>int</code></td>
+                <td><code>2</code></td>
+                <td> TrackState location used for initialization when InitializationType = 2. Defines where the reference point and helix parameters are taken from [GenfitTrackFitter] </td>
+              </tr>
+              <tr>
+                <td><code>InitPosition</code></td>
+                <td><code>vector&lt;double&gt;</code></td>
+                <td><code>[0.0, 0.0, 0.0]</code></td>
+                <td> User-defined initial position for InitializationType = 3 [GenfitTrackFitter] </td>
+              </tr>
+              <tr>
+                <td><code>InitMomentum</code></td>
+                <td><code>vector&lt;double&gt;</code></td>
+                <td><code>[0.0, 0.0, 0.0]</code></td>
+                <td> User-defined initial momentum for InitializationType = 3 [GenfitTrackFitter] </td>
+              </tr>
+              <tr>
+                <td><code>Epsilon</code></td>
+                <td><code>double</code></td>
+                <td><code>0.0001</code></td>
+                <td> Threshold to detect sign changes in the first derivative during track initialization. Used to identify hits from the first round of the looper [GenfitTrackFitter] </td>
+              </tr>
+              <tr>
+                <td><code>SmoothWindow</code></td>
+                <td><code>int</code></td>
+                <td><code>5</code></td>
+                <td> Number of hits used for smoothing before computing the first derivative in track initialization [GenfitTrackFitter] </td>
+              </tr>
+              <tr>
+                <td><code>SkipTrackOrdering</code></td>
+                <td><code>bool</code></td>
+                <td><code>False</code></td>
+                <td> Skip hit ordering before fitting [GenfitTrackFitter] </td>
+              </tr>
+              <tr>
+                <td><code>ListOfTypesToSkip</code></td>
+                <td><code>vector&lt;int&gt;</code></td>
+                <td><code>[]</code></td>
+                <td> List of track types to skip during fitting (e.g. unmatched tracks with type = 0) [GenfitTrackFitter] </td>
+              </tr>
+              <tr>
+                <td><code>RunSingleEvaluation</code></td>
+                <td><code>bool</code></td>
+                <td><code>False</code></td>
+                <td> If true, only the first particle hypothesis is evaluated. If false, all hypotheses are scanned and the best fit is chosen based on chi2/ndf [GenfitTrackFitter] </td>
+              </tr>
+              <tr>
+                <td><code>FilterTrackHits</code></td>
+                <td><code>bool</code></td>
+                <td><code>True</code></td>
+                <td> Filter track hits after fitting based on their quality (weights assigned by the fitter). This also resolves the left/right ambiguity in drift chamber hits: only the hit with the higher weight is considered. [GenfitTrackFitter] </td>
+              </tr>
+              <tr>
+                <td><code>RunCalorimeterExtrapolation</code></td>
+                <td><code>bool</code></td>
+                <td><code>True</code></td>
+                <td> If true, the track is extrapolated to the calorimeter surfaces (barrel and endcap)and the corresponding track states are stored in the output track.This is applied only if a non-zero magnetic field (Bz &gt; 0) is found at the last hit position. [GenfitTrackFitter] </td>
+              </tr>
+              <tr>
+                <td><code>RadialThresholdPromptTrack</code></td>
+                <td><code>double</code></td>
+                <td><code>100.0</code></td>
+                <td> Radius [mm] defining a spherical region centered at {0,0,0}. Tracks produced within this radius are classified as prompt, while those outside are considered displaced. This parameter is used to select different track initialization strategies: prompt tracks are initialized using the PCA of the hits with respect to a reference point (IP or VP), whereas displaced tracks are initialized using the PCA of the first hit. [GenfitTrackFitter] </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="alg-card" data-name="PerfectTrackFinder" data-lib="libTracking.so" data-package="k4RecTracker">
+        <div class="alg-card-header">
+          <span class="alg-name">PerfectTrackFinder</span>
+          <span class="alg-card-right">
+            <span class="alg-lib-badge">libTracking.so</span>
+            <span class="alg-card-toggle">&#9658;</span>
+          </span>
+        </div>
+        <div class="alg-card-body">
+          <table class="alg-props-table">
+            <thead>
+              <tr>
+                <th>Property</th>
+                <th>Type</th>
+                <th>Default</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>InputPlanarHitCollections</code></td>
+                <td><code>vector&lt;DataObjID&gt;</code></td>
+                <td><code>[&quot;InputPlanarHitCollections&quot;]</code></td>
+                <td>  [k4FWCore::details::MultiTransformer&lt;std::tuple&lt;edm4hep::TrackCollection&gt; (std::vector&lt;podio::LinkCollection&lt;edm4hep::TrackerHit,edm4hep::SimTrackerHit&gt; const*,std::allocator&lt;podio::LinkCollection&lt;edm4hep::TrackerHit,edm4hep::SimTrackerHit&gt; const*&gt; &gt; const&amp;,std::vector&lt;podio::LinkCollection&lt;edm4hep::TrackerHit,edm4hep::SimTrackerHit&gt; const*,std::allocator&lt;podio::LinkCollection&lt;edm4hep::TrackerHit,edm4hep::SimTrackerHit&gt; const*&gt; &gt; const&amp;,edm4hep::MCParticleCollection const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
+              </tr>
+              <tr>
+                <td><code>InputWireHitCollections</code></td>
+                <td><code>vector&lt;DataObjID&gt;</code></td>
+                <td><code>[&quot;InputWireHitCollections&quot;]</code></td>
+                <td>  [k4FWCore::details::MultiTransformer&lt;std::tuple&lt;edm4hep::TrackCollection&gt; (std::vector&lt;podio::LinkCollection&lt;edm4hep::TrackerHit,edm4hep::SimTrackerHit&gt; const*,std::allocator&lt;podio::LinkCollection&lt;edm4hep::TrackerHit,edm4hep::SimTrackerHit&gt; const*&gt; &gt; const&amp;,std::vector&lt;podio::LinkCollection&lt;edm4hep::TrackerHit,edm4hep::SimTrackerHit&gt; const*,std::allocator&lt;podio::LinkCollection&lt;edm4hep::TrackerHit,edm4hep::SimTrackerHit&gt; const*&gt; &gt; const&amp;,edm4hep::MCParticleCollection const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
+              </tr>
+              <tr>
+                <td><code>InputMCParticles</code></td>
+                <td><code>vector&lt;DataObjID&gt;</code></td>
+                <td><code>[&quot;InputMCParticles&quot;]</code></td>
+                <td>  [k4FWCore::details::MultiTransformer&lt;std::tuple&lt;edm4hep::TrackCollection&gt; (std::vector&lt;podio::LinkCollection&lt;edm4hep::TrackerHit,edm4hep::SimTrackerHit&gt; const*,std::allocator&lt;podio::LinkCollection&lt;edm4hep::TrackerHit,edm4hep::SimTrackerHit&gt; const*&gt; &gt; const&amp;,std::vector&lt;podio::LinkCollection&lt;edm4hep::TrackerHit,edm4hep::SimTrackerHit&gt; const*,std::allocator&lt;podio::LinkCollection&lt;edm4hep::TrackerHit,edm4hep::SimTrackerHit&gt; const*&gt; &gt; const&amp;,edm4hep::MCParticleCollection const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
+              </tr>
+              <tr>
+                <td><code>OutputPerfectTracks</code></td>
+                <td><code>vector&lt;DataObjID&gt;</code></td>
+                <td><code>[&quot;OutputPerfectTracks&quot;]</code></td>
+                <td>  [k4FWCore::details::MultiTransformer&lt;std::tuple&lt;edm4hep::TrackCollection&gt; (std::vector&lt;podio::LinkCollection&lt;edm4hep::TrackerHit,edm4hep::SimTrackerHit&gt; const*,std::allocator&lt;podio::LinkCollection&lt;edm4hep::TrackerHit,edm4hep::SimTrackerHit&gt; const*&gt; &gt; const&amp;,std::vector&lt;podio::LinkCollection&lt;edm4hep::TrackerHit,edm4hep::SimTrackerHit&gt; const*,std::allocator&lt;podio::LinkCollection&lt;edm4hep::TrackerHit,edm4hep::SimTrackerHit&gt; const*&gt; &gt; const&amp;,edm4hep::MCParticleCollection const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
               </tr>
             </tbody>
           </table>
