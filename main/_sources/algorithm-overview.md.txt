@@ -30,20 +30,20 @@ where the algorithm is found in the environment.</p>
 
 ## Algorithms
 
-Total: **198 algorithms** across **12 packages**.
+Total: **200 algorithms** across **12 packages**.
 
 
 ```{raw} html
-<div id="algorithm-overview" data-total="198" data-packages="12" data-item-label="algorithm">
+<div id="algorithm-overview" data-total="200" data-packages="12" data-item-label="algorithm">
   <div class="alg-filter-bar">
     <input type="text" id="alg-search" placeholder="Filter by name, package, or library…" autocomplete="off" />
-    <span id="alg-stats">Showing 198 of 198 algorithms in 12 packages</span>
+    <span id="alg-stats">Showing 200 of 200 algorithms in 12 packages</span>
   </div>
   <div class="alg-package-group" data-package="k4ActsTracking">
     <div class="alg-package-header">
       <a class="alg-package-name" href="https://github.com/key4hep/k4ActsTracking" target="_blank" rel="noopener noreferrer">k4ActsTracking</a>
       <span class="alg-package-meta">
-        <span class="alg-package-count">5 algorithms</span>
+        <span class="alg-package-count">6 algorithms</span>
         <span class="alg-package-toggle">&#9660;</span>
       </span>
     </div>
@@ -348,22 +348,81 @@ Total: **198 algorithms** across **12 packages**.
             </thead>
             <tbody>
               <tr>
-                <td><code>GeoSvcName</code></td>
+                <td><code>ObjVisFileName</code></td>
                 <td><code>string</code></td>
-                <td><code>GeoSvc</code></td>
-                <td> The name of the GeoSvc instance [ActsGeoSvc] </td>
+                <td><code>dump_acts_geo.obj</code></td>
+                <td> Name of the 3D visualization file [ActsGeoSvc] </td>
               </tr>
               <tr>
-                <td><code>debugGeometry</code></td>
+                <td><code>DumpVisualization</code></td>
                 <td><code>bool</code></td>
                 <td><code>False</code></td>
-                <td> Option for geometry debugging [ActsGeoSvc] </td>
+                <td> Whether or not to create a 3D visualization dump [ActsGeoSvc] </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="alg-card" data-name="ActsTestPropagator" data-lib="libk4ActsTrackingPlugins.so" data-package="k4ActsTracking">
+        <div class="alg-card-header">
+          <span class="alg-name">ActsTestPropagator</span>
+          <span class="alg-card-right">
+            <span class="alg-lib-badge">libk4ActsTrackingPlugins.so</span>
+            <span class="alg-card-toggle">&#9658;</span>
+          </span>
+        </div>
+        <div class="alg-card-body">
+          <table class="alg-props-table">
+            <thead>
+              <tr>
+                <th>Property</th>
+                <th>Type</th>
+                <th>Default</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>OutputCollections</code></td>
+                <td><code>vector&lt;DataObjID&gt;</code></td>
+                <td><code>[&quot;step_x&quot;, &quot;step_y&quot;, &quot;step_z&quot;, &quot;step_geoID&quot;, &quot;step_size&quot;]</code></td>
+                <td>  [k4FWCore::details::Transformer&lt;std::vector&lt;podio::UserDataCollection&lt;double,void&gt;,std::allocator&lt;podio::UserDataCollection&lt;double,void&gt; &gt; &gt; (),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
               </tr>
               <tr>
-                <td><code>outputFileName</code></td>
+                <td><code>StepsOutputFile</code></td>
                 <td><code>string</code></td>
-                <td><code></code></td>
-                <td> Output file name [ActsGeoSvc] </td>
+                <td><code>acts_steps.csv</code></td>
+                <td> Output file for writing step positions and geometry id [ActsTestPropagator] </td>
+              </tr>
+              <tr>
+                <td><code>NumTracks</code></td>
+                <td><code>int</code></td>
+                <td><code>100</code></td>
+                <td> Number of random tracks to propagate [ActsTestPropagator] </td>
+              </tr>
+              <tr>
+                <td><code>MinMomentum</code></td>
+                <td><code>double</code></td>
+                <td><code>10.0</code></td>
+                <td> Minimum particle momentum in GeV [ActsTestPropagator] </td>
+              </tr>
+              <tr>
+                <td><code>MaxMomentum</code></td>
+                <td><code>double</code></td>
+                <td><code>1000.0</code></td>
+                <td> Maximum particle momentum in GeV [ActsTestPropagator] </td>
+              </tr>
+              <tr>
+                <td><code>MinEta</code></td>
+                <td><code>double</code></td>
+                <td><code>-2.5</code></td>
+                <td> Minimum pseudorapidity [ActsTestPropagator] </td>
+              </tr>
+              <tr>
+                <td><code>MaxEta</code></td>
+                <td><code>double</code></td>
+                <td><code>2.5</code></td>
+                <td> Maximum pseudorapidity [ActsTestPropagator] </td>
               </tr>
             </tbody>
           </table>
@@ -3445,7 +3504,7 @@ Total: **198 algorithms** across **12 packages**.
               <tr>
                 <td><code>CrossingAngle</code></td>
                 <td><code>double</code></td>
-                <td><code>4.6711869e-310</code></td>
+                <td><code>4.689785e-310</code></td>
                 <td> Half the crossing angle beam in [rad] [unknown owner type] </td>
               </tr>
               <tr>
@@ -4150,7 +4209,7 @@ Total: **198 algorithms** across **12 packages**.
     <div class="alg-package-header">
       <a class="alg-package-name" href="https://github.com/HEP-FCC/k4RecCalorimeter" target="_blank" rel="noopener noreferrer">k4RecCalorimeter</a>
       <span class="alg-package-meta">
-        <span class="alg-package-count">73 algorithms</span>
+        <span class="alg-package-count">74 algorithms</span>
         <span class="alg-package-toggle">&#9660;</span>
       </span>
     </div>
@@ -9901,6 +9960,35 @@ Total: **198 algorithms** across **12 packages**.
                 <td><code>ServiceHandle</code></td>
                 <td><code>k4::recCalo::CaloCellConstantsSvc</code></td>
                 <td>  [k4::recCalo::CaloCellConstantsSvcTestAlg] </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="alg-card" data-name="k4__recCalo__TubeLayerModuleThetaCaloToolTestAlg" data-lib="libk4RecFCCeeCalorimeterTests.so" data-package="k4RecCalorimeter">
+        <div class="alg-card-header">
+          <span class="alg-name">k4__recCalo__TubeLayerModuleThetaCaloToolTestAlg</span>
+          <span class="alg-card-right">
+            <span class="alg-lib-badge">libk4RecFCCeeCalorimeterTests.so</span>
+            <span class="alg-card-toggle">&#9658;</span>
+          </span>
+        </div>
+        <div class="alg-card-body">
+          <table class="alg-props-table">
+            <thead>
+              <tr>
+                <th>Property</th>
+                <th>Type</th>
+                <th>Default</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>CalorimeterTool</code></td>
+                <td><code>PrivateToolHandle</code></td>
+                <td><code>TubeLayerModuleThetaCaloTool/TubeLayerModuleThetaCaloTool</code></td>
+                <td>  [k4::recCalo::TubeLayerModuleThetaCaloToolTestAlg] </td>
               </tr>
             </tbody>
           </table>
