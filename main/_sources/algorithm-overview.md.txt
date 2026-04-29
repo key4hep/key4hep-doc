@@ -832,8 +832,8 @@ Total: **200 algorithms** across **12 packages**.
               </tr>
               <tr>
                 <td><code>OutputCollection</code></td>
-                <td><code>vector&lt;DataObjID&gt;</code></td>
-                <td><code>[&quot;NewMCParticles&quot;]</code></td>
+                <td><code>DataObjID</code></td>
+                <td><code>NewMCParticles</code></td>
                 <td>  [k4FWCore::details::Transformer&lt;podio::CollectionBase* (std::vector&lt;podio::CollectionBase const*,std::allocator&lt;podio::CollectionBase const*&gt; &gt; const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
               </tr>
               <tr>
@@ -867,20 +867,20 @@ Total: **200 algorithms** across **12 packages**.
             <tbody>
               <tr>
                 <td><code>InputCollection</code></td>
-                <td><code>vector&lt;DataObjID&gt;</code></td>
-                <td><code>[&quot;&quot;]</code></td>
+                <td><code>DataObjID</code></td>
+                <td><code></code></td>
                 <td>  [k4FWCore::details::Transformer&lt;podio::CollectionBase* (podio::CollectionBase const&amp;,edm4hep::EventHeaderCollection const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
               </tr>
               <tr>
                 <td><code>EventHeader</code></td>
-                <td><code>vector&lt;DataObjID&gt;</code></td>
-                <td><code>[&quot;EventHeader&quot;]</code></td>
+                <td><code>DataObjID</code></td>
+                <td><code>EventHeader</code></td>
                 <td>  [k4FWCore::details::Transformer&lt;podio::CollectionBase* (podio::CollectionBase const&amp;,edm4hep::EventHeaderCollection const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
               </tr>
               <tr>
                 <td><code>OutputCollection</code></td>
-                <td><code>vector&lt;DataObjID&gt;</code></td>
-                <td><code>[&quot;&quot;]</code></td>
+                <td><code>DataObjID</code></td>
+                <td><code></code></td>
                 <td>  [k4FWCore::details::Transformer&lt;podio::CollectionBase* (podio::CollectionBase const&amp;,edm4hep::EventHeaderCollection const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
               </tr>
               <tr>
@@ -3504,7 +3504,7 @@ Total: **200 algorithms** across **12 packages**.
               <tr>
                 <td><code>CrossingAngle</code></td>
                 <td><code>double</code></td>
-                <td><code>4.689785e-310</code></td>
+                <td><code>4.6441985e-310</code></td>
                 <td> Half the crossing angle beam in [rad] [unknown owner type] </td>
               </tr>
               <tr>
