@@ -66,7 +66,7 @@ mdit-py-plugins==0.4.0
     # via myst-parser
 mdurl==0.1.2
     # via markdown-it-py
-mistune==3.0.2
+mistune==3.2.1
     # via nbconvert
 myst-parser==2.0.0
     # via -r requirements.in
@@ -168,6 +168,8 @@ traitlets==5.14.0
     #   nbclient
     #   nbconvert
     #   nbformat
+typing-extensions==4.15.0
+    # via mistune
 urllib3==2.6.3
     # via requests
 webencodings==0.5.1
