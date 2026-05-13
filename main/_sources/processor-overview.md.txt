@@ -22234,6 +22234,12 @@ Total: **212 processors** across **20 packages**.
                 <td>compression of output file 0: false &gt;0: true (default)</td>
               </tr>
               <tr>
+                <td><code>DiscardOutput</code></td>
+                <td><code>bool</code></td>
+                <td><code>false</code></td>
+                <td>Flag to discard output file (default: false)</td>
+              </tr>
+              <tr>
                 <td><code>FileName</code></td>
                 <td><code>string</code></td>
                 <td><code>aida_file</code></td>
