@@ -3504,7 +3504,7 @@ Total: **203 algorithms** across **12 packages**.
               <tr>
                 <td><code>CrossingAngle</code></td>
                 <td><code>double</code></td>
-                <td><code>4.6359644e-310</code></td>
+                <td><code>4.6873824e-310</code></td>
                 <td> Half the crossing angle beam in [rad] [unknown owner type] </td>
               </tr>
               <tr>
@@ -6729,13 +6729,13 @@ Total: **203 algorithms** across **12 packages**.
               <tr>
                 <td><code>ehECal</code></td>
                 <td><code>double</code></td>
-                <td><code>5.9814756e-154</code></td>
+                <td><code>2.1999303e-152</code></td>
                 <td> e/h of the ECal [unknown owner type] </td>
               </tr>
               <tr>
                 <td><code>ehHCal</code></td>
                 <td><code>double</code></td>
-                <td><code>6.0198676e+21</code></td>
+                <td><code>1.8767345e-152</code></td>
                 <td> e/h of the HCal [unknown owner type] </td>
               </tr>
             </tbody>
