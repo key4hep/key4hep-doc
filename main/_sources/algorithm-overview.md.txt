@@ -30,20 +30,20 @@ where the algorithm is found in the environment.</p>
 
 ## Algorithms
 
-Total: **203 algorithms** across **12 packages**.
+Total: **202 algorithms** across **12 packages**.
 
 
 ```{raw} html
-<div id="algorithm-overview" data-total="203" data-packages="12" data-item-label="algorithm">
+<div id="algorithm-overview" data-total="202" data-packages="12" data-item-label="algorithm">
   <div class="alg-filter-bar">
     <input type="text" id="alg-search" placeholder="Filter by name, package, or library…" autocomplete="off" />
-    <span id="alg-stats">Showing 203 of 203 algorithms in 12 packages</span>
+    <span id="alg-stats">Showing 202 of 202 algorithms in 12 packages</span>
   </div>
   <div class="alg-package-group" data-package="k4ActsTracking">
     <div class="alg-package-header">
       <a class="alg-package-name" href="https://github.com/key4hep/k4ActsTracking" target="_blank" rel="noopener noreferrer">k4ActsTracking</a>
       <span class="alg-package-meta">
-        <span class="alg-package-count">6 algorithms</span>
+        <span class="alg-package-count">7 algorithms</span>
         <span class="alg-package-toggle">&#9660;</span>
       </span>
     </div>
@@ -359,6 +359,12 @@ Total: **203 algorithms** across **12 packages**.
                 <td><code>False</code></td>
                 <td> Whether or not to create a 3D visualization dump [ActsGeoSvc] </td>
               </tr>
+              <tr>
+                <td><code>EncodingStringVariable</code></td>
+                <td><code>string</code></td>
+                <td><code>GlobalTrackerReadoutID</code></td>
+                <td> Name of the DD4hep constant holding the CellID encoding string. [ActsGeoSvc] </td>
+              </tr>
             </tbody>
           </table>
         </div>
@@ -423,6 +429,227 @@ Total: **203 algorithms** across **12 packages**.
                 <td><code>double</code></td>
                 <td><code>2.5</code></td>
                 <td> Maximum pseudorapidity [ActsTestPropagator] </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="alg-card" data-name="CKFTrackingAlg" data-lib="libk4ActsTrackingPlugins.so" data-package="k4ActsTracking">
+        <div class="alg-card-header">
+          <span class="alg-name">CKFTrackingAlg</span>
+          <span class="alg-card-right">
+            <span class="alg-lib-badge">libk4ActsTrackingPlugins.so</span>
+            <span class="alg-card-toggle">&#9658;</span>
+          </span>
+        </div>
+        <div class="alg-card-body">
+          <table class="alg-props-table">
+            <thead>
+              <tr>
+                <th>Property</th>
+                <th>Type</th>
+                <th>Default</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>InputTrackerHitCollection</code></td>
+                <td><code>DataObjID</code></td>
+                <td><code>TrackerHits</code></td>
+                <td>  [k4FWCore::details::MultiTransformer&lt;std::tuple&lt;edm4hep::TrackCollection,edm4hep::TrackCollection&gt; (edm4hep::TrackerHitPlaneCollection const&amp;,podio::LinkCollection&lt;edm4hep::TrackerHit,edm4hep::SimTrackerHit&gt; const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
+              </tr>
+              <tr>
+                <td><code>InputTrackerHitRelationCollection</code></td>
+                <td><code>DataObjID</code></td>
+                <td><code>TrackerHitRelations</code></td>
+                <td>  [k4FWCore::details::MultiTransformer&lt;std::tuple&lt;edm4hep::TrackCollection,edm4hep::TrackCollection&gt; (edm4hep::TrackerHitPlaneCollection const&amp;,podio::LinkCollection&lt;edm4hep::TrackerHit,edm4hep::SimTrackerHit&gt; const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
+              </tr>
+              <tr>
+                <td><code>OutputSeedCollection</code></td>
+                <td><code>DataObjID</code></td>
+                <td><code>SeedTracks</code></td>
+                <td>  [k4FWCore::details::MultiTransformer&lt;std::tuple&lt;edm4hep::TrackCollection,edm4hep::TrackCollection&gt; (edm4hep::TrackerHitPlaneCollection const&amp;,podio::LinkCollection&lt;edm4hep::TrackerHit,edm4hep::SimTrackerHit&gt; const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
+              </tr>
+              <tr>
+                <td><code>OutputTrackCollection</code></td>
+                <td><code>DataObjID</code></td>
+                <td><code>Tracks</code></td>
+                <td>  [k4FWCore::details::MultiTransformer&lt;std::tuple&lt;edm4hep::TrackCollection,edm4hep::TrackCollection&gt; (edm4hep::TrackerHitPlaneCollection const&amp;,podio::LinkCollection&lt;edm4hep::TrackerHit,edm4hep::SimTrackerHit&gt; const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
+              </tr>
+              <tr>
+                <td><code>RunCKF</code></td>
+                <td><code>bool</code></td>
+                <td><code>True</code></td>
+                <td> Run tracking using CKF. False means stop at seeding. [CKFTrackingAlg] </td>
+              </tr>
+              <tr>
+                <td><code>PropagateBackward</code></td>
+                <td><code>bool</code></td>
+                <td><code>False</code></td>
+                <td> Extrapolates tracks towards beamline. [CKFTrackingAlg] </td>
+              </tr>
+              <tr>
+                <td><code>SeedFinding_RMax</code></td>
+                <td><code>float</code></td>
+                <td><code>150.0</code></td>
+                <td> Maximum radius of hits to consider. [CKFTrackingAlg] </td>
+              </tr>
+              <tr>
+                <td><code>SeedFinding_DeltaRMin</code></td>
+                <td><code>float</code></td>
+                <td><code>5.0</code></td>
+                <td> Minimum dR between hits in a seed. [CKFTrackingAlg] </td>
+              </tr>
+              <tr>
+                <td><code>SeedFinding_DeltaRMax</code></td>
+                <td><code>float</code></td>
+                <td><code>80.0</code></td>
+                <td> Maximum dR between hits in a seed. [CKFTrackingAlg] </td>
+              </tr>
+              <tr>
+                <td><code>SeedFinding_DeltaRMinTop</code></td>
+                <td><code>float</code></td>
+                <td><code>0.0</code></td>
+                <td> Minimum dR between reference and outer hits in a seed. [CKFTrackingAlg] </td>
+              </tr>
+              <tr>
+                <td><code>SeedFinding_DeltaRMaxTop</code></td>
+                <td><code>float</code></td>
+                <td><code>0.0</code></td>
+                <td> Maximum dR between reference and outer hits in a seed. [CKFTrackingAlg] </td>
+              </tr>
+              <tr>
+                <td><code>SeedFinding_DeltaRMinBottom</code></td>
+                <td><code>float</code></td>
+                <td><code>0.0</code></td>
+                <td> Minimum dR between reference and inner hits in a seed. [CKFTrackingAlg] </td>
+              </tr>
+              <tr>
+                <td><code>SeedFinding_DeltaRMaxBottom</code></td>
+                <td><code>float</code></td>
+                <td><code>0.0</code></td>
+                <td> Maximum dR between reference and inner hits in a seed. [CKFTrackingAlg] </td>
+              </tr>
+              <tr>
+                <td><code>SeedFinding_CollisionRegion</code></td>
+                <td><code>float</code></td>
+                <td><code>75.0</code></td>
+                <td> Half-size of the collision region along z. [CKFTrackingAlg] </td>
+              </tr>
+              <tr>
+                <td><code>SeedFinding_ZMax</code></td>
+                <td><code>float</code></td>
+                <td><code>600.0</code></td>
+                <td> Maximum |z| of hits to consider. [CKFTrackingAlg] </td>
+              </tr>
+              <tr>
+                <td><code>SeedFinding_SigmaScattering</code></td>
+                <td><code>float</code></td>
+                <td><code>50.0</code></td>
+                <td> Number of sigmas allowed in scattering angle. [CKFTrackingAlg] </td>
+              </tr>
+              <tr>
+                <td><code>SeedFinding_RadLengthPerSeed</code></td>
+                <td><code>float</code></td>
+                <td><code>0.1</code></td>
+                <td> Average radiation length per seed. [CKFTrackingAlg] </td>
+              </tr>
+              <tr>
+                <td><code>SeedFinding_MinPt</code></td>
+                <td><code>float</code></td>
+                <td><code>500.0</code></td>
+                <td> Minimum pT of tracks to seed [MeV]. [CKFTrackingAlg] </td>
+              </tr>
+              <tr>
+                <td><code>SeedFinding_ImpactMax</code></td>
+                <td><code>float</code></td>
+                <td><code>3.0</code></td>
+                <td> Maximum d0 of tracks to seed [mm]. [CKFTrackingAlg] </td>
+              </tr>
+              <tr>
+                <td><code>SeedFinding_zBinEdges</code></td>
+                <td><code>vector&lt;string&gt;</code></td>
+                <td><code>[]</code></td>
+                <td> Custom z bin edges for the seeding grid. [CKFTrackingAlg] </td>
+              </tr>
+              <tr>
+                <td><code>SeedFinding_zTopBinLen</code></td>
+                <td><code>int</code></td>
+                <td><code>1</code></td>
+                <td> Number of top bins along Z for seeding. [CKFTrackingAlg] </td>
+              </tr>
+              <tr>
+                <td><code>SeedFinding_zBottomBinLen</code></td>
+                <td><code>int</code></td>
+                <td><code>1</code></td>
+                <td> Number of bottom bins along Z for seeding. [CKFTrackingAlg] </td>
+              </tr>
+              <tr>
+                <td><code>SeedFinding_phiTopBinLen</code></td>
+                <td><code>int</code></td>
+                <td><code>1</code></td>
+                <td> Number of top bins along phi for seeding. [CKFTrackingAlg] </td>
+              </tr>
+              <tr>
+                <td><code>SeedFinding_phiBottomBinLen</code></td>
+                <td><code>int</code></td>
+                <td><code>1</code></td>
+                <td> Number of bottom bins along phi for seeding. [CKFTrackingAlg] </td>
+              </tr>
+              <tr>
+                <td><code>InitialTrackError_Pos</code></td>
+                <td><code>double</code></td>
+                <td><code>0.01</code></td>
+                <td> Initial track error for local position. [CKFTrackingAlg] </td>
+              </tr>
+              <tr>
+                <td><code>InitialTrackError_Phi</code></td>
+                <td><code>double</code></td>
+                <td><code>0.017453293</code></td>
+                <td> Initial track error for phi. [CKFTrackingAlg] </td>
+              </tr>
+              <tr>
+                <td><code>InitialTrackError_RelP</code></td>
+                <td><code>double</code></td>
+                <td><code>0.25</code></td>
+                <td> Initial track error for momentum (relative). [CKFTrackingAlg] </td>
+              </tr>
+              <tr>
+                <td><code>InitialTrackError_Lambda</code></td>
+                <td><code>double</code></td>
+                <td><code>0.017453293</code></td>
+                <td> Initial track error for lambda. [CKFTrackingAlg] </td>
+              </tr>
+              <tr>
+                <td><code>InitialTrackError_Time</code></td>
+                <td><code>double</code></td>
+                <td><code>29979.246</code></td>
+                <td> Initial track error for time. [CKFTrackingAlg] </td>
+              </tr>
+              <tr>
+                <td><code>CKF_Chi2CutOff</code></td>
+                <td><code>double</code></td>
+                <td><code>15.0</code></td>
+                <td> Maximum local chi2 contribution. [CKFTrackingAlg] </td>
+              </tr>
+              <tr>
+                <td><code>CKF_NumMeasurementsCutOff</code></td>
+                <td><code>int</code></td>
+                <td><code>10</code></td>
+                <td> Maximum measurements on a single surface. [CKFTrackingAlg] </td>
+              </tr>
+              <tr>
+                <td><code>SeedingSensorsCellIDs</code></td>
+                <td><code>vector&lt;string&gt;</code></td>
+                <td><code>[]</code></td>
+                <td> CellIDSelector selection strings for seed space-point filtering. Each entry is a comma-separated list of field:value constraints (e.g. &#34;system:1,layer:2|3&#34;). Multiple entries are OR-ed together. Omitted fields act as wildcards. [CKFTrackingAlg] </td>
+              </tr>
+              <tr>
+                <td><code>NumThreads</code></td>
+                <td><code>int</code></td>
+                <td><code>1</code></td>
+                <td> Number of threads for internal TBB parallelism. [CKFTrackingAlg] </td>
               </tr>
             </tbody>
           </table>
@@ -800,7 +1027,7 @@ Total: **203 algorithms** across **12 packages**.
     <div class="alg-package-header">
       <a class="alg-package-name" href="https://github.com/key4hep/k4FWCore" target="_blank" rel="noopener noreferrer">k4FWCore</a>
       <span class="alg-package-meta">
-        <span class="alg-package-count">14 algorithms</span>
+        <span class="alg-package-count">10 algorithms</span>
         <span class="alg-package-toggle">&#9660;</span>
       </span>
     </div>
@@ -964,83 +1191,6 @@ Total: **203 algorithms** across **12 packages**.
                 <td><code>k4FWCore::DataHandle&lt;edm4hep::EventHeaderCollection&gt;</code></td>
                 <td><code>EventHeader</code></td>
                 <td> Name of the EventHeaderCollection that will be stored in the output root file. [unknown owner type] </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="alg-card" data-name="FCCDataSvc" data-lib="libk4FWCorePlugins.so" data-package="k4FWCore">
-        <div class="alg-card-header">
-          <span class="alg-name">FCCDataSvc</span>
-          <span class="alg-card-right">
-            <span class="alg-lib-badge">libk4FWCorePlugins.so</span>
-            <span class="alg-card-toggle">&#9658;</span>
-          </span>
-        </div>
-        <div class="alg-card-body">
-          <table class="alg-props-table">
-            <thead>
-              <tr>
-                <th>Property</th>
-                <th>Type</th>
-                <th>Default</th>
-                <th>Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><code>RootName</code></td>
-                <td><code>string</code></td>
-                <td><code>/Event</code></td>
-                <td> name of root entry [DataSvc] </td>
-              </tr>
-              <tr>
-                <td><code>ForceLeaves</code></td>
-                <td><code>bool</code></td>
-                <td><code>False</code></td>
-                <td> force creation of default leaves on registerObject [DataSvc] </td>
-              </tr>
-              <tr>
-                <td><code>InhibitPaths</code></td>
-                <td><code>vector&lt;string&gt;</code></td>
-                <td><code>[]</code></td>
-                <td> inhibited leaves [DataSvc] </td>
-              </tr>
-              <tr>
-                <td><code>EnableFaultHandler</code></td>
-                <td><code>bool</code></td>
-                <td><code>False</code></td>
-                <td> enable incidents on data creation requests [DataSvc] </td>
-              </tr>
-              <tr>
-                <td><code>DataFaultName</code></td>
-                <td><code>string</code></td>
-                <td><code>DataFault</code></td>
-                <td> Name of the data fault incident [DataSvc] </td>
-              </tr>
-              <tr>
-                <td><code>EnableAccessHandler</code></td>
-                <td><code>bool</code></td>
-                <td><code>False</code></td>
-                <td> enable incidents on data access requests [DataSvc] </td>
-              </tr>
-              <tr>
-                <td><code>DataAccessName</code></td>
-                <td><code>string</code></td>
-                <td><code>DataAccess</code></td>
-                <td> Name of the data access incident [DataSvc] </td>
-              </tr>
-              <tr>
-                <td><code>inputs</code></td>
-                <td><code>vector&lt;string&gt;</code></td>
-                <td><code>[]</code></td>
-                <td> Names of the files to read [unknown owner type] </td>
-              </tr>
-              <tr>
-                <td><code>input</code></td>
-                <td><code>string</code></td>
-                <td><code></code></td>
-                <td> Name of the file to read [unknown owner type] </td>
               </tr>
             </tbody>
           </table>
@@ -1289,76 +1439,6 @@ Total: **203 algorithms** across **12 packages**.
           </table>
         </div>
       </div>
-      <div class="alg-card" data-name="PodioInput" data-lib="libk4FWCorePlugins.so" data-package="k4FWCore">
-        <div class="alg-card-header">
-          <span class="alg-name">PodioInput</span>
-          <span class="alg-card-right">
-            <span class="alg-lib-badge">libk4FWCorePlugins.so</span>
-            <span class="alg-card-toggle">&#9658;</span>
-          </span>
-        </div>
-        <div class="alg-card-body">
-          <table class="alg-props-table">
-            <thead>
-              <tr>
-                <th>Property</th>
-                <th>Type</th>
-                <th>Default</th>
-                <th>Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><code>collections</code></td>
-                <td><code>vector&lt;string&gt;</code></td>
-                <td><code>[]</code></td>
-                <td> Collections that should be read (default all) [PodioInput] </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="alg-card" data-name="PodioOutput" data-lib="libk4FWCorePlugins.so" data-package="k4FWCore">
-        <div class="alg-card-header">
-          <span class="alg-name">PodioOutput</span>
-          <span class="alg-card-right">
-            <span class="alg-lib-badge">libk4FWCorePlugins.so</span>
-            <span class="alg-card-toggle">&#9658;</span>
-          </span>
-        </div>
-        <div class="alg-card-body">
-          <table class="alg-props-table">
-            <thead>
-              <tr>
-                <th>Property</th>
-                <th>Type</th>
-                <th>Default</th>
-                <th>Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><code>filename</code></td>
-                <td><code>string</code></td>
-                <td><code>output.root</code></td>
-                <td> Name of the file to create [PodioOutput] </td>
-              </tr>
-              <tr>
-                <td><code>outputCommands</code></td>
-                <td><code>vector&lt;string&gt;</code></td>
-                <td><code>[&quot;keep *&quot;]</code></td>
-                <td> A set of commands to declare which collections to keep or drop. [PodioOutput] </td>
-              </tr>
-              <tr>
-                <td><code>remoteFilename</code></td>
-                <td><code>string</code></td>
-                <td><code></code></td>
-                <td> An optional file path to copy the outputfile to. [PodioOutput] </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
       <div class="alg-card" data-name="Reader" data-lib="libk4FWCorePlugins.so" data-package="k4FWCore">
         <div class="alg-card-header">
           <span class="alg-name">Reader</span>
@@ -1459,89 +1539,6 @@ Total: **203 algorithms** across **12 packages**.
                 <td><code>ServiceHandle</code></td>
                 <td><code>IOSvc</code></td>
                 <td>  [Writer] </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="alg-card" data-name="k4DataSvc" data-lib="libk4FWCorePlugins.so" data-package="k4FWCore">
-        <div class="alg-card-header">
-          <span class="alg-name">k4DataSvc</span>
-          <span class="alg-card-right">
-            <span class="alg-lib-badge">libk4FWCorePlugins.so</span>
-            <span class="alg-card-toggle">&#9658;</span>
-          </span>
-        </div>
-        <div class="alg-card-body">
-          <table class="alg-props-table">
-            <thead>
-              <tr>
-                <th>Property</th>
-                <th>Type</th>
-                <th>Default</th>
-                <th>Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><code>RootName</code></td>
-                <td><code>string</code></td>
-                <td><code>/Event</code></td>
-                <td> name of root entry [DataSvc] </td>
-              </tr>
-              <tr>
-                <td><code>ForceLeaves</code></td>
-                <td><code>bool</code></td>
-                <td><code>False</code></td>
-                <td> force creation of default leaves on registerObject [DataSvc] </td>
-              </tr>
-              <tr>
-                <td><code>InhibitPaths</code></td>
-                <td><code>vector&lt;string&gt;</code></td>
-                <td><code>[]</code></td>
-                <td> inhibited leaves [DataSvc] </td>
-              </tr>
-              <tr>
-                <td><code>EnableFaultHandler</code></td>
-                <td><code>bool</code></td>
-                <td><code>False</code></td>
-                <td> enable incidents on data creation requests [DataSvc] </td>
-              </tr>
-              <tr>
-                <td><code>DataFaultName</code></td>
-                <td><code>string</code></td>
-                <td><code>DataFault</code></td>
-                <td> Name of the data fault incident [DataSvc] </td>
-              </tr>
-              <tr>
-                <td><code>EnableAccessHandler</code></td>
-                <td><code>bool</code></td>
-                <td><code>False</code></td>
-                <td> enable incidents on data access requests [DataSvc] </td>
-              </tr>
-              <tr>
-                <td><code>DataAccessName</code></td>
-                <td><code>string</code></td>
-                <td><code>DataAccess</code></td>
-                <td> Name of the data access incident [DataSvc] </td>
-              </tr>
-              <tr>
-                <td><code>inputs</code></td>
-                <td><code>vector&lt;string&gt;</code></td>
-                <td><code>[]</code></td>
-                <td> Names of the files to read [unknown owner type] </td>
-              </tr>
-              <tr>
-                <td><code>input</code></td>
-                <td><code>string</code></td>
-                <td><code></code></td>
-                <td> Name of the file to read [unknown owner type] </td>
-              </tr>
-              <tr>
-                <td><code>FirstEventEntry</code></td>
-                <td><code>unsigned int</code></td>
-                <td><code>0</code></td>
-                <td> First event to read [unknown owner type] </td>
               </tr>
             </tbody>
           </table>
@@ -3504,13 +3501,13 @@ Total: **203 algorithms** across **12 packages**.
               <tr>
                 <td><code>CrossingAngle</code></td>
                 <td><code>double</code></td>
-                <td><code>4.6689658e-310</code></td>
+                <td><code>4.6755643e-310</code></td>
                 <td> Half the crossing angle beam in [rad] [unknown owner type] </td>
               </tr>
               <tr>
                 <td><code>LongitudinalCut</code></td>
                 <td><code>double</code></td>
-                <td><code>6.0132872e-154</code></td>
+                <td><code>2.8862366e+214</code></td>
                 <td> the value for cut_z used in GP++ in [um] [unknown owner type] </td>
               </tr>
               <tr>
@@ -4209,7 +4206,7 @@ Total: **203 algorithms** across **12 packages**.
     <div class="alg-package-header">
       <a class="alg-package-name" href="https://github.com/HEP-FCC/k4RecCalorimeter" target="_blank" rel="noopener noreferrer">k4RecCalorimeter</a>
       <span class="alg-package-meta">
-        <span class="alg-package-count">77 algorithms</span>
+        <span class="alg-package-count">79 algorithms</span>
         <span class="alg-package-toggle">&#9660;</span>
       </span>
     </div>
@@ -4470,6 +4467,18 @@ Total: **203 algorithms** across **12 packages**.
                 <td><code>string</code></td>
                 <td><code></code></td>
                 <td> File with the calibration parameters [CalibrateCaloClusters] </td>
+              </tr>
+              <tr>
+                <td><code>deltaThetaCalo</code></td>
+                <td><code>double</code></td>
+                <td><code>0.0024543692</code></td>
+                <td> Theta granularity used for the fractional theta input feature [CalibrateCaloClusters] </td>
+              </tr>
+              <tr>
+                <td><code>deltaPhiCalo</code></td>
+                <td><code>double</code></td>
+                <td><code>0.0040906154</code></td>
+                <td> Phi granularity used for the fractional phi input feature [CalibrateCaloClusters] </td>
               </tr>
               <tr>
                 <td><code>inClusters</code></td>
@@ -6729,13 +6738,13 @@ Total: **203 algorithms** across **12 packages**.
               <tr>
                 <td><code>ehECal</code></td>
                 <td><code>double</code></td>
-                <td><code>2.1999303e-152</code></td>
+                <td><code>5.9814756e-154</code></td>
                 <td> e/h of the ECal [unknown owner type] </td>
               </tr>
               <tr>
                 <td><code>ehHCal</code></td>
                 <td><code>double</code></td>
-                <td><code>1.8767345e-152</code></td>
+                <td><code>6.0198676e+21</code></td>
                 <td> e/h of the HCal [unknown owner type] </td>
               </tr>
             </tbody>
@@ -10042,6 +10051,76 @@ Total: **203 algorithms** across **12 packages**.
                 <td><code>ServiceHandle</code></td>
                 <td><code>k4::recCalo::CaloCellConstantsSvc</code></td>
                 <td>  [k4::recCalo::CaloCellConstantsSvcTestAlg] </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="alg-card" data-name="k4__recCalo__CaloCellIndexerSvc" data-lib="libk4RecCalorimeterPlugins.so" data-package="k4RecCalorimeter">
+        <div class="alg-card-header">
+          <span class="alg-name">k4__recCalo__CaloCellIndexerSvc</span>
+          <span class="alg-card-right">
+            <span class="alg-lib-badge">libk4RecCalorimeterPlugins.so</span>
+            <span class="alg-card-toggle">&#9658;</span>
+          </span>
+        </div>
+        <div class="alg-card-body">
+          <table class="alg-props-table">
+            <thead>
+              <tr>
+                <th>Property</th>
+                <th>Type</th>
+                <th>Default</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>GeoTools</code></td>
+                <td><code>PrivateToolHandleArray</code></td>
+                <td><code>[]</code></td>
+                <td>  [k4::recCalo::CaloCellIndexerSvc] </td>
+              </tr>
+              <tr>
+                <td><code>CaloCellConstantsSvc</code></td>
+                <td><code>ServiceHandle</code></td>
+                <td><code>k4::recCalo::CaloCellConstantsSvc</code></td>
+                <td>  [k4::recCalo::CaloCellIndexerSvc] </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="alg-card" data-name="k4__recCalo__CaloCellIndexerSvcTestAlg" data-lib="libk4RecCalorimeterTests.so" data-package="k4RecCalorimeter">
+        <div class="alg-card-header">
+          <span class="alg-name">k4__recCalo__CaloCellIndexerSvcTestAlg</span>
+          <span class="alg-card-right">
+            <span class="alg-lib-badge">libk4RecCalorimeterTests.so</span>
+            <span class="alg-card-toggle">&#9658;</span>
+          </span>
+        </div>
+        <div class="alg-card-body">
+          <table class="alg-props-table">
+            <thead>
+              <tr>
+                <th>Property</th>
+                <th>Type</th>
+                <th>Default</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>CaloCellIndexerSvc</code></td>
+                <td><code>ServiceHandle</code></td>
+                <td><code>k4::recCalo::CaloCellIndexerSvc</code></td>
+                <td>  [k4::recCalo::CaloCellIndexerSvcTestAlg] </td>
+              </tr>
+              <tr>
+                <td><code>DetIDs</code></td>
+                <td><code>vector&lt;int&gt;</code></td>
+                <td><code>[4]</code></td>
+                <td>  [k4::recCalo::CaloCellIndexerSvcTestAlg] </td>
               </tr>
             </tbody>
           </table>
