@@ -14,7 +14,7 @@ babel==2.14.0
     # via sphinx
 beautifulsoup4==4.12.2
     # via nbconvert
-bleach[css]==6.1.0
+bleach[css]==6.4.0
     # via nbconvert
 certifi==2024.7.4
     # via requests
@@ -115,7 +115,6 @@ rpds-py==0.15.2
     #   referencing
 six==1.16.0
     # via
-    #   bleach
     #   notedown
     #   python-dateutil
 snowballstemmer==2.2.0
