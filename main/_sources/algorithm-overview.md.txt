@@ -598,6 +598,198 @@ Total: **203 algorithms** across **12 packages**.
                 <td> Number of bottom bins along phi for seeding. [CKFTrackingAlg] </td>
               </tr>
               <tr>
+                <td><code>SeedFinding_DeltaRMiddleMinSPRange</code></td>
+                <td><code>float</code></td>
+                <td><code>10.0</code></td>
+                <td> Lower offset added to the rounded minimum radius when computing the variable middle space-point range. [CKFTrackingAlg] </td>
+              </tr>
+              <tr>
+                <td><code>SeedFinding_DeltaRMiddleMaxSPRange</code></td>
+                <td><code>float</code></td>
+                <td><code>10.0</code></td>
+                <td> Upper offset subtracted from the rounded maximum radius when computing the variable middle space-point range. [CKFTrackingAlg] </td>
+              </tr>
+              <tr>
+                <td><code>SeedFilter_DeltaInvHelixDiameter</code></td>
+                <td><code>float</code></td>
+                <td><code>3e-05</code></td>
+                <td> Allowed difference in curvature (inverted seed radii) between two compatible seeds. [CKFTrackingAlg] </td>
+              </tr>
+              <tr>
+                <td><code>SeedFilter_CompatSeedWeight</code></td>
+                <td><code>float</code></td>
+                <td><code>200.0</code></td>
+                <td> Weight added to a seed when a compatible seed is found (c1 factor). [CKFTrackingAlg] </td>
+              </tr>
+              <tr>
+                <td><code>SeedFilter_ImpactWeightFactor</code></td>
+                <td><code>float</code></td>
+                <td><code>1.0</code></td>
+                <td> Factor multiplying the transverse impact parameter d0, subtracted from the seed weight (c2 factor). [CKFTrackingAlg] </td>
+              </tr>
+              <tr>
+                <td><code>SeedFilter_ZOriginWeightFactor</code></td>
+                <td><code>float</code></td>
+                <td><code>1.0</code></td>
+                <td> Factor multiplying the longitudinal impact parameter z0, subtracted from the seed weight (c3 factor). [CKFTrackingAlg] </td>
+              </tr>
+              <tr>
+                <td><code>SeedFilter_MaxSeedsPerSpM</code></td>
+                <td><code>unsigned int</code></td>
+                <td><code>1</code></td>
+                <td> Maximum number (minus one) of accepted seeds per middle space-point. [CKFTrackingAlg] </td>
+              </tr>
+              <tr>
+                <td><code>SeedFilter_CompatSeedLimit</code></td>
+                <td><code>unsigned int</code></td>
+                <td><code>2</code></td>
+                <td> Maximum number of compatible space-points used in the score calculation. [CKFTrackingAlg] </td>
+              </tr>
+              <tr>
+                <td><code>SeedFilter_SeedWeightIncrement</code></td>
+                <td><code>float</code></td>
+                <td><code>0.0</code></td>
+                <td> Weight increment applied when the number of compatible seeds exceeds NumSeedIncrement. [CKFTrackingAlg] </td>
+              </tr>
+              <tr>
+                <td><code>SeedFilter_NumSeedIncrement</code></td>
+                <td><code>float</code></td>
+                <td><code>3.40282e+38</code></td>
+                <td> Number of compatible seeds above which SeedWeightIncrement is applied (default: effectively disabled). [CKFTrackingAlg] </td>
+              </tr>
+              <tr>
+                <td><code>SeedFilter_AbsDeltaEtaWeightFactor</code></td>
+                <td><code>float</code></td>
+                <td><code>0.0</code></td>
+                <td> Weight factor for the abs(delta-eta) penalty between seed direction and beamspot-to-pca vector (0 disables). [CKFTrackingAlg] </td>
+              </tr>
+              <tr>
+                <td><code>SeedFilter_AbsDeltaEtaMinImpact</code></td>
+                <td><code>float</code></td>
+                <td><code>2.0</code></td>
+                <td> Minimum impact parameter required to apply the abs(delta-eta) weight. [CKFTrackingAlg] </td>
+              </tr>
+              <tr>
+                <td><code>SeedFilter_SeedConfirmation</code></td>
+                <td><code>bool</code></td>
+                <td><code>False</code></td>
+                <td> Enable quality seed confirmation, defined per (r, z) detector region by the seed confirmation ranges. [CKFTrackingAlg] </td>
+              </tr>
+              <tr>
+                <td><code>SeedFilter_MaxSeedsPerSpMConf</code></td>
+                <td><code>unsigned int</code></td>
+                <td><code>5</code></td>
+                <td> Maximum number of normal-quality seeds per middle space-point in seed confirmation. [CKFTrackingAlg] </td>
+              </tr>
+              <tr>
+                <td><code>SeedFilter_MaxQualitySeedsPerSpMConf</code></td>
+                <td><code>unsigned int</code></td>
+                <td><code>5</code></td>
+                <td> Maximum number of high-quality seeds per inner-middle space-point doublet in seed confirmation. [CKFTrackingAlg] </td>
+              </tr>
+              <tr>
+                <td><code>SeedFilter_UseDeltaRinsteadOfTopRadius</code></td>
+                <td><code>bool</code></td>
+                <td><code>False</code></td>
+                <td> Use deltaR between top and middle space-point instead of the top radius to search for compatible SPs. [CKFTrackingAlg] </td>
+              </tr>
+              <tr>
+                <td><code>SeedFilter_CentralSeedConf_ZMin</code></td>
+                <td><code>float</code></td>
+                <td><code>-3.40282e+38</code></td>
+                <td> Central region: minimum z of the middle space-point splitting the seed confirmation region. [CKFTrackingAlg] </td>
+              </tr>
+              <tr>
+                <td><code>SeedFilter_CentralSeedConf_ZMax</code></td>
+                <td><code>float</code></td>
+                <td><code>3.40282e+38</code></td>
+                <td> Central region: maximum z of the middle space-point splitting the seed confirmation region. [CKFTrackingAlg] </td>
+              </tr>
+              <tr>
+                <td><code>SeedFilter_CentralSeedConf_RMax</code></td>
+                <td><code>float</code></td>
+                <td><code>3.40282e+38</code></td>
+                <td> Central region: inner space-point radius splitting the seed confirmation region. [CKFTrackingAlg] </td>
+              </tr>
+              <tr>
+                <td><code>SeedFilter_CentralSeedConf_NTopForLargeR</code></td>
+                <td><code>unsigned int</code></td>
+                <td><code>0</code></td>
+                <td> Central region: minimum compatible outer SPs required if the inner SP radius is larger than RMax. [CKFTrackingAlg] </td>
+              </tr>
+              <tr>
+                <td><code>SeedFilter_CentralSeedConf_NTopForSmallR</code></td>
+                <td><code>unsigned int</code></td>
+                <td><code>0</code></td>
+                <td> Central region: minimum compatible outer SPs required if the inner SP radius is smaller than RMax. [CKFTrackingAlg] </td>
+              </tr>
+              <tr>
+                <td><code>SeedFilter_CentralSeedConf_MinBottomRadius</code></td>
+                <td><code>float</code></td>
+                <td><code>60.0</code></td>
+                <td> Central region: minimum radius for the inner seed component in quality seed confirmation. [CKFTrackingAlg] </td>
+              </tr>
+              <tr>
+                <td><code>SeedFilter_CentralSeedConf_MaxZOrigin</code></td>
+                <td><code>float</code></td>
+                <td><code>150.0</code></td>
+                <td> Central region: maximum longitudinal impact parameter of the seed in quality seed confirmation. [CKFTrackingAlg] </td>
+              </tr>
+              <tr>
+                <td><code>SeedFilter_CentralSeedConf_MinImpact</code></td>
+                <td><code>float</code></td>
+                <td><code>1.0</code></td>
+                <td> Central region: minimum impact parameter of the seed in quality seed confirmation. [CKFTrackingAlg] </td>
+              </tr>
+              <tr>
+                <td><code>SeedFilter_ForwardSeedConf_ZMin</code></td>
+                <td><code>float</code></td>
+                <td><code>-3.40282e+38</code></td>
+                <td> Forward region: minimum z of the middle space-point splitting the seed confirmation region. [CKFTrackingAlg] </td>
+              </tr>
+              <tr>
+                <td><code>SeedFilter_ForwardSeedConf_ZMax</code></td>
+                <td><code>float</code></td>
+                <td><code>3.40282e+38</code></td>
+                <td> Forward region: maximum z of the middle space-point splitting the seed confirmation region. [CKFTrackingAlg] </td>
+              </tr>
+              <tr>
+                <td><code>SeedFilter_ForwardSeedConf_RMax</code></td>
+                <td><code>float</code></td>
+                <td><code>3.40282e+38</code></td>
+                <td> Forward region: inner space-point radius splitting the seed confirmation region. [CKFTrackingAlg] </td>
+              </tr>
+              <tr>
+                <td><code>SeedFilter_ForwardSeedConf_NTopForLargeR</code></td>
+                <td><code>unsigned int</code></td>
+                <td><code>0</code></td>
+                <td> Forward region: minimum compatible outer SPs required if the inner SP radius is larger than RMax. [CKFTrackingAlg] </td>
+              </tr>
+              <tr>
+                <td><code>SeedFilter_ForwardSeedConf_NTopForSmallR</code></td>
+                <td><code>unsigned int</code></td>
+                <td><code>0</code></td>
+                <td> Forward region: minimum compatible outer SPs required if the inner SP radius is smaller than RMax. [CKFTrackingAlg] </td>
+              </tr>
+              <tr>
+                <td><code>SeedFilter_ForwardSeedConf_MinBottomRadius</code></td>
+                <td><code>float</code></td>
+                <td><code>60.0</code></td>
+                <td> Forward region: minimum radius for the inner seed component in quality seed confirmation. [CKFTrackingAlg] </td>
+              </tr>
+              <tr>
+                <td><code>SeedFilter_ForwardSeedConf_MaxZOrigin</code></td>
+                <td><code>float</code></td>
+                <td><code>150.0</code></td>
+                <td> Forward region: maximum longitudinal impact parameter of the seed in quality seed confirmation. [CKFTrackingAlg] </td>
+              </tr>
+              <tr>
+                <td><code>SeedFilter_ForwardSeedConf_MinImpact</code></td>
+                <td><code>float</code></td>
+                <td><code>1.0</code></td>
+                <td> Forward region: minimum impact parameter of the seed in quality seed confirmation. [CKFTrackingAlg] </td>
+              </tr>
+              <tr>
                 <td><code>InitialTrackError_Pos</code></td>
                 <td><code>double</code></td>
                 <td><code>0.01</code></td>
@@ -3608,7 +3800,7 @@ Total: **203 algorithms** across **12 packages**.
               <tr>
                 <td><code>CrossingAngle</code></td>
                 <td><code>double</code></td>
-                <td><code>4.6673449e-310</code></td>
+                <td><code>4.6762219e-310</code></td>
                 <td> Half the crossing angle beam in [rad] [unknown owner type] </td>
               </tr>
               <tr>
@@ -6845,13 +7037,13 @@ Total: **203 algorithms** across **12 packages**.
               <tr>
                 <td><code>ehECal</code></td>
                 <td><code>double</code></td>
-                <td><code>5.9814756e-154</code></td>
+                <td><code>2.1999303e-152</code></td>
                 <td> e/h of the ECal [unknown owner type] </td>
               </tr>
               <tr>
                 <td><code>ehHCal</code></td>
                 <td><code>double</code></td>
-                <td><code>6.0198676e+21</code></td>
+                <td><code>1.8767345e-152</code></td>
                 <td> e/h of the HCal [unknown owner type] </td>
               </tr>
             </tbody>
