@@ -3800,7 +3800,7 @@ Total: **203 algorithms** across **12 packages**.
               <tr>
                 <td><code>CrossingAngle</code></td>
                 <td><code>double</code></td>
-                <td><code>4.6827301e-310</code></td>
+                <td><code>4.6694752e-310</code></td>
                 <td> Half the crossing angle beam in [rad] [unknown owner type] </td>
               </tr>
               <tr>
@@ -8800,6 +8800,119 @@ Total: **203 algorithms** across **12 packages**.
           </table>
         </div>
       </div>
+      <div class="alg-card" data-name="NoiseCaloCellsFromFileBarrelTool" data-lib="libk4RecFCCeeCalorimeterPlugins.so" data-package="k4RecCalorimeter">
+        <div class="alg-card-header">
+          <span class="alg-name">NoiseCaloCellsFromFileBarrelTool</span>
+          <span class="alg-card-right">
+            <span class="alg-lib-badge">libk4RecFCCeeCalorimeterPlugins.so</span>
+            <span class="alg-card-toggle">&#9658;</span>
+          </span>
+        </div>
+        <div class="alg-card-body">
+          <table class="alg-props-table">
+            <thead>
+              <tr>
+                <th>Property</th>
+                <th>Type</th>
+                <th>Default</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>cellPositionsTool</code></td>
+                <td><code>PrivateToolHandle</code></td>
+                <td><code>CellPositionsDummyTool/CellPositionsDummyTool</code></td>
+                <td> Handle for tool to retrieve cell positions [NoiseCaloCellsFromFileBaseTool] </td>
+              </tr>
+              <tr>
+                <td><code>addPileup</code></td>
+                <td><code>bool</code></td>
+                <td><code>True</code></td>
+                <td> Add pileup contribution to the electronics noise? (only if read from file) [NoiseCaloCellsFromFileBaseTool] </td>
+              </tr>
+              <tr>
+                <td><code>setNoiseOffset</code></td>
+                <td><code>bool</code></td>
+                <td><code>False</code></td>
+                <td> Set a noise offset per cell [NoiseCaloCellsFromFileBaseTool] </td>
+              </tr>
+              <tr>
+                <td><code>noiseFileName</code></td>
+                <td><code>string</code></td>
+                <td><code></code></td>
+                <td> Name of the file with noise constants [NoiseCaloCellsFromFileBaseTool] </td>
+              </tr>
+              <tr>
+                <td><code>scaleFactor</code></td>
+                <td><code>float</code></td>
+                <td><code>1.0</code></td>
+                <td> Factor to apply to the noise values [NoiseCaloCellsFromFileBaseTool] </td>
+              </tr>
+              <tr>
+                <td><code>readoutName</code></td>
+                <td><code>string</code></td>
+                <td><code>ECalBarrelModuleThetaMerged</code></td>
+                <td> Name of the detector readout [NoiseCaloCellsFromFileBaseTool] </td>
+              </tr>
+              <tr>
+                <td><code>activeFieldName</code></td>
+                <td><code>string</code></td>
+                <td><code>active_layer</code></td>
+                <td> Name of active layers for sampling calorimeter [NoiseCaloCellsFromFileBaseTool] </td>
+              </tr>
+              <tr>
+                <td><code>pileupNoiseRMSHistoName</code></td>
+                <td><code>string</code></td>
+                <td><code>h_pileup_layer</code></td>
+                <td> Name of pileup noise RMS histogram [NoiseCaloCellsFromFileBaseTool] </td>
+              </tr>
+              <tr>
+                <td><code>elecNoiseRMSHistoName</code></td>
+                <td><code>string</code></td>
+                <td><code>h_elecNoise_layer</code></td>
+                <td> Name of electronics noise RMS histogram [NoiseCaloCellsFromFileBaseTool] </td>
+              </tr>
+              <tr>
+                <td><code>elecNoiseOffsetHistoName</code></td>
+                <td><code>string</code></td>
+                <td><code>h_mean_pileup_layer</code></td>
+                <td> Name of electronics noise offset histogram [NoiseCaloCellsFromFileBaseTool] </td>
+              </tr>
+              <tr>
+                <td><code>pileupNoiseOffsetHistoName</code></td>
+                <td><code>string</code></td>
+                <td><code>h_pileup_layer</code></td>
+                <td> Name of pileup noise offset histogram [NoiseCaloCellsFromFileBaseTool] </td>
+              </tr>
+              <tr>
+                <td><code>filterNoiseThreshold</code></td>
+                <td><code>double</code></td>
+                <td><code>3.0</code></td>
+                <td> Energy threshold (cells with Ecell &lt; offset + filterThreshold*m_cellNoise removed) [NoiseCaloCellsFromFileBaseTool] </td>
+              </tr>
+              <tr>
+                <td><code>useAbsInFilter</code></td>
+                <td><code>bool</code></td>
+                <td><code>False</code></td>
+                <td> If set, cell filtering condition becomes: drop cell if abs(Ecell-offset) &lt; filterThreshold*m_cellNoise [NoiseCaloCellsFromFileBaseTool] </td>
+              </tr>
+              <tr>
+                <td><code>numHistograms</code></td>
+                <td><code>unsigned int</code></td>
+                <td><code>0</code></td>
+                <td> Number of histograms [NoiseCaloCellsFromFileBaseTool] </td>
+              </tr>
+              <tr>
+                <td><code>GeoSvc</code></td>
+                <td><code>ServiceHandle</code></td>
+                <td><code>GeoSvc</code></td>
+                <td>  [NoiseCaloCellsFromFileBaseTool] </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
       <div class="alg-card" data-name="NoiseCaloCellsFromFileTool" data-lib="libk4RecCalorimeterPlugins.so" data-package="k4RecCalorimeter">
         <div class="alg-card-header">
           <span class="alg-name">NoiseCaloCellsFromFileTool</span>
@@ -8901,9 +9014,9 @@ Total: **203 algorithms** across **12 packages**.
           </table>
         </div>
       </div>
-      <div class="alg-card" data-name="NoiseCaloCellsTurbineEndcapFromFileTool" data-lib="libk4RecFCCeeCalorimeterPlugins.so" data-package="k4RecCalorimeter">
+      <div class="alg-card" data-name="NoiseCaloCellsFromFileTurbineEndcapTool" data-lib="libk4RecFCCeeCalorimeterPlugins.so" data-package="k4RecCalorimeter">
         <div class="alg-card-header">
-          <span class="alg-name">NoiseCaloCellsTurbineEndcapFromFileTool</span>
+          <span class="alg-name">NoiseCaloCellsFromFileTurbineEndcapTool</span>
           <span class="alg-card-right">
             <span class="alg-lib-badge">libk4RecFCCeeCalorimeterPlugins.so</span>
             <span class="alg-card-toggle">&#9658;</span>
@@ -8924,204 +9037,91 @@ Total: **203 algorithms** across **12 packages**.
                 <td><code>cellPositionsTool</code></td>
                 <td><code>PrivateToolHandle</code></td>
                 <td><code>CellPositionsDummyTool/CellPositionsDummyTool</code></td>
-                <td> Handle for tool to retrieve cell positions [NoiseCaloCellsTurbineEndcapFromFileTool] </td>
+                <td> Handle for tool to retrieve cell positions [NoiseCaloCellsFromFileBaseTool] </td>
               </tr>
               <tr>
                 <td><code>addPileup</code></td>
                 <td><code>bool</code></td>
                 <td><code>True</code></td>
-                <td> Add pileup contribution to the electronics noise? (only if read from file) [NoiseCaloCellsTurbineEndcapFromFileTool] </td>
+                <td> Add pileup contribution to the electronics noise? (only if read from file) [NoiseCaloCellsFromFileBaseTool] </td>
               </tr>
               <tr>
                 <td><code>setNoiseOffset</code></td>
                 <td><code>bool</code></td>
                 <td><code>False</code></td>
-                <td> Set a noise offset per cell [NoiseCaloCellsTurbineEndcapFromFileTool] </td>
+                <td> Set a noise offset per cell [NoiseCaloCellsFromFileBaseTool] </td>
               </tr>
               <tr>
                 <td><code>noiseFileName</code></td>
                 <td><code>string</code></td>
                 <td><code></code></td>
-                <td> Name of the file with noise constants [NoiseCaloCellsTurbineEndcapFromFileTool] </td>
+                <td> Name of the file with noise constants [NoiseCaloCellsFromFileBaseTool] </td>
               </tr>
               <tr>
                 <td><code>scaleFactor</code></td>
                 <td><code>float</code></td>
                 <td><code>1.0</code></td>
-                <td> Factor to apply to the noise values [NoiseCaloCellsTurbineEndcapFromFileTool] </td>
+                <td> Factor to apply to the noise values [NoiseCaloCellsFromFileBaseTool] </td>
               </tr>
               <tr>
                 <td><code>readoutName</code></td>
                 <td><code>string</code></td>
-                <td><code>ECalEndcapTurbine</code></td>
-                <td> Name of the detector readout [NoiseCaloCellsTurbineEndcapFromFileTool] </td>
-              </tr>
-              <tr>
-                <td><code>activeFieldName</code></td>
-                <td><code>string</code></td>
-                <td><code>layer</code></td>
-                <td> Name of active layers for sampling calorimeter [NoiseCaloCellsTurbineEndcapFromFileTool] </td>
-              </tr>
-              <tr>
-                <td><code>pileupNoiseRMSHistoName</code></td>
-                <td><code>string</code></td>
-                <td><code>h_pileup_layer</code></td>
-                <td> Name of pileup noise RMS histogram [NoiseCaloCellsTurbineEndcapFromFileTool] </td>
-              </tr>
-              <tr>
-                <td><code>elecNoiseRMSHistoName</code></td>
-                <td><code>string</code></td>
-                <td><code>h_elecNoise_layer</code></td>
-                <td> Name of electronics noise RMS histogram [NoiseCaloCellsTurbineEndcapFromFileTool] </td>
-              </tr>
-              <tr>
-                <td><code>elecNoiseOffsetHistoName</code></td>
-                <td><code>string</code></td>
-                <td><code>h_mean_pileup_layer</code></td>
-                <td> Name of electronics noise offset histogram [NoiseCaloCellsTurbineEndcapFromFileTool] </td>
-              </tr>
-              <tr>
-                <td><code>pileupNoiseOffsetHistoName</code></td>
-                <td><code>string</code></td>
-                <td><code>h_pileup_layer</code></td>
-                <td> Name of pileup noise offset histogram [NoiseCaloCellsTurbineEndcapFromFileTool] </td>
-              </tr>
-              <tr>
-                <td><code>filterNoiseThreshold</code></td>
-                <td><code>double</code></td>
-                <td><code>3.0</code></td>
-                <td> Energy threshold (cells with Ecell &lt; offset + filterThreshold*m_cellNoise removed) [NoiseCaloCellsTurbineEndcapFromFileTool] </td>
-              </tr>
-              <tr>
-                <td><code>useAbsInFilter</code></td>
-                <td><code>bool</code></td>
-                <td><code>False</code></td>
-                <td> If set, cell filtering condition becomes: drop cell if abs(Ecell-offset) &lt; filterThreshold*m_cellNoise [NoiseCaloCellsTurbineEndcapFromFileTool] </td>
-              </tr>
-              <tr>
-                <td><code>numWheels</code></td>
-                <td><code>unsigned int</code></td>
-                <td><code>3</code></td>
-                <td> Number of wheels [NoiseCaloCellsTurbineEndcapFromFileTool] </td>
-              </tr>
-              <tr>
-                <td><code>GeoSvc</code></td>
-                <td><code>ServiceHandle</code></td>
-                <td><code>GeoSvc</code></td>
-                <td>  [NoiseCaloCellsTurbineEndcapFromFileTool] </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="alg-card" data-name="NoiseCaloCellsVsThetaFromFileTool" data-lib="libk4RecFCCeeCalorimeterPlugins.so" data-package="k4RecCalorimeter">
-        <div class="alg-card-header">
-          <span class="alg-name">NoiseCaloCellsVsThetaFromFileTool</span>
-          <span class="alg-card-right">
-            <span class="alg-lib-badge">libk4RecFCCeeCalorimeterPlugins.so</span>
-            <span class="alg-card-toggle">&#9658;</span>
-          </span>
-        </div>
-        <div class="alg-card-body">
-          <table class="alg-props-table">
-            <thead>
-              <tr>
-                <th>Property</th>
-                <th>Type</th>
-                <th>Default</th>
-                <th>Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><code>cellPositionsTool</code></td>
-                <td><code>PrivateToolHandle</code></td>
-                <td><code>CellPositionsDummyTool/CellPositionsDummyTool</code></td>
-                <td> Handle for tool to retrieve cell positions [NoiseCaloCellsVsThetaFromFileTool] </td>
-              </tr>
-              <tr>
-                <td><code>addPileup</code></td>
-                <td><code>bool</code></td>
-                <td><code>True</code></td>
-                <td> Add pileup contribution to the electronics noise? (only if read from file) [NoiseCaloCellsVsThetaFromFileTool] </td>
-              </tr>
-              <tr>
-                <td><code>setNoiseOffset</code></td>
-                <td><code>bool</code></td>
-                <td><code>False</code></td>
-                <td> Set a noise offset per cell [NoiseCaloCellsVsThetaFromFileTool] </td>
-              </tr>
-              <tr>
-                <td><code>noiseFileName</code></td>
-                <td><code>string</code></td>
-                <td><code></code></td>
-                <td> Name of the file with noise constants [NoiseCaloCellsVsThetaFromFileTool] </td>
-              </tr>
-              <tr>
-                <td><code>scaleFactor</code></td>
-                <td><code>float</code></td>
-                <td><code>1.0</code></td>
-                <td> Factor to apply to the noise values [NoiseCaloCellsVsThetaFromFileTool] </td>
-              </tr>
-              <tr>
-                <td><code>readoutName</code></td>
-                <td><code>string</code></td>
-                <td><code>ECalBarrelThetaModuleMerged</code></td>
-                <td> Name of the detector readout [NoiseCaloCellsVsThetaFromFileTool] </td>
+                <td><code>ECalBarrelModuleThetaMerged</code></td>
+                <td> Name of the detector readout [NoiseCaloCellsFromFileBaseTool] </td>
               </tr>
               <tr>
                 <td><code>activeFieldName</code></td>
                 <td><code>string</code></td>
                 <td><code>active_layer</code></td>
-                <td> Name of active layers for sampling calorimeter [NoiseCaloCellsVsThetaFromFileTool] </td>
+                <td> Name of active layers for sampling calorimeter [NoiseCaloCellsFromFileBaseTool] </td>
               </tr>
               <tr>
                 <td><code>pileupNoiseRMSHistoName</code></td>
                 <td><code>string</code></td>
                 <td><code>h_pileup_layer</code></td>
-                <td> Name of pileup noise RMS histogram [NoiseCaloCellsVsThetaFromFileTool] </td>
+                <td> Name of pileup noise RMS histogram [NoiseCaloCellsFromFileBaseTool] </td>
               </tr>
               <tr>
                 <td><code>elecNoiseRMSHistoName</code></td>
                 <td><code>string</code></td>
                 <td><code>h_elecNoise_layer</code></td>
-                <td> Name of electronics noise RMS histogram [NoiseCaloCellsVsThetaFromFileTool] </td>
+                <td> Name of electronics noise RMS histogram [NoiseCaloCellsFromFileBaseTool] </td>
               </tr>
               <tr>
                 <td><code>elecNoiseOffsetHistoName</code></td>
                 <td><code>string</code></td>
                 <td><code>h_mean_pileup_layer</code></td>
-                <td> Name of electronics noise offset histogram [NoiseCaloCellsVsThetaFromFileTool] </td>
+                <td> Name of electronics noise offset histogram [NoiseCaloCellsFromFileBaseTool] </td>
               </tr>
               <tr>
                 <td><code>pileupNoiseOffsetHistoName</code></td>
                 <td><code>string</code></td>
                 <td><code>h_pileup_layer</code></td>
-                <td> Name of pileup noise offset histogram [NoiseCaloCellsVsThetaFromFileTool] </td>
+                <td> Name of pileup noise offset histogram [NoiseCaloCellsFromFileBaseTool] </td>
               </tr>
               <tr>
                 <td><code>filterNoiseThreshold</code></td>
                 <td><code>double</code></td>
                 <td><code>3.0</code></td>
-                <td> Energy threshold (cells with Ecell &lt; offset + filterThreshold*m_cellNoise removed) [NoiseCaloCellsVsThetaFromFileTool] </td>
+                <td> Energy threshold (cells with Ecell &lt; offset + filterThreshold*m_cellNoise removed) [NoiseCaloCellsFromFileBaseTool] </td>
               </tr>
               <tr>
                 <td><code>useAbsInFilter</code></td>
                 <td><code>bool</code></td>
                 <td><code>False</code></td>
-                <td> If set, cell filtering condition becomes: drop cell if abs(Ecell-offset) &lt; filterThreshold*m_cellNoise [NoiseCaloCellsVsThetaFromFileTool] </td>
+                <td> If set, cell filtering condition becomes: drop cell if abs(Ecell-offset) &lt; filterThreshold*m_cellNoise [NoiseCaloCellsFromFileBaseTool] </td>
               </tr>
               <tr>
-                <td><code>numRadialLayers</code></td>
+                <td><code>numHistograms</code></td>
                 <td><code>unsigned int</code></td>
-                <td><code>3</code></td>
-                <td> Number of radial layers [NoiseCaloCellsVsThetaFromFileTool] </td>
+                <td><code>0</code></td>
+                <td> Number of histograms [NoiseCaloCellsFromFileBaseTool] </td>
               </tr>
               <tr>
                 <td><code>GeoSvc</code></td>
                 <td><code>ServiceHandle</code></td>
                 <td><code>GeoSvc</code></td>
-                <td>  [NoiseCaloCellsVsThetaFromFileTool] </td>
+                <td>  [NoiseCaloCellsFromFileBaseTool] </td>
               </tr>
             </tbody>
           </table>
@@ -11030,10 +11030,10 @@ Total: **203 algorithms** across **12 packages**.
                 <td> Detector geometry service [GenfitTrackFitter] </td>
               </tr>
               <tr>
-                <td><code>DCHName</code></td>
+                <td><code>WireTrackerName</code></td>
                 <td><code>string</code></td>
                 <td><code>DCH_v2</code></td>
-                <td> DCHName in the detector description (used to retrieve DCH geometry and material information) [GenfitTrackFitter] </td>
+                <td> WireTrackerName in the detector description (used to retrieve Wire Tracker geometry and material information) [GenfitTrackFitter] </td>
               </tr>
               <tr>
                 <td><code>UseBrems</code></td>
