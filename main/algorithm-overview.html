@@ -139,11 +139,11 @@ where the algorithm is found in the environment.</p>
 </div></section>
 <section id="algorithms">
 <h2>Algorithms<a class="headerlink" href="#algorithms" title="Link to this heading"></a></h2>
-<p>Total: <strong>203 algorithms</strong> across <strong>12 packages</strong>.</p>
-<div id="algorithm-overview" data-total="203" data-packages="12" data-item-label="algorithm">
+<p>Total: <strong>205 algorithms</strong> across <strong>12 packages</strong>.</p>
+<div id="algorithm-overview" data-total="205" data-packages="12" data-item-label="algorithm">
   <div class="alg-filter-bar">
     <input type="text" id="alg-search" placeholder="Filter by name, package, or library…" autocomplete="off" />
-    <span id="alg-stats">Showing 203 of 203 algorithms in 12 packages</span>
+    <span id="alg-stats">Showing 205 of 205 algorithms in 12 packages</span>
   </div>
   <div class="alg-package-group" data-package="k4ActsTracking">
     <div class="alg-package-header">
@@ -3906,7 +3906,7 @@ where the algorithm is found in the environment.</p>
               <tr>
                 <td><code>CrossingAngle</code></td>
                 <td><code>double</code></td>
-                <td><code>4.6379297e-310</code></td>
+                <td><code>4.6673612e-310</code></td>
                 <td> Half the crossing angle beam in [rad] [unknown owner type] </td>
               </tr>
               <tr>
@@ -4611,7 +4611,7 @@ where the algorithm is found in the environment.</p>
     <div class="alg-package-header">
       <a class="alg-package-name" href="https://github.com/HEP-FCC/k4RecCalorimeter" target="_blank" rel="noopener noreferrer">k4RecCalorimeter</a>
       <span class="alg-package-meta">
-        <span class="alg-package-count">79 algorithms</span>
+        <span class="alg-package-count">81 algorithms</span>
         <span class="alg-package-toggle">&#9660;</span>
       </span>
     </div>
@@ -10420,6 +10420,47 @@ where the algorithm is found in the environment.</p>
           </table>
         </div>
       </div>
+      <div class="alg-card" data-name="TurbineEndcapCaloTool" data-lib="libk4RecFCCeeCalorimeterPlugins.so" data-package="k4RecCalorimeter">
+        <div class="alg-card-header">
+          <span class="alg-name">TurbineEndcapCaloTool</span>
+          <span class="alg-card-right">
+            <span class="alg-lib-badge">libk4RecFCCeeCalorimeterPlugins.so</span>
+            <span class="alg-card-toggle">&#9658;</span>
+          </span>
+        </div>
+        <div class="alg-card-body">
+          <table class="alg-props-table">
+            <thead>
+              <tr>
+                <th>Property</th>
+                <th>Type</th>
+                <th>Default</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>readoutName</code></td>
+                <td><code>string</code></td>
+                <td><code></code></td>
+                <td>  [CalorimeterToolBase] </td>
+              </tr>
+              <tr>
+                <td><code>GeoSvc</code></td>
+                <td><code>ServiceHandle</code></td>
+                <td><code>GeoSvc</code></td>
+                <td>  [CalorimeterToolBase] </td>
+              </tr>
+              <tr>
+                <td><code>CaloCellConstantsSvc</code></td>
+                <td><code>ServiceHandle</code></td>
+                <td><code>k4::recCalo::CaloCellConstantsSvc</code></td>
+                <td>  [CalorimeterToolBase] </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
       <div class="alg-card" data-name="k4__recCalo__CaloCellConstantsSvc" data-lib="libk4RecCalorimeterPlugins.so" data-package="k4RecCalorimeter">
         <div class="alg-card-header">
           <span class="alg-name">k4__recCalo__CaloCellConstantsSvc</span>
@@ -10632,6 +10673,35 @@ where the algorithm is found in the environment.</p>
                 <td><code>PrivateToolHandle</code></td>
                 <td><code>TubeLayerModuleThetaCaloTool/TubeLayerModuleThetaCaloTool</code></td>
                 <td>  [k4::recCalo::TubeLayerModuleThetaCaloToolTestAlg] </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="alg-card" data-name="k4__recCalo__TurbineEndcapCaloToolTestAlg" data-lib="libk4RecFCCeeCalorimeterTests.so" data-package="k4RecCalorimeter">
+        <div class="alg-card-header">
+          <span class="alg-name">k4__recCalo__TurbineEndcapCaloToolTestAlg</span>
+          <span class="alg-card-right">
+            <span class="alg-lib-badge">libk4RecFCCeeCalorimeterTests.so</span>
+            <span class="alg-card-toggle">&#9658;</span>
+          </span>
+        </div>
+        <div class="alg-card-body">
+          <table class="alg-props-table">
+            <thead>
+              <tr>
+                <th>Property</th>
+                <th>Type</th>
+                <th>Default</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>CalorimeterTool</code></td>
+                <td><code>PrivateToolHandle</code></td>
+                <td><code>TurbineEndcapCaloTool/TurbineEndcapCaloTool</code></td>
+                <td>  [k4::recCalo::TurbineEndcapCaloToolTestAlg] </td>
               </tr>
             </tbody>
           </table>
