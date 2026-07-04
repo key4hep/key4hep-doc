@@ -139,17 +139,17 @@ where the algorithm is found in the environment.</p>
 </div></section>
 <section id="algorithms">
 <h2>Algorithms<a class="headerlink" href="#algorithms" title="Link to this heading"></a></h2>
-<p>Total: <strong>205 algorithms</strong> across <strong>12 packages</strong>.</p>
-<div id="algorithm-overview" data-total="205" data-packages="12" data-item-label="algorithm">
+<p>Total: <strong>206 algorithms</strong> across <strong>12 packages</strong>.</p>
+<div id="algorithm-overview" data-total="206" data-packages="12" data-item-label="algorithm">
   <div class="alg-filter-bar">
     <input type="text" id="alg-search" placeholder="Filter by name, package, or library…" autocomplete="off" />
-    <span id="alg-stats">Showing 205 of 205 algorithms in 12 packages</span>
+    <span id="alg-stats">Showing 206 of 206 algorithms in 12 packages</span>
   </div>
   <div class="alg-package-group" data-package="k4ActsTracking">
     <div class="alg-package-header">
       <a class="alg-package-name" href="https://github.com/key4hep/k4ActsTracking" target="_blank" rel="noopener noreferrer">k4ActsTracking</a>
       <span class="alg-package-meta">
-        <span class="alg-package-count">7 algorithms</span>
+        <span class="alg-package-count">8 algorithms</span>
         <span class="alg-package-toggle">&#9660;</span>
       </span>
     </div>
@@ -471,6 +471,12 @@ where the algorithm is found in the environment.</p>
                 <td><code>GlobalTrackerReadoutID</code></td>
                 <td> Name of the DD4hep constant holding the CellID encoding string. [ActsGeoSvc] </td>
               </tr>
+              <tr>
+                <td><code>BuildCaloSurfaces</code></td>
+                <td><code>bool</code></td>
+                <td><code>True</code></td>
+                <td> Whether to build the ECAL inner-face surfaces (for track extrapolation to the calorimeter face). [ActsGeoSvc] </td>
+              </tr>
             </tbody>
           </table>
         </div>
@@ -594,6 +600,12 @@ where the algorithm is found in the environment.</p>
                 <td><code>bool</code></td>
                 <td><code>False</code></td>
                 <td> Extrapolates tracks towards beamline. [CKFTrackingAlg] </td>
+              </tr>
+              <tr>
+                <td><code>ExtrapolateToCalo</code></td>
+                <td><code>bool</code></td>
+                <td><code>True</code></td>
+                <td> Extrapolate fitted tracks to the calorimeter face and add an AtCalorimeter track state. [CKFTrackingAlg] </td>
               </tr>
               <tr>
                 <td><code>SeedFinding_RMax</code></td>
@@ -948,6 +960,119 @@ where the algorithm is found in the environment.</p>
                 <td><code>int</code></td>
                 <td><code>1</code></td>
                 <td> Number of threads for internal TBB parallelism. [CKFTrackingAlg] </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="alg-card" data-name="CKFTrackingFromSeedsAlg" data-lib="libk4ActsTrackingPlugins.so" data-package="k4ActsTracking">
+        <div class="alg-card-header">
+          <span class="alg-name">CKFTrackingFromSeedsAlg</span>
+          <span class="alg-card-right">
+            <span class="alg-lib-badge">libk4ActsTrackingPlugins.so</span>
+            <span class="alg-card-toggle">&#9658;</span>
+          </span>
+        </div>
+        <div class="alg-card-body">
+          <table class="alg-props-table">
+            <thead>
+              <tr>
+                <th>Property</th>
+                <th>Type</th>
+                <th>Default</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>InputTrackerHitCollection</code></td>
+                <td><code>DataObjID</code></td>
+                <td><code>TrackerHits</code></td>
+                <td>  [k4FWCore::details::MultiTransformer&lt;std::tuple&lt;edm4hep::TrackCollection,edm4hep::TrackCollection&gt; (edm4hep::TrackerHitPlaneCollection const&amp;,edm4hep::TrackCollection const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
+              </tr>
+              <tr>
+                <td><code>InputSeedTrackCollection</code></td>
+                <td><code>DataObjID</code></td>
+                <td><code>SeedTrackCandidates</code></td>
+                <td>  [k4FWCore::details::MultiTransformer&lt;std::tuple&lt;edm4hep::TrackCollection,edm4hep::TrackCollection&gt; (edm4hep::TrackerHitPlaneCollection const&amp;,edm4hep::TrackCollection const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
+              </tr>
+              <tr>
+                <td><code>OutputSeedCollection</code></td>
+                <td><code>DataObjID</code></td>
+                <td><code>SeedTracks</code></td>
+                <td>  [k4FWCore::details::MultiTransformer&lt;std::tuple&lt;edm4hep::TrackCollection,edm4hep::TrackCollection&gt; (edm4hep::TrackerHitPlaneCollection const&amp;,edm4hep::TrackCollection const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
+              </tr>
+              <tr>
+                <td><code>OutputTrackCollection</code></td>
+                <td><code>DataObjID</code></td>
+                <td><code>Tracks</code></td>
+                <td>  [k4FWCore::details::MultiTransformer&lt;std::tuple&lt;edm4hep::TrackCollection,edm4hep::TrackCollection&gt; (edm4hep::TrackerHitPlaneCollection const&amp;,edm4hep::TrackCollection const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
+              </tr>
+              <tr>
+                <td><code>PropagateBackward</code></td>
+                <td><code>bool</code></td>
+                <td><code>False</code></td>
+                <td> Extrapolates tracks towards beamline. [CKFTrackingFromSeedsAlg] </td>
+              </tr>
+              <tr>
+                <td><code>ExtrapolateToCalo</code></td>
+                <td><code>bool</code></td>
+                <td><code>True</code></td>
+                <td> Extrapolate fitted tracks to the calorimeter face and add an AtCalorimeter track state. [CKFTrackingFromSeedsAlg] </td>
+              </tr>
+              <tr>
+                <td><code>MinSeedHits</code></td>
+                <td><code>unsigned int</code></td>
+                <td><code>3</code></td>
+                <td> Minimum number of hits an input track must have to seed the CKF. [CKFTrackingFromSeedsAlg] </td>
+              </tr>
+              <tr>
+                <td><code>InitialTrackError_Pos</code></td>
+                <td><code>double</code></td>
+                <td><code>0.01</code></td>
+                <td> Initial track error for local position. [CKFTrackingFromSeedsAlg] </td>
+              </tr>
+              <tr>
+                <td><code>InitialTrackError_Phi</code></td>
+                <td><code>double</code></td>
+                <td><code>0.017453293</code></td>
+                <td> Initial track error for phi. [CKFTrackingFromSeedsAlg] </td>
+              </tr>
+              <tr>
+                <td><code>InitialTrackError_RelP</code></td>
+                <td><code>double</code></td>
+                <td><code>0.25</code></td>
+                <td> Initial track error for momentum (relative). [CKFTrackingFromSeedsAlg] </td>
+              </tr>
+              <tr>
+                <td><code>InitialTrackError_Lambda</code></td>
+                <td><code>double</code></td>
+                <td><code>0.017453293</code></td>
+                <td> Initial track error for lambda. [CKFTrackingFromSeedsAlg] </td>
+              </tr>
+              <tr>
+                <td><code>InitialTrackError_Time</code></td>
+                <td><code>double</code></td>
+                <td><code>29979.246</code></td>
+                <td> Initial track error for time. [CKFTrackingFromSeedsAlg] </td>
+              </tr>
+              <tr>
+                <td><code>CKF_Chi2CutOff</code></td>
+                <td><code>double</code></td>
+                <td><code>15.0</code></td>
+                <td> Maximum local chi2 contribution. [CKFTrackingFromSeedsAlg] </td>
+              </tr>
+              <tr>
+                <td><code>CKF_NumMeasurementsCutOff</code></td>
+                <td><code>int</code></td>
+                <td><code>10</code></td>
+                <td> Maximum measurements on a single surface. [CKFTrackingFromSeedsAlg] </td>
+              </tr>
+              <tr>
+                <td><code>NumThreads</code></td>
+                <td><code>int</code></td>
+                <td><code>1</code></td>
+                <td> Number of threads for internal TBB parallelism. [CKFTrackingFromSeedsAlg] </td>
               </tr>
             </tbody>
           </table>
@@ -3906,7 +4031,7 @@ where the algorithm is found in the environment.</p>
               <tr>
                 <td><code>CrossingAngle</code></td>
                 <td><code>double</code></td>
-                <td><code>4.6484032e-310</code></td>
+                <td><code>4.6420917e-310</code></td>
                 <td> Half the crossing angle beam in [rad] [unknown owner type] </td>
               </tr>
               <tr>
