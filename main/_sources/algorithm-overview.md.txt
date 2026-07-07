@@ -1716,6 +1716,36 @@ Total: **206 algorithms** across **12 packages**.
                 <td><code>False</code></td>
                 <td> Silently skip putting a metadata parameter if the existing value is the same as the new value [MetadataSvc] </td>
               </tr>
+              <tr>
+                <td><code>SetAtFinalize</code></td>
+                <td><code>bool</code></td>
+                <td><code>False</code></td>
+                <td> When true, apply the Python-configured parameters at finalize time instead of at initialize time [MetadataSvc] </td>
+              </tr>
+              <tr>
+                <td><code>IntParameters</code></td>
+                <td><code>map&lt;string, int&gt;</code></td>
+                <td><code>[]</code></td>
+                <td> Metadata int parameters to be set directly from Python [MetadataSvc] </td>
+              </tr>
+              <tr>
+                <td><code>FloatParameters</code></td>
+                <td><code>map&lt;string, double&gt;</code></td>
+                <td><code>[]</code></td>
+                <td> Metadata float parameters to be set directly from Python [MetadataSvc] </td>
+              </tr>
+              <tr>
+                <td><code>DoubleParameters</code></td>
+                <td><code>map&lt;string, double&gt;</code></td>
+                <td><code>[]</code></td>
+                <td> Metadata double parameters to be set directly from Python [MetadataSvc] </td>
+              </tr>
+              <tr>
+                <td><code>StringParameters</code></td>
+                <td><code>map&lt;string, string&gt;</code></td>
+                <td><code>[]</code></td>
+                <td> Metadata string parameters to be set directly from Python [MetadataSvc] </td>
+              </tr>
             </tbody>
           </table>
         </div>
@@ -3925,7 +3955,7 @@ Total: **206 algorithms** across **12 packages**.
               <tr>
                 <td><code>CrossingAngle</code></td>
                 <td><code>double</code></td>
-                <td><code>4.6828719e-310</code></td>
+                <td><code>4.6491228e-310</code></td>
                 <td> Half the crossing angle beam in [rad] [unknown owner type] </td>
               </tr>
               <tr>
@@ -4575,15 +4605,15 @@ Total: **206 algorithms** across **12 packages**.
               </tr>
               <tr>
                 <td><code>EDM4hep2LcioTool</code></td>
-                <td><code>PublicToolHandle</code></td>
+                <td><code>PrivateToolHandle</code></td>
                 <td><code></code></td>
-                <td>None</td>
+                <td> Tool to convert EDM4hep to LCIO [unknown owner type] </td>
               </tr>
               <tr>
                 <td><code>Lcio2EDM4hepTool</code></td>
-                <td><code>PublicToolHandle</code></td>
+                <td><code>PrivateToolHandle</code></td>
                 <td><code></code></td>
-                <td>None</td>
+                <td> Tool to convert LCIO to EDM4hep [unknown owner type] </td>
               </tr>
             </tbody>
           </table>
@@ -7848,12 +7878,6 @@ Total: **206 algorithms** across **12 packages**.
                 <td>  [CreateFCCeeCaloXTalkNeighbours] </td>
               </tr>
               <tr>
-                <td><code>activeVolumesTheta</code></td>
-                <td><code>vector&lt;vector&lt;double&gt;&gt;</code></td>
-                <td><code>[]</code></td>
-                <td>  [CreateFCCeeCaloXTalkNeighbours] </td>
-              </tr>
-              <tr>
                 <td><code>xtalkCoefRadial</code></td>
                 <td><code>double</code></td>
                 <td><code>0.007</code></td>
@@ -7884,45 +7908,9 @@ Total: **206 algorithms** across **12 packages**.
                 <td>  [CreateFCCeeCaloXTalkNeighbours] </td>
               </tr>
               <tr>
-                <td><code>ecalBarrelSysId</code></td>
-                <td><code>unsigned int</code></td>
-                <td><code>4</code></td>
-                <td>  [CreateFCCeeCaloXTalkNeighbours] </td>
-              </tr>
-              <tr>
-                <td><code>hcalBarrelSysId</code></td>
-                <td><code>unsigned int</code></td>
-                <td><code>8</code></td>
-                <td>  [CreateFCCeeCaloXTalkNeighbours] </td>
-              </tr>
-              <tr>
                 <td><code>connectBarrels</code></td>
                 <td><code>bool</code></td>
                 <td><code>False</code></td>
-                <td>  [CreateFCCeeCaloXTalkNeighbours] </td>
-              </tr>
-              <tr>
-                <td><code>hCalZsize</code></td>
-                <td><code>double</code></td>
-                <td><code>18.0</code></td>
-                <td>  [CreateFCCeeCaloXTalkNeighbours] </td>
-              </tr>
-              <tr>
-                <td><code>hCalZoffset</code></td>
-                <td><code>double</code></td>
-                <td><code>-4590.0</code></td>
-                <td>  [CreateFCCeeCaloXTalkNeighbours] </td>
-              </tr>
-              <tr>
-                <td><code>hCalRinner</code></td>
-                <td><code>double</code></td>
-                <td><code>2850.0</code></td>
-                <td>  [CreateFCCeeCaloXTalkNeighbours] </td>
-              </tr>
-              <tr>
-                <td><code>hCalPhiOffset</code></td>
-                <td><code>double</code></td>
-                <td><code>0.0</code></td>
                 <td>  [CreateFCCeeCaloXTalkNeighbours] </td>
               </tr>
               <tr>
