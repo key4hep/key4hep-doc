@@ -371,6 +371,12 @@ Total: **206 algorithms** across **12 packages**.
                 <td><code>True</code></td>
                 <td> Whether to build the ECAL inner-face surfaces (for track extrapolation to the calorimeter face). [ActsGeoSvc] </td>
               </tr>
+              <tr>
+                <td><code>UseDD4hepBField</code></td>
+                <td><code>bool</code></td>
+                <td><code>False</code></td>
+                <td> Use the real, position-dependent DD4hep magnetic field (via ACTS&#39; DD4hepFieldAdapter) for all propagation, instead of a uniform Acts::ConstantBField sampled at the origin. Needed for localized fields such as the LUXE dipole; the default (false) preserves the constant-field behaviour of the collider/barrel clients. [ActsGeoSvc] </td>
+              </tr>
             </tbody>
           </table>
         </div>
@@ -500,6 +506,36 @@ Total: **206 algorithms** across **12 packages**.
                 <td><code>bool</code></td>
                 <td><code>True</code></td>
                 <td> Extrapolate fitted tracks to the calorimeter face and add an AtCalorimeter track state. [CKFTrackingAlg] </td>
+              </tr>
+              <tr>
+                <td><code>SeedingMode</code></td>
+                <td><code>string</code></td>
+                <td><code>Cylindrical</code></td>
+                <td> Seeding strategy: &#34;Cylindrical&#34; (default) or &#34;Telescope&#34;. [CKFTrackingAlg] </td>
+              </tr>
+              <tr>
+                <td><code>Telescope_LayerZTolerance</code></td>
+                <td><code>float</code></td>
+                <td><code>20.0</code></td>
+                <td> Maximum |dz| [mm] between space points assigned to the same telescope layer. [CKFTrackingAlg] </td>
+              </tr>
+              <tr>
+                <td><code>Telescope_CollinearityCut</code></td>
+                <td><code>float</code></td>
+                <td><code>2.0</code></td>
+                <td> Maximum transverse distance [mm] of the middle space point from the bottom-top line for a triplet seed. [CKFTrackingAlg] </td>
+              </tr>
+              <tr>
+                <td><code>Telescope_NominalMomentum</code></td>
+                <td><code>float</code></td>
+                <td><code>5.0</code></td>
+                <td> Nominal seed momentum [GeV] used for the straight-line (field-free) seed parameters. [CKFTrackingAlg] </td>
+              </tr>
+              <tr>
+                <td><code>Telescope_ReferenceZ</code></td>
+                <td><code>float</code></td>
+                <td><code>0.0</code></td>
+                <td> z [mm] of the beam-perpendicular reference plane the fitted tracks are extrapolated to for the AtIP track state. Replaces the beamline perigee, which is unreachable for beam-parallel telescope tracks. [CKFTrackingAlg] </td>
               </tr>
               <tr>
                 <td><code>SeedFinding_RMax</code></td>
@@ -844,6 +880,54 @@ Total: **206 algorithms** across **12 packages**.
                 <td> Maximum measurements on a single surface. [CKFTrackingAlg] </td>
               </tr>
               <tr>
+                <td><code>CKF_Chi2CutOffOutlier</code></td>
+                <td><code>double</code></td>
+                <td><code>1.7976931e+308</code></td>
+                <td> Maximum local chi2 for a failing hit to be kept as an outlier; above this it becomes a hole. [CKFTrackingAlg] </td>
+              </tr>
+              <tr>
+                <td><code>MaxPropagationSteps</code></td>
+                <td><code>unsigned int</code></td>
+                <td><code>10000</code></td>
+                <td> Maximum number of propagation steps for CKF track finding, IP/reference-surface extrapolation and calorimeter-face extrapolation. [CKFTrackingAlg] </td>
+              </tr>
+              <tr>
+                <td><code>UseBranchStopper</code></td>
+                <td><code>bool</code></td>
+                <td><code>False</code></td>
+                <td> Enable the CKF branch stopper. [CKFTrackingAlg] </td>
+              </tr>
+              <tr>
+                <td><code>BranchStopper_MaxHoles</code></td>
+                <td><code>int</code></td>
+                <td><code>2</code></td>
+                <td> Stop a branch above this many holes. [CKFTrackingAlg] </td>
+              </tr>
+              <tr>
+                <td><code>BranchStopper_MaxOutliers</code></td>
+                <td><code>int</code></td>
+                <td><code>2</code></td>
+                <td> Stop a branch above this many outliers. [CKFTrackingAlg] </td>
+              </tr>
+              <tr>
+                <td><code>BranchStopper_MinMeasurements</code></td>
+                <td><code>int</code></td>
+                <td><code>6</code></td>
+                <td> When stopping, keep the branch if it has at least this many measurements, otherwise drop it. [CKFTrackingAlg] </td>
+              </tr>
+              <tr>
+                <td><code>BranchStopper_PtMin</code></td>
+                <td><code>double</code></td>
+                <td><code>0.0</code></td>
+                <td> Drop a branch with |pT| (GeV) below this; &lt;=0 disables. [CKFTrackingAlg] </td>
+              </tr>
+              <tr>
+                <td><code>BranchStopper_PtMinMeasurements</code></td>
+                <td><code>int</code></td>
+                <td><code>3</code></td>
+                <td> Minimum measurements before the pT branch stop is applied. [CKFTrackingAlg] </td>
+              </tr>
+              <tr>
                 <td><code>SeedingSensorsCellIDs</code></td>
                 <td><code>vector&lt;string&gt;</code></td>
                 <td><code>[]</code></td>
@@ -963,6 +1047,12 @@ Total: **206 algorithms** across **12 packages**.
                 <td> Maximum measurements on a single surface. [CKFTrackingFromSeedsAlg] </td>
               </tr>
               <tr>
+                <td><code>MaxPropagationSteps</code></td>
+                <td><code>unsigned int</code></td>
+                <td><code>10000</code></td>
+                <td> Maximum number of propagation steps for CKF track finding, IP/reference-surface extrapolation and calorimeter-face extrapolation. [CKFTrackingFromSeedsAlg] </td>
+              </tr>
+              <tr>
                 <td><code>NumThreads</code></td>
                 <td><code>int</code></td>
                 <td><code>1</code></td>
@@ -1044,6 +1134,12 @@ Total: **206 algorithms** across **12 packages**.
                 <td><code>float</code></td>
                 <td><code>1.0</code></td>
                 <td> Minimum transverse momentum [FilterTracksAlg] </td>
+              </tr>
+              <tr>
+                <td><code>MaxHoles</code></td>
+                <td><code>int</code></td>
+                <td><code>0</code></td>
+                <td> Maximum number of holes on track [FilterTracksAlg] </td>
               </tr>
             </tbody>
           </table>
@@ -3955,7 +4051,7 @@ Total: **206 algorithms** across **12 packages**.
               <tr>
                 <td><code>CrossingAngle</code></td>
                 <td><code>double</code></td>
-                <td><code>4.6624827e-310</code></td>
+                <td><code>4.642607e-310</code></td>
                 <td> Half the crossing angle beam in [rad] [unknown owner type] </td>
               </tr>
               <tr>
