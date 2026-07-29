@@ -4051,7 +4051,7 @@ Total: **206 algorithms** across **12 packages**.
               <tr>
                 <td><code>CrossingAngle</code></td>
                 <td><code>double</code></td>
-                <td><code>4.6565192e-310</code></td>
+                <td><code>4.6656329e-310</code></td>
                 <td> Half the crossing angle beam in [rad] [unknown owner type] </td>
               </tr>
               <tr>
@@ -11687,6 +11687,12 @@ Total: **206 algorithms** across **12 packages**.
                 <td><code>float</code></td>
                 <td><code>0.01</code></td>
                 <td> Keep only particles with momentum (in GeV) greater than MinimumParticleMomentum [TracksFromGenParticles] </td>
+              </tr>
+              <tr>
+                <td><code>OnlyCaloReachingParticles</code></td>
+                <td><code>bool</code></td>
+                <td><code>True</code></td>
+                <td> Build tracks only for charged particles reaching the calorimeter (not isDecayedInTracker) [TracksFromGenParticles] </td>
               </tr>
               <tr>
                 <td><code>TrackerIDs</code></td>
