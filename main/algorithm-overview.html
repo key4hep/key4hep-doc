@@ -139,11 +139,11 @@ where the algorithm is found in the environment.</p>
 </div></section>
 <section id="algorithms">
 <h2>Algorithms<a class="headerlink" href="#algorithms" title="Link to this heading"></a></h2>
-<p>Total: <strong>206 algorithms</strong> across <strong>12 packages</strong>.</p>
-<div id="algorithm-overview" data-total="206" data-packages="12" data-item-label="algorithm">
+<p>Total: <strong>207 algorithms</strong> across <strong>12 packages</strong>.</p>
+<div id="algorithm-overview" data-total="207" data-packages="12" data-item-label="algorithm">
   <div class="alg-filter-bar">
     <input type="text" id="alg-search" placeholder="Filter by name, package, or library…" autocomplete="off" />
-    <span id="alg-stats">Showing 206 of 206 algorithms in 12 packages</span>
+    <span id="alg-stats">Showing 207 of 207 algorithms in 12 packages</span>
   </div>
   <div class="alg-package-group" data-package="k4ActsTracking">
     <div class="alg-package-header">
@@ -4157,7 +4157,7 @@ where the algorithm is found in the environment.</p>
               <tr>
                 <td><code>CrossingAngle</code></td>
                 <td><code>double</code></td>
-                <td><code>4.6668534e-310</code></td>
+                <td><code>4.6379976e-310</code></td>
                 <td> Half the crossing angle beam in [rad] [unknown owner type] </td>
               </tr>
               <tr>
@@ -10922,7 +10922,7 @@ where the algorithm is found in the environment.</p>
     <div class="alg-package-header">
       <a class="alg-package-name" href="https://github.com/key4hep/k4RecTracker" target="_blank" rel="noopener noreferrer">k4RecTracker</a>
       <span class="alg-package-meta">
-        <span class="alg-package-count">13 algorithms</span>
+        <span class="alg-package-count">14 algorithms</span>
         <span class="alg-package-toggle">&#9660;</span>
       </span>
     </div>
@@ -11651,6 +11651,83 @@ where the algorithm is found in the environment.</p>
                 <td><code>float</code></td>
                 <td><code>2.0</code></td>
                 <td> Z component of the (assumed constant) magnetic field in Tesla. [PlotTrackHitDistances] </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="alg-card" data-name="TrackMerger" data-lib="libTracking.so" data-package="k4RecTracker">
+        <div class="alg-card-header">
+          <span class="alg-name">TrackMerger</span>
+          <span class="alg-card-right">
+            <span class="alg-lib-badge">libTracking.so</span>
+            <span class="alg-card-toggle">&#9658;</span>
+          </span>
+        </div>
+        <div class="alg-card-body">
+          <table class="alg-props-table">
+            <thead>
+              <tr>
+                <th>Property</th>
+                <th>Type</th>
+                <th>Default</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>InputInnerTracks</code></td>
+                <td><code>DataObjID</code></td>
+                <td><code>InnerTracks</code></td>
+                <td>  [k4FWCore::details::Transformer&lt;edm4hep::TrackCollection (edm4hep::TrackCollection const&amp;,edm4hep::TrackCollection const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
+              </tr>
+              <tr>
+                <td><code>InputOuterTracks</code></td>
+                <td><code>DataObjID</code></td>
+                <td><code>OuterTracks</code></td>
+                <td>  [k4FWCore::details::Transformer&lt;edm4hep::TrackCollection (edm4hep::TrackCollection const&amp;,edm4hep::TrackCollection const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
+              </tr>
+              <tr>
+                <td><code>OutTracks</code></td>
+                <td><code>DataObjID</code></td>
+                <td><code>MyCandidateMergedTracks</code></td>
+                <td>  [k4FWCore::details::Transformer&lt;edm4hep::TrackCollection (edm4hep::TrackCollection const&amp;,edm4hep::TrackCollection const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
+              </tr>
+              <tr>
+                <td><code>Greedy</code></td>
+                <td><code>bool</code></td>
+                <td><code>True</code></td>
+                <td> If true, each track is used only once. [TrackMerger] </td>
+              </tr>
+              <tr>
+                <td><code>D0Tolerance</code></td>
+                <td><code>float</code></td>
+                <td><code>0.5</code></td>
+                <td> Maximum allowed |D0(inner) - D0(outer)| for a match. Negative disables this criterion. [TrackMerger] </td>
+              </tr>
+              <tr>
+                <td><code>Z0Tolerance</code></td>
+                <td><code>float</code></td>
+                <td><code>2.5</code></td>
+                <td> Maximum allowed |Z0(inner) - Z0(outer)| for a match. Negative disables this criterion. [TrackMerger] </td>
+              </tr>
+              <tr>
+                <td><code>PhiTolerance</code></td>
+                <td><code>float</code></td>
+                <td><code>-1.0</code></td>
+                <td> Maximum allowed |phi(inner) - phi(outer)| for a match. Negative disables this criterion. [TrackMerger] </td>
+              </tr>
+              <tr>
+                <td><code>OmegaTolerance</code></td>
+                <td><code>float</code></td>
+                <td><code>-1.0</code></td>
+                <td> Maximum allowed |omega(inner) - omega(outer)| for a match. Negative disables this criterion. [TrackMerger] </td>
+              </tr>
+              <tr>
+                <td><code>TanLambdaTolerance</code></td>
+                <td><code>float</code></td>
+                <td><code>-1.0</code></td>
+                <td> Maximum allowed |tanLambda(inner) - tanLambda(outer)| for a match. Negative disables this criterion. [TrackMerger] </td>
               </tr>
             </tbody>
           </table>
