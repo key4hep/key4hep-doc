@@ -30,20 +30,20 @@ where the algorithm is found in the environment.</p>
 
 ## Algorithms
 
-Total: **208 algorithms** across **12 packages**.
+Total: **210 algorithms** across **12 packages**.
 
 
 ```{raw} html
-<div id="algorithm-overview" data-total="208" data-packages="12" data-item-label="algorithm">
+<div id="algorithm-overview" data-total="210" data-packages="12" data-item-label="algorithm">
   <div class="alg-filter-bar">
     <input type="text" id="alg-search" placeholder="Filter by name, package, or library…" autocomplete="off" />
-    <span id="alg-stats">Showing 208 of 208 algorithms in 12 packages</span>
+    <span id="alg-stats">Showing 210 of 210 algorithms in 12 packages</span>
   </div>
   <div class="alg-package-group" data-package="k4ActsTracking">
     <div class="alg-package-header">
       <a class="alg-package-name" href="https://github.com/key4hep/k4ActsTracking" target="_blank" rel="noopener noreferrer">k4ActsTracking</a>
       <span class="alg-package-meta">
-        <span class="alg-package-count">9 algorithms</span>
+        <span class="alg-package-count">11 algorithms</span>
         <span class="alg-package-toggle">&#9660;</span>
       </span>
     </div>
@@ -370,6 +370,12 @@ Total: **208 algorithms** across **12 packages**.
                 <td><code>bool</code></td>
                 <td><code>True</code></td>
                 <td> Whether to build the ECAL inner-face surfaces (for track extrapolation to the calorimeter face). [ActsGeoSvc] </td>
+              </tr>
+              <tr>
+                <td><code>MaterialMapFile</code></td>
+                <td><code>string</code></td>
+                <td><code></code></td>
+                <td> Path to an ACTS material map to decorate the tracking geometry with. A &#39;.root&#39; file is read with ACTS&#39; RootMaterialDecorator, anything else (&#39;.json&#39;, &#39;.cbor&#39;) with the JsonMaterialDecorator. Empty (the default) leaves the geometry carrying only the proto-material placeholders that the material mapping step projects onto. The map is keyed by geometry identifier, which for a Gen3 geometry is assigned by the blueprint traversal order, so a map is only valid for the blueprint that produced it. [ActsGeoSvc] </td>
               </tr>
               <tr>
                 <td><code>UseDD4hepBField</code></td>
@@ -1140,6 +1146,142 @@ Total: **208 algorithms** across **12 packages**.
                 <td><code>int</code></td>
                 <td><code>0</code></td>
                 <td> Maximum number of holes on track [FilterTracksAlg] </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="alg-card" data-name="MaterialMappingAlg" data-lib="libk4ActsTrackingPlugins.so" data-package="k4ActsTracking">
+        <div class="alg-card-header">
+          <span class="alg-name">MaterialMappingAlg</span>
+          <span class="alg-card-right">
+            <span class="alg-lib-badge">libk4ActsTrackingPlugins.so</span>
+            <span class="alg-card-toggle">&#9658;</span>
+          </span>
+        </div>
+        <div class="alg-card-body">
+          <table class="alg-props-table">
+            <thead>
+              <tr>
+                <th>Property</th>
+                <th>Type</th>
+                <th>Default</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>InputFiles</code></td>
+                <td><code>vector&lt;string&gt;</code></td>
+                <td><code>[]</code></td>
+                <td> ROOT files holding the recorded material tracks from the geantino scan. [MaterialMappingAlg] </td>
+              </tr>
+              <tr>
+                <td><code>TreeName</code></td>
+                <td><code>string</code></td>
+                <td><code>material_tracks</code></td>
+                <td> Name of the TTree holding the recorded material tracks. Must match the treeName the recording job&#39;s RootMaterialTrackWriter used. [MaterialMappingAlg] </td>
+              </tr>
+              <tr>
+                <td><code>OutputFile</code></td>
+                <td><code>string</code></td>
+                <td><code>material-map.json</code></td>
+                <td> Path of the material map to write. Feed this back to ActsGeoSvc.MaterialMapFile for reconstruction. [MaterialMappingAlg] </td>
+              </tr>
+              <tr>
+                <td><code>MaxTracks</code></td>
+                <td><code>long</code></td>
+                <td><code>-1</code></td>
+                <td> Stop after this many recorded tracks. Negative (default) processes the whole input. [MaterialMappingAlg] </td>
+              </tr>
+              <tr>
+                <td><code>EmptyBinCorrection</code></td>
+                <td><code>bool</code></td>
+                <td><code>True</code></td>
+                <td> Let the accumulator correct for bins that no geantino crossed (recommended). [MaterialMappingAlg] </td>
+              </tr>
+              <tr>
+                <td><code>PrePostStepInfo</code></td>
+                <td><code>bool</code></td>
+                <td><code>True</code></td>
+                <td> Whether the input carries pre- and post-step positions. Must match the recording job&#39;s RootMaterialTrackWriter.prePostStep, which is True for a Geant4 scan. [MaterialMappingAlg] </td>
+              </tr>
+              <tr>
+                <td><code>SurfaceInfo</code></td>
+                <td><code>bool</code></td>
+                <td><code>False</code></td>
+                <td> Whether the input carries per-step surface information. Must match the recording job&#39;s RootMaterialTrackWriter.storeSurface, which is False for a scan that knows nothing of our geometry. [MaterialMappingAlg] </td>
+              </tr>
+              <tr>
+                <td><code>VolumeInfo</code></td>
+                <td><code>bool</code></td>
+                <td><code>False</code></td>
+                <td> Whether the input carries per-step volume information. Must match the recording job&#39;s RootMaterialTrackWriter.storeVolume. [MaterialMappingAlg] </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="alg-card" data-name="MaterialValidationAlg" data-lib="libk4ActsTrackingPlugins.so" data-package="k4ActsTracking">
+        <div class="alg-card-header">
+          <span class="alg-name">MaterialValidationAlg</span>
+          <span class="alg-card-right">
+            <span class="alg-lib-badge">libk4ActsTrackingPlugins.so</span>
+            <span class="alg-card-toggle">&#9658;</span>
+          </span>
+        </div>
+        <div class="alg-card-body">
+          <table class="alg-props-table">
+            <thead>
+              <tr>
+                <th>Property</th>
+                <th>Type</th>
+                <th>Default</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>InputFiles</code></td>
+                <td><code>vector&lt;string&gt;</code></td>
+                <td><code>[]</code></td>
+                <td> Geantino scan ROOT file(s). Only the track start positions and directions are used. [MaterialValidationAlg] </td>
+              </tr>
+              <tr>
+                <td><code>TreeName</code></td>
+                <td><code>string</code></td>
+                <td><code>material_tracks</code></td>
+                <td> Name of the TTree in the scan files. [MaterialValidationAlg] </td>
+              </tr>
+              <tr>
+                <td><code>OutputFile</code></td>
+                <td><code>string</code></td>
+                <td><code>propagated-material-tracks.root</code></td>
+                <td> ROOT file to write the propagated material tracks to, in the same format as the scan. [MaterialValidationAlg] </td>
+              </tr>
+              <tr>
+                <td><code>MaxTracks</code></td>
+                <td><code>long</code></td>
+                <td><code>-1</code></td>
+                <td> Stop after this many tracks. Negative (default) processes the whole input. [MaterialValidationAlg] </td>
+              </tr>
+              <tr>
+                <td><code>Assigner</code></td>
+                <td><code>string</code></td>
+                <td><code>intersection</code></td>
+                <td> How to find the material a geantino crosses. &#39;intersection&#39; intersects the designated surfaces geometrically, which is what the mapping step uses and therefore validates the map&#39;s content. &#39;propagator&#39; walks the geometry with the navigator, which additionally validates that tracking can reach that material. [MaterialValidationAlg] </td>
+              </tr>
+              <tr>
+                <td><code>ResolvePassive</code></td>
+                <td><code>bool</code></td>
+                <td><code>True</code></td>
+                <td> Let the navigator stop on passive surfaces. The material receivers are volume portals, so this must stay true for the propagation to see them. [MaterialValidationAlg] </td>
+              </tr>
+              <tr>
+                <td><code>MaxPropagationSteps</code></td>
+                <td><code>unsigned int</code></td>
+                <td><code>1000</code></td>
+                <td> Step limit for one geantino propagation, for the &#39;propagator&#39; assigner. This is a safety valve against a propagation that never terminates, not a budget to be tuned: on MAIA_v0 a geantino needs about 40 steps, so the default is already an ample margin. A track that exceeds it is stuck rather than slow -- raising the limit does not rescue it, it only takes longer to give up. [MaterialValidationAlg] </td>
               </tr>
             </tbody>
           </table>
@@ -4098,7 +4240,7 @@ Total: **208 algorithms** across **12 packages**.
               <tr>
                 <td><code>CrossingAngle</code></td>
                 <td><code>double</code></td>
-                <td><code>4.6597668e-310</code></td>
+                <td><code>4.6887622e-310</code></td>
                 <td> Half the crossing angle beam in [rad] [unknown owner type] </td>
               </tr>
               <tr>
