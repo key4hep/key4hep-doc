@@ -21,7 +21,7 @@ jobs:
       pr-number: ${{ github.event.number }}
 
   linkcheck:
-    if: contains(['opened', 'reopened', 'synchronize'], ${{ github.event.action }})
+    if: contains(fromJSON('["opened", "reopened", "synchronize"]'), github.event.action)
     uses: ./.github/workflows/build.yml
     with:
       ref: ${{ github.event.pull_request.head.sha }}
@@ -55,7 +55,7 @@ jobs:
 
       - name: Deploy Preview
         uses: rossjrw/pr-preview-action@v1.6.2
-        if: contains(['opened', 'reopened', 'synchronize'], ${{ github.event.action }})
+        if: contains(fromJSON('["opened", "reopened", "synchronize"]'), github.event.action)
         with:
           source-dir: pr-preview-unpacked
           preview-branch: gh-pages
