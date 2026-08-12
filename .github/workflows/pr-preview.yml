@@ -21,7 +21,7 @@ jobs:
       pr-number: ${{ github.event.number }}
 
   linkcheck:
-    if: contains(['opened', 'reopened', 'synchronize'], ${{ github.event.action }})
+    if: contains(fromJSON('["opened", "reopened", "synchronize"]'), github.event.action)
     uses: ./.github/workflows/build.yml
     with:
       ref: ${{ github.event.pull_request.head.sha }}
@@ -38,11 +38,11 @@ jobs:
       contents: write
 
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           ref: ${{ github.event.pull_request.head.sha }}
 
-      - uses: actions/download-artifact@v6
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
         with:
           name: github-pages
           path: doc_artifact
@@ -54,8 +54,8 @@ jobs:
           rm -r doc_artifact
 
       - name: Deploy Preview
-        uses: rossjrw/pr-preview-action@v1.6.2
-        if: contains(['opened', 'reopened', 'synchronize'], ${{ github.event.action }})
+        uses: rossjrw/pr-preview-action@ffa7509e91a3ec8dfc2e5536c4d5c1acdf7a6de9 # v1.8.1
+        if: contains(fromJSON('["opened", "reopened", "synchronize"]'), github.event.action)
         with:
           source-dir: pr-preview-unpacked
           preview-branch: gh-pages
@@ -64,7 +64,7 @@ jobs:
           action: auto
 
       - name: Remove Preview
-        uses: rossjrw/pr-preview-action@v1.6.2
+        uses: rossjrw/pr-preview-action@ffa7509e91a3ec8dfc2e5536c4d5c1acdf7a6de9 # v1.8.1
         if: github.event.action == 'closed' && !github.event.pull_request.merged
         with:
           source-dir: pr-preview-unpacked
