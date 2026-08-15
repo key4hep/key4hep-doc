@@ -620,6 +620,12 @@ where the algorithm is found in the environment.</p>
                 <td> Extrapolate fitted tracks to the calorimeter face and add an AtCalorimeter track state. [CKFTrackingAlg] </td>
               </tr>
               <tr>
+                <td><code>AddEndcapCaloState</code></td>
+                <td><code>bool</code></td>
+                <td><code>False</code></td>
+                <td> Give a track that crosses both calorimeter sections one AtCalorimeter track state per section instead of a single one. A track entering the barrel face close to the barrel/endcap corner goes on to enter the endcap too; with this enabled it gets a second AtCalorimeter state there, appended after the barrel one (the states are ordered as the track crosses them). Off by default, since a consumer looking up &#39;the&#39; AtCalorimeter state by location would silently see only the barrel one. Ignored unless ExtrapolateToCalo is set. [CKFTrackingAlg] </td>
+              </tr>
+              <tr>
                 <td><code>SeedingMode</code></td>
                 <td><code>string</code></td>
                 <td><code>Cylindrical</code></td>
@@ -1109,6 +1115,12 @@ where the algorithm is found in the environment.</p>
                 <td><code>bool</code></td>
                 <td><code>True</code></td>
                 <td> Extrapolate fitted tracks to the calorimeter face and add an AtCalorimeter track state. [CKFTrackingFromSeedsAlg] </td>
+              </tr>
+              <tr>
+                <td><code>AddEndcapCaloState</code></td>
+                <td><code>bool</code></td>
+                <td><code>False</code></td>
+                <td> Give a track that crosses both calorimeter sections one AtCalorimeter track state per section instead of a single one. A track entering the barrel face close to the barrel/endcap corner goes on to enter the endcap too; with this enabled it gets a second AtCalorimeter state there, appended after the barrel one (the states are ordered as the track crosses them). Off by default, since a consumer looking up &#39;the&#39; AtCalorimeter state by location would silently see only the barrel one. Ignored unless ExtrapolateToCalo is set. [CKFTrackingFromSeedsAlg] </td>
               </tr>
               <tr>
                 <td><code>MinSeedHits</code></td>
@@ -4346,7 +4358,7 @@ where the algorithm is found in the environment.</p>
               <tr>
                 <td><code>CrossingAngle</code></td>
                 <td><code>double</code></td>
-                <td><code>4.6887622e-310</code></td>
+                <td><code>4.6357157e-310</code></td>
                 <td> Half the crossing angle beam in [rad] [unknown owner type] </td>
               </tr>
               <tr>
