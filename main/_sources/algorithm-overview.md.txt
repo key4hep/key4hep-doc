@@ -3024,7 +3024,7 @@ Total: **210 algorithms** across **12 packages**.
                 <td><code>UseDD4hepField</code></td>
                 <td><code>bool</code></td>
                 <td><code>False</code></td>
-                <td> Whether to use the BField map from DD4hep [DDPandoraPFANewAlgorithm] </td>
+                <td> Use local magnetic field value from dd4hep. It allows to use consistent values to unpack the track states produced upstream. [DDPandoraPFANewAlgorithm] </td>
               </tr>
               <tr>
                 <td><code>ShouldFormTrackRelationships</code></td>
@@ -4252,7 +4252,7 @@ Total: **210 algorithms** across **12 packages**.
               <tr>
                 <td><code>CrossingAngle</code></td>
                 <td><code>double</code></td>
-                <td><code>4.6425706e-310</code></td>
+                <td><code>4.6701141e-310</code></td>
                 <td> Half the crossing angle beam in [rad] [unknown owner type] </td>
               </tr>
               <tr>
