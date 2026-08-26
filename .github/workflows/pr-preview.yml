@@ -58,7 +58,6 @@ jobs:
 
       - name: Deploy Preview
         uses: rossjrw/pr-preview-action@ffa7509e91a3ec8dfc2e5536c4d5c1acdf7a6de9 # v1.8.1
-        if: contains(fromJSON('["opened", "reopened", "synchronize"]'), github.event.action)
         with:
           source-dir: pr-preview-unpacked
           preview-branch: gh-pages
@@ -66,11 +65,21 @@ jobs:
           deploy-repository: "key4hep/key4hep-doc"
           action: auto
 
+  # Removing a preview needs neither the build nor its artifact, so this runs
+  # independently of build-preview. Merged PRs have to be cleaned up as well
+  remove-preview:
+    if: github.event.action == 'closed'
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+      contents: write
+
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
       - name: Remove Preview
         uses: rossjrw/pr-preview-action@ffa7509e91a3ec8dfc2e5536c4d5c1acdf7a6de9 # v1.8.1
-        if: github.event.action == 'closed' && !github.event.pull_request.merged
         with:
-          source-dir: pr-preview-unpacked
           preview-branch: gh-pages
           umbrella-dir: pr-preview
           deploy-repository: "key4hep/key4hep-doc"
