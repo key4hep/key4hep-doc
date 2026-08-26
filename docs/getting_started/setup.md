@@ -25,3 +25,24 @@ displayed with instructions on how to reproduce the current environment.
 **Nightly builds are intended for development and testing and they will be
 deleted after some time from `/cvmfs`. They will also introduce new features
 unannounced, so don't use these for anything else than development!**
+
+## Required system packages
+
+The key4hep stack requires some system libraries to be present before sourcing
+the setup script. On a minimal installation install them with:
+
+```bash
+apt install -y libgl1-mesa-glx libgl1-mesa-dev libglu1-mesa libglu1-mesa-dev   # Ubuntu
+dnf install -y mesa-libGL mesa-libGL-devel mesa-libGLU mesa-libGLU-devel       # AlmaLinux 9
+```
+
+For building software from source you additionally need the compilers and
+development tools:
+
+```bash
+apt install -y build-essential gfortran                             # Ubuntu
+dnf groupinstall -y "Development Tools" && dnf install -y gfortran  # AlmaLinux 9
+```
+
+Alternatively, installing [HEP_OSlibs](https://gitlab.cern.ch/linuxsupport/rpms/HEP_OSlibs)
+provides the typical set of system libraries needed at CERN.
