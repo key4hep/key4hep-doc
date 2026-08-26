@@ -9,11 +9,14 @@ on:
       - closed
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
+  # github.ref is the base branch for pull_request_target, so it has to be the
+  # PR number here to avoid cancelling the runs of all the other open PRs
+  group: ${{ github.workflow }}-${{ github.event.number }}
   cancel-in-progress: true
 
 jobs:
   build-preview:
+    if: contains(fromJSON('["opened", "reopened", "synchronize"]'), github.event.action)
     uses: ./.github/workflows/build.yml
     with:
       ref: ${{ github.event.pull_request.head.sha }}
