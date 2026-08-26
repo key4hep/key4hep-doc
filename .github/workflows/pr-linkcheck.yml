@@ -1,0 +1,31 @@
+name: Link check PR
+
+# Deliberately kept out of pr-build.yml: pr-deploy.yml only deploys previews of
+# builds that succeeded, and a dead link should not stop the preview of a PR
+# from being deployed
+on:
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.number }}
+  cancel-in-progress: true
+
+# As for pr-build.yml: this executes the code of the PR, which gets to see the
+# GITHUB_TOKEN, so these permissions are what keeps that harmless
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  linkcheck:
+    uses: ./.github/workflows/build.yml
+    with:
+      ref: ${{ github.event.pull_request.head.sha }}
+      linkcheck: true
+      upload-artifact: false
+      generate-overviews: false
+      pr-number: ${{ github.event.number }}

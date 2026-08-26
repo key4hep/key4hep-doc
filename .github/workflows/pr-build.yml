@@ -1,0 +1,45 @@
+name: Build PR preview
+
+on:
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.number }}
+  cancel-in-progress: true
+
+# This builds and executes the code of the PR, so it runs in the untrusted
+# pull_request context. The code of the PR does get to see the GITHUB_TOKEN,
+# because fetching the upstream PR sources needs it, so these permissions are
+# the only thing that keeps that harmless. Do not widen them. The deployment of
+# the result happens in pr-deploy.yml
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  build-preview:
+    uses: ./.github/workflows/build.yml
+    with:
+      ref: ${{ github.event.pull_request.head.sha }}
+      linkcheck: false
+      pr-number: ${{ github.event.number }}
+
+  # pr-deploy.yml is triggered via workflow_run and has no PR in its event
+  # context, so hand it the PR number. This job deliberately checks out nothing
+  # and runs no code from the PR, so the number cannot be tampered with here
+  pr-number:
+    needs: build-preview
+    runs-on: ubuntu-latest
+    steps:
+      - name: Store PR number
+        env:
+          PR_NUMBER: ${{ github.event.number }}
+        run: echo "${PR_NUMBER}" > pr_number.txt
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: pr-number
+          path: pr_number.txt
