@@ -21,6 +21,18 @@ jobs:
       ref: ${{ github.ref_name }}
       linkcheck: false
 
+  # PRs only check the links of the ref they build, so links can go stale without
+  # anything in the repository changing. Kept separate from build so that a dead
+  # link does not hold up the deployment of the documentation
+  nightly-linkcheck:
+    if: github.event_name == 'schedule'
+    uses: ./.github/workflows/build.yml
+    with:
+      ref: ${{ github.ref_name }}
+      linkcheck: true
+      upload-artifact: false
+      generate-overviews: false
+
   deploy:
     needs: build
     runs-on: ubuntu-latest
