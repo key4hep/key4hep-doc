@@ -139,11 +139,11 @@ where the algorithm is found in the environment.</p>
 </div></section>
 <section id="algorithms">
 <h2>Algorithms<a class="headerlink" href="#algorithms" title="Link to this heading"></a></h2>
-<p>Total: <strong>210 algorithms</strong> across <strong>12 packages</strong>.</p>
-<div id="algorithm-overview" data-total="210" data-packages="12" data-item-label="algorithm">
+<p>Total: <strong>212 algorithms</strong> across <strong>12 packages</strong>.</p>
+<div id="algorithm-overview" data-total="212" data-packages="12" data-item-label="algorithm">
   <div class="alg-filter-bar">
     <input type="text" id="alg-search" placeholder="Filter by name, package, or library…" autocomplete="off" />
-    <span id="alg-stats">Showing 210 of 210 algorithms in 12 packages</span>
+    <span id="alg-stats">Showing 212 of 212 algorithms in 12 packages</span>
   </div>
   <div class="alg-package-group" data-package="k4ActsTracking">
     <div class="alg-package-header">
@@ -4358,7 +4358,7 @@ where the algorithm is found in the environment.</p>
               <tr>
                 <td><code>CrossingAngle</code></td>
                 <td><code>double</code></td>
-                <td><code>4.6534996e-310</code></td>
+                <td><code>4.6836122e-310</code></td>
                 <td> Half the crossing angle beam in [rad] [unknown owner type] </td>
               </tr>
               <tr>
@@ -5063,7 +5063,7 @@ where the algorithm is found in the environment.</p>
     <div class="alg-package-header">
       <a class="alg-package-name" href="https://github.com/HEP-FCC/k4RecCalorimeter" target="_blank" rel="noopener noreferrer">k4RecCalorimeter</a>
       <span class="alg-package-meta">
-        <span class="alg-package-count">81 algorithms</span>
+        <span class="alg-package-count">83 algorithms</span>
         <span class="alg-package-toggle">&#9660;</span>
       </span>
     </div>
@@ -6669,6 +6669,71 @@ where the algorithm is found in the environment.</p>
                 <td><code>double</code></td>
                 <td><code>0.0</code></td>
                 <td> radius in cm [CellPositionsTailCatcherTool] </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="alg-card" data-name="ClusterPi0PhotonID" data-lib="libk4RecFCCeeCalorimeterPlugins.so" data-package="k4RecCalorimeter">
+        <div class="alg-card-header">
+          <span class="alg-name">ClusterPi0PhotonID</span>
+          <span class="alg-card-right">
+            <span class="alg-lib-badge">libk4RecFCCeeCalorimeterPlugins.so</span>
+            <span class="alg-card-toggle">&#9658;</span>
+          </span>
+        </div>
+        <div class="alg-card-body">
+          <table class="alg-props-table">
+            <thead>
+              <tr>
+                <th>Property</th>
+                <th>Type</th>
+                <th>Default</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>inClusters</code></td>
+                <td><code>vector&lt;DataObjID&gt;</code></td>
+                <td><code>[&quot;clustersWithScore&quot;]</code></td>
+                <td>  [k4FWCore::details::MultiTransformer&lt;std::tuple&lt;edm4hep::ReconstructedParticleCollection,edm4hep::ParticleIDCollection&gt; (edm4hep::ClusterCollection const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
+              </tr>
+              <tr>
+                <td><code>outParticles</code></td>
+                <td><code>vector&lt;DataObjID&gt;</code></td>
+                <td><code>[&quot;IdentifiedParticles&quot;]</code></td>
+                <td>  [k4FWCore::details::MultiTransformer&lt;std::tuple&lt;edm4hep::ReconstructedParticleCollection,edm4hep::ParticleIDCollection&gt; (edm4hep::ClusterCollection const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
+              </tr>
+              <tr>
+                <td><code>outParticleIDs</code></td>
+                <td><code>vector&lt;DataObjID&gt;</code></td>
+                <td><code>[&quot;IdentifiedParticleIDs&quot;]</code></td>
+                <td>  [k4FWCore::details::MultiTransformer&lt;std::tuple&lt;edm4hep::ReconstructedParticleCollection,edm4hep::ParticleIDCollection&gt; (edm4hep::ClusterCollection const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
+              </tr>
+              <tr>
+                <td><code>ClusterScoreShapeParameterName</code></td>
+                <td><code>string</code></td>
+                <td><code>ClusterTRAPPISTScore</code></td>
+                <td> Name of the shape parameter to be used for particle identification [ClusterPi0PhotonID] </td>
+              </tr>
+              <tr>
+                <td><code>Threshold</code></td>
+                <td><code>float</code></td>
+                <td><code>0.5</code></td>
+                <td> Threshold for particle identification based on the shape parameter value [ClusterPi0PhotonID] </td>
+              </tr>
+              <tr>
+                <td><code>Pi0Mass</code></td>
+                <td><code>float</code></td>
+                <td><code>0.134977</code></td>
+                <td> Mass of the Pi0 particle [ClusterPi0PhotonID] </td>
+              </tr>
+              <tr>
+                <td><code>ParticleIDAlgorithmName</code></td>
+                <td><code>string</code></td>
+                <td><code>TRAPPIST</code></td>
+                <td> Name of the algorithm used for particle identification [ClusterPi0PhotonID] </td>
               </tr>
             </tbody>
           </table>
@@ -10625,6 +10690,47 @@ where the algorithm is found in the environment.</p>
                 <td><code>PrivateToolHandle</code></td>
                 <td><code>CellPositionsHCalBarrelNoSegTool</code></td>
                 <td> Handle for tool to retrieve cell positions in HCal Barrel without DD4hep segmentation [unknown owner type] </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="alg-card" data-name="TRAPPISTPi0PhotonInference" data-lib="libk4RecFCCeeCalorimeterPlugins.so" data-package="k4RecCalorimeter">
+        <div class="alg-card-header">
+          <span class="alg-name">TRAPPISTPi0PhotonInference</span>
+          <span class="alg-card-right">
+            <span class="alg-lib-badge">libk4RecFCCeeCalorimeterPlugins.so</span>
+            <span class="alg-card-toggle">&#9658;</span>
+          </span>
+        </div>
+        <div class="alg-card-body">
+          <table class="alg-props-table">
+            <thead>
+              <tr>
+                <th>Property</th>
+                <th>Type</th>
+                <th>Default</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>inClusters</code></td>
+                <td><code>vector&lt;DataObjID&gt;</code></td>
+                <td><code>[&quot;unpairedClusters&quot;]</code></td>
+                <td>  [k4FWCore::details::MultiTransformer&lt;std::tuple&lt;edm4hep::ClusterCollection&gt; (edm4hep::ClusterCollection const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
+              </tr>
+              <tr>
+                <td><code>outClusters</code></td>
+                <td><code>vector&lt;DataObjID&gt;</code></td>
+                <td><code>[&quot;clustersWithScore&quot;]</code></td>
+                <td>  [k4FWCore::details::MultiTransformer&lt;std::tuple&lt;edm4hep::ClusterCollection&gt; (edm4hep::ClusterCollection const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
+              </tr>
+              <tr>
+                <td><code>ONNXModelPath</code></td>
+                <td><code>string</code></td>
+                <td><code></code></td>
+                <td> Path to the ONNX model to be used for inference [TRAPPISTPi0PhotonInference] </td>
               </tr>
             </tbody>
           </table>
