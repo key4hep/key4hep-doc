@@ -40,6 +40,6 @@ body:
     id: suggestion
     attributes:
       label: Suggested improvement
-      description: If you have an idea how to fix it, describe it here
+      description: If you have an idea how to improve it, describe it here
     validations:
       required: false
