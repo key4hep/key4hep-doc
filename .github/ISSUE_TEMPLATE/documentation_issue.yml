@@ -1,0 +1,45 @@
+name: Documentation issue
+description: Report a problem or suggest an improvement in the Key4hep documentation
+labels: ["documentation"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping improve the Key4hep documentation!
+        Please check existing issues first to avoid duplicates.
+  - type: dropdown
+    id: doc-area
+    attributes:
+      label: Documentation area
+      description: Which part of the documentation is affected?
+      options:
+        - Getting started / setup instructions (cvmfs, spack, releases)
+        - Tutorials and examples
+        - API reference
+        - Algorithm / component overview pages
+        - Website structure or navigation
+        - Other
+    validations:
+      required: true
+  - type: input
+    id: location
+    attributes:
+      label: Location
+      description: Page URL or file path in the docs where the problem appears
+      placeholder: e.g. https://key4hep.github.io/key4hep-doc/getting_started/setup.html
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: Description of the problem
+      description: What is wrong, missing, or unclear?
+    validations:
+      required: true
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: Suggested improvement
+      description: If you have an idea how to improve it, describe it here
+    validations:
+      required: false
