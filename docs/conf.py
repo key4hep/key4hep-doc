@@ -62,6 +62,11 @@ source_suffix = {
 linkcheck_ignore = [
     r"https://twiki.cern.ch/twiki/bin/view",  # TWikis might need login
     r"https://github\.com/.*/commits/",  # rate-limited web pages
+    # Bot protection returns 403 for non-browser HTTP clients (e.g. python
+    # requests used by sphinx), regardless of the User-Agent header that is
+    # sent, so we have to work around these. Thanks AI corps, I guess
+    r"https://stackoverflow\.com/a/12095473",
+    r"https://spackpm\.slack\.com",
 ]
 if IN_GITHUB_ACTIONS_CI:
     linkcheck_ignore.extend(
