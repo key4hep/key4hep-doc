@@ -1,0 +1,34 @@
+name: Remove PR preview
+
+# The removal needs write access to the preview branch, so it has to run in the
+# trusted pull_request_target context. That is safe here because nothing from
+# the PR is ever checked out or executed. Building and deploying the preview
+# happens in pr-build.yml and pr-deploy.yml
+on:
+  pull_request_target:
+    types:
+      - closed
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.number }}
+  cancel-in-progress: false
+
+jobs:
+  remove-preview:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+      contents: write
+
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Remove Preview
+        uses: rossjrw/pr-preview-action@ffa7509e91a3ec8dfc2e5536c4d5c1acdf7a6de9 # v1.8.1
+        with:
+          preview-branch: gh-pages
+          umbrella-dir: pr-preview
+          deploy-repository: "key4hep/key4hep-doc"
+          action: remove

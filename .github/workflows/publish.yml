@@ -13,17 +13,41 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+permissions:
+  contents: read
 
 jobs:
   build:
+    # build.yml needs pull-requests on top of the floor above
+    permissions:
+      contents: read
+      pull-requests: read
     uses: ./.github/workflows/build.yml
     with:
       ref: ${{ github.ref_name }}
       linkcheck: false
 
+  # PRs only check the links of the ref they build, so links can go stale without
+  # anything in the repository changing. Kept separate from build so that a dead
+  # link does not hold up the deployment of the documentation
+  nightly-linkcheck:
+    if: github.event_name == 'schedule'
+    permissions:
+      contents: read
+      pull-requests: read
+    uses: ./.github/workflows/build.yml
+    with:
+      ref: ${{ github.ref_name }}
+      linkcheck: true
+      upload-artifact: false
+      generate-overviews: false
+
   deploy:
     needs: build
     runs-on: ubuntu-latest
+    # Pushes the built documentation onto the gh-pages branch
+    permissions:
+      contents: write
 
     steps:
     - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -37,16 +61,21 @@ jobs:
       env:
         TARGET_DIR: ${{ github.ref_name }}
       run: |
-        mkdir -p ${TARGET_DIR}
-        rm -rf ${TARGET_DIR}/*
-        tar -xvf doc_artifact/artifact.tar --directory ${TARGET_DIR}
+        mkdir -p "${TARGET_DIR:?}"
+        rm -rf "${TARGET_DIR:?}"/*
+        tar -xvf doc_artifact/artifact.tar --directory "${TARGET_DIR}"
         rm -r doc_artifact
     - name: Commit and Push changes
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         TARGET_DIR: ${{ github.ref_name }}
       run: |
-        git config --global user.email ${GITHUB_ACTOR_ID}+${GITHUB_ACTOR}@users.noreply.github.com
-        git config --global user.name ${GITHUB_ACTOR}
-        git add ${TARGET_DIR}
-        git diff-index --quiet HEAD 2>&1 > /dev/null || git commit -m "Update documentation for ${TARGET_DIR}" && git push
+        git config --global user.email "${GITHUB_ACTOR_ID}+${GITHUB_ACTOR}@users.noreply.github.com"
+        git config --global user.name "${GITHUB_ACTOR}"
+        git add "${TARGET_DIR}"
+        if git diff-index --quiet HEAD --; then
+          echo "The documentation did not change"
+        else
+          git commit -m "Update documentation for ${TARGET_DIR}"
+          git push
+        fi
