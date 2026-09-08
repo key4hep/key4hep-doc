@@ -139,11 +139,11 @@ where the algorithm is found in the environment.</p>
 </div></section>
 <section id="algorithms">
 <h2>Algorithms<a class="headerlink" href="#algorithms" title="Link to this heading"></a></h2>
-<p>Total: <strong>212 algorithms</strong> across <strong>12 packages</strong>.</p>
-<div id="algorithm-overview" data-total="212" data-packages="12" data-item-label="algorithm">
+<p>Total: <strong>214 algorithms</strong> across <strong>12 packages</strong>.</p>
+<div id="algorithm-overview" data-total="214" data-packages="12" data-item-label="algorithm">
   <div class="alg-filter-bar">
     <input type="text" id="alg-search" placeholder="Filter by name, package, or library…" autocomplete="off" />
-    <span id="alg-stats">Showing 212 of 212 algorithms in 12 packages</span>
+    <span id="alg-stats">Showing 214 of 214 algorithms in 12 packages</span>
   </div>
   <div class="alg-package-group" data-package="k4ActsTracking">
     <div class="alg-package-header">
@@ -4376,7 +4376,7 @@ where the algorithm is found in the environment.</p>
               <tr>
                 <td><code>CrossingAngle</code></td>
                 <td><code>double</code></td>
-                <td><code>4.6727679e-310</code></td>
+                <td><code>4.6870334e-310</code></td>
                 <td> Half the crossing angle beam in [rad] [unknown owner type] </td>
               </tr>
               <tr>
@@ -5081,7 +5081,7 @@ where the algorithm is found in the environment.</p>
     <div class="alg-package-header">
       <a class="alg-package-name" href="https://github.com/HEP-FCC/k4RecCalorimeter" target="_blank" rel="noopener noreferrer">k4RecCalorimeter</a>
       <span class="alg-package-meta">
-        <span class="alg-package-count">83 algorithms</span>
+        <span class="alg-package-count">84 algorithms</span>
         <span class="alg-package-toggle">&#9660;</span>
       </span>
     </div>
@@ -7678,13 +7678,13 @@ where the algorithm is found in the environment.</p>
               <tr>
                 <td><code>ehECal</code></td>
                 <td><code>double</code></td>
-                <td><code>1.3561327e+248</code></td>
+                <td><code>2.0337308e-110</code></td>
                 <td> e/h of the ECal [unknown owner type] </td>
               </tr>
               <tr>
                 <td><code>ehHCal</code></td>
                 <td><code>double</code></td>
-                <td><code>1.1135419e+219</code></td>
+                <td><code>2.0429602e+73</code></td>
                 <td> e/h of the HCal [unknown owner type] </td>
               </tr>
             </tbody>
@@ -9962,7 +9962,25 @@ where the algorithm is found in the environment.</p>
                 <td><code>fileName</code></td>
                 <td><code>string</code></td>
                 <td><code></code></td>
-                <td> Name of the file that contains the crosstalk map. Leave the default empty to avoid crashes when cross-talk is not needed. [ReadCaloCrosstalkMap] </td>
+                <td> Name of the file that contains the crosstalk map. [ReadCaloCrosstalkMap] </td>
+              </tr>
+              <tr>
+                <td><code>detID</code></td>
+                <td><code>int</code></td>
+                <td><code>-1</code></td>
+                <td> Subsystem ID for this detector.  Defaults to ECAL_Barrel. [ReadCaloCrosstalkMap] </td>
+              </tr>
+              <tr>
+                <td><code>CaloCellConstantsSvc</code></td>
+                <td><code>ServiceHandle</code></td>
+                <td><code>k4::recCalo::CaloCellConstantsSvc</code></td>
+                <td> The cell constants service [ReadCaloCrosstalkMap] </td>
+              </tr>
+              <tr>
+                <td><code>CaloCellIndexerSvc</code></td>
+                <td><code>ServiceHandle</code></td>
+                <td><code>k4::recCalo::CaloCellIndexerSvc</code></td>
+                <td> The cell indexing service. [ReadCaloCrosstalkMap] </td>
               </tr>
             </tbody>
           </table>
@@ -11178,6 +11196,59 @@ where the algorithm is found in the environment.</p>
                 <td><code>ServiceHandle</code></td>
                 <td><code>GeoSvc</code></td>
                 <td>  [k4::recCalo::HCalPhiCaloToolTestAlg] </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="alg-card" data-name="k4__recCalo__ReadCaloCrosstalkMapTestAlg" data-lib="libk4RecCalorimeterTests.so" data-package="k4RecCalorimeter">
+        <div class="alg-card-header">
+          <span class="alg-name">k4__recCalo__ReadCaloCrosstalkMapTestAlg</span>
+          <span class="alg-card-right">
+            <span class="alg-lib-badge">libk4RecCalorimeterTests.so</span>
+            <span class="alg-card-toggle">&#9658;</span>
+          </span>
+        </div>
+        <div class="alg-card-body">
+          <table class="alg-props-table">
+            <thead>
+              <tr>
+                <th>Property</th>
+                <th>Type</th>
+                <th>Default</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>Tool</code></td>
+                <td><code>PrivateToolHandle</code></td>
+                <td><code>ReadCaloCrosstalkMap/ReadCaloCrosstalkMap</code></td>
+                <td>  [k4::recCalo::ReadCaloCrosstalkMapTestAlg] </td>
+              </tr>
+              <tr>
+                <td><code>CaloCellIndexerSvc</code></td>
+                <td><code>ServiceHandle</code></td>
+                <td><code>k4::recCalo::CaloCellIndexerSvc</code></td>
+                <td> The cell indexing service. [k4::recCalo::ReadCaloCrosstalkMapTestAlg] </td>
+              </tr>
+              <tr>
+                <td><code>fileName</code></td>
+                <td><code>string</code></td>
+                <td><code>crosstalkTest.root</code></td>
+                <td>  [k4::recCalo::ReadCaloCrosstalkMapTestAlg] </td>
+              </tr>
+              <tr>
+                <td><code>detID</code></td>
+                <td><code>int</code></td>
+                <td><code>-1</code></td>
+                <td>  [k4::recCalo::ReadCaloCrosstalkMapTestAlg] </td>
+              </tr>
+              <tr>
+                <td><code>ncells</code></td>
+                <td><code>unsigned int</code></td>
+                <td><code>100</code></td>
+                <td>  [k4::recCalo::ReadCaloCrosstalkMapTestAlg] </td>
               </tr>
             </tbody>
           </table>
@@ -12414,7 +12485,7 @@ where the algorithm is found in the environment.</p>
     <div class="alg-package-header">
       <a class="alg-package-name" href="https://github.com/key4hep/k4Reco" target="_blank" rel="noopener noreferrer">k4Reco</a>
       <span class="alg-package-meta">
-        <span class="alg-package-count">6 algorithms</span>
+        <span class="alg-package-count">7 algorithms</span>
         <span class="alg-package-toggle">&#9660;</span>
       </span>
     </div>
@@ -12843,6 +12914,81 @@ where the algorithm is found in the environment.</p>
                 <td><code>unsigned long</code></td>
                 <td><code>64</code></td>
                 <td> Number of bits to use for the cellID of the hits [DDPlanarDigi] </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="alg-card" data-name="FastJetAlg" data-lib="libk4RecoPlugins.so" data-package="k4Reco">
+        <div class="alg-card-header">
+          <span class="alg-name">FastJetAlg</span>
+          <span class="alg-card-right">
+            <span class="alg-lib-badge">libk4RecoPlugins.so</span>
+            <span class="alg-card-toggle">&#9658;</span>
+          </span>
+        </div>
+        <div class="alg-card-body">
+          <table class="alg-props-table">
+            <thead>
+              <tr>
+                <th>Property</th>
+                <th>Type</th>
+                <th>Default</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>recParticleIn</code></td>
+                <td><code>DataObjID</code></td>
+                <td><code>ReconstructedParticles</code></td>
+                <td>  [k4FWCore::details::MultiTransformer&lt;std::tuple&lt;edm4hep::ReconstructedParticleCollection,edm4hep::ReconstructedParticleCollection&gt; (edm4hep::ReconstructedParticleCollection const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
+              </tr>
+              <tr>
+                <td><code>jetOut</code></td>
+                <td><code>DataObjID</code></td>
+                <td><code>JetOut</code></td>
+                <td>  [k4FWCore::details::MultiTransformer&lt;std::tuple&lt;edm4hep::ReconstructedParticleCollection,edm4hep::ReconstructedParticleCollection&gt; (edm4hep::ReconstructedParticleCollection const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
+              </tr>
+              <tr>
+                <td><code>recParticleOut</code></td>
+                <td><code>DataObjID</code></td>
+                <td><code>Constituents</code></td>
+                <td>  [k4FWCore::details::MultiTransformer&lt;std::tuple&lt;edm4hep::ReconstructedParticleCollection,edm4hep::ReconstructedParticleCollection&gt; (edm4hep::ReconstructedParticleCollection const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
+              </tr>
+              <tr>
+                <td><code>algorithm</code></td>
+                <td><code>string</code></td>
+                <td><code>kt_algorithm</code></td>
+                <td> Name of the algorithm to use for making jets. E.g. kt_algorithm. Full list of algorithms can be seen in the FastJet code. [FastJetAlg] </td>
+              </tr>
+              <tr>
+                <td><code>algorithmParameters</code></td>
+                <td><code>vector&lt;float&gt;</code></td>
+                <td><code>[0.7]</code></td>
+                <td> Parameters required by each specific algorithm. The amount of parameters and interpretation varies per algorithm. [FastJetAlg] </td>
+              </tr>
+              <tr>
+                <td><code>clusteringMode</code></td>
+                <td><code>string</code></td>
+                <td><code>Inclusive</code></td>
+                <td> Clustering mode for the algorithm. Not all clustering modes are available for all algorithms. See Fast Jet code for availabilities. [FastJetAlg] </td>
+              </tr>
+              <tr>
+                <td><code>clusteringParams</code></td>
+                <td><code>vector&lt;float&gt;</code></td>
+                <td><code>[0.0]</code></td>
+                <td> Parameters for the clusteringMode. 
+clusterMode &#34;Inclusive&#34; takes &lt;minPt&gt;
+clusterMode &#34;InclusiveIterativeNJets&#34; takes &lt;nrJets&gt; &lt;minE&gt;
+clusterMode &#34;ExclusiveNJets&#34; takes &lt;nrJets&gt;
+clusterMode &#34;ExclusiveYCut&#34; takes &lt;yCut&gt;. Note: not all modes are available for all algorithms.Some parameters are input as floats, despite conversion to integers. [FastJetAlg] </td>
+              </tr>
+              <tr>
+                <td><code>recombinationScheme</code></td>
+                <td><code>string</code></td>
+                <td><code>E_scheme</code></td>
+                <td> The recombination scheme used when merging 2 particles. Usually there is no need to use anything else than 4-Vector addition: E_scheme. [FastJetAlg] </td>
               </tr>
             </tbody>
           </table>
