@@ -27,8 +27,8 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Contributing" href="CONTRIBUTING.html" />
-    <link rel="prev" title="Getting help" href="help.html" /> 
+    <link rel="next" title="Getting help" href="help.html" />
+    <link rel="prev" title="Introduction" href="introduction.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -51,30 +51,36 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="help.html">Getting help</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Getting key4hep</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#with-cvmfs">With CVMFS</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="help.html">Getting help</a></li>
 <li class="toctree-l1"><a class="reference internal" href="CONTRIBUTING.html">Contributing</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<p class="caption" role="heading"><span class="caption-text">User Guides</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../how-tos/README.html">Key4hep How-Tos and Instructions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorials/README.html">Key4hep Tutorials</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../developing-key4hep-software/README.html">Developing Key4hep</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../spack-build-instructions-for-librarians/README.html">Building Key4hep: For Librarians</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../talks-and-presentations/README.html">Talks and Presentations</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Reference</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../algorithm-overview.html">Gaudi Algorithm Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../processor-overview.html">Marlin Processor Overview</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">External links</span></p>
+<p class="caption" role="heading"><span class="caption-text">Developer Resources</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../developing-key4hep-software/README.html">Developing Key4hep</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../spack-build-instructions-for-librarians/README.html">Building Key4hep: For Librarians</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">More Information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../talks-and-presentations/README.html">Talks and Presentations</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Community Resources</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference external" href="https://cern.ch/fccsw">FCC software</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://fccsw-forum.web.cern.ch/">FCC SW forum</a></li>
@@ -82,6 +88,13 @@
 <li class="toctree-l1"><a class="reference external" href="https://ilcsoft.desy.de/portal">ILC software</a></li>
 <li class="toctree-l1"><a class="reference external" href="http://cepcsoft.ihep.ac.cn/">CEPC software</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://mcd-wiki.web.cern.ch/software/">Muon Collider software</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">External Resources</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://edm4hep.web.cern.ch">EDM4hep</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://key4hep.web.cern.ch/podio">podio</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://gaudi.web.cern.ch/doxygen/v40r0/index.html">Gaudi (doxygen)</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://acts.readthedocs.io">Acts</a></li>
 </ul>
 
         </div>
@@ -115,8 +128,8 @@
 <p>Two builds with the key4hep stack are distributed on cvmfs. The releases happen
 every few months on demand (for example, if there is a new important feature or
 a breaking change) and at the moment AlmaLinux 9 (EL9, Rocky Linux 9), Ubuntu
-22.04 are supported. Some older releases also were built for CentOS7. For
-sourcing the releases, run:</p>
+Ubuntu 24.04 are supported. Some older releases also were built for CentOS7 and
+Ubuntu 22.04. For sourcing the releases, run:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>/cvmfs/sw.hsf.org/key4hep/setup.sh
 </pre></div>
 </div>
@@ -127,10 +140,13 @@ the latest version of most of the packages are available:</p>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">setup.sh</span></code> script always points to the latest build and it will change
 without warning. However, after sourcing the script some information will be
-displayed with instructions on how to reproduce the current environment.
-<strong>Nightly builds are intended for development and testing and they will be
+displayed with instructions on how to reproduce the current environment.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Nightly builds are intended for development and testing and they will be
 deleted after some time from <code class="docutils literal notranslate"><span class="pre">/cvmfs</span></code>. They will also introduce new features
-unannounced, so don’t use these for anything else than development!</strong></p>
+unannounced, so don’t use these for anything else than development!</p>
+</div>
 </section>
 </section>
 
@@ -138,8 +154,8 @@ unannounced, so don’t use these for anything else than development!</strong></
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="help.html" class="btn btn-neutral float-left" title="Getting help" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="CONTRIBUTING.html" class="btn btn-neutral float-right" title="Contributing" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="introduction.html" class="btn btn-neutral float-left" title="Introduction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="help.html" class="btn btn-neutral float-right" title="Getting help" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
