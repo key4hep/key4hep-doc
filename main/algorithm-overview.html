@@ -152,11 +152,11 @@ where the algorithm is found in the environment.</p>
 </div></section>
 <section id="algorithms">
 <h2>Algorithms<a class="headerlink" href="#algorithms" title="Link to this heading"></a></h2>
-<p>Total: <strong>214 algorithms</strong> across <strong>12 packages</strong>.</p>
-<div id="algorithm-overview" data-total="214" data-packages="12" data-item-label="algorithm">
+<p>Total: <strong>218 algorithms</strong> across <strong>12 packages</strong>.</p>
+<div id="algorithm-overview" data-total="218" data-packages="12" data-item-label="algorithm">
   <div class="alg-filter-bar">
     <input type="text" id="alg-search" placeholder="Filter by name, package, or library…" autocomplete="off" />
-    <span id="alg-stats">Showing 214 of 214 algorithms in 12 packages</span>
+    <span id="alg-stats">Showing 218 of 218 algorithms in 12 packages</span>
   </div>
   <div class="alg-package-group" data-package="k4ActsTracking">
     <div class="alg-package-header">
@@ -4395,7 +4395,7 @@ where the algorithm is found in the environment.</p>
               <tr>
                 <td><code>CrossingAngle</code></td>
                 <td><code>double</code></td>
-                <td><code>4.6883668e-310</code></td>
+                <td><code>4.6394556e-310</code></td>
                 <td> Half the crossing angle beam in [rad] [unknown owner type] </td>
               </tr>
               <tr>
@@ -5100,7 +5100,7 @@ where the algorithm is found in the environment.</p>
     <div class="alg-package-header">
       <a class="alg-package-name" href="https://github.com/HEP-FCC/k4RecCalorimeter" target="_blank" rel="noopener noreferrer">k4RecCalorimeter</a>
       <span class="alg-package-meta">
-        <span class="alg-package-count">84 algorithms</span>
+        <span class="alg-package-count">88 algorithms</span>
         <span class="alg-package-toggle">&#9660;</span>
       </span>
     </div>
@@ -6250,6 +6250,136 @@ where the algorithm is found in the environment.</p>
                 <td><code>string</code></td>
                 <td><code>ZCA</code></td>
                 <td> Name of the whitening filter to apply [CaloWhitening] </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="alg-card" data-name="CellEnergyCalibratorScinPpdNpe" data-lib="libk4RecCaloDigiPlugins.so" data-package="k4RecCalorimeter">
+        <div class="alg-card-header">
+          <span class="alg-name">CellEnergyCalibratorScinPpdNpe</span>
+          <span class="alg-card-right">
+            <span class="alg-lib-badge">libk4RecCaloDigiPlugins.so</span>
+            <span class="alg-card-toggle">&#9658;</span>
+          </span>
+        </div>
+        <div class="alg-card-body">
+          <table class="alg-props-table">
+            <thead>
+              <tr>
+                <th>Property</th>
+                <th>Type</th>
+                <th>Default</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>inputLinkCollection</code></td>
+                <td><code>DataObjID</code></td>
+                <td><code>CaloHitLinks</code></td>
+                <td>  [k4FWCore::details::MultiTransformer&lt;std::tuple&lt;edm4hep::CalorimeterHitCollection,podio::LinkCollection&lt;edm4hep::CalorimeterHit,edm4hep::SimCalorimeterHit&gt; &gt; (podio::LinkCollection&lt;edm4hep::CalorimeterHit,edm4hep::SimCalorimeterHit&gt; const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
+              </tr>
+              <tr>
+                <td><code>outputHitCollection</code></td>
+                <td><code>DataObjID</code></td>
+                <td><code>CalorimeterHitsRec</code></td>
+                <td>  [k4FWCore::details::MultiTransformer&lt;std::tuple&lt;edm4hep::CalorimeterHitCollection,podio::LinkCollection&lt;edm4hep::CalorimeterHit,edm4hep::SimCalorimeterHit&gt; &gt; (podio::LinkCollection&lt;edm4hep::CalorimeterHit,edm4hep::SimCalorimeterHit&gt; const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
+              </tr>
+              <tr>
+                <td><code>outputRelationCollection</code></td>
+                <td><code>DataObjID</code></td>
+                <td><code>CaloHitLinksRec</code></td>
+                <td>  [k4FWCore::details::MultiTransformer&lt;std::tuple&lt;edm4hep::CalorimeterHitCollection,podio::LinkCollection&lt;edm4hep::CalorimeterHit,edm4hep::SimCalorimeterHit&gt; &gt; (podio::LinkCollection&lt;edm4hep::CalorimeterHit,edm4hep::SimCalorimeterHit&gt; const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
+              </tr>
+              <tr>
+                <td><code>calibration_layergroups</code></td>
+                <td><code>vector&lt;int&gt;</code></td>
+                <td><code>[]</code></td>
+                <td> Grouping of calo layers [BaseCellEnergyCalibrator] </td>
+              </tr>
+              <tr>
+                <td><code>calibration_factorsMipGev</code></td>
+                <td><code>vector&lt;float&gt;</code></td>
+                <td><code>[]</code></td>
+                <td> Calibration coefficients (MIP-&gt;shower GeV) of layers groups [BaseCellEnergyCalibrator] </td>
+              </tr>
+              <tr>
+                <td><code>EncodingStringParameterName</code></td>
+                <td><code>string</code></td>
+                <td><code>GlobalCalorimeterReadoutID</code></td>
+                <td> The name of the DD4hep constant that contains the encoding string for calorimeters [BaseCellEnergyCalibrator] </td>
+              </tr>
+              <tr>
+                <td><code>ppd_mipPe</code></td>
+                <td><code>float</code></td>
+                <td><code>10.0</code></td>
+                <td> # Photo-electrons per MIP (scintillator): used to Poisson smear #PEs if &gt;0 [CellEnergyCalibratorScinPpdNpe] </td>
+              </tr>
+              <tr>
+                <td><code>ppd_npix</code></td>
+                <td><code>int</code></td>
+                <td><code>10000</code></td>
+                <td> Total number of MPPC/SiPM pixels for implementation of saturation effect [CellEnergyCalibratorScinPpdNpe] </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="alg-card" data-name="CellEnergyCalibratorSiliconMip" data-lib="libk4RecCaloDigiPlugins.so" data-package="k4RecCalorimeter">
+        <div class="alg-card-header">
+          <span class="alg-name">CellEnergyCalibratorSiliconMip</span>
+          <span class="alg-card-right">
+            <span class="alg-lib-badge">libk4RecCaloDigiPlugins.so</span>
+            <span class="alg-card-toggle">&#9658;</span>
+          </span>
+        </div>
+        <div class="alg-card-body">
+          <table class="alg-props-table">
+            <thead>
+              <tr>
+                <th>Property</th>
+                <th>Type</th>
+                <th>Default</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>inputLinkCollection</code></td>
+                <td><code>DataObjID</code></td>
+                <td><code>CaloHitLinks</code></td>
+                <td>  [k4FWCore::details::MultiTransformer&lt;std::tuple&lt;edm4hep::CalorimeterHitCollection,podio::LinkCollection&lt;edm4hep::CalorimeterHit,edm4hep::SimCalorimeterHit&gt; &gt; (podio::LinkCollection&lt;edm4hep::CalorimeterHit,edm4hep::SimCalorimeterHit&gt; const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
+              </tr>
+              <tr>
+                <td><code>outputHitCollection</code></td>
+                <td><code>DataObjID</code></td>
+                <td><code>CalorimeterHitsRec</code></td>
+                <td>  [k4FWCore::details::MultiTransformer&lt;std::tuple&lt;edm4hep::CalorimeterHitCollection,podio::LinkCollection&lt;edm4hep::CalorimeterHit,edm4hep::SimCalorimeterHit&gt; &gt; (podio::LinkCollection&lt;edm4hep::CalorimeterHit,edm4hep::SimCalorimeterHit&gt; const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
+              </tr>
+              <tr>
+                <td><code>outputRelationCollection</code></td>
+                <td><code>DataObjID</code></td>
+                <td><code>CaloHitLinksRec</code></td>
+                <td>  [k4FWCore::details::MultiTransformer&lt;std::tuple&lt;edm4hep::CalorimeterHitCollection,podio::LinkCollection&lt;edm4hep::CalorimeterHit,edm4hep::SimCalorimeterHit&gt; &gt; (podio::LinkCollection&lt;edm4hep::CalorimeterHit,edm4hep::SimCalorimeterHit&gt; const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
+              </tr>
+              <tr>
+                <td><code>calibration_layergroups</code></td>
+                <td><code>vector&lt;int&gt;</code></td>
+                <td><code>[]</code></td>
+                <td> Grouping of calo layers [BaseCellEnergyCalibrator] </td>
+              </tr>
+              <tr>
+                <td><code>calibration_factorsMipGev</code></td>
+                <td><code>vector&lt;float&gt;</code></td>
+                <td><code>[]</code></td>
+                <td> Calibration coefficients (MIP-&gt;shower GeV) of layers groups [BaseCellEnergyCalibrator] </td>
+              </tr>
+              <tr>
+                <td><code>EncodingStringParameterName</code></td>
+                <td><code>string</code></td>
+                <td><code>GlobalCalorimeterReadoutID</code></td>
+                <td> The name of the DD4hep constant that contains the encoding string for calorimeters [BaseCellEnergyCalibrator] </td>
               </tr>
             </tbody>
           </table>
@@ -8797,6 +8927,370 @@ where the algorithm is found in the environment.</p>
                 <td><code>k4FWCore::DataHandle&lt;podio::LinkCollection&lt;edm4hep::Cluster,edm4hep::MCParticle&gt; &gt;</code></td>
                 <td><code>cluster_mcparticle_links</code></td>
                 <td> The links between clusters and MC particles (output) [unknown owner type] </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="alg-card" data-name="DigitiserScinPpdNpe" data-lib="libk4RecCaloDigiPlugins.so" data-package="k4RecCalorimeter">
+        <div class="alg-card-header">
+          <span class="alg-name">DigitiserScinPpdNpe</span>
+          <span class="alg-card-right">
+            <span class="alg-lib-badge">libk4RecCaloDigiPlugins.so</span>
+            <span class="alg-card-toggle">&#9658;</span>
+          </span>
+        </div>
+        <div class="alg-card-body">
+          <table class="alg-props-table">
+            <thead>
+              <tr>
+                <th>Property</th>
+                <th>Type</th>
+                <th>Default</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>inputHitCollection</code></td>
+                <td><code>DataObjID</code></td>
+                <td><code>SimCalorimeterHits</code></td>
+                <td>  [k4FWCore::details::MultiTransformer&lt;std::tuple&lt;edm4hep::CalorimeterHitCollection,podio::LinkCollection&lt;edm4hep::CalorimeterHit,edm4hep::SimCalorimeterHit&gt; &gt; (edm4hep::SimCalorimeterHitCollection const&amp;,edm4hep::EventHeaderCollection const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
+              </tr>
+              <tr>
+                <td><code>inputHeaderCollection</code></td>
+                <td><code>DataObjID</code></td>
+                <td><code>EventHeader</code></td>
+                <td>  [k4FWCore::details::MultiTransformer&lt;std::tuple&lt;edm4hep::CalorimeterHitCollection,podio::LinkCollection&lt;edm4hep::CalorimeterHit,edm4hep::SimCalorimeterHit&gt; &gt; (edm4hep::SimCalorimeterHitCollection const&amp;,edm4hep::EventHeaderCollection const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
+              </tr>
+              <tr>
+                <td><code>outputHitCollection</code></td>
+                <td><code>DataObjID</code></td>
+                <td><code>CalorimeterHits</code></td>
+                <td>  [k4FWCore::details::MultiTransformer&lt;std::tuple&lt;edm4hep::CalorimeterHitCollection,podio::LinkCollection&lt;edm4hep::CalorimeterHit,edm4hep::SimCalorimeterHit&gt; &gt; (edm4hep::SimCalorimeterHitCollection const&amp;,edm4hep::EventHeaderCollection const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
+              </tr>
+              <tr>
+                <td><code>outputRelationCollection</code></td>
+                <td><code>DataObjID</code></td>
+                <td><code>CaloHitLinks</code></td>
+                <td>  [k4FWCore::details::MultiTransformer&lt;std::tuple&lt;edm4hep::CalorimeterHitCollection,podio::LinkCollection&lt;edm4hep::CalorimeterHit,edm4hep::SimCalorimeterHit&gt; &gt; (edm4hep::SimCalorimeterHitCollection const&amp;,edm4hep::EventHeaderCollection const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
+              </tr>
+              <tr>
+                <td><code>timingCut</code></td>
+                <td><code>int</code></td>
+                <td><code>0</code></td>
+                <td> Use hit times [BaseDigitiser] </td>
+              </tr>
+              <tr>
+                <td><code>timingCorrectForPropagation</code></td>
+                <td><code>int</code></td>
+                <td><code>0</code></td>
+                <td> Correct hit times for propagation: radial distance/c [BaseDigitiser] </td>
+              </tr>
+              <tr>
+                <td><code>timingWindowMin</code></td>
+                <td><code>float</code></td>
+                <td><code>-10.0</code></td>
+                <td> Time Window minimum time in ns [BaseDigitiser] </td>
+              </tr>
+              <tr>
+                <td><code>timingWindowMax</code></td>
+                <td><code>float</code></td>
+                <td><code>100.0</code></td>
+                <td> Time Window maximum time in ns [BaseDigitiser] </td>
+              </tr>
+              <tr>
+                <td><code>integrationMethod</code></td>
+                <td><code>string</code></td>
+                <td><code>Standard</code></td>
+                <td> Energy integration and time calculation method. Options: Standard, ROC [BaseDigitiser] </td>
+              </tr>
+              <tr>
+                <td><code>fastShaper</code></td>
+                <td><code>float</code></td>
+                <td><code>0.0</code></td>
+                <td> Fast shaper value. Unit in ns [BaseDigitiser] </td>
+              </tr>
+              <tr>
+                <td><code>slowShaper</code></td>
+                <td><code>float</code></td>
+                <td><code>0.0</code></td>
+                <td> Slow shaper value. Unit in ns [BaseDigitiser] </td>
+              </tr>
+              <tr>
+                <td><code>timingResolution</code></td>
+                <td><code>float</code></td>
+                <td><code>0.0</code></td>
+                <td> Time resolution to apply (gaussian smearing). Unit in ns [BaseDigitiser] </td>
+              </tr>
+              <tr>
+                <td><code>calibration_mip</code></td>
+                <td><code>float</code></td>
+                <td><code>0.0001</code></td>
+                <td> Average G4 deposited energy by MIP for calibration [BaseDigitiser] </td>
+              </tr>
+              <tr>
+                <td><code>miscalibration_uncorrel</code></td>
+                <td><code>float</code></td>
+                <td><code>0.0</code></td>
+                <td> Uncorrelated random Gaussian miscalibration (as a fraction: 1.0 = 100%) [BaseDigitiser] </td>
+              </tr>
+              <tr>
+                <td><code>miscalibration_correl</code></td>
+                <td><code>float</code></td>
+                <td><code>0.0</code></td>
+                <td> Correlated random Gaussian miscalibration (as a fraction: 1.0 = 100%) [BaseDigitiser] </td>
+              </tr>
+              <tr>
+                <td><code>deadCell_fraction</code></td>
+                <td><code>float</code></td>
+                <td><code>0.0</code></td>
+                <td> Random dead cell fraction (as a fraction: 0-&gt;1) [BaseDigitiser] </td>
+              </tr>
+              <tr>
+                <td><code>elec_noise_mip</code></td>
+                <td><code>float</code></td>
+                <td><code>0.0</code></td>
+                <td> Typical electronics noise (in MIP units) [BaseDigitiser] </td>
+              </tr>
+              <tr>
+                <td><code>elec_range_mip</code></td>
+                <td><code>float</code></td>
+                <td><code>2500.0</code></td>
+                <td> Maximum of dynamic range of electronics (in MIPs) [BaseDigitiser] </td>
+              </tr>
+              <tr>
+                <td><code>EncodingStringParameterName</code></td>
+                <td><code>string</code></td>
+                <td><code>GlobalCalorimeterReadoutID</code></td>
+                <td> The name of the DD4hep constant that contains the encoding string for calorimeters [BaseDigitiser] </td>
+              </tr>
+              <tr>
+                <td><code>threshold</code></td>
+                <td><code>float</code></td>
+                <td><code>0.5</code></td>
+                <td> Threshold for Hit [BaseDigitiser] </td>
+              </tr>
+              <tr>
+                <td><code>thresholdUnit</code></td>
+                <td><code>string</code></td>
+                <td><code>MIP</code></td>
+                <td> Unit for threshold. Can be &#34;GeV&#34;, &#34;MIP&#34; or &#34;px&#34;. MIP and px need properly set calibration constants [BaseDigitiser] </td>
+              </tr>
+              <tr>
+                <td><code>CaloType</code></td>
+                <td><code>string</code></td>
+                <td><code>em</code></td>
+                <td> Calorimeter Type: em, had, muon [BaseDigitiser] </td>
+              </tr>
+              <tr>
+                <td><code>CaloID</code></td>
+                <td><code>string</code></td>
+                <td><code>ecal</code></td>
+                <td> Calorimeter ID: ecal, hcal, yoke, lcal, lhcal, bcal [BaseDigitiser] </td>
+              </tr>
+              <tr>
+                <td><code>CaloLayout</code></td>
+                <td><code>string</code></td>
+                <td><code>barrel</code></td>
+                <td> Calorimeter Layout: barrel, endcap, ring, plug [BaseDigitiser] </td>
+              </tr>
+              <tr>
+                <td><code>ppd_mipPe</code></td>
+                <td><code>float</code></td>
+                <td><code>10.0</code></td>
+                <td> # Photo-electrons per MIP (scintillator): used to Poisson smear #PEs if &gt;0 [DigitiserScinPpdNpe] </td>
+              </tr>
+              <tr>
+                <td><code>ppd_npix</code></td>
+                <td><code>int</code></td>
+                <td><code>10000</code></td>
+                <td> Total number of MPPC/SiPM pixels for implementation of saturation effect [DigitiserScinPpdNpe] </td>
+              </tr>
+              <tr>
+                <td><code>ppd_npix_uncert</code></td>
+                <td><code>float</code></td>
+                <td><code>0.05</code></td>
+                <td> Fractional uncertainty of effective total number of MPPC/SiPM pixels [DigitiserScinPpdNpe] </td>
+              </tr>
+              <tr>
+                <td><code>ppd_pix_spread</code></td>
+                <td><code>float</code></td>
+                <td><code>0.05</code></td>
+                <td> Variation of PPD pixel signal (as a fraction: 0.01=1%) [DigitiserScinPpdNpe] </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="alg-card" data-name="DigitiserSiliconMip" data-lib="libk4RecCaloDigiPlugins.so" data-package="k4RecCalorimeter">
+        <div class="alg-card-header">
+          <span class="alg-name">DigitiserSiliconMip</span>
+          <span class="alg-card-right">
+            <span class="alg-lib-badge">libk4RecCaloDigiPlugins.so</span>
+            <span class="alg-card-toggle">&#9658;</span>
+          </span>
+        </div>
+        <div class="alg-card-body">
+          <table class="alg-props-table">
+            <thead>
+              <tr>
+                <th>Property</th>
+                <th>Type</th>
+                <th>Default</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>inputHitCollection</code></td>
+                <td><code>DataObjID</code></td>
+                <td><code>SimCalorimeterHits</code></td>
+                <td>  [k4FWCore::details::MultiTransformer&lt;std::tuple&lt;edm4hep::CalorimeterHitCollection,podio::LinkCollection&lt;edm4hep::CalorimeterHit,edm4hep::SimCalorimeterHit&gt; &gt; (edm4hep::SimCalorimeterHitCollection const&amp;,edm4hep::EventHeaderCollection const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
+              </tr>
+              <tr>
+                <td><code>inputHeaderCollection</code></td>
+                <td><code>DataObjID</code></td>
+                <td><code>EventHeader</code></td>
+                <td>  [k4FWCore::details::MultiTransformer&lt;std::tuple&lt;edm4hep::CalorimeterHitCollection,podio::LinkCollection&lt;edm4hep::CalorimeterHit,edm4hep::SimCalorimeterHit&gt; &gt; (edm4hep::SimCalorimeterHitCollection const&amp;,edm4hep::EventHeaderCollection const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
+              </tr>
+              <tr>
+                <td><code>outputHitCollection</code></td>
+                <td><code>DataObjID</code></td>
+                <td><code>CalorimeterHits</code></td>
+                <td>  [k4FWCore::details::MultiTransformer&lt;std::tuple&lt;edm4hep::CalorimeterHitCollection,podio::LinkCollection&lt;edm4hep::CalorimeterHit,edm4hep::SimCalorimeterHit&gt; &gt; (edm4hep::SimCalorimeterHitCollection const&amp;,edm4hep::EventHeaderCollection const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
+              </tr>
+              <tr>
+                <td><code>outputRelationCollection</code></td>
+                <td><code>DataObjID</code></td>
+                <td><code>CaloHitLinks</code></td>
+                <td>  [k4FWCore::details::MultiTransformer&lt;std::tuple&lt;edm4hep::CalorimeterHitCollection,podio::LinkCollection&lt;edm4hep::CalorimeterHit,edm4hep::SimCalorimeterHit&gt; &gt; (edm4hep::SimCalorimeterHitCollection const&amp;,edm4hep::EventHeaderCollection const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
+              </tr>
+              <tr>
+                <td><code>timingCut</code></td>
+                <td><code>int</code></td>
+                <td><code>0</code></td>
+                <td> Use hit times [BaseDigitiser] </td>
+              </tr>
+              <tr>
+                <td><code>timingCorrectForPropagation</code></td>
+                <td><code>int</code></td>
+                <td><code>0</code></td>
+                <td> Correct hit times for propagation: radial distance/c [BaseDigitiser] </td>
+              </tr>
+              <tr>
+                <td><code>timingWindowMin</code></td>
+                <td><code>float</code></td>
+                <td><code>-10.0</code></td>
+                <td> Time Window minimum time in ns [BaseDigitiser] </td>
+              </tr>
+              <tr>
+                <td><code>timingWindowMax</code></td>
+                <td><code>float</code></td>
+                <td><code>100.0</code></td>
+                <td> Time Window maximum time in ns [BaseDigitiser] </td>
+              </tr>
+              <tr>
+                <td><code>integrationMethod</code></td>
+                <td><code>string</code></td>
+                <td><code>Standard</code></td>
+                <td> Energy integration and time calculation method. Options: Standard, ROC [BaseDigitiser] </td>
+              </tr>
+              <tr>
+                <td><code>fastShaper</code></td>
+                <td><code>float</code></td>
+                <td><code>0.0</code></td>
+                <td> Fast shaper value. Unit in ns [BaseDigitiser] </td>
+              </tr>
+              <tr>
+                <td><code>slowShaper</code></td>
+                <td><code>float</code></td>
+                <td><code>0.0</code></td>
+                <td> Slow shaper value. Unit in ns [BaseDigitiser] </td>
+              </tr>
+              <tr>
+                <td><code>timingResolution</code></td>
+                <td><code>float</code></td>
+                <td><code>0.0</code></td>
+                <td> Time resolution to apply (gaussian smearing). Unit in ns [BaseDigitiser] </td>
+              </tr>
+              <tr>
+                <td><code>calibration_mip</code></td>
+                <td><code>float</code></td>
+                <td><code>0.0001</code></td>
+                <td> Average G4 deposited energy by MIP for calibration [BaseDigitiser] </td>
+              </tr>
+              <tr>
+                <td><code>miscalibration_uncorrel</code></td>
+                <td><code>float</code></td>
+                <td><code>0.0</code></td>
+                <td> Uncorrelated random Gaussian miscalibration (as a fraction: 1.0 = 100%) [BaseDigitiser] </td>
+              </tr>
+              <tr>
+                <td><code>miscalibration_correl</code></td>
+                <td><code>float</code></td>
+                <td><code>0.0</code></td>
+                <td> Correlated random Gaussian miscalibration (as a fraction: 1.0 = 100%) [BaseDigitiser] </td>
+              </tr>
+              <tr>
+                <td><code>deadCell_fraction</code></td>
+                <td><code>float</code></td>
+                <td><code>0.0</code></td>
+                <td> Random dead cell fraction (as a fraction: 0-&gt;1) [BaseDigitiser] </td>
+              </tr>
+              <tr>
+                <td><code>elec_noise_mip</code></td>
+                <td><code>float</code></td>
+                <td><code>0.0</code></td>
+                <td> Typical electronics noise (in MIP units) [BaseDigitiser] </td>
+              </tr>
+              <tr>
+                <td><code>elec_range_mip</code></td>
+                <td><code>float</code></td>
+                <td><code>2500.0</code></td>
+                <td> Maximum of dynamic range of electronics (in MIPs) [BaseDigitiser] </td>
+              </tr>
+              <tr>
+                <td><code>EncodingStringParameterName</code></td>
+                <td><code>string</code></td>
+                <td><code>GlobalCalorimeterReadoutID</code></td>
+                <td> The name of the DD4hep constant that contains the encoding string for calorimeters [BaseDigitiser] </td>
+              </tr>
+              <tr>
+                <td><code>threshold</code></td>
+                <td><code>float</code></td>
+                <td><code>0.5</code></td>
+                <td> Threshold for Hit [BaseDigitiser] </td>
+              </tr>
+              <tr>
+                <td><code>thresholdUnit</code></td>
+                <td><code>string</code></td>
+                <td><code>MIP</code></td>
+                <td> Unit for threshold. Can be &#34;GeV&#34;, &#34;MIP&#34; or &#34;px&#34;. MIP and px need properly set calibration constants [BaseDigitiser] </td>
+              </tr>
+              <tr>
+                <td><code>CaloType</code></td>
+                <td><code>string</code></td>
+                <td><code>em</code></td>
+                <td> Calorimeter Type: em, had, muon [BaseDigitiser] </td>
+              </tr>
+              <tr>
+                <td><code>CaloID</code></td>
+                <td><code>string</code></td>
+                <td><code>ecal</code></td>
+                <td> Calorimeter ID: ecal, hcal, yoke, lcal, lhcal, bcal [BaseDigitiser] </td>
+              </tr>
+              <tr>
+                <td><code>CaloLayout</code></td>
+                <td><code>string</code></td>
+                <td><code>barrel</code></td>
+                <td> Calorimeter Layout: barrel, endcap, ring, plug [BaseDigitiser] </td>
+              </tr>
+              <tr>
+                <td><code>silicon_pairEnergy</code></td>
+                <td><code>float</code></td>
+                <td><code>3.6</code></td>
+                <td> energy required to create e-h pair in silicon (in eV) [DigitiserSiliconMip] </td>
               </tr>
             </tbody>
           </table>
@@ -12896,7 +13390,13 @@ where the algorithm is found in the environment.</p>
                 <td><code>CorrectTimesForPropagation</code></td>
                 <td><code>bool</code></td>
                 <td><code>False</code></td>
-                <td> Correct hit time for the propagation: radial distance/c (default: false) [DDPlanarDigi] </td>
+                <td> Correct the stored hit time for the propagation time-of-flight: radial distance/c (default: false) [DDPlanarDigi] </td>
+              </tr>
+              <tr>
+                <td><code>CorrectTimeWindowForPropagation</code></td>
+                <td><code>bool</code></td>
+                <td><code>False</code></td>
+                <td> Correct the hit time for the propagation time-of-flight when applying the time window cut. The stored hit time is not affected (default: false) [DDPlanarDigi] </td>
               </tr>
               <tr>
                 <td><code>TimeWindowMin</code></td>
