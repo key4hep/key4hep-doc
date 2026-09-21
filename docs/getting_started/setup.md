@@ -18,7 +18,7 @@ Before sourcing the setup script, make sure the required operating-system
 packages are installed. See the [LCG Releases prerequisites](https://lcgdocs.web.cern.ch/lcgdocs/lcgreleases/introduction/#prerequisites)
 for the supported platforms and the current package requirements.
 
-In addition, nightly builds for AlmaLinux 9, Ubuntu 22.04 and Ubuntu 24.04 with
+In addition, nightly builds for AlmaLinux 9 and Ubuntu 26.04 with
 the latest version of most of the packages are available:
 
 ```bash
