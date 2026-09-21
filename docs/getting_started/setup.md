@@ -12,6 +12,12 @@ Ubuntu 22.04. For sourcing the releases, run:
 source /cvmfs/sw.hsf.org/key4hep/setup.sh
 ```
 
+## System prerequisites
+
+Before sourcing the setup script, make sure the required operating-system
+packages are installed. See the [LCG Releases prerequisites](https://lcgdocs.web.cern.ch/lcgdocs/lcgreleases/introduction/#prerequisites)
+for the supported platforms and the current package requirements.
+
 In addition, nightly builds for AlmaLinux 9, Ubuntu 22.04 and Ubuntu 24.04 with
 the latest version of most of the packages are available:
 
@@ -28,4 +34,3 @@ Nightly builds are intended for development and testing and they will be
 deleted after some time from `/cvmfs`. They will also introduce new features
 unannounced, so don't use these for anything else than development!
 ```
-
