@@ -2,6 +2,14 @@
 
 ## With CVMFS
 
+### System prerequisites
+
+Before sourcing the setup script, make sure the required operating-system
+packages are installed. See the [LCG Releases prerequisites](https://lcgdocs.web.cern.ch/lcgdocs/lcgreleases/introduction/#prerequisites)
+for the supported platforms and the current package requirements.
+
+### Setup
+
 Two builds with the key4hep stack are distributed on cvmfs. The releases happen
 every few months on demand (for example, if there is a new important feature or
 a breaking change) and at the moment AlmaLinux 9 (EL9, Rocky Linux 9), Ubuntu
@@ -11,12 +19,6 @@ Ubuntu 22.04. For sourcing the releases, run:
 ```bash
 source /cvmfs/sw.hsf.org/key4hep/setup.sh
 ```
-
-### System prerequisites
-
-Before sourcing the setup script, make sure the required operating-system
-packages are installed. See the [LCG Releases prerequisites](https://lcgdocs.web.cern.ch/lcgdocs/lcgreleases/introduction/#prerequisites)
-for the supported platforms and the current package requirements.
 
 In addition, nightly builds for AlmaLinux 9 and Ubuntu 26.04 with
 the latest version of most of the packages are available:
