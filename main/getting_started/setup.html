@@ -55,7 +55,11 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Getting key4hep</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#with-cvmfs">With CVMFS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#with-cvmfs">With CVMFS</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#system-prerequisites">System prerequisites</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#setup">Setup</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="help.html">Getting help</a></li>
@@ -125,6 +129,14 @@
 <h1>Getting key4hep<a class="headerlink" href="#getting-key4hep" title="Link to this heading"></a></h1>
 <section id="with-cvmfs">
 <h2>With CVMFS<a class="headerlink" href="#with-cvmfs" title="Link to this heading"></a></h2>
+<section id="system-prerequisites">
+<h3>System prerequisites<a class="headerlink" href="#system-prerequisites" title="Link to this heading"></a></h3>
+<p>Before sourcing the setup script, make sure the required operating-system
+packages are installed. See the <a class="reference external" href="https://lcgdocs.web.cern.ch/lcgdocs/lcgreleases/introduction/#prerequisites">LCG Releases prerequisites</a>
+for the supported platforms and the current package requirements.</p>
+</section>
+<section id="setup">
+<h3>Setup<a class="headerlink" href="#setup" title="Link to this heading"></a></h3>
 <p>Two builds with the key4hep stack are distributed on cvmfs. The releases happen
 every few months on demand (for example, if there is a new important feature or
 a breaking change) and at the moment AlmaLinux 9 (EL9, Rocky Linux 9), Ubuntu
@@ -133,7 +145,7 @@ Ubuntu 22.04. For sourcing the releases, run:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>/cvmfs/sw.hsf.org/key4hep/setup.sh
 </pre></div>
 </div>
-<p>In addition, nightly builds for AlmaLinux 9, Ubuntu 22.04 and Ubuntu 24.04 with
+<p>In addition, nightly builds for AlmaLinux 9 and Ubuntu 26.04 with
 the latest version of most of the packages are available:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>/cvmfs/sw-nightlies.hsf.org/key4hep/setup.sh
 </pre></div>
@@ -147,6 +159,7 @@ displayed with instructions on how to reproduce the current environment.</p>
 deleted after some time from <code class="docutils literal notranslate"><span class="pre">/cvmfs</span></code>. They will also introduce new features
 unannounced, so don’t use these for anything else than development!</p>
 </div>
+</section>
 </section>
 </section>
 
