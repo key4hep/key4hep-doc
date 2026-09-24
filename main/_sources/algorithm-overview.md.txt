@@ -4276,7 +4276,7 @@ Total: **218 algorithms** across **12 packages**.
               <tr>
                 <td><code>CrossingAngle</code></td>
                 <td><code>double</code></td>
-                <td><code>4.6547545e-310</code></td>
+                <td><code>4.6710107e-310</code></td>
                 <td> Half the crossing angle beam in [rad] [unknown owner type] </td>
               </tr>
               <tr>
@@ -11764,11 +11764,11 @@ Total: **218 algorithms** across **12 packages**.
           </table>
         </div>
       </div>
-      <div class="alg-card" data-name="DCHdigi_v01" data-lib="libDCHdigi.so" data-package="k4RecTracker">
+      <div class="alg-card" data-name="DCHdigi_v01" data-lib="libWireTrackerDigi.so" data-package="k4RecTracker">
         <div class="alg-card-header">
           <span class="alg-name">DCHdigi_v01</span>
           <span class="alg-card-right">
-            <span class="alg-lib-badge">libDCHdigi.so</span>
+            <span class="alg-lib-badge">libWireTrackerDigi.so</span>
             <span class="alg-card-toggle">&#9658;</span>
           </span>
         </div>
@@ -11865,124 +11865,11 @@ Total: **218 algorithms** across **12 packages**.
           </table>
         </div>
       </div>
-      <div class="alg-card" data-name="DCHdigi_v02" data-lib="libDCHdigi.so" data-package="k4RecTracker">
-        <div class="alg-card-header">
-          <span class="alg-name">DCHdigi_v02</span>
-          <span class="alg-card-right">
-            <span class="alg-lib-badge">libDCHdigi.so</span>
-            <span class="alg-card-toggle">&#9658;</span>
-          </span>
-        </div>
-        <div class="alg-card-body">
-          <table class="alg-props-table">
-            <thead>
-              <tr>
-                <th>Property</th>
-                <th>Type</th>
-                <th>Default</th>
-                <th>Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><code>InputSimHitCollection</code></td>
-                <td><code>vector&lt;DataObjID&gt;</code></td>
-                <td><code>[&quot;&quot;]</code></td>
-                <td>  [k4FWCore::details::MultiTransformer&lt;std::tuple&lt;edm4hep::SenseWireHitCollection,podio::LinkCollection&lt;edm4hep::TrackerHit,edm4hep::SimTrackerHit&gt; &gt; (edm4hep::SimTrackerHitCollection const&amp;,edm4hep::EventHeaderCollection const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
-              </tr>
-              <tr>
-                <td><code>HeaderName</code></td>
-                <td><code>vector&lt;DataObjID&gt;</code></td>
-                <td><code>[&quot;EventHeader&quot;]</code></td>
-                <td>  [k4FWCore::details::MultiTransformer&lt;std::tuple&lt;edm4hep::SenseWireHitCollection,podio::LinkCollection&lt;edm4hep::TrackerHit,edm4hep::SimTrackerHit&gt; &gt; (edm4hep::SimTrackerHitCollection const&amp;,edm4hep::EventHeaderCollection const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
-              </tr>
-              <tr>
-                <td><code>OutputDigihitCollection</code></td>
-                <td><code>vector&lt;DataObjID&gt;</code></td>
-                <td><code>[&quot;DCHDigi2Collection&quot;]</code></td>
-                <td>  [k4FWCore::details::MultiTransformer&lt;std::tuple&lt;edm4hep::SenseWireHitCollection,podio::LinkCollection&lt;edm4hep::TrackerHit,edm4hep::SimTrackerHit&gt; &gt; (edm4hep::SimTrackerHitCollection const&amp;,edm4hep::EventHeaderCollection const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
-              </tr>
-              <tr>
-                <td><code>OutputLinkCollection</code></td>
-                <td><code>vector&lt;DataObjID&gt;</code></td>
-                <td><code>[&quot;DCHDigi2SimLinkCollection&quot;]</code></td>
-                <td>  [k4FWCore::details::MultiTransformer&lt;std::tuple&lt;edm4hep::SenseWireHitCollection,podio::LinkCollection&lt;edm4hep::TrackerHit,edm4hep::SimTrackerHit&gt; &gt; (edm4hep::SimTrackerHitCollection const&amp;,edm4hep::EventHeaderCollection const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
-              </tr>
-              <tr>
-                <td><code>uidSvcName</code></td>
-                <td><code>string</code></td>
-                <td><code>UniqueIDGenSvc</code></td>
-                <td> The name of the UniqueIDGenSvc instance [DCHdigi_v02] </td>
-              </tr>
-              <tr>
-                <td><code>GeoSvcName</code></td>
-                <td><code>string</code></td>
-                <td><code>GeoSvc</code></td>
-                <td> The name of the GeoSvc instance [DCHdigi_v02] </td>
-              </tr>
-              <tr>
-                <td><code>DCH_name</code></td>
-                <td><code>string</code></td>
-                <td><code>DCH_v2</code></td>
-                <td> Name of the Drift Chamber detector [DCHdigi_v02] </td>
-              </tr>
-              <tr>
-                <td><code>zResolution_mm</code></td>
-                <td><code>double</code></td>
-                <td><code>1.0</code></td>
-                <td> Spatial resolution in the direction along the wire, in mm. [DCHdigi_v02] </td>
-              </tr>
-              <tr>
-                <td><code>xyResolution_mm</code></td>
-                <td><code>double</code></td>
-                <td><code>0.1</code></td>
-                <td> Spatial resolution in the direction perpendicular to the wire, in mm. [DCHdigi_v02] </td>
-              </tr>
-              <tr>
-                <td><code>Deadtime_ns</code></td>
-                <td><code>double</code></td>
-                <td><code>400.0</code></td>
-                <td> Deadtime of a cell in ns. [DCHdigi_v02] </td>
-              </tr>
-              <tr>
-                <td><code>DriftVelocity_um_per_ns</code></td>
-                <td><code>double</code></td>
-                <td><code>-1.0</code></td>
-                <td> Gas drift velocity in um/ns. If negative, automatically chosen based on GasType. Currently assumed constant for the drift time calculation. [DCHdigi_v02] </td>
-              </tr>
-              <tr>
-                <td><code>SignalVelocity_mm_per_ns</code></td>
-                <td><code>double</code></td>
-                <td><code>199.86164</code></td>
-                <td> Signal velocity in the wire in mm/ns. Default value: 2/3 of the speed of light. [DCHdigi_v02] </td>
-              </tr>
-              <tr>
-                <td><code>GasType</code></td>
-                <td><code>int</code></td>
-                <td><code>0</code></td>
-                <td> Gas type: 0: He(90%)-Isobutane(10%), 1: pure He, 2: Ar(50%)-Ethane(50%), 3: pure Ar. [DCHdigi_v02] </td>
-              </tr>
-              <tr>
-                <td><code>ReadoutWindowStartTime_ns</code></td>
-                <td><code>double</code></td>
-                <td><code>1.0</code></td>
-                <td> Together with ReadoutWindowDuration_ns, defines the readout window. Any DigiHits with arrival time before ReadoutWindowStartTime_ns are discarded. [DCHdigi_v02] </td>
-              </tr>
-              <tr>
-                <td><code>ReadoutWindowDuration_ns</code></td>
-                <td><code>double</code></td>
-                <td><code>450.0</code></td>
-                <td> Together with ReadoutWindowStartTime_ns, defines the readout window. Any DigiHits with arrival time after ReadoutWindowStartTime_ns + ReadoutWindowDuration_ns are discarded. [DCHdigi_v02] </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="alg-card" data-name="DCHsimpleDigitizer" data-lib="libDCHdigi.so" data-package="k4RecTracker">
+      <div class="alg-card" data-name="DCHsimpleDigitizer" data-lib="libWireTrackerDigi.so" data-package="k4RecTracker">
         <div class="alg-card-header">
           <span class="alg-name">DCHsimpleDigitizer</span>
           <span class="alg-card-right">
-            <span class="alg-lib-badge">libDCHdigi.so</span>
+            <span class="alg-lib-badge">libWireTrackerDigi.so</span>
             <span class="alg-card-toggle">&#9658;</span>
           </span>
         </div>
@@ -12031,11 +11918,11 @@ Total: **218 algorithms** across **12 packages**.
           </table>
         </div>
       </div>
-      <div class="alg-card" data-name="DCHsimpleDigitizerExtendedEdm" data-lib="libDCHdigi.so" data-package="k4RecTracker">
+      <div class="alg-card" data-name="DCHsimpleDigitizerExtendedEdm" data-lib="libWireTrackerDigi.so" data-package="k4RecTracker">
         <div class="alg-card-header">
           <span class="alg-name">DCHsimpleDigitizerExtendedEdm</span>
           <span class="alg-card-right">
-            <span class="alg-lib-badge">libDCHdigi.so</span>
+            <span class="alg-lib-badge">libWireTrackerDigi.so</span>
             <span class="alg-card-toggle">&#9658;</span>
           </span>
         </div>
@@ -12868,6 +12755,125 @@ Total: **218 algorithms** across **12 packages**.
                 <td><code>string</code></td>
                 <td><code></code></td>
                 <td> Name of the file containing debug histograms. [VTXdigitizerDetailed] </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="alg-card" data-name="WireTrackerDigi_v01" data-lib="libWireTrackerDigi.so" data-package="k4RecTracker">
+        <div class="alg-card-header">
+          <span class="alg-name">WireTrackerDigi_v01</span>
+          <span class="alg-card-right">
+            <span class="alg-lib-badge">libWireTrackerDigi.so</span>
+            <span class="alg-card-toggle">&#9658;</span>
+          </span>
+        </div>
+        <div class="alg-card-body">
+          <table class="alg-props-table">
+            <thead>
+              <tr>
+                <th>Property</th>
+                <th>Type</th>
+                <th>Default</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>InputSimHitCollection</code></td>
+                <td><code>vector&lt;DataObjID&gt;</code></td>
+                <td><code>[&quot;&quot;]</code></td>
+                <td>  [k4FWCore::details::MultiTransformer&lt;std::tuple&lt;edm4hep::SenseWireHitCollection,podio::LinkCollection&lt;edm4hep::TrackerHit,edm4hep::SimTrackerHit&gt; &gt; (edm4hep::SimTrackerHitCollection const&amp;,edm4hep::EventHeaderCollection const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
+              </tr>
+              <tr>
+                <td><code>HeaderName</code></td>
+                <td><code>vector&lt;DataObjID&gt;</code></td>
+                <td><code>[&quot;EventHeader&quot;]</code></td>
+                <td>  [k4FWCore::details::MultiTransformer&lt;std::tuple&lt;edm4hep::SenseWireHitCollection,podio::LinkCollection&lt;edm4hep::TrackerHit,edm4hep::SimTrackerHit&gt; &gt; (edm4hep::SimTrackerHitCollection const&amp;,edm4hep::EventHeaderCollection const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
+              </tr>
+              <tr>
+                <td><code>OutputDigihitCollection</code></td>
+                <td><code>vector&lt;DataObjID&gt;</code></td>
+                <td><code>[&quot;DCHDigi2Collection&quot;]</code></td>
+                <td>  [k4FWCore::details::MultiTransformer&lt;std::tuple&lt;edm4hep::SenseWireHitCollection,podio::LinkCollection&lt;edm4hep::TrackerHit,edm4hep::SimTrackerHit&gt; &gt; (edm4hep::SimTrackerHitCollection const&amp;,edm4hep::EventHeaderCollection const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
+              </tr>
+              <tr>
+                <td><code>OutputLinkCollection</code></td>
+                <td><code>vector&lt;DataObjID&gt;</code></td>
+                <td><code>[&quot;DCHDigi2SimLinkCollection&quot;]</code></td>
+                <td>  [k4FWCore::details::MultiTransformer&lt;std::tuple&lt;edm4hep::SenseWireHitCollection,podio::LinkCollection&lt;edm4hep::TrackerHit,edm4hep::SimTrackerHit&gt; &gt; (edm4hep::SimTrackerHitCollection const&amp;,edm4hep::EventHeaderCollection const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
+              </tr>
+              <tr>
+                <td><code>uidSvcName</code></td>
+                <td><code>string</code></td>
+                <td><code>UniqueIDGenSvc</code></td>
+                <td> The name of the UniqueIDGenSvc instance [WireTrackerDigi_v01] </td>
+              </tr>
+              <tr>
+                <td><code>GeoSvcName</code></td>
+                <td><code>string</code></td>
+                <td><code>GeoSvc</code></td>
+                <td> The name of the GeoSvc instance [WireTrackerDigi_v01] </td>
+              </tr>
+              <tr>
+                <td><code>DCH_name</code></td>
+                <td><code>string</code></td>
+                <td><code>DCH_v2</code></td>
+                <td> Name of the detector (eg, DCH_v2 or STT_o1_v01) [WireTrackerDigi_v01] </td>
+              </tr>
+              <tr>
+                <td><code>zResolution_mm</code></td>
+                <td><code>double</code></td>
+                <td><code>1.0</code></td>
+                <td> Spatial resolution in the direction along the wire, in mm. [WireTrackerDigi_v01] </td>
+              </tr>
+              <tr>
+                <td><code>xyResolution_mm</code></td>
+                <td><code>double</code></td>
+                <td><code>0.1</code></td>
+                <td> Spatial resolution in the direction perpendicular to the wire, in mm. [WireTrackerDigi_v01] </td>
+              </tr>
+              <tr>
+                <td><code>Deadtime_ns</code></td>
+                <td><code>double</code></td>
+                <td><code>400.0</code></td>
+                <td> Deadtime of a cell in ns. [WireTrackerDigi_v01] </td>
+              </tr>
+              <tr>
+                <td><code>DriftVelocity_um_per_ns</code></td>
+                <td><code>double</code></td>
+                <td><code>-1.0</code></td>
+                <td> Gas drift velocity in um/ns. If negative, automatically chosen based on GasType. Currently assumed constant for the drift time calculation. [WireTrackerDigi_v01] </td>
+              </tr>
+              <tr>
+                <td><code>SignalVelocity_mm_per_ns</code></td>
+                <td><code>double</code></td>
+                <td><code>199.86164</code></td>
+                <td> Signal velocity in the wire in mm/ns. Default value: 2/3 of the speed of light. [WireTrackerDigi_v01] </td>
+              </tr>
+              <tr>
+                <td><code>GasType</code></td>
+                <td><code>int</code></td>
+                <td><code>0</code></td>
+                <td> Gas type: 0: He(90%)-Isobutane(10%), 1: pure He, 2: Ar(50%)-Ethane(50%), 3: pure Ar. [WireTrackerDigi_v01] </td>
+              </tr>
+              <tr>
+                <td><code>ReadoutWindowStartTime_ns</code></td>
+                <td><code>double</code></td>
+                <td><code>1.0</code></td>
+                <td> Together with ReadoutWindowDuration_ns, defines the readout window. Any DigiHits with arrival time before ReadoutWindowStartTime_ns are discarded. [WireTrackerDigi_v01] </td>
+              </tr>
+              <tr>
+                <td><code>ReadoutWindowDuration_ns</code></td>
+                <td><code>double</code></td>
+                <td><code>450.0</code></td>
+                <td> Together with ReadoutWindowStartTime_ns, defines the readout window. Any DigiHits with arrival time after ReadoutWindowStartTime_ns + ReadoutWindowDuration_ns are discarded. [WireTrackerDigi_v01] </td>
+              </tr>
+              <tr>
+                <td><code>isSTT</code></td>
+                <td><code>bool</code></td>
+                <td><code>False</code></td>
+                <td> Set to true if using straw tubes, false for drift chamber. False by default. [WireTrackerDigi_v01] </td>
               </tr>
             </tbody>
           </table>
