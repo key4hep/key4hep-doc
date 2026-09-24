@@ -152,11 +152,11 @@ where the algorithm is found in the environment.</p>
 </div></section>
 <section id="algorithms">
 <h2>Algorithms<a class="headerlink" href="#algorithms" title="Link to this heading"></a></h2>
-<p>Total: <strong>218 algorithms</strong> across <strong>12 packages</strong>.</p>
-<div id="algorithm-overview" data-total="218" data-packages="12" data-item-label="algorithm">
+<p>Total: <strong>221 algorithms</strong> across <strong>12 packages</strong>.</p>
+<div id="algorithm-overview" data-total="221" data-packages="12" data-item-label="algorithm">
   <div class="alg-filter-bar">
     <input type="text" id="alg-search" placeholder="Filter by name, package, or library…" autocomplete="off" />
-    <span id="alg-stats">Showing 218 of 218 algorithms in 12 packages</span>
+    <span id="alg-stats">Showing 221 of 221 algorithms in 12 packages</span>
   </div>
   <div class="alg-package-group" data-package="k4ActsTracking">
     <div class="alg-package-header">
@@ -4395,7 +4395,7 @@ where the algorithm is found in the environment.</p>
               <tr>
                 <td><code>CrossingAngle</code></td>
                 <td><code>double</code></td>
-                <td><code>4.6710107e-310</code></td>
+                <td><code>4.636818e-310</code></td>
                 <td> Half the crossing angle beam in [rad] [unknown owner type] </td>
               </tr>
               <tr>
@@ -5100,7 +5100,7 @@ where the algorithm is found in the environment.</p>
     <div class="alg-package-header">
       <a class="alg-package-name" href="https://github.com/HEP-FCC/k4RecCalorimeter" target="_blank" rel="noopener noreferrer">k4RecCalorimeter</a>
       <span class="alg-package-meta">
-        <span class="alg-package-count">88 algorithms</span>
+        <span class="alg-package-count">90 algorithms</span>
         <span class="alg-package-toggle">&#9660;</span>
       </span>
     </div>
@@ -5650,6 +5650,95 @@ where the algorithm is found in the environment.</p>
                 <td><code>float</code></td>
                 <td><code>20.0</code></td>
                 <td> Sigma of Gaussian pulse [CaloDigitizerFunc] </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="alg-card" data-name="CaloDrivenClusterSeeding" data-lib="libk4RecFCCeeCalorimeterPlugins.so" data-package="k4RecCalorimeter">
+        <div class="alg-card-header">
+          <span class="alg-name">CaloDrivenClusterSeeding</span>
+          <span class="alg-card-right">
+            <span class="alg-lib-badge">libk4RecFCCeeCalorimeterPlugins.so</span>
+            <span class="alg-card-toggle">&#9658;</span>
+          </span>
+        </div>
+        <div class="alg-card-body">
+          <table class="alg-props-table">
+            <thead>
+              <tr>
+                <th>Property</th>
+                <th>Type</th>
+                <th>Default</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>InputCaloHitCollections</code></td>
+                <td><code>vector&lt;DataObjID&gt;</code></td>
+                <td><code>[]</code></td>
+                <td>  [k4FWCore::details::MultiTransformer&lt;std::tuple&lt;edm4hep::ClusterCollection,edm4hep::ClusterCollection&gt; (std::vector&lt;edm4hep::CalorimeterHitCollection const*,std::allocator&lt;edm4hep::CalorimeterHitCollection const*&gt; &gt; const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
+              </tr>
+              <tr>
+                <td><code>OutputSeedsA</code></td>
+                <td><code>DataObjID</code></td>
+                <td><code>CaloDrivenSeedsA</code></td>
+                <td>  [k4FWCore::details::MultiTransformer&lt;std::tuple&lt;edm4hep::ClusterCollection,edm4hep::ClusterCollection&gt; (std::vector&lt;edm4hep::CalorimeterHitCollection const*,std::allocator&lt;edm4hep::CalorimeterHitCollection const*&gt; &gt; const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
+              </tr>
+              <tr>
+                <td><code>OutputSeedsB</code></td>
+                <td><code>DataObjID</code></td>
+                <td><code>CaloDrivenSeedsB</code></td>
+                <td>  [k4FWCore::details::MultiTransformer&lt;std::tuple&lt;edm4hep::ClusterCollection,edm4hep::ClusterCollection&gt; (std::vector&lt;edm4hep::CalorimeterHitCollection const*,std::allocator&lt;edm4hep::CalorimeterHitCollection const*&gt; &gt; const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
+              </tr>
+              <tr>
+                <td><code>ReadoutName</code></td>
+                <td><code>string</code></td>
+                <td><code></code></td>
+                <td> Name of the calorimeter readout (used to retrieve the segmentation) [ClusterSeedingBase&lt;std::tuple&lt;edm4hep::ClusterCollection,edm4hep::ClusterCollection&gt; (std::vector&lt;edm4hep::CalorimeterHitCollection const*,std::allocator&lt;edm4hep::CalorimeterHitCollection const*&gt; &gt; const&amp;)&gt;] </td>
+              </tr>
+              <tr>
+                <td><code>FieldStringsToFilter</code></td>
+                <td><code>vector&lt;string&gt;</code></td>
+                <td><code>[]</code></td>
+                <td> BitField names the cell is filtered on, e.g. &#39;cherenkov&#39;, &#39;layer&#39;. A cell is kept only if it matches the corresponding FieldValuesToFilter entry, so these pairs select cells rather than exclude them. [ClusterSeedingBase&lt;std::tuple&lt;edm4hep::ClusterCollection,edm4hep::ClusterCollection&gt; (std::vector&lt;edm4hep::CalorimeterHitCollection const*,std::allocator&lt;edm4hep::CalorimeterHitCollection const*&gt; &gt; const&amp;)&gt;] </td>
+              </tr>
+              <tr>
+                <td><code>FieldValuesToFilter</code></td>
+                <td><code>vector&lt;int&gt;</code></td>
+                <td><code>[]</code></td>
+                <td> Values the cell must have for the corresponding FieldStringsToFilter entry [ClusterSeedingBase&lt;std::tuple&lt;edm4hep::ClusterCollection,edm4hep::ClusterCollection&gt; (std::vector&lt;edm4hep::CalorimeterHitCollection const*,std::allocator&lt;edm4hep::CalorimeterHitCollection const*&gt; &gt; const&amp;)&gt;] </td>
+              </tr>
+              <tr>
+                <td><code>W0</code></td>
+                <td><code>float</code></td>
+                <td><code>4.6</code></td>
+                <td> Log-weight offset in log-weighted barycenter: w_i = max(0, W0 + ln(E_i/E_tot)) [ClusterSeedingBase&lt;std::tuple&lt;edm4hep::ClusterCollection,edm4hep::ClusterCollection&gt; (std::vector&lt;edm4hep::CalorimeterHitCollection const*,std::allocator&lt;edm4hep::CalorimeterHitCollection const*&gt; &gt; const&amp;)&gt;] </td>
+              </tr>
+              <tr>
+                <td><code>SeedEnergyThresholdA</code></td>
+                <td><code>float</code></td>
+                <td><code>0.04</code></td>
+                <td> Minimum crystal energy [GeV] for a Type-A seed (local max, Von Neumann neighbourhood) [CaloDrivenClusterSeeding] </td>
+              </tr>
+              <tr>
+                <td><code>SeedEnergyThresholdB</code></td>
+                <td><code>float</code></td>
+                <td><code>0.02</code></td>
+                <td> Minimum crystal energy [GeV] for a Type-B seed (local max + connectivity) [CaloDrivenClusterSeeding] </td>
+              </tr>
+              <tr>
+                <td><code>MinAboveThresholdNeighbours</code></td>
+                <td><code>unsigned int</code></td>
+                <td><code>2</code></td>
+                <td> Minimum number of above-threshold neighbours (including seed) for a Type-B seed [CaloDrivenClusterSeeding] </td>
+              </tr>
+              <tr>
+                <td><code>VonNeumannDistance</code></td>
+                <td><code>unsigned int</code></td>
+                <td><code>2</code></td>
+                <td> Von Neumann distance for neighbourhood definition (applies to both seed types) [CaloDrivenClusterSeeding] </td>
               </tr>
             </tbody>
           </table>
@@ -6901,6 +6990,202 @@ where the algorithm is found in the environment.</p>
                 <td><code>string</code></td>
                 <td><code>TRAPPIST</code></td>
                 <td> Name of the algorithm used for particle identification [ClusterPi0PhotonID] </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="alg-card" data-name="ClusterSeedGrower" data-lib="libk4RecFCCeeCalorimeterPlugins.so" data-package="k4RecCalorimeter">
+        <div class="alg-card-header">
+          <span class="alg-name">ClusterSeedGrower</span>
+          <span class="alg-card-right">
+            <span class="alg-lib-badge">libk4RecFCCeeCalorimeterPlugins.so</span>
+            <span class="alg-card-toggle">&#9658;</span>
+          </span>
+        </div>
+        <div class="alg-card-body">
+          <table class="alg-props-table">
+            <thead>
+              <tr>
+                <th>Property</th>
+                <th>Type</th>
+                <th>Default</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>InputSeeds</code></td>
+                <td><code>vector&lt;DataObjID&gt;</code></td>
+                <td><code>[]</code></td>
+                <td>  [k4FWCore::details::MultiTransformer&lt;std::tuple&lt;edm4hep::ClusterCollection&gt; (std::vector&lt;edm4hep::ClusterCollection const*,std::allocator&lt;edm4hep::ClusterCollection const*&gt; &gt; const&amp;,std::vector&lt;edm4hep::CalorimeterHitCollection const*,std::allocator&lt;edm4hep::CalorimeterHitCollection const*&gt; &gt; const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
+              </tr>
+              <tr>
+                <td><code>InputHits</code></td>
+                <td><code>vector&lt;DataObjID&gt;</code></td>
+                <td><code>[]</code></td>
+                <td>  [k4FWCore::details::MultiTransformer&lt;std::tuple&lt;edm4hep::ClusterCollection&gt; (std::vector&lt;edm4hep::ClusterCollection const*,std::allocator&lt;edm4hep::ClusterCollection const*&gt; &gt; const&amp;,std::vector&lt;edm4hep::CalorimeterHitCollection const*,std::allocator&lt;edm4hep::CalorimeterHitCollection const*&gt; &gt; const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
+              </tr>
+              <tr>
+                <td><code>OutputClusters</code></td>
+                <td><code>DataObjID</code></td>
+                <td><code>TopoGrownClusters</code></td>
+                <td>  [k4FWCore::details::MultiTransformer&lt;std::tuple&lt;edm4hep::ClusterCollection&gt; (std::vector&lt;edm4hep::ClusterCollection const*,std::allocator&lt;edm4hep::ClusterCollection const*&gt; &gt; const&amp;,std::vector&lt;edm4hep::CalorimeterHitCollection const*,std::allocator&lt;edm4hep::CalorimeterHitCollection const*&gt; &gt; const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
+              </tr>
+              <tr>
+                <td><code>ReadoutName</code></td>
+                <td><code>string</code></td>
+                <td><code></code></td>
+                <td> Name of the calorimeter readout (used to retrieve the segmentation) [ClusterSeedingBase&lt;std::tuple&lt;edm4hep::ClusterCollection&gt; (std::vector&lt;edm4hep::ClusterCollection const*,std::allocator&lt;edm4hep::ClusterCollection const*&gt; &gt; const&amp;,std::vector&lt;edm4hep::CalorimeterHitCollection const*,std::allocator&lt;edm4hep::CalorimeterHitCollection const*&gt; &gt; const&amp;)&gt;] </td>
+              </tr>
+              <tr>
+                <td><code>FieldStringsToFilter</code></td>
+                <td><code>vector&lt;string&gt;</code></td>
+                <td><code>[]</code></td>
+                <td> BitField names the cell is filtered on, e.g. &#39;cherenkov&#39;, &#39;layer&#39;. A cell is kept only if it matches the corresponding FieldValuesToFilter entry, so these pairs select cells rather than exclude them. [ClusterSeedingBase&lt;std::tuple&lt;edm4hep::ClusterCollection&gt; (std::vector&lt;edm4hep::ClusterCollection const*,std::allocator&lt;edm4hep::ClusterCollection const*&gt; &gt; const&amp;,std::vector&lt;edm4hep::CalorimeterHitCollection const*,std::allocator&lt;edm4hep::CalorimeterHitCollection const*&gt; &gt; const&amp;)&gt;] </td>
+              </tr>
+              <tr>
+                <td><code>FieldValuesToFilter</code></td>
+                <td><code>vector&lt;int&gt;</code></td>
+                <td><code>[]</code></td>
+                <td> Values the cell must have for the corresponding FieldStringsToFilter entry [ClusterSeedingBase&lt;std::tuple&lt;edm4hep::ClusterCollection&gt; (std::vector&lt;edm4hep::ClusterCollection const*,std::allocator&lt;edm4hep::ClusterCollection const*&gt; &gt; const&amp;,std::vector&lt;edm4hep::CalorimeterHitCollection const*,std::allocator&lt;edm4hep::CalorimeterHitCollection const*&gt; &gt; const&amp;)&gt;] </td>
+              </tr>
+              <tr>
+                <td><code>W0</code></td>
+                <td><code>float</code></td>
+                <td><code>4.6</code></td>
+                <td> Log-weight offset in log-weighted barycenter: w_i = max(0, W0 + ln(E_i/E_tot)) [ClusterSeedingBase&lt;std::tuple&lt;edm4hep::ClusterCollection&gt; (std::vector&lt;edm4hep::ClusterCollection const*,std::allocator&lt;edm4hep::ClusterCollection const*&gt; &gt; const&amp;,std::vector&lt;edm4hep::CalorimeterHitCollection const*,std::allocator&lt;edm4hep::CalorimeterHitCollection const*&gt; &gt; const&amp;)&gt;] </td>
+              </tr>
+              <tr>
+                <td><code>FieldStringsToInclude</code></td>
+                <td><code>vector&lt;string&gt;</code></td>
+                <td><code>[]</code></td>
+                <td> BitField names used to include hits (e.g. &#39;cherenkov&#39;, &#39;layer&#39;) [ClusterSeedGrower] </td>
+              </tr>
+              <tr>
+                <td><code>FieldValuesToInclude</code></td>
+                <td><code>vector&lt;int&gt;</code></td>
+                <td><code>[]</code></td>
+                <td> Values corresponding to FieldStringsToInclude for hit selection [ClusterSeedGrower] </td>
+              </tr>
+              <tr>
+                <td><code>GrowThreshold</code></td>
+                <td><code>float</code></td>
+                <td><code>0.01</code></td>
+                <td> Minimum hit energy [GeV] for BFS propagation. Hits below this threshold block further topological growth. [ClusterSeedGrower] </td>
+              </tr>
+              <tr>
+                <td><code>HardThreshold</code></td>
+                <td><code>float</code></td>
+                <td><code>0.01</code></td>
+                <td> Minimum hit energy [GeV] to enter the growth pool. Hits below this are never picked up by growth; cells already carried by an input seed are kept regardless (HardThreshold &lt;= GrowThreshold is expected). [ClusterSeedGrower] </td>
+              </tr>
+              <tr>
+                <td><code>UnseededThreshold</code></td>
+                <td><code>float</code></td>
+                <td><code>0.04</code></td>
+                <td> Minimum hit energy [GeV] required to seed an unseeded cluster candidate. A group of &gt;= MinUnseededHits connected hits all above this threshold forms one unseeded cluster seed. [ClusterSeedGrower] </td>
+              </tr>
+              <tr>
+                <td><code>VNDistSeeded</code></td>
+                <td><code>unsigned int</code></td>
+                <td><code>2</code></td>
+                <td> Von Neumann neighbour distance used for BFS growth of seeded clusters. Distance 1 means only direct face-sharing neighbours; distance 2 allows one jump between the frontier and the candidate hit. [ClusterSeedGrower] </td>
+              </tr>
+              <tr>
+                <td><code>VNDistUnseeded</code></td>
+                <td><code>unsigned int</code></td>
+                <td><code>2</code></td>
+                <td> Von Neumann neighbour distance used both for seeding and BFS growth of unseeded clusters. [ClusterSeedGrower] </td>
+              </tr>
+              <tr>
+                <td><code>MinUnseededHits</code></td>
+                <td><code>unsigned int</code></td>
+                <td><code>2</code></td>
+                <td> Minimum number of connected above-UnseededThreshold hits required to form an unseeded cluster seed. [ClusterSeedGrower] </td>
+              </tr>
+              <tr>
+                <td><code>MaxOpeningAngle</code></td>
+                <td><code>float</code></td>
+                <td><code>0.3</code></td>
+                <td> Maximum opening angle [rad] between a cluster barycenter and an unowned hit for the hit to be considered for attachment in Step 5. Only clusters within this angle are compared by opening-angle distance. [ClusterSeedGrower] </td>
+              </tr>
+              <tr>
+                <td><code>AttachIsolatedHits</code></td>
+                <td><code>bool</code></td>
+                <td><code>False</code></td>
+                <td> Whether to attach remaining unassigned hitPool cells to the nearest cluster after BFS growth. Only hits above HardThreshold are eligible for attachment. [ClusterSeedGrower] </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="alg-card" data-name="ClusterSeedMerging" data-lib="libk4RecFCCeeCalorimeterPlugins.so" data-package="k4RecCalorimeter">
+        <div class="alg-card-header">
+          <span class="alg-name">ClusterSeedMerging</span>
+          <span class="alg-card-right">
+            <span class="alg-lib-badge">libk4RecFCCeeCalorimeterPlugins.so</span>
+            <span class="alg-card-toggle">&#9658;</span>
+          </span>
+        </div>
+        <div class="alg-card-body">
+          <table class="alg-props-table">
+            <thead>
+              <tr>
+                <th>Property</th>
+                <th>Type</th>
+                <th>Default</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>CaloDrivenSeeds</code></td>
+                <td><code>vector&lt;DataObjID&gt;</code></td>
+                <td><code>[]</code></td>
+                <td>  [k4FWCore::details::MultiTransformer&lt;std::tuple&lt;edm4hep::ClusterCollection&gt; (std::vector&lt;edm4hep::ClusterCollection const*,std::allocator&lt;edm4hep::ClusterCollection const*&gt; &gt; const&amp;,std::vector&lt;edm4hep::ClusterCollection const*,std::allocator&lt;edm4hep::ClusterCollection const*&gt; &gt; const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
+              </tr>
+              <tr>
+                <td><code>TrackDrivenSeeds</code></td>
+                <td><code>vector&lt;DataObjID&gt;</code></td>
+                <td><code>[]</code></td>
+                <td>  [k4FWCore::details::MultiTransformer&lt;std::tuple&lt;edm4hep::ClusterCollection&gt; (std::vector&lt;edm4hep::ClusterCollection const*,std::allocator&lt;edm4hep::ClusterCollection const*&gt; &gt; const&amp;,std::vector&lt;edm4hep::ClusterCollection const*,std::allocator&lt;edm4hep::ClusterCollection const*&gt; &gt; const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
+              </tr>
+              <tr>
+                <td><code>OutputMergedSeeds</code></td>
+                <td><code>DataObjID</code></td>
+                <td><code>MergedSeeds</code></td>
+                <td>  [k4FWCore::details::MultiTransformer&lt;std::tuple&lt;edm4hep::ClusterCollection&gt; (std::vector&lt;edm4hep::ClusterCollection const*,std::allocator&lt;edm4hep::ClusterCollection const*&gt; &gt; const&amp;,std::vector&lt;edm4hep::ClusterCollection const*,std::allocator&lt;edm4hep::ClusterCollection const*&gt; &gt; const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
+              </tr>
+              <tr>
+                <td><code>ReadoutName</code></td>
+                <td><code>string</code></td>
+                <td><code></code></td>
+                <td> Name of the calorimeter readout (used to retrieve the segmentation) [ClusterSeedingBase&lt;std::tuple&lt;edm4hep::ClusterCollection&gt; (std::vector&lt;edm4hep::ClusterCollection const*,std::allocator&lt;edm4hep::ClusterCollection const*&gt; &gt; const&amp;,std::vector&lt;edm4hep::ClusterCollection const*,std::allocator&lt;edm4hep::ClusterCollection const*&gt; &gt; const&amp;)&gt;] </td>
+              </tr>
+              <tr>
+                <td><code>FieldStringsToFilter</code></td>
+                <td><code>vector&lt;string&gt;</code></td>
+                <td><code>[]</code></td>
+                <td> BitField names the cell is filtered on, e.g. &#39;cherenkov&#39;, &#39;layer&#39;. A cell is kept only if it matches the corresponding FieldValuesToFilter entry, so these pairs select cells rather than exclude them. [ClusterSeedingBase&lt;std::tuple&lt;edm4hep::ClusterCollection&gt; (std::vector&lt;edm4hep::ClusterCollection const*,std::allocator&lt;edm4hep::ClusterCollection const*&gt; &gt; const&amp;,std::vector&lt;edm4hep::ClusterCollection const*,std::allocator&lt;edm4hep::ClusterCollection const*&gt; &gt; const&amp;)&gt;] </td>
+              </tr>
+              <tr>
+                <td><code>FieldValuesToFilter</code></td>
+                <td><code>vector&lt;int&gt;</code></td>
+                <td><code>[]</code></td>
+                <td> Values the cell must have for the corresponding FieldStringsToFilter entry [ClusterSeedingBase&lt;std::tuple&lt;edm4hep::ClusterCollection&gt; (std::vector&lt;edm4hep::ClusterCollection const*,std::allocator&lt;edm4hep::ClusterCollection const*&gt; &gt; const&amp;,std::vector&lt;edm4hep::ClusterCollection const*,std::allocator&lt;edm4hep::ClusterCollection const*&gt; &gt; const&amp;)&gt;] </td>
+              </tr>
+              <tr>
+                <td><code>W0</code></td>
+                <td><code>float</code></td>
+                <td><code>4.6</code></td>
+                <td> Log-weight offset in log-weighted barycenter: w_i = max(0, W0 + ln(E_i/E_tot)) [ClusterSeedingBase&lt;std::tuple&lt;edm4hep::ClusterCollection&gt; (std::vector&lt;edm4hep::ClusterCollection const*,std::allocator&lt;edm4hep::ClusterCollection const*&gt; &gt; const&amp;,std::vector&lt;edm4hep::ClusterCollection const*,std::allocator&lt;edm4hep::ClusterCollection const*&gt; &gt; const&amp;)&gt;] </td>
+              </tr>
+              <tr>
+                <td><code>MergeDistance</code></td>
+                <td><code>float</code></td>
+                <td><code>44.0</code></td>
+                <td> d in arctan(d / |pos_i|): half-angle cone size for adjacency (mm) [ClusterSeedMerging] </td>
               </tr>
             </tbody>
           </table>
@@ -8797,6 +9082,71 @@ where the algorithm is found in the environment.</p>
                 <td><code>string</code></td>
                 <td><code></code></td>
                 <td> Name of the output file [unknown owner type] </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="alg-card" data-name="CreateOpticalCaloCells" data-lib="libk4RecCalorimeterPlugins.so" data-package="k4RecCalorimeter">
+        <div class="alg-card-header">
+          <span class="alg-name">CreateOpticalCaloCells</span>
+          <span class="alg-card-right">
+            <span class="alg-lib-badge">libk4RecCalorimeterPlugins.so</span>
+            <span class="alg-card-toggle">&#9658;</span>
+          </span>
+        </div>
+        <div class="alg-card-body">
+          <table class="alg-props-table">
+            <thead>
+              <tr>
+                <th>Property</th>
+                <th>Type</th>
+                <th>Default</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>OpticalHits</code></td>
+                <td><code>DataObjID</code></td>
+                <td><code>SimCalorimeterHitCollection</code></td>
+                <td>  [k4FWCore::details::MultiTransformer&lt;std::tuple&lt;edm4hep::CalorimeterHitCollection,podio::LinkCollection&lt;edm4hep::CalorimeterHit,edm4hep::SimCalorimeterHit&gt; &gt; (edm4hep::SimCalorimeterHitCollection const&amp;,edm4hep::SimCalorimeterHitCollection const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
+              </tr>
+              <tr>
+                <td><code>TruthHits</code></td>
+                <td><code>DataObjID</code></td>
+                <td><code>SimCalorimeterHitCollection</code></td>
+                <td>  [k4FWCore::details::MultiTransformer&lt;std::tuple&lt;edm4hep::CalorimeterHitCollection,podio::LinkCollection&lt;edm4hep::CalorimeterHit,edm4hep::SimCalorimeterHit&gt; &gt; (edm4hep::SimCalorimeterHitCollection const&amp;,edm4hep::SimCalorimeterHitCollection const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
+              </tr>
+              <tr>
+                <td><code>OutputCollection</code></td>
+                <td><code>DataObjID</code></td>
+                <td><code>CalorimeterHitCollection</code></td>
+                <td>  [k4FWCore::details::MultiTransformer&lt;std::tuple&lt;edm4hep::CalorimeterHitCollection,podio::LinkCollection&lt;edm4hep::CalorimeterHit,edm4hep::SimCalorimeterHit&gt; &gt; (edm4hep::SimCalorimeterHitCollection const&amp;,edm4hep::SimCalorimeterHitCollection const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
+              </tr>
+              <tr>
+                <td><code>OutputLinks</code></td>
+                <td><code>DataObjID</code></td>
+                <td><code>CaloHitSimCaloHitLinkCollection</code></td>
+                <td>  [k4FWCore::details::MultiTransformer&lt;std::tuple&lt;edm4hep::CalorimeterHitCollection,podio::LinkCollection&lt;edm4hep::CalorimeterHit,edm4hep::SimCalorimeterHit&gt; &gt; (edm4hep::SimCalorimeterHitCollection const&amp;,edm4hep::SimCalorimeterHitCollection const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
+              </tr>
+              <tr>
+                <td><code>calibrationConstant</code></td>
+                <td><code>float</code></td>
+                <td><code>1.0</code></td>
+                <td> Multiplicative calibration from optical signal to cell energy [CreateOpticalCaloCells] </td>
+              </tr>
+              <tr>
+                <td><code>maskCherenkovForTruthLink</code></td>
+                <td><code>bool</code></td>
+                <td><code>False</code></td>
+                <td> Ignore the &#39;cherenkov&#39; cellID field when matching optical hits to truth hits [CreateOpticalCaloCells] </td>
+              </tr>
+              <tr>
+                <td><code>cherenkovFieldName</code></td>
+                <td><code>string</code></td>
+                <td><code>cherenkov</code></td>
+                <td> Name of the cellID field flagging the Cherenkov readout (used only when maskCherenkovForTruthLink=true) [CreateOpticalCaloCells] </td>
               </tr>
             </tbody>
           </table>
@@ -11343,6 +11693,83 @@ where the algorithm is found in the environment.</p>
           </table>
         </div>
       </div>
+      <div class="alg-card" data-name="TrackDrivenClusterSeeding" data-lib="libk4RecFCCeeCalorimeterPlugins.so" data-package="k4RecCalorimeter">
+        <div class="alg-card-header">
+          <span class="alg-name">TrackDrivenClusterSeeding</span>
+          <span class="alg-card-right">
+            <span class="alg-lib-badge">libk4RecFCCeeCalorimeterPlugins.so</span>
+            <span class="alg-card-toggle">&#9658;</span>
+          </span>
+        </div>
+        <div class="alg-card-body">
+          <table class="alg-props-table">
+            <thead>
+              <tr>
+                <th>Property</th>
+                <th>Type</th>
+                <th>Default</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>InputTrackCollection</code></td>
+                <td><code>DataObjID</code></td>
+                <td><code>TracksFromGenParticles</code></td>
+                <td>  [k4FWCore::details::MultiTransformer&lt;std::tuple&lt;edm4hep::ClusterCollection&gt; (edm4hep::TrackCollection const&amp;,std::vector&lt;edm4hep::CalorimeterHitCollection const*,std::allocator&lt;edm4hep::CalorimeterHitCollection const*&gt; &gt; const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
+              </tr>
+              <tr>
+                <td><code>InputCaloHitCollections</code></td>
+                <td><code>vector&lt;DataObjID&gt;</code></td>
+                <td><code>[]</code></td>
+                <td>  [k4FWCore::details::MultiTransformer&lt;std::tuple&lt;edm4hep::ClusterCollection&gt; (edm4hep::TrackCollection const&amp;,std::vector&lt;edm4hep::CalorimeterHitCollection const*,std::allocator&lt;edm4hep::CalorimeterHitCollection const*&gt; &gt; const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
+              </tr>
+              <tr>
+                <td><code>OutputSeedsC</code></td>
+                <td><code>DataObjID</code></td>
+                <td><code>TrackDrivenSeedsC</code></td>
+                <td>  [k4FWCore::details::MultiTransformer&lt;std::tuple&lt;edm4hep::ClusterCollection&gt; (edm4hep::TrackCollection const&amp;,std::vector&lt;edm4hep::CalorimeterHitCollection const*,std::allocator&lt;edm4hep::CalorimeterHitCollection const*&gt; &gt; const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
+              </tr>
+              <tr>
+                <td><code>ReadoutName</code></td>
+                <td><code>string</code></td>
+                <td><code></code></td>
+                <td> Name of the calorimeter readout (used to retrieve the segmentation) [ClusterSeedingBase&lt;std::tuple&lt;edm4hep::ClusterCollection&gt; (edm4hep::TrackCollection const&amp;,std::vector&lt;edm4hep::CalorimeterHitCollection const*,std::allocator&lt;edm4hep::CalorimeterHitCollection const*&gt; &gt; const&amp;)&gt;] </td>
+              </tr>
+              <tr>
+                <td><code>FieldStringsToFilter</code></td>
+                <td><code>vector&lt;string&gt;</code></td>
+                <td><code>[]</code></td>
+                <td> BitField names the cell is filtered on, e.g. &#39;cherenkov&#39;, &#39;layer&#39;. A cell is kept only if it matches the corresponding FieldValuesToFilter entry, so these pairs select cells rather than exclude them. [ClusterSeedingBase&lt;std::tuple&lt;edm4hep::ClusterCollection&gt; (edm4hep::TrackCollection const&amp;,std::vector&lt;edm4hep::CalorimeterHitCollection const*,std::allocator&lt;edm4hep::CalorimeterHitCollection const*&gt; &gt; const&amp;)&gt;] </td>
+              </tr>
+              <tr>
+                <td><code>FieldValuesToFilter</code></td>
+                <td><code>vector&lt;int&gt;</code></td>
+                <td><code>[]</code></td>
+                <td> Values the cell must have for the corresponding FieldStringsToFilter entry [ClusterSeedingBase&lt;std::tuple&lt;edm4hep::ClusterCollection&gt; (edm4hep::TrackCollection const&amp;,std::vector&lt;edm4hep::CalorimeterHitCollection const*,std::allocator&lt;edm4hep::CalorimeterHitCollection const*&gt; &gt; const&amp;)&gt;] </td>
+              </tr>
+              <tr>
+                <td><code>W0</code></td>
+                <td><code>float</code></td>
+                <td><code>4.6</code></td>
+                <td> Log-weight offset in log-weighted barycenter: w_i = max(0, W0 + ln(E_i/E_tot)) [ClusterSeedingBase&lt;std::tuple&lt;edm4hep::ClusterCollection&gt; (edm4hep::TrackCollection const&amp;,std::vector&lt;edm4hep::CalorimeterHitCollection const*,std::allocator&lt;edm4hep::CalorimeterHitCollection const*&gt; &gt; const&amp;)&gt;] </td>
+              </tr>
+              <tr>
+                <td><code>SeedEnergyThreshold</code></td>
+                <td><code>float</code></td>
+                <td><code>0.02</code></td>
+                <td> Minimum crystal energy [GeV] to be considered as a Type-C seed candidate [TrackDrivenClusterSeeding] </td>
+              </tr>
+              <tr>
+                <td><code>TrackWindow</code></td>
+                <td><code>float</code></td>
+                <td><code>0.05</code></td>
+                <td> Angular search cone half-angle [rad] around the track impact point: opening angle to the track impact direction &lt; TrackWindow [TrackDrivenClusterSeeding] </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
       <div class="alg-card" data-name="TubeLayerModuleThetaCaloTool" data-lib="libk4RecFCCeeCalorimeterPlugins.so" data-package="k4RecCalorimeter">
         <div class="alg-card-header">
           <span class="alg-name">TubeLayerModuleThetaCaloTool</span>
@@ -11637,83 +12064,6 @@ where the algorithm is found in the environment.</p>
           </table>
         </div>
       </div>
-      <div class="alg-card" data-name="k4__recCalo__HCalPhiCaloToolTestAlg" data-lib="libk4RecFCCeeCalorimeterTests.so" data-package="k4RecCalorimeter">
-        <div class="alg-card-header">
-          <span class="alg-name">k4__recCalo__HCalPhiCaloToolTestAlg</span>
-          <span class="alg-card-right">
-            <span class="alg-lib-badge">libk4RecFCCeeCalorimeterTests.so</span>
-            <span class="alg-card-toggle">&#9658;</span>
-          </span>
-        </div>
-        <div class="alg-card-body">
-          <table class="alg-props-table">
-            <thead>
-              <tr>
-                <th>Property</th>
-                <th>Type</th>
-                <th>Default</th>
-                <th>Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><code>ExpectedBarrelCells</code></td>
-                <td><code>int</code></td>
-                <td><code>0</code></td>
-                <td>  [k4::recCalo::HCalPhiCaloToolTestAlg] </td>
-              </tr>
-              <tr>
-                <td><code>ExpectedEndcapCells</code></td>
-                <td><code>int</code></td>
-                <td><code>0</code></td>
-                <td>  [k4::recCalo::HCalPhiCaloToolTestAlg] </td>
-              </tr>
-              <tr>
-                <td><code>ExpectedBarrelReadout</code></td>
-                <td><code>string</code></td>
-                <td><code></code></td>
-                <td>  [k4::recCalo::HCalPhiCaloToolTestAlg] </td>
-              </tr>
-              <tr>
-                <td><code>ExpectedEndcapReadout</code></td>
-                <td><code>string</code></td>
-                <td><code></code></td>
-                <td>  [k4::recCalo::HCalPhiCaloToolTestAlg] </td>
-              </tr>
-              <tr>
-                <td><code>GroupRows</code></td>
-                <td><code>bool</code></td>
-                <td><code>False</code></td>
-                <td>  [k4::recCalo::HCalPhiCaloToolTestAlg] </td>
-              </tr>
-              <tr>
-                <td><code>DumpCells</code></td>
-                <td><code>bool</code></td>
-                <td><code>False</code></td>
-                <td>  [k4::recCalo::HCalPhiCaloToolTestAlg] </td>
-              </tr>
-              <tr>
-                <td><code>HCalBarrelTool</code></td>
-                <td><code>PrivateToolHandle</code></td>
-                <td><code></code></td>
-                <td>  [k4::recCalo::HCalPhiCaloToolTestAlg] </td>
-              </tr>
-              <tr>
-                <td><code>HCalEndcapTool</code></td>
-                <td><code>PrivateToolHandle</code></td>
-                <td><code></code></td>
-                <td>  [k4::recCalo::HCalPhiCaloToolTestAlg] </td>
-              </tr>
-              <tr>
-                <td><code>GeoSvc</code></td>
-                <td><code>ServiceHandle</code></td>
-                <td><code>GeoSvc</code></td>
-                <td>  [k4::recCalo::HCalPhiCaloToolTestAlg] </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
       <div class="alg-card" data-name="k4__recCalo__ReadCaloCrosstalkMapTestAlg" data-lib="libk4RecCalorimeterTests.so" data-package="k4RecCalorimeter">
         <div class="alg-card-header">
           <span class="alg-name">k4__recCalo__ReadCaloCrosstalkMapTestAlg</span>
@@ -11767,71 +12117,13 @@ where the algorithm is found in the environment.</p>
           </table>
         </div>
       </div>
-      <div class="alg-card" data-name="k4__recCalo__TubeLayerModuleThetaCaloToolTestAlg" data-lib="libk4RecFCCeeCalorimeterTests.so" data-package="k4RecCalorimeter">
-        <div class="alg-card-header">
-          <span class="alg-name">k4__recCalo__TubeLayerModuleThetaCaloToolTestAlg</span>
-          <span class="alg-card-right">
-            <span class="alg-lib-badge">libk4RecFCCeeCalorimeterTests.so</span>
-            <span class="alg-card-toggle">&#9658;</span>
-          </span>
-        </div>
-        <div class="alg-card-body">
-          <table class="alg-props-table">
-            <thead>
-              <tr>
-                <th>Property</th>
-                <th>Type</th>
-                <th>Default</th>
-                <th>Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><code>CalorimeterTool</code></td>
-                <td><code>PrivateToolHandle</code></td>
-                <td><code>TubeLayerModuleThetaCaloTool/TubeLayerModuleThetaCaloTool</code></td>
-                <td>  [k4::recCalo::TubeLayerModuleThetaCaloToolTestAlg] </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="alg-card" data-name="k4__recCalo__TurbineEndcapCaloToolTestAlg" data-lib="libk4RecFCCeeCalorimeterTests.so" data-package="k4RecCalorimeter">
-        <div class="alg-card-header">
-          <span class="alg-name">k4__recCalo__TurbineEndcapCaloToolTestAlg</span>
-          <span class="alg-card-right">
-            <span class="alg-lib-badge">libk4RecFCCeeCalorimeterTests.so</span>
-            <span class="alg-card-toggle">&#9658;</span>
-          </span>
-        </div>
-        <div class="alg-card-body">
-          <table class="alg-props-table">
-            <thead>
-              <tr>
-                <th>Property</th>
-                <th>Type</th>
-                <th>Default</th>
-                <th>Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><code>CalorimeterTool</code></td>
-                <td><code>PrivateToolHandle</code></td>
-                <td><code>TurbineEndcapCaloTool/TurbineEndcapCaloTool</code></td>
-                <td>  [k4::recCalo::TurbineEndcapCaloToolTestAlg] </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
     </div>
   </div>
   <div class="alg-package-group" data-package="k4RecTracker">
     <div class="alg-package-header">
       <a class="alg-package-name" href="https://github.com/key4hep/k4RecTracker" target="_blank" rel="noopener noreferrer">k4RecTracker</a>
       <span class="alg-package-meta">
-        <span class="alg-package-count">14 algorithms</span>
+        <span class="alg-package-count">15 algorithms</span>
         <span class="alg-package-toggle">&#9660;</span>
       </span>
     </div>
@@ -11979,6 +12271,125 @@ where the algorithm is found in the environment.</p>
                 <td><code>string</code></td>
                 <td><code>dch_digi_alg_debug.root</code></td>
                 <td> name for the file that will contain the histograms for debugging [DCHdigi_v01] </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="alg-card" data-name="DCHdigi_v02" data-lib="libWireTrackerDigi.so" data-package="k4RecTracker">
+        <div class="alg-card-header">
+          <span class="alg-name">DCHdigi_v02</span>
+          <span class="alg-card-right">
+            <span class="alg-lib-badge">libWireTrackerDigi.so</span>
+            <span class="alg-card-toggle">&#9658;</span>
+          </span>
+        </div>
+        <div class="alg-card-body">
+          <table class="alg-props-table">
+            <thead>
+              <tr>
+                <th>Property</th>
+                <th>Type</th>
+                <th>Default</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>InputSimHitCollection</code></td>
+                <td><code>vector&lt;DataObjID&gt;</code></td>
+                <td><code>[&quot;&quot;]</code></td>
+                <td>  [k4FWCore::details::MultiTransformer&lt;std::tuple&lt;edm4hep::SenseWireHitCollection,podio::LinkCollection&lt;edm4hep::TrackerHit,edm4hep::SimTrackerHit&gt; &gt; (edm4hep::SimTrackerHitCollection const&amp;,edm4hep::EventHeaderCollection const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
+              </tr>
+              <tr>
+                <td><code>HeaderName</code></td>
+                <td><code>vector&lt;DataObjID&gt;</code></td>
+                <td><code>[&quot;EventHeader&quot;]</code></td>
+                <td>  [k4FWCore::details::MultiTransformer&lt;std::tuple&lt;edm4hep::SenseWireHitCollection,podio::LinkCollection&lt;edm4hep::TrackerHit,edm4hep::SimTrackerHit&gt; &gt; (edm4hep::SimTrackerHitCollection const&amp;,edm4hep::EventHeaderCollection const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
+              </tr>
+              <tr>
+                <td><code>OutputDigihitCollection</code></td>
+                <td><code>vector&lt;DataObjID&gt;</code></td>
+                <td><code>[&quot;DCHDigi2Collection&quot;]</code></td>
+                <td>  [k4FWCore::details::MultiTransformer&lt;std::tuple&lt;edm4hep::SenseWireHitCollection,podio::LinkCollection&lt;edm4hep::TrackerHit,edm4hep::SimTrackerHit&gt; &gt; (edm4hep::SimTrackerHitCollection const&amp;,edm4hep::EventHeaderCollection const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
+              </tr>
+              <tr>
+                <td><code>OutputLinkCollection</code></td>
+                <td><code>vector&lt;DataObjID&gt;</code></td>
+                <td><code>[&quot;DCHDigi2SimLinkCollection&quot;]</code></td>
+                <td>  [k4FWCore::details::MultiTransformer&lt;std::tuple&lt;edm4hep::SenseWireHitCollection,podio::LinkCollection&lt;edm4hep::TrackerHit,edm4hep::SimTrackerHit&gt; &gt; (edm4hep::SimTrackerHitCollection const&amp;,edm4hep::EventHeaderCollection const&amp;),Gaudi::Functional::Traits::use_&lt;&gt; &gt;] </td>
+              </tr>
+              <tr>
+                <td><code>uidSvcName</code></td>
+                <td><code>string</code></td>
+                <td><code>UniqueIDGenSvc</code></td>
+                <td> The name of the UniqueIDGenSvc instance [WireTrackerDigi_v01] </td>
+              </tr>
+              <tr>
+                <td><code>GeoSvcName</code></td>
+                <td><code>string</code></td>
+                <td><code>GeoSvc</code></td>
+                <td> The name of the GeoSvc instance [WireTrackerDigi_v01] </td>
+              </tr>
+              <tr>
+                <td><code>DCH_name</code></td>
+                <td><code>string</code></td>
+                <td><code>DCH_v2</code></td>
+                <td> Name of the detector (eg, DCH_v2 or STT_o1_v01) [WireTrackerDigi_v01] </td>
+              </tr>
+              <tr>
+                <td><code>zResolution_mm</code></td>
+                <td><code>double</code></td>
+                <td><code>1.0</code></td>
+                <td> Spatial resolution in the direction along the wire, in mm. [WireTrackerDigi_v01] </td>
+              </tr>
+              <tr>
+                <td><code>xyResolution_mm</code></td>
+                <td><code>double</code></td>
+                <td><code>0.1</code></td>
+                <td> Spatial resolution in the direction perpendicular to the wire, in mm. [WireTrackerDigi_v01] </td>
+              </tr>
+              <tr>
+                <td><code>Deadtime_ns</code></td>
+                <td><code>double</code></td>
+                <td><code>400.0</code></td>
+                <td> Deadtime of a cell in ns. [WireTrackerDigi_v01] </td>
+              </tr>
+              <tr>
+                <td><code>DriftVelocity_um_per_ns</code></td>
+                <td><code>double</code></td>
+                <td><code>-1.0</code></td>
+                <td> Gas drift velocity in um/ns. If negative, automatically chosen based on GasType. Currently assumed constant for the drift time calculation. [WireTrackerDigi_v01] </td>
+              </tr>
+              <tr>
+                <td><code>SignalVelocity_mm_per_ns</code></td>
+                <td><code>double</code></td>
+                <td><code>199.86164</code></td>
+                <td> Signal velocity in the wire in mm/ns. Default value: 2/3 of the speed of light. [WireTrackerDigi_v01] </td>
+              </tr>
+              <tr>
+                <td><code>GasType</code></td>
+                <td><code>int</code></td>
+                <td><code>0</code></td>
+                <td> Gas type: 0: He(90%)-Isobutane(10%), 1: pure He, 2: Ar(50%)-Ethane(50%), 3: pure Ar. [WireTrackerDigi_v01] </td>
+              </tr>
+              <tr>
+                <td><code>ReadoutWindowStartTime_ns</code></td>
+                <td><code>double</code></td>
+                <td><code>1.0</code></td>
+                <td> Together with ReadoutWindowDuration_ns, defines the readout window. Any DigiHits with arrival time before ReadoutWindowStartTime_ns are discarded. [WireTrackerDigi_v01] </td>
+              </tr>
+              <tr>
+                <td><code>ReadoutWindowDuration_ns</code></td>
+                <td><code>double</code></td>
+                <td><code>450.0</code></td>
+                <td> Together with ReadoutWindowStartTime_ns, defines the readout window. Any DigiHits with arrival time after ReadoutWindowStartTime_ns + ReadoutWindowDuration_ns are discarded. [WireTrackerDigi_v01] </td>
+              </tr>
+              <tr>
+                <td><code>isSTT</code></td>
+                <td><code>bool</code></td>
+                <td><code>False</code></td>
+                <td> Set to true if using straw tubes, false for drift chamber. False by default. [WireTrackerDigi_v01] </td>
               </tr>
             </tbody>
           </table>
