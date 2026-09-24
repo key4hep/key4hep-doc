@@ -49,7 +49,7 @@ jobs:
           gh search repos --owner=key4hep --archived=false --visibility=public --json name,url --limit 100 > key4hep_repositories.json
           gh search repos --owner=hep-fcc --archived=false --visibility=public --json name,url --limit 100 > hep-fcc_repositories.json
           gh search repos --owner=ilcsoft --archived=false --visibility=public --json name,url --limit 100 > ilcsoft_repositories.json
-      - uses: cvmfs-contrib/github-action-cvmfs@10197e000cc0add8e54ac4fb73d3ed44e2de72b4 # v5.5
+      - uses: cvmfs-contrib/github-action-cvmfs@72f2a8d366043978d6aebee154bc9ed321c2f2a8 # v5.6
       - uses: aidasoft/run-lcg-view@b4da52e1c5ccb70a60ad4e7216de0a90664d5849 # v6.0.2
         with:
           container: ubuntu2404
