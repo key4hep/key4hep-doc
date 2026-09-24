@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Generate Gaudi Functionals &mdash; Key4hep  documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/overview.css" type="text/css" />
+    <link rel="shortcut icon" href="../../../_static/favicon.png"/>
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../../_static/copybutton.js?v=f281be69"></script>
+        <script src="../../../_static/design-tabs.js?v=36754332"></script>
+        <script defer="defer" src="../../../_static/overview.js?v=96af7809"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Reading and writing EDM4hep files in Gaudi" href="../../k4fwcore/doc/PodioInputOutput.html" />
+    <link rel="prev" title="EDM4hep - The common event data model" href="../edm4hep_analysis/edm4hep_api_intro.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            Key4hep
+              <img src="../../../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/setup.html">Getting key4hep</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/help.html">Getting help</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/CONTRIBUTING.html">Contributing</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User Guides</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../README.html">Key4hep How-Tos and Instructions</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../edm4hep_analysis/edm4hep_api_intro.html">EDM4hep - The common event data model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../edm4hep_analysis/edm4hep_api_intro.html#podio-the-technical-infrastructure-on-which-things-run">podio - The technical infrastructure on which things run</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Generate Gaudi Functionals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#setup">Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#choosing-a-functional">Choosing a Functional</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#describing-collections">Describing collections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#a-first-consumer">A first Consumer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#a-transformer-with-properties">A Transformer with properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#implementing-operator">Implementing <code class="docutils literal notranslate"><span class="pre">operator()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#configuring-it-in-a-steering-file">Configuring it in a steering file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#building-and-running">Building and running</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#multiple-outputs">Multiple outputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#variable-length-runtime-collections">Variable-length (runtime) collections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#useful-options">Useful options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#safe-generation">Safe generation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#exercises">Exercises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#references">References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../k4fwcore/doc/PodioInputOutput.html">Reading and writing EDM4hep files in Gaudi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../k4fwcore/doc/k4run-args.html">Adding custom arguments to <code class="docutils literal notranslate"><span class="pre">k4run</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../k4fwcore/doc/k4run-args.html#interactive-python-prompt">Interactive python prompt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../k4fwcore/doc/algorithmTiming.html">Getting algorithm run time information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../k4marlinwrapper/doc/MarlinWrapperIntroduction.html">Wrapping Marlin processors in Gaudi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../k4edm4hep2lcioconv/doc/LCIO2EDM4hep.html">Standalone conversion from LCIO to EDM4hep</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../k4edm4hep2lcioconv/doc/LCIO2EDM4hep.html#library-usage-of-the-conversion-functions">Library usage of the conversion functions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials/README.html">Key4hep Tutorials</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../algorithm-overview.html">Gaudi Algorithm Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../processor-overview.html">Marlin Processor Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer Resources</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../developing-key4hep-software/README.html">Developing Key4hep</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../spack-build-instructions-for-librarians/README.html">Building Key4hep: For Librarians</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">More Information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../talks-and-presentations/README.html">Talks and Presentations</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Community Resources</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://cern.ch/fccsw">FCC software</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://fccsw-forum.web.cern.ch/">FCC SW forum</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://twiki.cern.ch/twiki/bin/view/CLIC/CLICSoftwareComputing">CLIC software</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://ilcsoft.desy.de/portal">ILC software</a></li>
+<li class="toctree-l1"><a class="reference external" href="http://cepcsoft.ihep.ac.cn/">CEPC software</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://mcd-wiki.web.cern.ch/software/">Muon Collider software</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">External Resources</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://edm4hep.web.cern.ch">EDM4hep</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://key4hep.web.cern.ch/podio">podio</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://gaudi.web.cern.ch/doxygen/v40r0/index.html">Gaudi (doxygen)</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://acts.readthedocs.io">Acts</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Key4hep</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../README.html">Key4hep How-Tos and Instructions</a></li>
+      <li class="breadcrumb-item active">Generate Gaudi Functionals</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/how-tos/key4hep-tutorials/generate_gaudi_functionals/README.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="generate-gaudi-functionals">
+<h1>Generate Gaudi Functionals<a class="headerlink" href="#generate-gaudi-functionals" title="Link to this heading"></a></h1>
+<p>In this tutorial we use <code class="docutils literal notranslate"><span class="pre">generateFunctional</span></code>, a small command-line helper shipped
+with <a class="reference external" href="https://github.com/key4hep/k4FWCore"><code class="docutils literal notranslate"><span class="pre">k4FWCore</span></code></a>, to generate framework-correct
+C++ scaffolding for Gaudi Functional algorithms. A Functional algorithm needs several
+pieces to agree with each other: the framework base class, the C++ input and output
+types, the ordering of the constructor <code class="docutils literal notranslate"><span class="pre">KeyValue</span></code>s, the <code class="docutils literal notranslate"><span class="pre">operator()</span></code> signature and
+return type, the EDM4hep/podio includes and the component declaration. <code class="docutils literal notranslate"><span class="pre">generateFunctional</span></code>
+writes all of this from a compact description of the collections and properties, so that
+you can focus on the physics logic in <code class="docutils literal notranslate"><span class="pre">operator()</span></code>.</p>
+<p>The generator does not replace understanding the framework, and it does not write the
+algorithm for you: you still supply the collection types and names, and you still
+implement the event loop. What it gives you is a clean, compilable starting point.</p>
+</section>
+<section id="setup">
+<h1>Setup<a class="headerlink" href="#setup" title="Link to this heading"></a></h1>
+<p>The tutorial needs a Key4hep environment that contains <code class="docutils literal notranslate"><span class="pre">generateFunctional</span></code> (k4FWCore
+with <a class="reference external" href="https://github.com/key4hep/k4FWCore/pull/372">PR #372</a> or later). On any machine
+with CVMFS, source a recent stack:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>/cvmfs/sw.hsf.org/key4hep/setup.sh
+</pre></div>
+</div>
+<p>Once k4FWCore is installed, the command is on your <code class="docutils literal notranslate"><span class="pre">PATH</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>generateFunctional<span class="w"> </span>--help
+</pre></div>
+</div>
+<p>From a source checkout it can also be run directly (it is executable) or through Python:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>k4FWCore/helpers
+./generateFunctional<span class="w"> </span>--help<span class="w">            </span><span class="c1"># executable</span>
+python3<span class="w"> </span>generateFunctional<span class="w"> </span>--help<span class="w">      </span><span class="c1"># needs jinja2 in the environment</span>
+</pre></div>
+</div>
+<p>Plain Python execution requires <code class="docutils literal notranslate"><span class="pre">jinja2</span></code>; running through <code class="docutils literal notranslate"><span class="pre">uv</span></code> (<code class="docutils literal notranslate"><span class="pre">uv</span> <span class="pre">run</span> <span class="pre">--script</span> <span class="pre">generateFunctional</span> <span class="pre">...</span></code>)
+is an optional alternative that provisions it automatically.</p>
+</section>
+<section id="choosing-a-functional">
+<h1>Choosing a Functional<a class="headerlink" href="#choosing-a-functional" title="Link to this heading"></a></h1>
+<p>The kind of Functional you need is determined by how many collections it reads and
+writes. <code class="docutils literal notranslate"><span class="pre">generateFunctional</span></code> infers it from the number of <code class="docutils literal notranslate"><span class="pre">--inputs</span></code> and <code class="docutils literal notranslate"><span class="pre">--outputs</span></code>:</p>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>Inputs</th>
+<th>Outputs</th>
+<th>Generated Functional</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>one or more</td>
+<td>none</td>
+<td><code>Consumer</code></td>
+</tr>
+<tr>
+<td>none</td>
+<td>one or more</td>
+<td><code>Producer</code></td>
+</tr>
+<tr>
+<td>one or more</td>
+<td>one</td>
+<td><code>Transformer</code></td>
+</tr>
+<tr>
+<td>one or more</td>
+<td>two or more</td>
+<td><code>MultiTransformer</code></td>
+</tr>
+<tr>
+<td>one or more</td>
+<td>a Boolean decision</td>
+<td><code>FilterPredicate</code></td>
+</tr>
+</tbody>
+</table>
+<p>Only the filter must be requested explicitly, because it cannot be told apart from a
+consumer by counting collections:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>generateFunctional<span class="w"> </span>MyFilter<span class="w"> </span>filter<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-i<span class="w"> </span><span class="s1">&#39;edm4hep::MCParticleCollection:MCParticles&#39;</span>
+</pre></div>
+</div>
+<p>A <code class="docutils literal notranslate"><span class="pre">Producer</span></code> with more than one output stays a <code class="docutils literal notranslate"><span class="pre">Producer</span></code> and returns a <code class="docutils literal notranslate"><span class="pre">std::tuple</span></code>;
+a <code class="docutils literal notranslate"><span class="pre">Transformer</span></code> with more than one output is promoted to a <code class="docutils literal notranslate"><span class="pre">MultiTransformer</span></code>.</p>
+</section>
+<section id="describing-collections">
+<h1>Describing collections<a class="headerlink" href="#describing-collections" title="Link to this heading"></a></h1>
+<p>Each input and output is a <code class="docutils literal notranslate"><span class="pre">TYPE:KEY</span></code> pair:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">C</span><span class="o">++</span><span class="n">CollectionType</span><span class="p">:</span><span class="n">SteeringPropertyName</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">TYPE</span></code> becomes the C++ collection type (templated types such as
+<code class="docutils literal notranslate"><span class="pre">podio::UserDataCollection&lt;float&gt;</span></code> are supported).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">KEY</span></code> becomes the configurable collection property that you set in the Python steering
+file. It is optional; if omitted the generator derives one from the type by stripping
+the namespace and the <code class="docutils literal notranslate"><span class="pre">Collection</span></code> suffix.</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>-o<span class="w"> </span><span class="s1">&#39;edm4hep::MCParticleCollection&#39;</span>
+<span class="c1"># default key: MCParticles</span>
+</pre></div>
+</div>
+<p>Gaudi properties use a similar <code class="docutils literal notranslate"><span class="pre">TYPE:NAME:DEFAULT[:DESCRIPTION]</span></code> form:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>-p<span class="w"> </span><span class="s1">&#39;double:NoiseMean:0.0:Gaussian noise mean in GeV&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">   </span><span class="s1">&#39;double:NoiseSigma:0.001:Gaussian noise width in GeV&#39;</span>
+</pre></div>
+</div>
+</section>
+<section id="a-first-consumer">
+<h1>A first Consumer<a class="headerlink" href="#a-first-consumer" title="Link to this heading"></a></h1>
+<p>A <code class="docutils literal notranslate"><span class="pre">Consumer</span></code> reads one or more collections and produces nothing — ideal for monitoring,
+validation, or filling histograms. Generate one that reads calorimeter simulation hits:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>generateFunctional<span class="w"> </span>EventStats<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-i<span class="w"> </span><span class="s1">&#39;edm4hep::SimCalorimeterHitCollection:SimCaloHits&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-p<span class="w"> </span><span class="s1">&#39;double:EnergyThreshold:0.0:Minimum hit energy in GeV&#39;</span>
+</pre></div>
+</div>
+<p>With one input and no output the generator infers a <code class="docutils literal notranslate"><span class="pre">Consumer</span></code>:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span><span class="w"> </span><span class="nc">EventStats</span><span class="w"> </span><span class="k">final</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">k4FWCore</span><span class="o">::</span><span class="n">Consumer</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">edm4hep</span><span class="o">::</span><span class="n">SimCalorimeterHitCollection</span><span class="o">&amp;</span><span class="p">)</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">EventStats</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">ISvcLocator</span><span class="o">*</span><span class="w"> </span><span class="n">svcLoc</span><span class="p">)</span>
+<span class="w">      </span><span class="o">:</span><span class="w"> </span><span class="n">Consumer</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">svcLoc</span><span class="p">,</span><span class="w"> </span><span class="n">KeyValue</span><span class="p">(</span><span class="s">&quot;SimCaloHits&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;SimCaloHits&quot;</span><span class="p">))</span><span class="w"> </span><span class="p">{}</span>
+
+<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="k">operator</span><span class="p">()(</span><span class="k">const</span><span class="w"> </span><span class="n">edm4hep</span><span class="o">::</span><span class="n">SimCalorimeterHitCollection</span><span class="o">&amp;</span><span class="w"> </span><span class="n">SimCaloHits</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">debug</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Received SimCaloHits with &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">SimCaloHits</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; elements&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endmsg</span><span class="p">;</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">elem</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">SimCaloHits</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="c1">// TODO: process elem</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="n">Gaudi</span><span class="o">::</span><span class="n">Property</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">m_energyThreshold</span><span class="p">{</span>
+<span class="w">      </span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;EnergyThreshold&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Minimum hit energy in GeV&quot;</span><span class="p">};</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</section>
+<section id="a-transformer-with-properties">
+<h1>A Transformer with properties<a class="headerlink" href="#a-transformer-with-properties" title="Link to this heading"></a></h1>
+<p>A <code class="docutils literal notranslate"><span class="pre">Transformer</span></code> reads collections and returns exactly one. Generate the scaffold for a
+simple calorimeter digitizer, place its properties under <code class="docutils literal notranslate"><span class="pre">private:</span></code>, and also emit a
+standalone <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>generateFunctional<span class="w"> </span>RandomNoiseDigitizer<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-i<span class="w"> </span><span class="s1">&#39;edm4hep::SimCalorimeterHitCollection:InputCollection&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-o<span class="w"> </span><span class="s1">&#39;edm4hep::CalorimeterHitCollection:OutputCollection&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-p<span class="w"> </span><span class="s1">&#39;double:NoiseMean:0.0:Gaussian noise mean in GeV&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">     </span><span class="s1">&#39;double:NoiseSigma:0.001:Gaussian noise width in GeV&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--private-properties<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--cmake
+</pre></div>
+</div>
+<p>This writes <code class="docutils literal notranslate"><span class="pre">RandomNoiseDigitizer.cpp</span></code> and <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code>.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+The generated <code class="docutils literal notranslate"><span class="pre">RandomNoiseDigitizer.cpp</span></code><div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;k4FWCore/Transformer.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;Gaudi/Property.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;edm4hep/CalorimeterHitCollection.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;edm4hep/SimCalorimeterHitCollection.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string&gt;</span>
+
+<span class="k">struct</span><span class="w"> </span><span class="nc">RandomNoiseDigitizer</span><span class="w"> </span><span class="k">final</span>
+<span class="w">    </span><span class="o">:</span><span class="w"> </span><span class="n">k4FWCore</span><span class="o">::</span><span class="n">Transformer</span><span class="o">&lt;</span><span class="n">edm4hep</span><span class="o">::</span><span class="n">CalorimeterHitCollection</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">edm4hep</span><span class="o">::</span><span class="n">SimCalorimeterHitCollection</span><span class="o">&amp;</span><span class="p">)</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">  </span><span class="n">RandomNoiseDigitizer</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">ISvcLocator</span><span class="o">*</span><span class="w"> </span><span class="n">svcLoc</span><span class="p">)</span>
+<span class="w">      </span><span class="o">:</span><span class="w"> </span><span class="n">Transformer</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">svcLoc</span><span class="p">,</span>
+<span class="w">                    </span><span class="p">{</span><span class="n">KeyValue</span><span class="p">(</span><span class="s">&quot;InputCollection&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;InputCollection&quot;</span><span class="p">)},</span>
+<span class="w">                    </span><span class="p">{</span><span class="n">KeyValue</span><span class="p">(</span><span class="s">&quot;OutputCollection&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;OutputCollection&quot;</span><span class="p">)})</span><span class="w"> </span><span class="p">{}</span>
+
+<span class="w">  </span><span class="n">edm4hep</span><span class="o">::</span><span class="n">CalorimeterHitCollection</span><span class="w"> </span><span class="k">operator</span><span class="p">()(</span>
+<span class="w">      </span><span class="k">const</span><span class="w"> </span><span class="n">edm4hep</span><span class="o">::</span><span class="n">SimCalorimeterHitCollection</span><span class="o">&amp;</span><span class="w"> </span><span class="n">InputCollection</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// TODO: implement</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">edm4hep</span><span class="o">::</span><span class="n">CalorimeterHitCollection</span><span class="p">{};</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="k">private</span><span class="o">:</span>
+<span class="w">  </span><span class="n">Gaudi</span><span class="o">::</span><span class="n">Property</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">m_noiseMean</span><span class="p">{</span>
+<span class="w">      </span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;NoiseMean&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Gaussian noise mean in GeV&quot;</span><span class="p">};</span>
+<span class="w">  </span><span class="n">Gaudi</span><span class="o">::</span><span class="n">Property</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">m_noiseSigma</span><span class="p">{</span>
+<span class="w">      </span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;NoiseSigma&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">0.001</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Gaussian noise width in GeV&quot;</span><span class="p">};</span>
+<span class="p">};</span>
+
+<span class="n">DECLARE_COMPONENT</span><span class="p">(</span><span class="n">RandomNoiseDigitizer</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details><p>The generated class is a valid scaffold: correct includes, the right base-class
+signature, ordered constructor <code class="docutils literal notranslate"><span class="pre">KeyValue</span></code>s, a type-safe <code class="docutils literal notranslate"><span class="pre">operator()</span></code>, the requested
+<code class="docutils literal notranslate"><span class="pre">Gaudi::Property</span></code> members, and the <code class="docutils literal notranslate"><span class="pre">DECLARE_COMPONENT</span></code> line that lets Gaudi load the
+algorithm. The one part you are expected to edit is <code class="docutils literal notranslate"><span class="pre">operator()</span></code>.</p>
+</section>
+<section id="implementing-operator">
+<h1>Implementing <code class="docutils literal notranslate"><span class="pre">operator()</span></code><a class="headerlink" href="#implementing-operator" title="Link to this heading"></a></h1>
+<p>Replace the generated <code class="docutils literal notranslate"><span class="pre">TODO</span></code> with the algorithm logic. <code class="docutils literal notranslate"><span class="pre">operator()</span></code> runs once per event
+and is <code class="docutils literal notranslate"><span class="pre">const</span></code> to support thread-safe scheduling, so avoid mutable event state in
+members.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">edm4hep</span><span class="o">::</span><span class="n">CalorimeterHitCollection</span><span class="w"> </span><span class="nf">operator</span><span class="p">()(</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">edm4hep</span><span class="o">::</span><span class="n">SimCalorimeterHitCollection</span><span class="o">&amp;</span><span class="w"> </span><span class="n">input</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">edm4hep</span><span class="o">::</span><span class="n">CalorimeterHitCollection</span><span class="w"> </span><span class="n">output</span><span class="p">;</span>
+
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">simHit</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">input</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">digiHit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">output</span><span class="p">.</span><span class="n">create</span><span class="p">();</span>
+
+<span class="w">    </span><span class="c1">// Exercise: draw Gaussian noise from the Key4hep/Gaudi random-number service.</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">noise</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">digiHit</span><span class="p">.</span><span class="n">setCellID</span><span class="p">(</span><span class="n">simHit</span><span class="p">.</span><span class="n">getCellID</span><span class="p">());</span>
+<span class="w">    </span><span class="n">digiHit</span><span class="p">.</span><span class="n">setEnergy</span><span class="p">(</span><span class="n">simHit</span><span class="p">.</span><span class="n">getEnergy</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">noise</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">output</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="configuring-it-in-a-steering-file">
+<h1>Configuring it in a steering file<a class="headerlink" href="#configuring-it-in-a-steering-file" title="Link to this heading"></a></h1>
+<p>The <code class="docutils literal notranslate"><span class="pre">KEY</span></code> values you passed on the command line become the configurable collection
+properties. A minimal steering file for the digitizer:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">Gaudi.Configuration</span><span class="w"> </span><span class="kn">import</span> <span class="n">INFO</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">Configurables</span><span class="w"> </span><span class="kn">import</span> <span class="n">RandomNoiseDigitizer</span><span class="p">,</span> <span class="n">EventDataSvc</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">k4FWCore</span><span class="w"> </span><span class="kn">import</span> <span class="n">ApplicationMgr</span><span class="p">,</span> <span class="n">IOSvc</span>
+
+<span class="n">svc</span> <span class="o">=</span> <span class="n">IOSvc</span><span class="p">(</span><span class="s2">&quot;IOSvc&quot;</span><span class="p">)</span>
+<span class="n">svc</span><span class="o">.</span><span class="n">Input</span> <span class="o">=</span> <span class="s2">&quot;sim_edm4hep.root&quot;</span>
+<span class="n">svc</span><span class="o">.</span><span class="n">Output</span> <span class="o">=</span> <span class="s2">&quot;digi_edm4hep.root&quot;</span>
+
+<span class="n">digitizer</span> <span class="o">=</span> <span class="n">RandomNoiseDigitizer</span><span class="p">(</span>
+    <span class="s2">&quot;RandomNoiseDigitizer&quot;</span><span class="p">,</span>
+    <span class="n">InputCollection</span><span class="o">=</span><span class="s2">&quot;ECalBarrelCollection&quot;</span><span class="p">,</span>
+    <span class="n">OutputCollection</span><span class="o">=</span><span class="s2">&quot;ECalBarrelDigiHits&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">digitizer</span><span class="o">.</span><span class="n">NoiseMean</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="n">digitizer</span><span class="o">.</span><span class="n">NoiseSigma</span> <span class="o">=</span> <span class="mf">0.001</span>
+
+<span class="n">ApplicationMgr</span><span class="p">(</span>
+    <span class="n">TopAlg</span><span class="o">=</span><span class="p">[</span><span class="n">digitizer</span><span class="p">],</span>
+    <span class="n">EvtSel</span><span class="o">=</span><span class="s2">&quot;NONE&quot;</span><span class="p">,</span>
+    <span class="n">EvtMax</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+    <span class="n">ExtSvc</span><span class="o">=</span><span class="p">[</span><span class="n">EventDataSvc</span><span class="p">(</span><span class="s2">&quot;EventDataSvc&quot;</span><span class="p">)],</span>
+    <span class="n">OutputLevel</span><span class="o">=</span><span class="n">INFO</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="building-and-running">
+<h1>Building and running<a class="headerlink" href="#building-and-running" title="Link to this heading"></a></h1>
+<p>For the standalone scaffold created with <code class="docutils literal notranslate"><span class="pre">--cmake</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cmake<span class="w"> </span>-S<span class="w"> </span>.<span class="w"> </span>-B<span class="w"> </span>build
+cmake<span class="w"> </span>--build<span class="w"> </span>build<span class="w"> </span>-j
+</pre></div>
+</div>
+<p>To add the algorithm to an existing Key4hep package instead, move the generated <code class="docutils literal notranslate"><span class="pre">.cpp</span></code>
+into the package’s component source directory, add it to the package’s
+<code class="docutils literal notranslate"><span class="pre">gaudi_add_module(...)</span></code> sources, and rebuild. Then run the steering file:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>k4run<span class="w"> </span>runRandomNoiseDigitizer.py
+</pre></div>
+</div>
+</section>
+<section id="multiple-outputs">
+<h1>Multiple outputs<a class="headerlink" href="#multiple-outputs" title="Link to this heading"></a></h1>
+<p>Give a transformer more than one output and the generator produces a <code class="docutils literal notranslate"><span class="pre">MultiTransformer</span></code>
+that returns a tuple:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>generateFunctional<span class="w"> </span>SplitParticles<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-i<span class="w"> </span><span class="s1">&#39;edm4hep::MCParticleCollection:MCParticles&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-o<span class="w"> </span><span class="s1">&#39;edm4hep::MCParticleCollection:ChargedParticles&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">     </span><span class="s1">&#39;edm4hep::MCParticleCollection:NeutralParticles&#39;</span>
+</pre></div>
+</div>
+<p>The return type is emitted as a <code class="docutils literal notranslate"><span class="pre">retType</span></code> alias and the stub returns placeholder
+collections that you rename as you implement:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">retType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">tuple</span><span class="o">&lt;</span>
+<span class="w">    </span><span class="n">edm4hep</span><span class="o">::</span><span class="n">MCParticleCollection</span><span class="p">,</span>
+<span class="w">    </span><span class="n">edm4hep</span><span class="o">::</span><span class="n">MCParticleCollection</span><span class="o">&gt;</span><span class="p">;</span>
+
+<span class="c1">// ... inside operator() ...</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">output1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">edm4hep</span><span class="o">::</span><span class="n">MCParticleCollection</span><span class="p">();</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">output2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">edm4hep</span><span class="o">::</span><span class="n">MCParticleCollection</span><span class="p">();</span>
+
+<span class="c1">// TODO: fill output collections</span>
+
+<span class="k">return</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_tuple</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">output1</span><span class="p">),</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">output2</span><span class="p">));</span><span class="w"> </span><span class="c1">// NOLINT</span>
+</pre></div>
+</div>
+<p>The ordering of output types, constructor keys, and returned collections must stay
+consistent.</p>
+</section>
+<section id="variable-length-runtime-collections">
+<h1>Variable-length (runtime) collections<a class="headerlink" href="#variable-length-runtime-collections" title="Link to this heading"></a></h1>
+<p>k4FWCore Functionals can take a variable number of input collections. Promote an input
+to a <code class="docutils literal notranslate"><span class="pre">KeyValues</span></code> vector with <code class="docutils literal notranslate"><span class="pre">--runtime-inputs</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>generateFunctional<span class="w"> </span>MergeHits<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-i<span class="w"> </span><span class="s1">&#39;edm4hep::MCParticleCollection:Inputs&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--runtime-inputs<span class="w"> </span><span class="s1">&#39;edm4hep::MCParticleCollection:Inputs:MCParticles0,MCParticles1&#39;</span>
+</pre></div>
+</div>
+<p>The input then arrives as a <code class="docutils literal notranslate"><span class="pre">std::vector&lt;const</span> <span class="pre">edm4hep::MCParticleCollection*&gt;&amp;</span></code>, with a
+<code class="docutils literal notranslate"><span class="pre">KeyValues(&quot;Inputs&quot;,</span> <span class="pre">{&quot;MCParticles0&quot;,</span> <span class="pre">&quot;MCParticles1&quot;})</span></code> in the constructor.</p>
+<p>Fixed and variable-length inputs can be mixed in the same algorithm — give them distinct
+keys, listing only the variable-length one in <code class="docutils literal notranslate"><span class="pre">--runtime-inputs</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>generateFunctional<span class="w"> </span>MixInputs<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-i<span class="w"> </span><span class="s1">&#39;edm4hep::MCParticleCollection:Fixed&#39;</span><span class="w"> </span><span class="s1">&#39;edm4hep::TrackCollection:Tracks&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--runtime-inputs<span class="w"> </span><span class="s1">&#39;edm4hep::TrackCollection:Tracks:t0,t1&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-o<span class="w"> </span><span class="s1">&#39;edm4hep::MCParticleCollection:Output&#39;</span>
+<span class="c1"># operator()(const edm4hep::MCParticleCollection&amp; Fixed,</span>
+<span class="c1">#            const std::vector&lt;const edm4hep::TrackCollection*&gt;&amp; Tracks)</span>
+</pre></div>
+</div>
+<p>Use <code class="docutils literal notranslate"><span class="pre">--runtime-outputs</span> <span class="pre">TYPE</span></code> for a variable-length vector of outputs. Runtime collections
+are a k4FWCore-specific feature.</p>
+</section>
+<section id="useful-options">
+<h1>Useful options<a class="headerlink" href="#useful-options" title="Link to this heading"></a></h1>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>Option</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--cmake</code></td>
+<td>also generate a minimal <code>CMakeLists.txt</code></td>
+</tr>
+<tr>
+<td><code>--private-properties</code></td>
+<td>place properties under <code>private:</code></td>
+</tr>
+<tr>
+<td><code>--type-aliases</code></td>
+<td>emit <code>using XxxColl = ...;</code> aliases for input types</td>
+</tr>
+<tr>
+<td><code>--namespace NAME</code></td>
+<td>wrap the class in a C++ namespace</td>
+</tr>
+<tr>
+<td><code>--use-class</code></td>
+<td>generate <code>class</code> instead of <code>struct</code></td>
+</tr>
+<tr>
+<td><code>--framework gaudi</code></td>
+<td>target native <code>Gaudi::Functional</code> instead of k4FWCore</td>
+</tr>
+<tr>
+<td><code>--event-context</code></td>
+<td>add <code>const EventContext&amp;</code> and a <code>finalize()</code> scaffold</td>
+</tr>
+<tr>
+<td><code>--runtime-inputs</code></td>
+<td>promote named inputs to variable-length <code>KeyValues</code></td>
+</tr>
+<tr>
+<td><code>--runtime-outputs</code></td>
+<td>generate a variable-length vector of outputs</td>
+</tr>
+<tr>
+<td><code>--keyvalues-inputs</code></td>
+<td>promote specific inputs to <code>KeyValues</code> vectors</td>
+</tr>
+<tr>
+<td><code>--all-keyvalues</code></td>
+<td>treat every input as a <code>KeyValues</code> vector</td>
+</tr>
+<tr>
+<td><code>-f</code>, <code>--output-file</code></td>
+<td>write to a specific path (default <code>&lt;ClassName&gt;.cpp</code>)</td>
+</tr>
+<tr>
+<td><code>--force</code></td>
+<td>overwrite an existing generated file</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="safe-generation">
+<h1>Safe generation<a class="headerlink" href="#safe-generation" title="Link to this heading"></a></h1>
+<p>By default the generator refuses to clobber an existing file:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">Refusing to overwrite existing C++ source at &#39;RandomNoiseDigitizer.cpp&#39;.</span>
+<span class="go">  Re-run with --force (or remove the file) if you really want to replace it.</span>
+</pre></div>
+</div>
+<p>Once you have edited a generated file, treat it as ordinary C++ and edit it directly;
+only regenerate when the command line is the source of truth.</p>
+</section>
+<section id="exercises">
+<h1>Exercises<a class="headerlink" href="#exercises" title="Link to this heading"></a></h1>
+<p><strong>1. Event-statistics Consumer.</strong> Generate <code class="docutils literal notranslate"><span class="pre">EventStats</span></code> with a
+<code class="docutils literal notranslate"><span class="pre">edm4hep::SimCalorimeterHitCollection</span></code> input keyed <code class="docutils literal notranslate"><span class="pre">SimCaloHits</span></code> and an <code class="docutils literal notranslate"><span class="pre">EnergyThreshold</span></code>
+property. Implement it to count hits above threshold, sum their energy, and print one
+<code class="docutils literal notranslate"><span class="pre">info()</span></code> message per event.</p>
+<p><strong>2. Random-noise Transformer.</strong> Generate <code class="docutils literal notranslate"><span class="pre">RandomNoiseDigitizer</span></code> as above, complete
+<code class="docutils literal notranslate"><span class="pre">operator()</span></code> (draw Gaussian noise from the Gaudi random-number service), add it to a
+steering file, build, and run ten events.</p>
+<p><strong>3. Splitter (challenge).</strong> Generate a Functional with one <code class="docutils literal notranslate"><span class="pre">MCParticleCollection</span></code> input,
+two <code class="docutils literal notranslate"><span class="pre">MCParticleCollection</span></code> outputs, a <code class="docutils literal notranslate"><span class="pre">MinMomentum</span></code> property, and <code class="docutils literal notranslate"><span class="pre">--type-aliases</span> <span class="pre">--private-properties</span></code>. Split the input into particles with <code class="docutils literal notranslate"><span class="pre">p</span> <span class="pre">&gt;=</span> <span class="pre">MinMomentum</span></code> and the
+rest, and check that the order of the returned tuple matches the order of the <code class="docutils literal notranslate"><span class="pre">-o</span></code>
+options.</p>
+</section>
+<section id="references">
+<h1>References<a class="headerlink" href="#references" title="Link to this heading"></a></h1>
+<ul class="simple">
+<li><p>k4FWCore pull request <a class="reference external" href="https://github.com/key4hep/k4FWCore/pull/372">#372</a> — the Gaudi
+Functional C++ class generator.</p></li>
+<li><p><a class="reference external" href="https://github.com/key4hep/key4hep-tutorials/blob/main/gaudi_alg_higgs/README.md"><code class="docutils literal notranslate"><span class="pre">gaudi_alg_higgs</span></code></a>
+— writing a Gaudi algorithm by hand, for comparison.</p></li>
+<li><p>Key4hep documentation: <a class="reference external" href="https://key4hep.github.io/key4hep-doc/">Writing Gaudi (Functional) algorithms</a>.</p></li>
+</ul>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../edm4hep_analysis/edm4hep_api_intro.html" class="btn btn-neutral float-left" title="EDM4hep - The common event data model" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../k4fwcore/doc/PodioInputOutput.html" class="btn btn-neutral float-right" title="Reading and writing EDM4hep files in Gaudi" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Key4hep.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
