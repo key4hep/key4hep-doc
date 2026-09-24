@@ -49,6 +49,8 @@ if [ -n "$EXTERNAL_PR_LINE" ]; then
         PR_FORK=$(echo "$EXTERNAL_PR_INFO" | jq -r '.repo')
         PR_BRANCH=$(echo "$EXTERNAL_PR_INFO" | jq -r '.branch')
         PR_FILES=$(echo "$EXTERNAL_PR_INFO" | jq -r '.files[]')
+        # Files are referenced in the docs with the repository name as prefix
+        PR_REPO=$(echo "$GITHUB_URL" | cut -d'/' -f5)
         echo "Fork/Repository: $PR_FORK"
         echo "Branch: $PR_BRANCH"
         echo "Files: $PR_FILES"
@@ -74,7 +76,9 @@ for pr_file in $PR_FILES; do
 
     # Figure out where in the final doc tree this file should go
     for top_file in "${TOP_LEVEL_FILES[@]}"; do
-        referenced_file=$(grep "$pr_file" "$top_file" | head -1 | awk '{print $1}')
+        # Only consider toctree entries, i.e. lines consisting of only the
+        # (indented) path to the file, including the repository name
+        referenced_file=$(grep -E "^[[:space:]]+${PR_REPO}/${pr_file}[[:space:]]*$" "$top_file" | head -1 | tr -d '[:space:]')
         if [ -n "$referenced_file" ]; then
             file_dir=$(dirname $(realpath "$top_file"))
             echo "Found reference to $referenced_file in $top_file"
