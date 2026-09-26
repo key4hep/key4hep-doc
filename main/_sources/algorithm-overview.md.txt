@@ -4276,7 +4276,7 @@ Total: **221 algorithms** across **12 packages**.
               <tr>
                 <td><code>CrossingAngle</code></td>
                 <td><code>double</code></td>
-                <td><code>4.636818e-310</code></td>
+                <td><code>4.6471767e-310</code></td>
                 <td> Half the crossing angle beam in [rad] [unknown owner type] </td>
               </tr>
               <tr>
