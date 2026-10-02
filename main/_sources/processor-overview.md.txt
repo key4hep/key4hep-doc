@@ -3293,6 +3293,461 @@ Total: **207 processors** across **19 packages**.
       </div>
     </div>
   </div>
+  <div class="alg-package-group" data-package="FCalClusterer">
+    <div class="alg-package-header">
+      <a class="alg-package-name" href="https://github.com/FCALSW/FCalClusterer" target="_blank" rel="noopener noreferrer">FCalClusterer</a>
+      <span class="alg-package-meta">
+        <span class="alg-package-count">4 processors</span>
+        <span class="alg-package-toggle">&#9660;</span>
+      </span>
+    </div>
+    <div class="alg-cards-container">
+      <div class="alg-card" data-name="BeamCalClusterReco" data-lib="libFCalClusterer.so" data-package="FCalClusterer">
+        <div class="alg-card-header">
+          <span class="alg-name">BeamCalClusterReco</span>
+          <span class="alg-card-right">
+            <span class="alg-lib-badge">libFCalClusterer.so</span>
+            <span class="alg-card-toggle">&#9658;</span>
+          </span>
+        </div>
+        <div class="alg-card-body">
+          <p class="alg-description">BeamCalClusterReco reproduces the beamstrahlung background for a given number of bunch-crossings NumberOfBX and puts the signal hits from the lcio input file on top of that, and then clustering is attempted.</p>
+          <table class="alg-props-table">
+            <thead>
+              <tr>
+                <th>Parameter</th>
+                <th>Type</th>
+                <th>Default</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>BackgroundMethod</code></td>
+                <td><code>string</code></td>
+                <td><code>Gaussian</code></td>
+                <td>How to estimate background [Gaussian, Parametrised, Pregenerated, Averaged, Empty]</td>
+              </tr>
+              <tr>
+                <td><code>BeamCalCollectionName</code></td>
+                <td><code>string</code></td>
+                <td><code>BeamCalCollection</code></td>
+                <td>Name of BeamCal Collection</td>
+              </tr>
+              <tr>
+                <td><code>BeamCalHitsOutCollection</code></td>
+                <td><code>string</code></td>
+                <td><code>BeamCal_Hits</code></td>
+                <td>Collection of CalorimeterHits from the BeamCal,only created when input are SimCalorimeterHits</td>
+              </tr>
+              <tr>
+                <td><code>CreateEfficiencyFile</code></td>
+                <td><code>bool</code></td>
+                <td><code>false</code></td>
+                <td>Flag to create the TEfficiency for fast tagging library</td>
+              </tr>
+              <tr>
+                <td><code>DetectorName</code></td>
+                <td><code>string</code></td>
+                <td><code>BeamCal</code></td>
+                <td>The Name of the Detector the reconstruction is for</td>
+              </tr>
+              <tr>
+                <td><code>DetectorStartingLayerID</code></td>
+                <td><code>int</code></td>
+                <td><code>1</code></td>
+                <td>The ID of the first layer of the detector BeamCal 1: LumiCal: 0</td>
+              </tr>
+              <tr>
+                <td><code>ETCluster</code></td>
+                <td><code>FloatVec</code></td>
+                <td><code>3 2 1</code></td>
+                <td>Energy in a Cluster to consider it an electron</td>
+              </tr>
+              <tr>
+                <td><code>ETPad</code></td>
+                <td><code>FloatVec</code></td>
+                <td><code>0.5 0.3 0.2</code></td>
+                <td>Energy in a Pad, after subtraction of background required to consider it for signal</td>
+              </tr>
+              <tr>
+                <td><code>EfficiencyFilename</code></td>
+                <td><code>string</code></td>
+                <td><code>TaggingEfficiency.root</code></td>
+                <td>The name of the rootFile which will contain the TEfficiency objects</td>
+              </tr>
+              <tr>
+                <td><code>InputFileBackgrounds</code></td>
+                <td><code>StringVec</code></td>
+                <td><code>BeamCal.root</code></td>
+                <td>Root Inputfile(s)</td>
+              </tr>
+              <tr>
+                <td><code>LinearCalibrationFactor</code></td>
+                <td><code>double</code></td>
+                <td><code>1</code></td>
+                <td>Multiply deposit energy by this factor to account for sampling fraction</td>
+              </tr>
+              <tr>
+                <td><code>LogWeightingConstant</code></td>
+                <td><code>double</code></td>
+                <td><code>-1</code></td>
+                <td>Weighting constant to use in logarithmic weighting of hits, if negative energy weighting is used</td>
+              </tr>
+              <tr>
+                <td><code>MCParticleCollectionName</code></td>
+                <td><code>string</code></td>
+                <td><code>MCParticle</code></td>
+                <td>MCParticle Collection Name, only needed and used to estimate efficiencies</td>
+              </tr>
+              <tr>
+                <td><code>MaxPadDistance</code></td>
+                <td><code>double</code></td>
+                <td><code>1e+10</code></td>
+                <td>Maximum Distance between primary tower and neighbours to put into one cluster</td>
+              </tr>
+              <tr>
+                <td><code>MinimumTowerSize</code></td>
+                <td><code>int</code></td>
+                <td><code>4</code></td>
+                <td>Minimum number of pads in a single tower to be considered for signal</td>
+              </tr>
+              <tr>
+                <td><code>NShowerCountingLayers</code></td>
+                <td><code>int</code></td>
+                <td><code>3</code></td>
+                <td>How many layers are used for shower fitting</td>
+              </tr>
+              <tr>
+                <td><code>NumberOfBX</code></td>
+                <td><code>int</code></td>
+                <td><code>1</code></td>
+                <td>Number of Bunch Crossings of Background</td>
+              </tr>
+              <tr>
+                <td><code>PrintThisEvent</code></td>
+                <td><code>int</code></td>
+                <td><code>-1</code></td>
+                <td>Number of Event that should be printed to PDF File</td>
+              </tr>
+              <tr>
+                <td><code>ReadoutName</code></td>
+                <td><code>string</code></td>
+                <td><code></code></td>
+                <td>The Name of the DD4hep Readout belonging to the Detector the reconstruction is for, by default the name of the input collection</td>
+              </tr>
+              <tr>
+                <td><code>RecoClusterCollectionname</code></td>
+                <td><code>string</code></td>
+                <td><code>BCalClusters</code></td>
+                <td>Name of the Reconstructed Cluster collection</td>
+              </tr>
+              <tr>
+                <td><code>RecoParticleCollectionname</code></td>
+                <td><code>string</code></td>
+                <td><code>BCalRecoParticle</code></td>
+                <td>Name of the Reconstructed Particle collection</td>
+              </tr>
+              <tr>
+                <td><code>SigmaCut</code></td>
+                <td><code>double</code></td>
+                <td><code>1</code></td>
+                <td>If not using ConstPadCuts, each pad SigmaCut*standardDeviation is considered for clusters</td>
+              </tr>
+              <tr>
+                <td><code>StartLookingInLayer</code></td>
+                <td><code>int</code></td>
+                <td><code>10</code></td>
+                <td>Layer (inclusive) from which on we start looking for signal clusters</td>
+              </tr>
+              <tr>
+                <td><code>StartingRing</code></td>
+                <td><code>FloatVec</code></td>
+                <td><code>0 1 2</code></td>
+                <td>Rings from which onwards the outside Thresholds are used</td>
+              </tr>
+              <tr>
+                <td><code>SubClusterEnergyID</code></td>
+                <td><code>int</code></td>
+                <td><code>5</code></td>
+                <td>The ID where the SubClusterEnergy will be added: LumiCal=3, BeamCal=5 in DDPFOCreator.hh</td>
+              </tr>
+              <tr>
+                <td><code>TowerChi2ndfLimit</code></td>
+                <td><code>double</code></td>
+                <td><code>5</code></td>
+                <td>Limit on square norm of tower energy chi2/ndf, where chi2 = (E_dep - E_bg)^2/sig^2. 			      Reasonable value for pregenerated bkg is 5., for parametrised is 2.</td>
+              </tr>
+              <tr>
+                <td><code>UseChi2Selection</code></td>
+                <td><code>bool</code></td>
+                <td><code>false</code></td>
+                <td>Use Chi2 selection criteria to detect high energy electron in the signal.</td>
+              </tr>
+              <tr>
+                <td><code>UseConstPadCuts</code></td>
+                <td><code>bool</code></td>
+                <td><code>true</code></td>
+                <td>Use the cuts for the pads specified in ETPad. If false, the standard deviation of each pad times the SigmaCut Factor is used, the first entry in ETPad is used as a minimum energy to consider a pad at all</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="alg-card" data-name="DrawBeamCalFromDD4hep" data-lib="libFCalClusterer.so" data-package="FCalClusterer">
+        <div class="alg-card-header">
+          <span class="alg-name">DrawBeamCalFromDD4hep</span>
+          <span class="alg-card-right">
+            <span class="alg-lib-badge">libFCalClusterer.so</span>
+            <span class="alg-card-toggle">&#9658;</span>
+          </span>
+        </div>
+        <div class="alg-card-body">
+          <p class="alg-description">DrawBeamCalFromDD4hep draws segmentation from dd4hep with energy deposits in the lcio files</p>
+          <table class="alg-props-table">
+            <thead>
+              <tr>
+                <th>Parameter</th>
+                <th>Type</th>
+                <th>Default</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>BeamCalCollectionName</code></td>
+                <td><code>string</code></td>
+                <td><code>BeamCalCollection</code></td>
+                <td>Name of BeamCal Collection</td>
+              </tr>
+              <tr>
+                <td><code>DrawDensities</code></td>
+                <td><code>bool</code></td>
+                <td><code>false</code></td>
+                <td>Option to draw area density of deposited energy rather than deposited energy per cell. Meaningful for polar segmentation. Default false.</td>
+              </tr>
+              <tr>
+                <td><code>OutputFileBackground</code></td>
+                <td><code>string</code></td>
+                <td><code>BeamCal.root</code></td>
+                <td>Root OutputFile</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="alg-card" data-name="MarlinLumiCalClusterer" data-lib="libFCalClusterer.so" data-package="FCalClusterer">
+        <div class="alg-card-header">
+          <span class="alg-name">MarlinLumiCalClusterer</span>
+          <span class="alg-card-right">
+            <span class="alg-lib-badge">libFCalClusterer.so</span>
+            <span class="alg-card-toggle">&#9658;</span>
+          </span>
+        </div>
+        <div class="alg-card-body">
+          <p class="alg-description">Reconstruction of clusters in the LumiCal detector</p>
+          <table class="alg-props-table">
+            <thead>
+              <tr>
+                <th>Parameter</th>
+                <th>Type</th>
+                <th>Default</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>ClusterMinNumHits</code></td>
+                <td><code>int</code></td>
+                <td><code>15</code></td>
+                <td>Minimal number of hits in cluster</td>
+              </tr>
+              <tr>
+                <td><code>CutOnFiducuialVolume</code></td>
+                <td><code>bool</code></td>
+                <td><code>false</code></td>
+                <td>Whether to cut clusters outside of the fiducial volume or not</td>
+              </tr>
+              <tr>
+                <td><code>ElementsPercentInShowerPeakLayer</code></td>
+                <td><code>double</code></td>
+                <td><code>0.03</code></td>
+                <td>BP: Not sure what it is</td>
+              </tr>
+              <tr>
+                <td><code>EnergyCalibConst</code></td>
+                <td><code>double</code></td>
+                <td><code>0.0105</code></td>
+                <td>Calibration const E_dep = EnergyCalibConst*E_primary ( default for LCal ILD)</td>
+              </tr>
+              <tr>
+                <td><code>LogWeigthConstant</code></td>
+                <td><code>double</code></td>
+                <td><code>6</code></td>
+                <td>Sets minimum for logarithmic energy weights</td>
+              </tr>
+              <tr>
+                <td><code>LumiCal_Clusters</code></td>
+                <td><code>string</code></td>
+                <td><code>LumiCalClusters</code></td>
+                <td>Collection of Cluster found in the LumiCal</td>
+              </tr>
+              <tr>
+                <td><code>LumiCal_Collection</code></td>
+                <td><code>string</code></td>
+                <td><code>LumiCalCollection</code></td>
+                <td>Collection Containing Hits in the LumiCal</td>
+              </tr>
+              <tr>
+                <td><code>LumiCal_Hits</code></td>
+                <td><code>string</code></td>
+                <td><code>LumiCalHits</code></td>
+                <td>Collection of CalorimtersHits from the LumiCal</td>
+              </tr>
+              <tr>
+                <td><code>LumiCal_RecoParticles</code></td>
+                <td><code>string</code></td>
+                <td><code>LumiCalRecoParticles</code></td>
+                <td>Collection of Reconstructed Particles found in the LumiCal</td>
+              </tr>
+              <tr>
+                <td><code>MaxRecordNumber</code></td>
+                <td><code>int</code></td>
+                <td><code>10</code></td>
+                <td>Number of event to work with</td>
+              </tr>
+              <tr>
+                <td><code>MemoryResidentTree</code></td>
+                <td><code>int</code></td>
+                <td><code>0</code></td>
+                <td>Place for ROOT tree memory(1) or disk(0)</td>
+              </tr>
+              <tr>
+                <td><code>MiddleEnergyHitBoundFrac</code></td>
+                <td><code>double</code></td>
+                <td><code>0.01</code></td>
+                <td>BP: see explanation in LumiCalClusterer.cpp</td>
+              </tr>
+              <tr>
+                <td><code>MinClusterEngy</code></td>
+                <td><code>double</code></td>
+                <td><code>2</code></td>
+                <td>Sets minimum energy deposit for cluster to be accepted [GeV]</td>
+              </tr>
+              <tr>
+                <td><code>MinHitEnergy</code></td>
+                <td><code>double</code></td>
+                <td><code>5e-06</code></td>
+                <td>Hit energy cut [Mev]</td>
+              </tr>
+              <tr>
+                <td><code>MoliereRadius</code></td>
+                <td><code>double</code></td>
+                <td><code>16</code></td>
+                <td>Moliere radius, controls clusters separation distance [mm]</td>
+              </tr>
+              <tr>
+                <td><code>NumEventsTree</code></td>
+                <td><code>int</code></td>
+                <td><code>500</code></td>
+                <td>Number of events in memory resident ROOT tree.</td>
+              </tr>
+              <tr>
+                <td><code>NumOfNearNeighbor</code></td>
+                <td><code>int</code></td>
+                <td><code>6</code></td>
+                <td>Number of neighbor hits to consider</td>
+              </tr>
+              <tr>
+                <td><code>OutDirName</code></td>
+                <td><code>string</code></td>
+                <td><code>rootOut</code></td>
+                <td>Name of output directory</td>
+              </tr>
+              <tr>
+                <td><code>OutRootFileName</code></td>
+                <td><code>string</code></td>
+                <td><code></code></td>
+                <td>Name of output ROOT file ( without suffix) NO DEFAULT. If no name provided root file will not be generated</td>
+              </tr>
+              <tr>
+                <td><code>SkipNEvents</code></td>
+                <td><code>int</code></td>
+                <td><code>0</code></td>
+                <td>Number of events to skip at the begining of the LCIO file</td>
+              </tr>
+              <tr>
+                <td><code>WeightingMethod</code></td>
+                <td><code>string</code></td>
+                <td><code>LogMethod</code></td>
+                <td>Hit positions weighting method (LogMthod, EnergyMethod )</td>
+              </tr>
+              <tr>
+                <td><code>ZLayerPhiOffset</code></td>
+                <td><code>double</code></td>
+                <td><code>3.75</code></td>
+                <td>Relative offset of LCal z-layers [deg] default is half of the phi sector size</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="alg-card" data-name="ReadBeamCal" data-lib="libFCalClusterer.so" data-package="FCalClusterer">
+        <div class="alg-card-header">
+          <span class="alg-name">ReadBeamCal</span>
+          <span class="alg-card-right">
+            <span class="alg-lib-badge">libFCalClusterer.so</span>
+            <span class="alg-card-toggle">&#9658;</span>
+          </span>
+        </div>
+        <div class="alg-card-body">
+          <p class="alg-description">ReadBeamCal reads the simulation for the pairs and creates two std::vector&lt;double&gt; in a tree, which can then be used later on for Overlay, calculation of fluctiuations, etc.</p>
+          <table class="alg-props-table">
+            <thead>
+              <tr>
+                <th>Parameter</th>
+                <th>Type</th>
+                <th>Default</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>BeamCalCollectionName</code></td>
+                <td><code>string</code></td>
+                <td><code>BeamCalCollection</code></td>
+                <td>Name of BeamCal Collection</td>
+              </tr>
+              <tr>
+                <td><code>DetectorName</code></td>
+                <td><code>string</code></td>
+                <td><code>BeamCal</code></td>
+                <td>The Name of the Detector the collections are from</td>
+              </tr>
+              <tr>
+                <td><code>DetectorStartingLayerID</code></td>
+                <td><code>int</code></td>
+                <td><code>1</code></td>
+                <td>The ID of the first layer of the detector BeamCal 1: LumiCal: 0</td>
+              </tr>
+              <tr>
+                <td><code>OutputFileBackground</code></td>
+                <td><code>string</code></td>
+                <td><code>BeamCal.root</code></td>
+                <td>Root OutputFile</td>
+              </tr>
+              <tr>
+                <td><code>ProbabilityFactor</code></td>
+                <td><code>double</code></td>
+                <td><code>100</code></td>
+                <td>Probability [0,100%] for particle to be added to event. Allows the scaling ofthe background to smaller background rate</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="alg-package-group" data-package="ForwardTracking">
     <div class="alg-package-header">
       <a class="alg-package-name" href="https://github.com/iLCSoft/ForwardTracking" target="_blank" rel="noopener noreferrer">ForwardTracking</a>
@@ -5749,6 +6204,167 @@ Total: **207 processors** across **19 packages**.
                 <td><code>string</code></td>
                 <td><code>validatePhoton.root</code></td>
                 <td>name of output file</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="alg-package-group" data-package="LCFIPlus">
+    <div class="alg-package-header">
+      <a class="alg-package-name" href="https://github.com/lcfiplus/LCFIPlus" target="_blank" rel="noopener noreferrer">LCFIPlus</a>
+      <span class="alg-package-meta">
+        <span class="alg-package-count">2 processors</span>
+        <span class="alg-package-toggle">&#9660;</span>
+      </span>
+    </div>
+    <div class="alg-cards-container">
+      <div class="alg-card" data-name="LcfiplusProcessor" data-lib="libLCFIPlus.so.0.11.1" data-package="LCFIPlus">
+        <div class="alg-card-header">
+          <span class="alg-name">LcfiplusProcessor</span>
+          <span class="alg-card-right">
+            <span class="alg-lib-badge">libLCFIPlus.so.0.11.1</span>
+            <span class="alg-card-toggle">&#9658;</span>
+          </span>
+        </div>
+        <div class="alg-card-body">
+          <p class="alg-description">Lcfiplus general processor</p>
+          <table class="alg-props-table">
+            <thead>
+              <tr>
+                <th>Parameter</th>
+                <th>Type</th>
+                <th>Default</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>Algorithms</code></td>
+                <td><code>StringVec</code></td>
+                <td><code></code></td>
+                <td>LCFIPlus algorithms to run</td>
+              </tr>
+              <tr>
+                <td><code>BeamSizeX</code></td>
+                <td><code>float</code></td>
+                <td><code>0.000639</code></td>
+                <td>Bunch size in the X direction [mm]</td>
+              </tr>
+              <tr>
+                <td><code>BeamSizeY</code></td>
+                <td><code>float</code></td>
+                <td><code>5.7e-06</code></td>
+                <td>Bunch size in the Y direction [mm]</td>
+              </tr>
+              <tr>
+                <td><code>BeamSizeZ</code></td>
+                <td><code>float</code></td>
+                <td><code>0.0913</code></td>
+                <td>Bunch size in the Z direction [mm]</td>
+              </tr>
+              <tr>
+                <td><code>IgnoreLackOfVertexRP</code></td>
+                <td><code>int</code></td>
+                <td><code>0</code></td>
+                <td>Keep running even if vertex RP collection is not present</td>
+              </tr>
+              <tr>
+                <td><code>MCPCollection</code></td>
+                <td><code>string</code></td>
+                <td><code></code></td>
+                <td>MC particle collection</td>
+              </tr>
+              <tr>
+                <td><code>MCPFORelation</code></td>
+                <td><code>string</code></td>
+                <td><code></code></td>
+                <td>Relation between MC and PFO particles</td>
+              </tr>
+              <tr>
+                <td><code>MagneticField</code></td>
+                <td><code>float</code></td>
+                <td><code>0</code></td>
+                <td>Manually set magnetic field, overriding the value from DD4hep [T]</td>
+              </tr>
+              <tr>
+                <td><code>PFOCollection</code></td>
+                <td><code>string</code></td>
+                <td><code></code></td>
+                <td>Particle flow output collection</td>
+              </tr>
+              <tr>
+                <td><code>PIDAlgorithmName</code></td>
+                <td><code>string</code></td>
+                <td><code>LikelihoodPID</code></td>
+                <td>ParticleID Algorithm Name</td>
+              </tr>
+              <tr>
+                <td><code>PrintEventNumber</code></td>
+                <td><code>int</code></td>
+                <td><code>0</code></td>
+                <td>Event number printing period in std output: 0 = no printing</td>
+              </tr>
+              <tr>
+                <td><code>ReadSubdetectorEnergies</code></td>
+                <td><code>int</code></td>
+                <td><code>1</code></td>
+                <td>Read subdetector energies (ILD)</td>
+              </tr>
+              <tr>
+                <td><code>TrackHitOrdering</code></td>
+                <td><code>int</code></td>
+                <td><code>0</code></td>
+                <td>Track hit ordering: 0=ILD-LOI (default), 1=ILD-DBD, 2=CLICdet</td>
+              </tr>
+              <tr>
+                <td><code>UpdateVertexRPDaughters</code></td>
+                <td><code>int</code></td>
+                <td><code>1</code></td>
+                <td>Writing back obtained vertices to input RP collections (which must be writable)</td>
+              </tr>
+              <tr>
+                <td><code>UseMCP</code></td>
+                <td><code>int</code></td>
+                <td><code>0</code></td>
+                <td>Whether MCParticle collection is imported or not</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="alg-card" data-name="TrackToPFOConverterProcessor" data-lib="libLCFIPlus.so.0.11.1" data-package="LCFIPlus">
+        <div class="alg-card-header">
+          <span class="alg-name">TrackToPFOConverterProcessor</span>
+          <span class="alg-card-right">
+            <span class="alg-lib-badge">libLCFIPlus.so.0.11.1</span>
+            <span class="alg-card-toggle">&#9658;</span>
+          </span>
+        </div>
+        <div class="alg-card-body">
+          <p class="alg-description">Processor to convert track collection into ReconstructedParticle collection</p>
+          <table class="alg-props-table">
+            <thead>
+              <tr>
+                <th>Parameter</th>
+                <th>Type</th>
+                <th>Default</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>InputTrackCollection</code></td>
+                <td><code>string</code></td>
+                <td><code>InputTracks</code></td>
+                <td>Input track collection to convert</td>
+              </tr>
+              <tr>
+                <td><code>OutputPFOCollection</code></td>
+                <td><code>string</code></td>
+                <td><code>ConvertedTrackAsPFO</code></td>
+                <td>Ouptut collection</td>
               </tr>
             </tbody>
           </table>
@@ -20793,632 +21409,16 @@ Total: **207 processors** across **19 packages**.
       </div>
     </div>
   </div>
-  <div class="alg-package-group" data-package="fcalclusterer">
+  <div class="alg-package-group" data-package="PandoraAnalysis">
     <div class="alg-package-header">
-      <span class="alg-package-name">fcalclusterer</span>
-      <span class="alg-package-meta">
-        <span class="alg-package-count">4 processors</span>
-        <span class="alg-package-toggle">&#9660;</span>
-      </span>
-    </div>
-    <div class="alg-cards-container">
-      <div class="alg-card" data-name="BeamCalClusterReco" data-lib="libFCalClusterer.so" data-package="fcalclusterer">
-        <div class="alg-card-header">
-          <span class="alg-name">BeamCalClusterReco</span>
-          <span class="alg-card-right">
-            <span class="alg-lib-badge">libFCalClusterer.so</span>
-            <span class="alg-card-toggle">&#9658;</span>
-          </span>
-        </div>
-        <div class="alg-card-body">
-          <p class="alg-description">BeamCalClusterReco reproduces the beamstrahlung background for a given number of bunch-crossings NumberOfBX and puts the signal hits from the lcio input file on top of that, and then clustering is attempted.</p>
-          <table class="alg-props-table">
-            <thead>
-              <tr>
-                <th>Parameter</th>
-                <th>Type</th>
-                <th>Default</th>
-                <th>Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><code>BackgroundMethod</code></td>
-                <td><code>string</code></td>
-                <td><code>Gaussian</code></td>
-                <td>How to estimate background [Gaussian, Parametrised, Pregenerated, Averaged, Empty]</td>
-              </tr>
-              <tr>
-                <td><code>BeamCalCollectionName</code></td>
-                <td><code>string</code></td>
-                <td><code>BeamCalCollection</code></td>
-                <td>Name of BeamCal Collection</td>
-              </tr>
-              <tr>
-                <td><code>BeamCalHitsOutCollection</code></td>
-                <td><code>string</code></td>
-                <td><code>BeamCal_Hits</code></td>
-                <td>Collection of CalorimeterHits from the BeamCal,only created when input are SimCalorimeterHits</td>
-              </tr>
-              <tr>
-                <td><code>CreateEfficiencyFile</code></td>
-                <td><code>bool</code></td>
-                <td><code>false</code></td>
-                <td>Flag to create the TEfficiency for fast tagging library</td>
-              </tr>
-              <tr>
-                <td><code>DetectorName</code></td>
-                <td><code>string</code></td>
-                <td><code>BeamCal</code></td>
-                <td>The Name of the Detector the reconstruction is for</td>
-              </tr>
-              <tr>
-                <td><code>DetectorStartingLayerID</code></td>
-                <td><code>int</code></td>
-                <td><code>1</code></td>
-                <td>The ID of the first layer of the detector BeamCal 1: LumiCal: 0</td>
-              </tr>
-              <tr>
-                <td><code>ETCluster</code></td>
-                <td><code>FloatVec</code></td>
-                <td><code>3 2 1</code></td>
-                <td>Energy in a Cluster to consider it an electron</td>
-              </tr>
-              <tr>
-                <td><code>ETPad</code></td>
-                <td><code>FloatVec</code></td>
-                <td><code>0.5 0.3 0.2</code></td>
-                <td>Energy in a Pad, after subtraction of background required to consider it for signal</td>
-              </tr>
-              <tr>
-                <td><code>EfficiencyFilename</code></td>
-                <td><code>string</code></td>
-                <td><code>TaggingEfficiency.root</code></td>
-                <td>The name of the rootFile which will contain the TEfficiency objects</td>
-              </tr>
-              <tr>
-                <td><code>InputFileBackgrounds</code></td>
-                <td><code>StringVec</code></td>
-                <td><code>BeamCal.root</code></td>
-                <td>Root Inputfile(s)</td>
-              </tr>
-              <tr>
-                <td><code>LinearCalibrationFactor</code></td>
-                <td><code>double</code></td>
-                <td><code>1</code></td>
-                <td>Multiply deposit energy by this factor to account for sampling fraction</td>
-              </tr>
-              <tr>
-                <td><code>LogWeightingConstant</code></td>
-                <td><code>double</code></td>
-                <td><code>-1</code></td>
-                <td>Weighting constant to use in logarithmic weighting of hits, if negative energy weighting is used</td>
-              </tr>
-              <tr>
-                <td><code>MCParticleCollectionName</code></td>
-                <td><code>string</code></td>
-                <td><code>MCParticle</code></td>
-                <td>MCParticle Collection Name, only needed and used to estimate efficiencies</td>
-              </tr>
-              <tr>
-                <td><code>MaxPadDistance</code></td>
-                <td><code>double</code></td>
-                <td><code>1e+10</code></td>
-                <td>Maximum Distance between primary tower and neighbours to put into one cluster</td>
-              </tr>
-              <tr>
-                <td><code>MinimumTowerSize</code></td>
-                <td><code>int</code></td>
-                <td><code>4</code></td>
-                <td>Minimum number of pads in a single tower to be considered for signal</td>
-              </tr>
-              <tr>
-                <td><code>NShowerCountingLayers</code></td>
-                <td><code>int</code></td>
-                <td><code>3</code></td>
-                <td>How many layers are used for shower fitting</td>
-              </tr>
-              <tr>
-                <td><code>NumberOfBX</code></td>
-                <td><code>int</code></td>
-                <td><code>1</code></td>
-                <td>Number of Bunch Crossings of Background</td>
-              </tr>
-              <tr>
-                <td><code>PrintThisEvent</code></td>
-                <td><code>int</code></td>
-                <td><code>-1</code></td>
-                <td>Number of Event that should be printed to PDF File</td>
-              </tr>
-              <tr>
-                <td><code>ReadoutName</code></td>
-                <td><code>string</code></td>
-                <td><code></code></td>
-                <td>The Name of the DD4hep Readout belonging to the Detector the reconstruction is for, by default the name of the input collection</td>
-              </tr>
-              <tr>
-                <td><code>RecoClusterCollectionname</code></td>
-                <td><code>string</code></td>
-                <td><code>BCalClusters</code></td>
-                <td>Name of the Reconstructed Cluster collection</td>
-              </tr>
-              <tr>
-                <td><code>RecoParticleCollectionname</code></td>
-                <td><code>string</code></td>
-                <td><code>BCalRecoParticle</code></td>
-                <td>Name of the Reconstructed Particle collection</td>
-              </tr>
-              <tr>
-                <td><code>SigmaCut</code></td>
-                <td><code>double</code></td>
-                <td><code>1</code></td>
-                <td>If not using ConstPadCuts, each pad SigmaCut*standardDeviation is considered for clusters</td>
-              </tr>
-              <tr>
-                <td><code>StartLookingInLayer</code></td>
-                <td><code>int</code></td>
-                <td><code>10</code></td>
-                <td>Layer (inclusive) from which on we start looking for signal clusters</td>
-              </tr>
-              <tr>
-                <td><code>StartingRing</code></td>
-                <td><code>FloatVec</code></td>
-                <td><code>0 1 2</code></td>
-                <td>Rings from which onwards the outside Thresholds are used</td>
-              </tr>
-              <tr>
-                <td><code>SubClusterEnergyID</code></td>
-                <td><code>int</code></td>
-                <td><code>5</code></td>
-                <td>The ID where the SubClusterEnergy will be added: LumiCal=3, BeamCal=5 in DDPFOCreator.hh</td>
-              </tr>
-              <tr>
-                <td><code>TowerChi2ndfLimit</code></td>
-                <td><code>double</code></td>
-                <td><code>5</code></td>
-                <td>Limit on square norm of tower energy chi2/ndf, where chi2 = (E_dep - E_bg)^2/sig^2. 			      Reasonable value for pregenerated bkg is 5., for parametrised is 2.</td>
-              </tr>
-              <tr>
-                <td><code>UseChi2Selection</code></td>
-                <td><code>bool</code></td>
-                <td><code>false</code></td>
-                <td>Use Chi2 selection criteria to detect high energy electron in the signal.</td>
-              </tr>
-              <tr>
-                <td><code>UseConstPadCuts</code></td>
-                <td><code>bool</code></td>
-                <td><code>true</code></td>
-                <td>Use the cuts for the pads specified in ETPad. If false, the standard deviation of each pad times the SigmaCut Factor is used, the first entry in ETPad is used as a minimum energy to consider a pad at all</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="alg-card" data-name="DrawBeamCalFromDD4hep" data-lib="libFCalClusterer.so" data-package="fcalclusterer">
-        <div class="alg-card-header">
-          <span class="alg-name">DrawBeamCalFromDD4hep</span>
-          <span class="alg-card-right">
-            <span class="alg-lib-badge">libFCalClusterer.so</span>
-            <span class="alg-card-toggle">&#9658;</span>
-          </span>
-        </div>
-        <div class="alg-card-body">
-          <p class="alg-description">DrawBeamCalFromDD4hep draws segmentation from dd4hep with energy deposits in the lcio files</p>
-          <table class="alg-props-table">
-            <thead>
-              <tr>
-                <th>Parameter</th>
-                <th>Type</th>
-                <th>Default</th>
-                <th>Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><code>BeamCalCollectionName</code></td>
-                <td><code>string</code></td>
-                <td><code>BeamCalCollection</code></td>
-                <td>Name of BeamCal Collection</td>
-              </tr>
-              <tr>
-                <td><code>DrawDensities</code></td>
-                <td><code>bool</code></td>
-                <td><code>false</code></td>
-                <td>Option to draw area density of deposited energy rather than deposited energy per cell. Meaningful for polar segmentation. Default false.</td>
-              </tr>
-              <tr>
-                <td><code>OutputFileBackground</code></td>
-                <td><code>string</code></td>
-                <td><code>BeamCal.root</code></td>
-                <td>Root OutputFile</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="alg-card" data-name="MarlinLumiCalClusterer" data-lib="libFCalClusterer.so" data-package="fcalclusterer">
-        <div class="alg-card-header">
-          <span class="alg-name">MarlinLumiCalClusterer</span>
-          <span class="alg-card-right">
-            <span class="alg-lib-badge">libFCalClusterer.so</span>
-            <span class="alg-card-toggle">&#9658;</span>
-          </span>
-        </div>
-        <div class="alg-card-body">
-          <p class="alg-description">Reconstruction of clusters in the LumiCal detector</p>
-          <table class="alg-props-table">
-            <thead>
-              <tr>
-                <th>Parameter</th>
-                <th>Type</th>
-                <th>Default</th>
-                <th>Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><code>ClusterMinNumHits</code></td>
-                <td><code>int</code></td>
-                <td><code>15</code></td>
-                <td>Minimal number of hits in cluster</td>
-              </tr>
-              <tr>
-                <td><code>CutOnFiducuialVolume</code></td>
-                <td><code>bool</code></td>
-                <td><code>false</code></td>
-                <td>Whether to cut clusters outside of the fiducial volume or not</td>
-              </tr>
-              <tr>
-                <td><code>ElementsPercentInShowerPeakLayer</code></td>
-                <td><code>double</code></td>
-                <td><code>0.03</code></td>
-                <td>BP: Not sure what it is</td>
-              </tr>
-              <tr>
-                <td><code>EnergyCalibConst</code></td>
-                <td><code>double</code></td>
-                <td><code>0.0105</code></td>
-                <td>Calibration const E_dep = EnergyCalibConst*E_primary ( default for LCal ILD)</td>
-              </tr>
-              <tr>
-                <td><code>LogWeigthConstant</code></td>
-                <td><code>double</code></td>
-                <td><code>6</code></td>
-                <td>Sets minimum for logarithmic energy weights</td>
-              </tr>
-              <tr>
-                <td><code>LumiCal_Clusters</code></td>
-                <td><code>string</code></td>
-                <td><code>LumiCalClusters</code></td>
-                <td>Collection of Cluster found in the LumiCal</td>
-              </tr>
-              <tr>
-                <td><code>LumiCal_Collection</code></td>
-                <td><code>string</code></td>
-                <td><code>LumiCalCollection</code></td>
-                <td>Collection Containing Hits in the LumiCal</td>
-              </tr>
-              <tr>
-                <td><code>LumiCal_Hits</code></td>
-                <td><code>string</code></td>
-                <td><code>LumiCalHits</code></td>
-                <td>Collection of CalorimtersHits from the LumiCal</td>
-              </tr>
-              <tr>
-                <td><code>LumiCal_RecoParticles</code></td>
-                <td><code>string</code></td>
-                <td><code>LumiCalRecoParticles</code></td>
-                <td>Collection of Reconstructed Particles found in the LumiCal</td>
-              </tr>
-              <tr>
-                <td><code>MaxRecordNumber</code></td>
-                <td><code>int</code></td>
-                <td><code>10</code></td>
-                <td>Number of event to work with</td>
-              </tr>
-              <tr>
-                <td><code>MemoryResidentTree</code></td>
-                <td><code>int</code></td>
-                <td><code>0</code></td>
-                <td>Place for ROOT tree memory(1) or disk(0)</td>
-              </tr>
-              <tr>
-                <td><code>MiddleEnergyHitBoundFrac</code></td>
-                <td><code>double</code></td>
-                <td><code>0.01</code></td>
-                <td>BP: see explanation in LumiCalClusterer.cpp</td>
-              </tr>
-              <tr>
-                <td><code>MinClusterEngy</code></td>
-                <td><code>double</code></td>
-                <td><code>2</code></td>
-                <td>Sets minimum energy deposit for cluster to be accepted [GeV]</td>
-              </tr>
-              <tr>
-                <td><code>MinHitEnergy</code></td>
-                <td><code>double</code></td>
-                <td><code>5e-06</code></td>
-                <td>Hit energy cut [Mev]</td>
-              </tr>
-              <tr>
-                <td><code>MoliereRadius</code></td>
-                <td><code>double</code></td>
-                <td><code>16</code></td>
-                <td>Moliere radius, controls clusters separation distance [mm]</td>
-              </tr>
-              <tr>
-                <td><code>NumEventsTree</code></td>
-                <td><code>int</code></td>
-                <td><code>500</code></td>
-                <td>Number of events in memory resident ROOT tree.</td>
-              </tr>
-              <tr>
-                <td><code>NumOfNearNeighbor</code></td>
-                <td><code>int</code></td>
-                <td><code>6</code></td>
-                <td>Number of neighbor hits to consider</td>
-              </tr>
-              <tr>
-                <td><code>OutDirName</code></td>
-                <td><code>string</code></td>
-                <td><code>rootOut</code></td>
-                <td>Name of output directory</td>
-              </tr>
-              <tr>
-                <td><code>OutRootFileName</code></td>
-                <td><code>string</code></td>
-                <td><code></code></td>
-                <td>Name of output ROOT file ( without suffix) NO DEFAULT. If no name provided root file will not be generated</td>
-              </tr>
-              <tr>
-                <td><code>SkipNEvents</code></td>
-                <td><code>int</code></td>
-                <td><code>0</code></td>
-                <td>Number of events to skip at the begining of the LCIO file</td>
-              </tr>
-              <tr>
-                <td><code>WeightingMethod</code></td>
-                <td><code>string</code></td>
-                <td><code>LogMethod</code></td>
-                <td>Hit positions weighting method (LogMthod, EnergyMethod )</td>
-              </tr>
-              <tr>
-                <td><code>ZLayerPhiOffset</code></td>
-                <td><code>double</code></td>
-                <td><code>3.75</code></td>
-                <td>Relative offset of LCal z-layers [deg] default is half of the phi sector size</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="alg-card" data-name="ReadBeamCal" data-lib="libFCalClusterer.so" data-package="fcalclusterer">
-        <div class="alg-card-header">
-          <span class="alg-name">ReadBeamCal</span>
-          <span class="alg-card-right">
-            <span class="alg-lib-badge">libFCalClusterer.so</span>
-            <span class="alg-card-toggle">&#9658;</span>
-          </span>
-        </div>
-        <div class="alg-card-body">
-          <p class="alg-description">ReadBeamCal reads the simulation for the pairs and creates two std::vector&lt;double&gt; in a tree, which can then be used later on for Overlay, calculation of fluctiuations, etc.</p>
-          <table class="alg-props-table">
-            <thead>
-              <tr>
-                <th>Parameter</th>
-                <th>Type</th>
-                <th>Default</th>
-                <th>Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><code>BeamCalCollectionName</code></td>
-                <td><code>string</code></td>
-                <td><code>BeamCalCollection</code></td>
-                <td>Name of BeamCal Collection</td>
-              </tr>
-              <tr>
-                <td><code>DetectorName</code></td>
-                <td><code>string</code></td>
-                <td><code>BeamCal</code></td>
-                <td>The Name of the Detector the collections are from</td>
-              </tr>
-              <tr>
-                <td><code>DetectorStartingLayerID</code></td>
-                <td><code>int</code></td>
-                <td><code>1</code></td>
-                <td>The ID of the first layer of the detector BeamCal 1: LumiCal: 0</td>
-              </tr>
-              <tr>
-                <td><code>OutputFileBackground</code></td>
-                <td><code>string</code></td>
-                <td><code>BeamCal.root</code></td>
-                <td>Root OutputFile</td>
-              </tr>
-              <tr>
-                <td><code>ProbabilityFactor</code></td>
-                <td><code>double</code></td>
-                <td><code>100</code></td>
-                <td>Probability [0,100%] for particle to be added to event. Allows the scaling ofthe background to smaller background rate</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="alg-package-group" data-package="lcfiplus">
-    <div class="alg-package-header">
-      <span class="alg-package-name">lcfiplus</span>
+      <a class="alg-package-name" href="https://github.com/PandoraPFAOrg/LCPandoraAnalysis" target="_blank" rel="noopener noreferrer">PandoraAnalysis</a>
       <span class="alg-package-meta">
         <span class="alg-package-count">2 processors</span>
         <span class="alg-package-toggle">&#9660;</span>
       </span>
     </div>
     <div class="alg-cards-container">
-      <div class="alg-card" data-name="LcfiplusProcessor" data-lib="libLCFIPlus.so.0.11.1" data-package="lcfiplus">
-        <div class="alg-card-header">
-          <span class="alg-name">LcfiplusProcessor</span>
-          <span class="alg-card-right">
-            <span class="alg-lib-badge">libLCFIPlus.so.0.11.1</span>
-            <span class="alg-card-toggle">&#9658;</span>
-          </span>
-        </div>
-        <div class="alg-card-body">
-          <p class="alg-description">Lcfiplus general processor</p>
-          <table class="alg-props-table">
-            <thead>
-              <tr>
-                <th>Parameter</th>
-                <th>Type</th>
-                <th>Default</th>
-                <th>Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><code>Algorithms</code></td>
-                <td><code>StringVec</code></td>
-                <td><code></code></td>
-                <td>LCFIPlus algorithms to run</td>
-              </tr>
-              <tr>
-                <td><code>BeamSizeX</code></td>
-                <td><code>float</code></td>
-                <td><code>0.000639</code></td>
-                <td>Bunch size in the X direction [mm]</td>
-              </tr>
-              <tr>
-                <td><code>BeamSizeY</code></td>
-                <td><code>float</code></td>
-                <td><code>5.7e-06</code></td>
-                <td>Bunch size in the Y direction [mm]</td>
-              </tr>
-              <tr>
-                <td><code>BeamSizeZ</code></td>
-                <td><code>float</code></td>
-                <td><code>0.0913</code></td>
-                <td>Bunch size in the Z direction [mm]</td>
-              </tr>
-              <tr>
-                <td><code>IgnoreLackOfVertexRP</code></td>
-                <td><code>int</code></td>
-                <td><code>0</code></td>
-                <td>Keep running even if vertex RP collection is not present</td>
-              </tr>
-              <tr>
-                <td><code>MCPCollection</code></td>
-                <td><code>string</code></td>
-                <td><code></code></td>
-                <td>MC particle collection</td>
-              </tr>
-              <tr>
-                <td><code>MCPFORelation</code></td>
-                <td><code>string</code></td>
-                <td><code></code></td>
-                <td>Relation between MC and PFO particles</td>
-              </tr>
-              <tr>
-                <td><code>MagneticField</code></td>
-                <td><code>float</code></td>
-                <td><code>0</code></td>
-                <td>Manually set magnetic field, overriding the value from DD4hep [T]</td>
-              </tr>
-              <tr>
-                <td><code>PFOCollection</code></td>
-                <td><code>string</code></td>
-                <td><code></code></td>
-                <td>Particle flow output collection</td>
-              </tr>
-              <tr>
-                <td><code>PIDAlgorithmName</code></td>
-                <td><code>string</code></td>
-                <td><code>LikelihoodPID</code></td>
-                <td>ParticleID Algorithm Name</td>
-              </tr>
-              <tr>
-                <td><code>PrintEventNumber</code></td>
-                <td><code>int</code></td>
-                <td><code>0</code></td>
-                <td>Event number printing period in std output: 0 = no printing</td>
-              </tr>
-              <tr>
-                <td><code>ReadSubdetectorEnergies</code></td>
-                <td><code>int</code></td>
-                <td><code>1</code></td>
-                <td>Read subdetector energies (ILD)</td>
-              </tr>
-              <tr>
-                <td><code>TrackHitOrdering</code></td>
-                <td><code>int</code></td>
-                <td><code>0</code></td>
-                <td>Track hit ordering: 0=ILD-LOI (default), 1=ILD-DBD, 2=CLICdet</td>
-              </tr>
-              <tr>
-                <td><code>UpdateVertexRPDaughters</code></td>
-                <td><code>int</code></td>
-                <td><code>1</code></td>
-                <td>Writing back obtained vertices to input RP collections (which must be writable)</td>
-              </tr>
-              <tr>
-                <td><code>UseMCP</code></td>
-                <td><code>int</code></td>
-                <td><code>0</code></td>
-                <td>Whether MCParticle collection is imported or not</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="alg-card" data-name="TrackToPFOConverterProcessor" data-lib="libLCFIPlus.so.0.11.1" data-package="lcfiplus">
-        <div class="alg-card-header">
-          <span class="alg-name">TrackToPFOConverterProcessor</span>
-          <span class="alg-card-right">
-            <span class="alg-lib-badge">libLCFIPlus.so.0.11.1</span>
-            <span class="alg-card-toggle">&#9658;</span>
-          </span>
-        </div>
-        <div class="alg-card-body">
-          <p class="alg-description">Processor to convert track collection into ReconstructedParticle collection</p>
-          <table class="alg-props-table">
-            <thead>
-              <tr>
-                <th>Parameter</th>
-                <th>Type</th>
-                <th>Default</th>
-                <th>Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><code>InputTrackCollection</code></td>
-                <td><code>string</code></td>
-                <td><code>InputTracks</code></td>
-                <td>Input track collection to convert</td>
-              </tr>
-              <tr>
-                <td><code>OutputPFOCollection</code></td>
-                <td><code>string</code></td>
-                <td><code>ConvertedTrackAsPFO</code></td>
-                <td>Ouptut collection</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="alg-package-group" data-package="pandoraanalysis">
-    <div class="alg-package-header">
-      <span class="alg-package-name">pandoraanalysis</span>
-      <span class="alg-package-meta">
-        <span class="alg-package-count">2 processors</span>
-        <span class="alg-package-toggle">&#9660;</span>
-      </span>
-    </div>
-    <div class="alg-cards-container">
-      <div class="alg-card" data-name="PandoraPFACalibrator" data-lib="libPandoraAnalysis.so.2.0.1" data-package="pandoraanalysis">
+      <div class="alg-card" data-name="PandoraPFACalibrator" data-lib="libPandoraAnalysis.so.2.0.1" data-package="PandoraAnalysis">
         <div class="alg-card-header">
           <span class="alg-name">PandoraPFACalibrator</span>
           <span class="alg-card-right">
@@ -21568,7 +21568,7 @@ Total: **207 processors** across **19 packages**.
           </table>
         </div>
       </div>
-      <div class="alg-card" data-name="PfoAnalysis" data-lib="libPandoraAnalysis.so.2.0.1" data-package="pandoraanalysis">
+      <div class="alg-card" data-name="PfoAnalysis" data-lib="libPandoraAnalysis.so.2.0.1" data-package="PandoraAnalysis">
         <div class="alg-card-header">
           <span class="alg-name">PfoAnalysis</span>
           <span class="alg-card-right">
