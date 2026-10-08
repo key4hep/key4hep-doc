@@ -2154,7 +2154,7 @@ Total: **221 algorithms** across **12 packages**.
                 <td><code>StartBackgroundEventIndex</code></td>
                 <td><code>int</code></td>
                 <td><code>-1</code></td>
-                <td> Index of the background event to start from (-1 means start from the beginning) [OverlayTiming] </td>
+                <td> Index of the background event every group starts reading from, once at the beginning of the job (-1 means start from the beginning) [OverlayTiming] </td>
               </tr>
               <tr>
                 <td><code>BackgroundFileNames</code></td>
@@ -2196,7 +2196,7 @@ Total: **221 algorithms** across **12 packages**.
                 <td><code>AllowReusingBackgroundFiles</code></td>
                 <td><code>bool</code></td>
                 <td><code>False</code></td>
-                <td> If true, wrap around the background file when events are exhausted [OverlayTiming] </td>
+                <td> If true, start over from the first event of a group once all of its events have been overlaid; otherwise running out of background events is an error [OverlayTiming] </td>
               </tr>
               <tr>
                 <td><code>CopyCellIDMetadata</code></td>
@@ -4276,7 +4276,7 @@ Total: **221 algorithms** across **12 packages**.
               <tr>
                 <td><code>CrossingAngle</code></td>
                 <td><code>double</code></td>
-                <td><code>4.6380985e-310</code></td>
+                <td><code>4.6417339e-310</code></td>
                 <td> Half the crossing angle beam in [rad] [unknown owner type] </td>
               </tr>
               <tr>
@@ -10508,6 +10508,18 @@ Total: **221 algorithms** across **12 packages**.
                 <td> upper boundary of pi0 mass window [GeV] [PairCaloClustersPi0] </td>
               </tr>
               <tr>
+                <td><code>minClusterEnergy</code></td>
+                <td><code>double</code></td>
+                <td><code>0.0</code></td>
+                <td> minimum cluster energy [GeV] [PairCaloClustersPi0] </td>
+              </tr>
+              <tr>
+                <td><code>maxDTheta</code></td>
+                <td><code>double</code></td>
+                <td><code>999.0</code></td>
+                <td> maximum opening angle of a pair [PairCaloClustersPi0] </td>
+              </tr>
+              <tr>
                 <td><code>inClusters</code></td>
                 <td><code>k4FWCore::DataHandle&lt;edm4hep::ClusterCollection&gt;</code></td>
                 <td><code>inClusters</code></td>
@@ -12435,19 +12447,25 @@ Total: **221 algorithms** across **12 packages**.
                 <td><code>ModelPath</code></td>
                 <td><code>string</code></td>
                 <td><code></code></td>
-                <td> ModelPath [GGTFTrackFinder] </td>
+                <td> Path to the ONNX model file [GGTFTrackFinder] </td>
+              </tr>
+              <tr>
+                <td><code>MaxHits</code></td>
+                <td><code>unsigned long</code></td>
+                <td><code>20000</code></td>
+                <td> Maximum number of hits accepted per event [GGTFTrackFinder] </td>
               </tr>
               <tr>
                 <td><code>Tbeta</code></td>
                 <td><code>double</code></td>
                 <td><code>0.6</code></td>
-                <td> tbeta: threshold used to identify core points in clusters (tracks) [GGTFTrackFinder] </td>
+                <td> Threshold used to identify cluster core points [GGTFTrackFinder] </td>
               </tr>
               <tr>
                 <td><code>Td</code></td>
                 <td><code>double</code></td>
                 <td><code>0.3</code></td>
-                <td> td: radius around a core point used to assign nearby hits to its cluster [GGTFTrackFinder] </td>
+                <td> Radius used to assign nearby hits to a cluster core [GGTFTrackFinder] </td>
               </tr>
             </tbody>
           </table>
