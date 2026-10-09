@@ -5510,6 +5510,12 @@ Total: **207 processors** across **19 packages**.
                 <td>Maximum costheta of examined MCParticles sample</td>
               </tr>
               <tr>
+                <td><code>DD4hepXMLFile</code></td>
+                <td><code>string</code></td>
+                <td><code></code></td>
+                <td>Path to the DD4hep compact XML file. If set, used to determine the detector model family (FCCee vs ILC) for subdetector hit index mapping. If absent, ILC indices are used (legacy behaviour).</td>
+              </tr>
+              <tr>
                 <td><code>DistFromIP</code></td>
                 <td><code>double</code></td>
                 <td><code>10</code></td>
