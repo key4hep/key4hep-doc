@@ -291,6 +291,72 @@ GDB console. To interrupt running of the Gaudi steering use `CTRL+C`.
 More details how to run GDB with Gaudi can be found in
 [LHCb Code Analysis Tools](https://twiki.cern.ch/twiki/bin/view/LHCb/CodeAnalysisTools#Debugging_gaudirun_py_on_Linux_w) (requires a CERN account to view).
 
+### Inspecting MCParticles with Python
+
+GDB's `python` command lets you inspect EDM4hep collections and use the results
+in Python. The following examples show a few things that can be done with GDB.
+Build your algorithm and EDM4hep with debug symbols and little or no
+optimisation (`-Og` or `-O0`) so that GDB can call their C++ accessors. If GCC
+leaves collection types incomplete in GDB, add `-femit-class-debug-always` when
+building your algorithm.
+
+For a small example, run the following from the k4FWCore source directory, with
+its test plugins built and installed in your Key4hep environment:
+
+```console
+$ gdb --args "$(command -v python)" "$(command -v k4run)" test/k4FWCoreTest/options/ExampleFunctionalProducer.py --num-events=1
+(gdb) set breakpoint pending on
+(gdb) break ExampleFunctionalProducer::operator()
+(gdb) run
+```
+
+Use `next` until you reach `return coll;`. The local `coll` collection now holds
+two MCParticles. Enter `python`, paste the following block, then enter `end` on
+a separate line to execute it:
+
+```python
+import gdb
+
+masses = []
+for i in range(int(gdb.parse_and_eval("coll.size()"))):
+    pdg = int(gdb.parse_and_eval(f"(int) coll[{i}].getPDG()"))
+    mass = float(gdb.parse_and_eval(f"(double) coll[{i}].getMass()"))
+    print(f"Particle {i}: PDG={pdg}, mass={mass:g} GeV")
+    masses.append(mass)
+```
+
+Replace `coll` with the name of the collection in your algorithm. This uses the
+public C++ API; the scalar casts also work with EDM4hep versions whose getters
+return references. Accessor calls execute code in the stopped process, so run
+this while the collection is alive in the selected stack frame.
+
+### Plotting with matplotlib
+
+The `masses` list remains available in GDB's Python interpreter. Enter `python`
+again, paste this block, then enter `end`:
+
+```python
+import matplotlib
+matplotlib.use("Agg")
+import matplotlib.pyplot as plt
+
+fig, ax = plt.subplots()
+ax.hist(masses, bins=10)
+ax.set_xlabel("MCParticle mass [GeV]")
+ax.set_ylabel("Particles")
+fig.savefig("mcparticle_masses.png")
+plt.close(fig)
+```
+
+Open `mcparticle_masses.png` from GDB's working directory in an image viewer.
+Matplotlib must be available to the Python interpreter embedded in GDB, which
+may differ from the Python used by `k4run`. The `Agg` backend saves the plot
+without needing a graphical display.
+
+With the two particles from `ExampleFunctionalProducer`, the plot looks like this:
+
+![MCParticle mass histogram from the GDB example](../static/mcparticle_masses.png)
+
 ## Avoiding const in `operator()`
 There is a way of working around `operator()` being const and that is by adding
 the keyword `mutable` to our data member. This will allow us to change our data
