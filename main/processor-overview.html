@@ -20084,6 +20084,12 @@ where the algorithm is found in the environment.</p>
                 <td>particle mass that is used in the fit - default is the pion mass: 0.13957018 )</td>
               </tr>
               <tr>
+                <td><code>SkipFailedFits</code></td>
+                <td><code>bool</code></td>
+                <td><code>false</code></td>
+                <td>Do not write tracks whose refit failed (error or ndf &lt; 0) to the output collection. Keep false if the output has to stay index-aligned with the input collection.</td>
+              </tr>
+              <tr>
                 <td><code>SmoothOn</code></td>
                 <td><code>bool</code></td>
                 <td><code>false</code></td>
