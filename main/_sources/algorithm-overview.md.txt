@@ -4061,7 +4061,7 @@ Total: **225 algorithms** across **12 packages**.
               <tr>
                 <td><code>CrossingAngle</code></td>
                 <td><code>double</code></td>
-                <td><code>4.6763855e-310</code></td>
+                <td><code>4.677325e-310</code></td>
                 <td> Half the crossing angle beam in [rad] [unknown owner type] </td>
               </tr>
               <tr>
@@ -12233,6 +12233,12 @@ Total: **225 algorithms** across **12 packages**.
                 <td><code>string</code></td>
                 <td><code></code></td>
                 <td> Path to the ONNX model file [GGTFTrackFinder] </td>
+              </tr>
+              <tr>
+                <td><code>EmbeddingCoordinates</code></td>
+                <td><code>unsigned long</code></td>
+                <td><code>3</code></td>
+                <td> Number of embedding-space coordinates per hit in the ONNX model output; the model must produce one additional trailing value per hit, the cluster potential (beta) [GGTFTrackFinder] </td>
               </tr>
               <tr>
                 <td><code>MaxHits</code></td>
