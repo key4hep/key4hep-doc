@@ -772,6 +772,12 @@ where the algorithm is found in the environment.</p>
                 <td> Initial track error for momentum (relative). [CKFTrackingAlg] </td>
               </tr>
               <tr>
+                <td><code>InitialTrackError_QOverP</code></td>
+                <td><code>double</code></td>
+                <td><code>0.0</code></td>
+                <td> Initial track error for q/p (absolute), added in quadrature to the relative one. [CKFTrackingAlg] </td>
+              </tr>
+              <tr>
                 <td><code>InitialTrackError_Lambda</code></td>
                 <td><code>double</code></td>
                 <td><code>0.017453293</code></td>
@@ -4180,7 +4186,7 @@ where the algorithm is found in the environment.</p>
               <tr>
                 <td><code>CrossingAngle</code></td>
                 <td><code>double</code></td>
-                <td><code>4.677325e-310</code></td>
+                <td><code>4.6852329e-310</code></td>
                 <td> Half the crossing angle beam in [rad] [unknown owner type] </td>
               </tr>
               <tr>
@@ -12716,34 +12722,76 @@ where the algorithm is found in the environment.</p>
                 <td> If true, each track is used only once. [TrackMerger] </td>
               </tr>
               <tr>
+                <td><code>UseSignificance</code></td>
+                <td><code>bool</code></td>
+                <td><code>True</code></td>
+                <td> If true (default), match on the *Significance cuts, i.e. |diff| / sqrt(var(inner) + var(outer)) using the track states&#39; covariance matrices. If false, match on the *Tolerance cuts (absolute differences). [TrackMerger] </td>
+              </tr>
+              <tr>
                 <td><code>D0Tolerance</code></td>
                 <td><code>float</code></td>
                 <td><code>0.5</code></td>
-                <td> Maximum allowed |D0(inner) - D0(outer)| for a match. Negative disables this criterion. [TrackMerger] </td>
+                <td> Absolute mode: maximum allowed |D0(inner) - D0(outer)| [mm] for a match. Negative disables this criterion. [TrackMerger] </td>
               </tr>
               <tr>
                 <td><code>Z0Tolerance</code></td>
                 <td><code>float</code></td>
                 <td><code>2.5</code></td>
-                <td> Maximum allowed |Z0(inner) - Z0(outer)| for a match. Negative disables this criterion. [TrackMerger] </td>
+                <td> Absolute mode: maximum allowed |Z0(inner) - Z0(outer)| [mm] for a match. Negative disables this criterion. [TrackMerger] </td>
               </tr>
               <tr>
                 <td><code>PhiTolerance</code></td>
                 <td><code>float</code></td>
                 <td><code>-1.0</code></td>
-                <td> Maximum allowed |phi(inner) - phi(outer)| for a match. Negative disables this criterion. [TrackMerger] </td>
+                <td> Absolute mode: maximum allowed |phi(inner) - phi(outer)| [rad], wrapped into [-pi, pi], for a match. Negative disables this criterion. [TrackMerger] </td>
               </tr>
               <tr>
                 <td><code>OmegaTolerance</code></td>
                 <td><code>float</code></td>
                 <td><code>-1.0</code></td>
-                <td> Maximum allowed |omega(inner) - omega(outer)| for a match. Negative disables this criterion. [TrackMerger] </td>
+                <td> Absolute mode: maximum allowed |omega(inner) - omega(outer)| [1/mm] for a match. Negative disables this criterion. [TrackMerger] </td>
               </tr>
               <tr>
                 <td><code>TanLambdaTolerance</code></td>
                 <td><code>float</code></td>
                 <td><code>-1.0</code></td>
-                <td> Maximum allowed |tanLambda(inner) - tanLambda(outer)| for a match. Negative disables this criterion. [TrackMerger] </td>
+                <td> Absolute mode: maximum allowed |tanLambda(inner) - tanLambda(outer)| for a match. Negative disables this criterion. [TrackMerger] </td>
+              </tr>
+              <tr>
+                <td><code>D0Significance</code></td>
+                <td><code>float</code></td>
+                <td><code>3.0</code></td>
+                <td> Significance mode: maximum allowed D0 significance for a match. Negative disables this criterion. [TrackMerger] </td>
+              </tr>
+              <tr>
+                <td><code>Z0Significance</code></td>
+                <td><code>float</code></td>
+                <td><code>3.0</code></td>
+                <td> Significance mode: maximum allowed Z0 significance for a match. Negative disables this criterion. [TrackMerger] </td>
+              </tr>
+              <tr>
+                <td><code>PhiSignificance</code></td>
+                <td><code>float</code></td>
+                <td><code>3.0</code></td>
+                <td> Significance mode: maximum allowed phi significance (difference wrapped into [-pi, pi]) for a match. Negative disables this criterion. [TrackMerger] </td>
+              </tr>
+              <tr>
+                <td><code>PtSignificance</code></td>
+                <td><code>float</code></td>
+                <td><code>2.0</code></td>
+                <td> Significance mode: maximum allowed significance of the signed pT (charge sign times pT, derived from omega and the magnetic field) for a match. Requires a geometry with a field. Negative disables this criterion. [TrackMerger] </td>
+              </tr>
+              <tr>
+                <td><code>TanLambdaSignificance</code></td>
+                <td><code>float</code></td>
+                <td><code>3.0</code></td>
+                <td> Significance mode: maximum allowed tanLambda significance for a match. Negative disables this criterion. [TrackMerger] </td>
+              </tr>
+              <tr>
+                <td><code>GeoSvc</code></td>
+                <td><code>ServiceHandle</code></td>
+                <td><code>GeoSvc</code></td>
+                <td> Detector geometry service [TrackMerger] </td>
               </tr>
             </tbody>
           </table>
