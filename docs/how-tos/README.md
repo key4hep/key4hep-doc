@@ -11,6 +11,7 @@ Key4hep users and are mostly designed to be reference material, rather than
    :maxdepth: 1
 
    key4hep-tutorials/edm4hep_analysis/edm4hep_api_intro.md
+   key4hep-tutorials/edm4hep_analysis/edm4hep_cheat_sheet.md
    k4fwcore/doc/PodioInputOutput.md
    k4fwcore/doc/k4run-args.md
    k4fwcore/doc/algorithmTiming.md
