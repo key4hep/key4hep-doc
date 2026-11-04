@@ -4770,7 +4770,7 @@ Total: **225 algorithms** across **12 packages**.
   </div>
   <div class="alg-package-group" data-package="k4RecCalorimeter">
     <div class="alg-package-header">
-      <a class="alg-package-name" href="https://github.com/HEP-FCC/k4RecCalorimeter" target="_blank" rel="noopener noreferrer">k4RecCalorimeter</a>
+      <a class="alg-package-name" href="https://github.com/key4hep/k4RecCalorimeter" target="_blank" rel="noopener noreferrer">k4RecCalorimeter</a>
       <span class="alg-package-meta">
         <span class="alg-package-count">90 algorithms</span>
         <span class="alg-package-toggle">&#9660;</span>
