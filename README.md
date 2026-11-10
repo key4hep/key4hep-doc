@@ -5,11 +5,20 @@ Key4hep central documentation
 
 ## Getting dependencies
 
-Install python dependencies:
+Python dependencies are managed with [uv](https://docs.astral.sh/uv/). Install
+them into a local `.venv` with:
 
 ```sh
-pip install -r requirements.txt
+uv sync
 ```
+
+Commands can then either be run via `uv run <command>` or after activating the
+environment with `source .venv/bin/activate`. The examples below assume the
+latter.
+
+To add or update a dependency, edit `pyproject.toml` (or use `uv add`) and run
+`uv lock` to update `uv.lock`. Use `uv lock --upgrade-package <name>` to upgrade
+a single (transitive) dependency.
 
 ## Building locally
 
