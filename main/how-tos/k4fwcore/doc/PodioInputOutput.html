@@ -1,29 +1,29 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="../../../">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Reading and writing EDM4hep files in Gaudi &mdash; Key4hep  documentation</title>
-      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../../../_static/copybutton.css" type="text/css" />
-      <link rel="stylesheet" href="../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css" type="text/css" />
-      <link rel="stylesheet" href="../../../_static/overview.css" type="text/css" />
-    <link rel="shortcut icon" href="../../../_static/favicon.png"/>
-  <!--[if lt IE 9]>
-    <script src="../../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=6a604523" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/overview.css?v=3b42e9a5" />
+
   
-        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
-        <script src="../../../_static/doctools.js?v=888ff710"></script>
-        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
-        <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
-        <script src="../../../_static/copybutton.js?v=f281be69"></script>
-        <script src="../../../_static/design-tabs.js?v=36754332"></script>
-        <script defer="defer" src="../../../_static/overview.js?v=96af7809"></script>
+    <link rel="shortcut icon" href="../../../_static/favicon.png"/>
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+      <script data-sd-tabs-storage-prefix="sphinx-design-tab-id-" src="../../../_static/design-tabs.js?v=fcb327ea"></script>
+      <script defer="defer" src="../../../_static/overview.js?v=96af7809"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
@@ -62,7 +62,7 @@
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="../../README.html">Key4hep How-Tos and Instructions</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../../key4hep-tutorials/edm4hep_analysis/edm4hep_api_intro.html">EDM4hep - The common event data model</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../key4hep-tutorials/edm4hep_analysis/edm4hep_api_intro.html#podio-the-technical-infrastructure-on-which-things-run">podio - The technical infrastructure on which things run</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../key4hep-tutorials/edm4hep_analysis/edm4hep_api_intro.html#podio-introduction">podio - The technical infrastructure on which things run</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Reading and writing EDM4hep files in Gaudi</a></li>
 <li class="toctree-l2"><a class="reference internal" href="k4run-args.html">Adding custom arguments to <code class="docutils literal notranslate"><span class="pre">k4run</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="k4run-args.html#interactive-python-prompt">Interactive python prompt</a></li>
@@ -156,7 +156,7 @@ limitations under the License.
 <p><code class="docutils literal notranslate"><span class="pre">IOSvc</span></code> is an external Gaudi service for reading and writing EDM4hep files. The service should be imported from <code class="docutils literal notranslate"><span class="pre">k4FWCore</span></code> and named “IOSvc” as other components may look for it under this name.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">k4FWCore</span><span class="w"> </span><span class="kn">import</span> <span class="n">IOSvc</span>
 
-<span class="n">io_svc</span> <span class="o">=</span> <span class="n">IOSvc</span><span class="p">(</span><span class="s2">&quot;IOSvc&quot;</span><span class="p">)</span> <span class="c1"># or just IOSvc() as &quot;IOSvc&quot; name is used by default</span>
+<span class="n">io_svc</span> <span class="o">=</span> <span class="n">IOSvc</span><span class="p">(</span><span class="s2">"IOSvc"</span><span class="p">)</span> <span class="c1"># or just IOSvc() as "IOSvc" name is used by default</span>
 </pre></div>
 </div>
 <p>After instantiation the service should be register as an external service in the <code class="docutils literal notranslate"><span class="pre">ApplicationMgr</span></code>. Similarly, it’s important to import the <code class="docutils literal notranslate"><span class="pre">ApplicationMgr</span></code> from <code class="docutils literal notranslate"><span class="pre">k4FWCore</span></code>:</p>
@@ -177,15 +177,15 @@ limitations under the License.
 <p>The <code class="docutils literal notranslate"><span class="pre">Input</span></code> property can be used to specify the input. The <code class="docutils literal notranslate"><span class="pre">IOSvc</span></code> will not read any files unless the <code class="docutils literal notranslate"><span class="pre">Input</span></code> property is specified.</p>
 <div class="sd-tab-set docutils">
 <input checked="checked" id="sd-tab-item-0" name="sd-tab-set-0" type="radio">
-</input><label class="sd-tab-label" for="sd-tab-item-0">
-Python</label><div class="sd-tab-content docutils">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">io_svc</span><span class="o">.</span><span class="n">Input</span> <span class="o">=</span> <span class="s2">&quot;input.root&quot;</span>
+<label aria-controls="sd-tab-item-0-content" class="sd-tab-label" for="sd-tab-item-0">
+Python</label><div class="sd-tab-content docutils" id="sd-tab-item-0-content">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">io_svc</span><span class="o">.</span><span class="n">Input</span> <span class="o">=</span> <span class="s2">"input.root"</span>
 </pre></div>
 </div>
 </div>
 <input id="sd-tab-item-1" name="sd-tab-set-0" type="radio">
-</input><label class="sd-tab-label" for="sd-tab-item-1">
-CLI</label><div class="sd-tab-content docutils">
+<label aria-controls="sd-tab-item-1-content" class="sd-tab-label" for="sd-tab-item-1">
+CLI</label><div class="sd-tab-content docutils" id="sd-tab-item-1-content">
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>k4run<span class="w"> </span>&lt;steering-file&gt;<span class="w"> </span>--IOSvc.Input<span class="w"> </span>input.root
 </pre></div>
 </div>
@@ -198,15 +198,15 @@ CLI</label><div class="sd-tab-content docutils">
 <p>A list of filenames can be given in order to specify multiple input files:</p>
 <div class="sd-tab-set docutils">
 <input checked="checked" id="sd-tab-item-2" name="sd-tab-set-1" type="radio">
-</input><label class="sd-tab-label" for="sd-tab-item-2">
-Python</label><div class="sd-tab-content docutils">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">io_svc</span><span class="o">.</span><span class="n">Input</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;input.root&quot;</span><span class="p">,</span> <span class="s2">&quot;another_input.root&quot;</span><span class="p">,</span> <span class="p">]</span>
+<label aria-controls="sd-tab-item-2-content" class="sd-tab-label" for="sd-tab-item-2">
+Python</label><div class="sd-tab-content docutils" id="sd-tab-item-2-content">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">io_svc</span><span class="o">.</span><span class="n">Input</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"input.root"</span><span class="p">,</span> <span class="s2">"another_input.root"</span><span class="p">,</span> <span class="p">]</span>
 </pre></div>
 </div>
 </div>
 <input id="sd-tab-item-3" name="sd-tab-set-1" type="radio">
-</input><label class="sd-tab-label" for="sd-tab-item-3">
-CLI</label><div class="sd-tab-content docutils">
+<label aria-controls="sd-tab-item-3-content" class="sd-tab-label" for="sd-tab-item-3">
+CLI</label><div class="sd-tab-content docutils" id="sd-tab-item-3-content">
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>k4run<span class="w"> </span>&lt;steering-file&gt;<span class="w"> </span>--IOSvc.Input<span class="w"> </span>input.root<span class="w"> </span>another_input.root
 </pre></div>
 </div>
@@ -216,15 +216,15 @@ CLI</label><div class="sd-tab-content docutils">
 <p>The <code class="docutils literal notranslate"><span class="pre">FirstEventEntry</span></code> property of <code class="docutils literal notranslate"><span class="pre">IOSvc</span></code> can be used to start processing from a given frame instead of from the first frame in the input:</p>
 <div class="sd-tab-set docutils">
 <input checked="checked" id="sd-tab-item-4" name="sd-tab-set-2" type="radio">
-</input><label class="sd-tab-label" for="sd-tab-item-4">
-Python</label><div class="sd-tab-content docutils">
+<label aria-controls="sd-tab-item-4-content" class="sd-tab-label" for="sd-tab-item-4">
+Python</label><div class="sd-tab-content docutils" id="sd-tab-item-4-content">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">io_svc</span><span class="o">.</span><span class="n">FirstEventEntry</span> <span class="o">=</span> <span class="mi">7</span> <span class="c1"># default 0</span>
 </pre></div>
 </div>
 </div>
 <input id="sd-tab-item-5" name="sd-tab-set-2" type="radio">
-</input><label class="sd-tab-label" for="sd-tab-item-5">
-CLI</label><div class="sd-tab-content docutils">
+<label aria-controls="sd-tab-item-5-content" class="sd-tab-label" for="sd-tab-item-5">
+CLI</label><div class="sd-tab-content docutils" id="sd-tab-item-5-content">
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>k4run<span class="w"> </span>&lt;steering-file&gt;<span class="w"> </span>--IOSvc.FirstEventEntry<span class="w"> </span><span class="m">7</span>
 </pre></div>
 </div>
@@ -233,16 +233,16 @@ CLI</label><div class="sd-tab-content docutils">
 <p>A list of collection names can be assigned to the <code class="docutils literal notranslate"><span class="pre">CollectionNames</span></code> property of <code class="docutils literal notranslate"><span class="pre">IOSvc</span></code> to limit the number of collections that will be populated. Without specifying the <code class="docutils literal notranslate"><span class="pre">CollectionNames</span></code> all present collections will be read and put into TES.</p>
 <div class="sd-tab-set docutils">
 <input checked="checked" id="sd-tab-item-6" name="sd-tab-set-3" type="radio">
-</input><label class="sd-tab-label" for="sd-tab-item-6">
-Python</label><div class="sd-tab-content docutils">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">io_svc</span><span class="o">.</span><span class="n">CollectionNames</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;MCParticles&quot;</span><span class="p">,</span> <span class="s2">&quot;SimTrackerHits&quot;</span><span class="p">]</span>
+<label aria-controls="sd-tab-item-6-content" class="sd-tab-label" for="sd-tab-item-6">
+Python</label><div class="sd-tab-content docutils" id="sd-tab-item-6-content">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">io_svc</span><span class="o">.</span><span class="n">CollectionNames</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"MCParticles"</span><span class="p">,</span> <span class="s2">"SimTrackerHits"</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
 <input id="sd-tab-item-7" name="sd-tab-set-3" type="radio">
-</input><label class="sd-tab-label" for="sd-tab-item-7">
-CLI</label><div class="sd-tab-content docutils">
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>k4run<span class="w"> </span>&lt;steering-file&gt;<span class="w"> </span>--IOSvc.CollectionNames<span class="w"> </span><span class="s2">&quot;MCParticles&quot;</span><span class="w"> </span><span class="s2">&quot;SimTrackerHits&quot;</span>
+<label aria-controls="sd-tab-item-7-content" class="sd-tab-label" for="sd-tab-item-7">
+CLI</label><div class="sd-tab-content docutils" id="sd-tab-item-7-content">
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>k4run<span class="w"> </span>&lt;steering-file&gt;<span class="w"> </span>--IOSvc.CollectionNames<span class="w"> </span><span class="s2">"MCParticles"</span><span class="w"> </span><span class="s2">"SimTrackerHits"</span>
 </pre></div>
 </div>
 </div>
@@ -253,15 +253,15 @@ CLI</label><div class="sd-tab-content docutils">
 <p>The <code class="docutils literal notranslate"><span class="pre">IOSvc</span></code> supports writing EDM4hep to the ROOT output. The <code class="docutils literal notranslate"><span class="pre">Output</span></code> property can be used to specify the output. The <code class="docutils literal notranslate"><span class="pre">IOSvc</span></code> will not write any files unless the <code class="docutils literal notranslate"><span class="pre">Output</span></code> property is specified.</p>
 <div class="sd-tab-set docutils">
 <input checked="checked" id="sd-tab-item-8" name="sd-tab-set-4" type="radio">
-</input><label class="sd-tab-label" for="sd-tab-item-8">
-Python</label><div class="sd-tab-content docutils">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">io_svc</span><span class="o">.</span><span class="n">Output</span> <span class="o">=</span> <span class="s2">&quot;output.root&quot;</span>
+<label aria-controls="sd-tab-item-8-content" class="sd-tab-label" for="sd-tab-item-8">
+Python</label><div class="sd-tab-content docutils" id="sd-tab-item-8-content">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">io_svc</span><span class="o">.</span><span class="n">Output</span> <span class="o">=</span> <span class="s2">"output.root"</span>
 </pre></div>
 </div>
 </div>
 <input id="sd-tab-item-9" name="sd-tab-set-4" type="radio">
-</input><label class="sd-tab-label" for="sd-tab-item-9">
-CLI</label><div class="sd-tab-content docutils">
+<label aria-controls="sd-tab-item-9-content" class="sd-tab-label" for="sd-tab-item-9">
+CLI</label><div class="sd-tab-content docutils" id="sd-tab-item-9-content">
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>k4run<span class="w"> </span>&lt;steering-file&gt;<span class="w"> </span>--IOSvc.Output<span class="w"> </span>output.root
 </pre></div>
 </div>
@@ -274,16 +274,16 @@ CLI</label><div class="sd-tab-content docutils">
 <p>The writing backend can be specified with the <code class="docutils literal notranslate"><span class="pre">OutputType</span></code> property of <code class="docutils literal notranslate"><span class="pre">IOSvc</span></code>. The allowed values are <code class="docutils literal notranslate"><span class="pre">&quot;ROOT&quot;</span></code> for TTree-based output or <code class="docutils literal notranslate"><span class="pre">&quot;RNTuple&quot;</span></code> for RNTuple-based output. By default the <code class="docutils literal notranslate"><span class="pre">&quot;ROOT&quot;</span></code> backend is used.</p>
 <div class="sd-tab-set docutils">
 <input checked="checked" id="sd-tab-item-10" name="sd-tab-set-5" type="radio">
-</input><label class="sd-tab-label" for="sd-tab-item-10">
-Python</label><div class="sd-tab-content docutils">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">io_svc</span><span class="o">.</span><span class="n">OutputType</span> <span class="o">=</span> <span class="s2">&quot;RNTuple&quot;</span>
+<label aria-controls="sd-tab-item-10-content" class="sd-tab-label" for="sd-tab-item-10">
+Python</label><div class="sd-tab-content docutils" id="sd-tab-item-10-content">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">io_svc</span><span class="o">.</span><span class="n">OutputType</span> <span class="o">=</span> <span class="s2">"RNTuple"</span>
 </pre></div>
 </div>
 </div>
 <input id="sd-tab-item-11" name="sd-tab-set-5" type="radio">
-</input><label class="sd-tab-label" for="sd-tab-item-11">
-CLI</label><div class="sd-tab-content docutils">
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>k4run<span class="w"> </span>&lt;steering-file&gt;<span class="w"> </span>--IOSvc.OutputType<span class="w"> </span><span class="s2">&quot;RNTuple&quot;</span>
+<label aria-controls="sd-tab-item-11-content" class="sd-tab-label" for="sd-tab-item-11">
+CLI</label><div class="sd-tab-content docutils" id="sd-tab-item-11-content">
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>k4run<span class="w"> </span>&lt;steering-file&gt;<span class="w"> </span>--IOSvc.OutputType<span class="w"> </span><span class="s2">"RNTuple"</span>
 </pre></div>
 </div>
 </div>
@@ -291,32 +291,32 @@ CLI</label><div class="sd-tab-content docutils">
 <p>During processing, at the end of each event from the Gaudi event loop the <code class="docutils literal notranslate"><span class="pre">IOSvc</span></code> will write a frame with the collections present in TES. By default all the collections will be written. The <code class="docutils literal notranslate"><span class="pre">outputCommands</span></code> property of <code class="docutils literal notranslate"><span class="pre">IOSvc</span></code> can be used to specify commands to select which collections should be written. For example, the following commands will skip writing all the collections except for the collections named <code class="docutils literal notranslate"><span class="pre">MCParticles1</span></code>, <code class="docutils literal notranslate"><span class="pre">MCParticles2</span></code> and <code class="docutils literal notranslate"><span class="pre">SimTrackerHits</span></code>:</p>
 <div class="sd-tab-set docutils">
 <input checked="checked" id="sd-tab-item-12" name="sd-tab-set-6" type="radio">
-</input><label class="sd-tab-label" for="sd-tab-item-12">
-Python</label><div class="sd-tab-content docutils">
+<label aria-controls="sd-tab-item-12-content" class="sd-tab-label" for="sd-tab-item-12">
+Python</label><div class="sd-tab-content docutils" id="sd-tab-item-12-content">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">io_svc</span><span class="o">.</span><span class="n">outputCommands</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s2">&quot;drop *&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;keep MCParticles1&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;keep MCParticles2&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;keep SimTrackerHits&quot;</span><span class="p">,</span>
+    <span class="s2">"drop *"</span><span class="p">,</span>
+    <span class="s2">"keep MCParticles1"</span><span class="p">,</span>
+    <span class="s2">"keep MCParticles2"</span><span class="p">,</span>
+    <span class="s2">"keep SimTrackerHits"</span><span class="p">,</span>
 <span class="p">]</span>
 </pre></div>
 </div>
 </div>
 <input id="sd-tab-item-13" name="sd-tab-set-6" type="radio">
-</input><label class="sd-tab-label" for="sd-tab-item-13">
-CLI</label><div class="sd-tab-content docutils">
+<label aria-controls="sd-tab-item-13-content" class="sd-tab-label" for="sd-tab-item-13">
+CLI</label><div class="sd-tab-content docutils" id="sd-tab-item-13-content">
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>k4run<span class="w"> </span>&lt;steering-file&gt;<span class="w"> </span>--IOSvc.outputCommands<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span><span class="s2">&quot;drop *&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">    </span><span class="s2">&quot;keep MCParticles1&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">    </span><span class="s2">&quot;keep MCParticles2&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">    </span><span class="s2">&quot;keep SimTrackerHits&quot;</span>
+<span class="w">    </span><span class="s2">"drop *"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="s2">"keep MCParticles1"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="s2">"keep MCParticles2"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="s2">"keep SimTrackerHits"</span>
 </pre></div>
 </div>
 </div>
 </div>
 <p>It is also possible to specify entire datatypes for keeping or dropping via the <code class="docutils literal notranslate"><span class="pre">type</span></code> sub-command, e.g. to keep everything but any collection that is of type <code class="docutils literal notranslate"><span class="pre">edm4hep::SimTrackerHitCollection</span></code> one would do:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">io_svc</span><span class="o">.</span><span class="n">outputCommands</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s2">&quot;drop type edm4hep::SimTrackerHitCollection&quot;</span><span class="p">,</span>
+    <span class="s2">"drop type edm4hep::SimTrackerHitCollection"</span><span class="p">,</span>
 <span class="p">]</span>
 </pre></div>
 </div>
@@ -343,33 +343,33 @@ CLI</label><div class="sd-tab-content docutils">
 from k4FWCore import ApplicationMgr
 from Configurables import SelectorAlg
 
-<span class="gd">-podioevent = k4DataSvc(&quot;EventDataSvc&quot;)</span>
-<span class="gd">-podioevent.input = &quot;example_input.root&quot;</span>
-<span class="gi">+io_svc = IOSvc(&quot;IOSvc&quot;)</span>
-<span class="gi">+io_svc.Input= &quot;example_output.root&quot;</span>
+<span class="gd">-podioevent = k4DataSvc("EventDataSvc")</span>
+<span class="gd">-podioevent.input = "example_input.root"</span>
+<span class="gi">+io_svc = IOSvc("IOSvc")</span>
+<span class="gi">+io_svc.Input= "example_output.root"</span>
 
 <span class="gd">-inp = PodioInput()</span>
-<span class="gd">-inp.collections = [&quot;MCParticles&quot;, &quot;SimTrackerHits&quot;, &quot;TrackerHits&quot;, &quot;Tracks&quot;]</span>
-<span class="gi">+io_svc.CollectionNames = [&quot;MCParticles&quot;, &quot;SimTrackerHits&quot;]</span>
+<span class="gd">-inp.collections = ["MCParticles", "SimTrackerHits", "TrackerHits", "Tracks"]</span>
+<span class="gi">+io_svc.CollectionNames = ["MCParticles", "SimTrackerHits"]</span>
 
 alg = SelectorAlg(
-<span class="w"> </span>   &quot;Selector&quot;,
-<span class="w"> </span>   InputParticles=&quot;MCParticles&quot;,
-<span class="w"> </span>   InputHits=&quot;SimTrackerHits&quot;,
-<span class="w"> </span>   Output=&quot;SelectedParticles&quot;,
+<span class="w"> </span>   "Selector",
+<span class="w"> </span>   InputParticles="MCParticles",
+<span class="w"> </span>   InputHits="SimTrackerHits",
+<span class="w"> </span>   Output="SelectedParticles",
 )
 
 <span class="gd">-oup = PodioOutput()</span>
-<span class="gd">-oup.filename = &quot;example_output.root&quot;</span>
-<span class="gd">-oup.outputCommands = [&quot;drop MCParticles&quot;]</span>
-<span class="gi">+io_svc.Output = &quot;example_output.root&quot;</span>
-<span class="gi">+io_svc.outputCommands = [&quot;drop MCParticles&quot;]</span>
+<span class="gd">-oup.filename = "example_output.root"</span>
+<span class="gd">-oup.outputCommands = ["drop MCParticles"]</span>
+<span class="gi">+io_svc.Output = "example_output.root"</span>
+<span class="gi">+io_svc.outputCommands = ["drop MCParticles"]</span>
 
 
 ApplicationMgr(
 <span class="gd">-    TopAlg=[inp, alg,oup],</span>
 <span class="gi">+    TopAlg=[alg],</span>
-<span class="w"> </span>   EvtSel=&quot;NONE&quot;,
+<span class="w"> </span>   EvtSel="NONE",
 <span class="gd">-    ExtSvc=[podioevent],</span>
 <span class="gi">+    ExtSvc=[io_svc],</span>
 )

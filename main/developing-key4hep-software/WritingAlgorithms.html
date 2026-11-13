@@ -1,29 +1,29 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="../">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Writing Gaudi Algorithms &mdash; Key4hep  documentation</title>
-      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/overview.css" type="text/css" />
-    <link rel="shortcut icon" href="../_static/favicon.png"/>
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=6a604523" />
+      <link rel="stylesheet" type="text/css" href="../_static/overview.css?v=3b42e9a5" />
+
   
-        <script src="../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=5929fcd5"></script>
-        <script src="../_static/doctools.js?v=888ff710"></script>
-        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
-        <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
-        <script src="../_static/copybutton.js?v=f281be69"></script>
-        <script src="../_static/design-tabs.js?v=36754332"></script>
-        <script defer="defer" src="../_static/overview.js?v=96af7809"></script>
+    <link rel="shortcut icon" href="../_static/favicon.png"/>
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+      <script data-sd-tabs-storage-prefix="sphinx-design-tab-id-" src="../_static/design-tabs.js?v=fcb327ea"></script>
+      <script defer="defer" src="../_static/overview.js?v=96af7809"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -145,7 +145,7 @@ algorithms using <code class="docutils literal notranslate"><span class="pre">Ga
 </section>
 </section>
 <section id="gaudi-functional">
-<h1>Gaudi::Functional<a class="headerlink" href="#gaudi-functional" title="Link to this heading"></a></h1>
+<span id="gaudifunctional"></span><h1>Gaudi::Functional<a class="headerlink" href="#gaudi-functional" title="Link to this heading"></a></h1>
 <p>Using <code class="docutils literal notranslate"><span class="pre">Gaudi::Functional</span></code> is the recommended way of creating algorithms. The
 design is simple and at the same time enforces several constraints at
 compile-time, allowing for a quicker development cycle. In particular, we will
@@ -198,9 +198,9 @@ in https://lhcb.github.io/DevelopKit/03a-gaudi/):</p>
 </ul>
 <p>The structure of our class (more precisely structs) will then be, in the general
 case of the transformer:</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;GaudiAlg/Transformer.h&quot;</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">"GaudiAlg/Transformer.h"</span>
 <span class="c1">// Define BaseClass_t</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;k4FWCore/BaseClass.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">"k4FWCore/BaseClass.h"</span>
 
 <span class="k">struct</span><span class="w"> </span><span class="nc">ExampleTransformer</span><span class="w"> </span><span class="k">final</span>
 <span class="w">    </span><span class="o">:</span><span class="w"> </span><span class="n">Gaudi</span><span class="o">::</span><span class="n">Functional</span><span class="o">::</span><span class="n">Transformer</span><span class="o">&lt;</span><span class="n">colltype_out</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">colltype_in</span><span class="o">&amp;</span><span class="p">),</span><span class="w"> </span><span class="n">BaseClass_t</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
@@ -237,8 +237,8 @@ names of our inputs and outputs so they can be found by other algorithms, read
 from a file or saved to a file.</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="n">ExampleTransformer</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">ISvcLocator</span><span class="o">*</span><span class="w"> </span><span class="n">svcLoc</span><span class="p">)</span>
 <span class="w">      </span><span class="o">:</span><span class="w"> </span><span class="n">Transformer</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">svcLoc</span><span class="p">,</span>
-<span class="w">                    </span><span class="n">KeyValue</span><span class="p">(</span><span class="s">&quot;InputCollection&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;MCParticles&quot;</span><span class="p">),</span>
-<span class="w">                    </span><span class="n">KeyValue</span><span class="p">(</span><span class="s">&quot;OutputCollection&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;NewMCParticles&quot;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">KeyValue</span><span class="p">(</span><span class="s">"InputCollection"</span><span class="p">,</span><span class="w"> </span><span class="s">"MCParticles"</span><span class="p">),</span>
+<span class="w">                    </span><span class="n">KeyValue</span><span class="p">(</span><span class="s">"OutputCollection"</span><span class="p">,</span><span class="w"> </span><span class="s">"NewMCParticles"</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
 <span class="w">                    </span><span class="c1">// possibly do something</span>
 <span class="w">                    </span><span class="p">}</span>
 </pre></div>
@@ -252,11 +252,11 @@ together in a <code class="docutils literal notranslate"><span class="pre">std::
 of <code class="docutils literal notranslate"><span class="pre">KeyValue</span></code> with brackets, like</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="n">ExampleMultiTransformer</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">ISvcLocator</span><span class="o">*</span><span class="w"> </span><span class="n">svcLoc</span><span class="p">)</span>
 <span class="w">      </span><span class="o">:</span><span class="w"> </span><span class="n">MultiTransformer</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">svcLoc</span><span class="p">,</span>
-<span class="w">                    </span><span class="n">KeyValue</span><span class="p">(</span><span class="s">&quot;InputCollection&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;MCParticles&quot;</span><span class="p">),</span>
+<span class="w">                    </span><span class="n">KeyValue</span><span class="p">(</span><span class="s">"InputCollection"</span><span class="p">,</span><span class="w"> </span><span class="s">"MCParticles"</span><span class="p">),</span>
 <span class="w">                    </span><span class="p">{</span>
-<span class="w">                    </span><span class="n">KeyValue</span><span class="p">(</span><span class="s">&quot;OutputCollection1&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;NewMCParticles&quot;</span><span class="p">),</span>
-<span class="w">                    </span><span class="n">KeyValue</span><span class="p">(</span><span class="s">&quot;OutputCollection2&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;SimTrackerHits&quot;</span><span class="p">),</span>
-<span class="w">                    </span><span class="n">KeyValue</span><span class="p">(</span><span class="s">&quot;OutputCollection3&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;UsefulCollection&quot;</span><span class="p">),</span>
+<span class="w">                    </span><span class="n">KeyValue</span><span class="p">(</span><span class="s">"OutputCollection1"</span><span class="p">,</span><span class="w"> </span><span class="s">"NewMCParticles"</span><span class="p">),</span>
+<span class="w">                    </span><span class="n">KeyValue</span><span class="p">(</span><span class="s">"OutputCollection2"</span><span class="p">,</span><span class="w"> </span><span class="s">"SimTrackerHits"</span><span class="p">),</span>
+<span class="w">                    </span><span class="n">KeyValue</span><span class="p">(</span><span class="s">"OutputCollection3"</span><span class="p">,</span><span class="w"> </span><span class="s">"UsefulCollection"</span><span class="p">),</span>
 <span class="w">                    </span><span class="p">}</span>
 <span class="w">                    </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">                    </span><span class="c1">// possibly do something</span>
@@ -303,18 +303,18 @@ tell us if we are using an undefined variable, for example.</p>
 <p>Then, create <code class="docutils literal notranslate"><span class="pre">IOSvc</span></code> and configure the input:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">io_svc</span> <span class="o">=</span> <span class="n">IOSvc</span><span class="p">()</span>
 
-<span class="n">io_svc</span><span class="o">.</span><span class="n">Input</span> <span class="o">=</span> <span class="s2">&quot;output_k4test_exampledata_producer.root&quot;</span>
+<span class="n">io_svc</span><span class="o">.</span><span class="n">Input</span> <span class="o">=</span> <span class="s2">"output_k4test_exampledata_producer.root"</span>
 <span class="n">io_svc</span><span class="o">.</span><span class="n">CollectionNames</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s2">&quot;MCParticles&quot;</span><span class="p">,</span>
+    <span class="s2">"MCParticles"</span><span class="p">,</span>
 <span class="p">]</span>
 </pre></div>
 </div>
 <p>We select the name of the input file and which collections we’ll make available
 for the rest of the algorithms.</p>
 <p>For the output:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">io_svc</span><span class="o">.</span><span class="n">Output</span> <span class="o">=</span> <span class="s2">&quot;output_k4test_exampledata_transformer.root&quot;</span>
-<span class="c1"># The collections that we don&#39;t drop will also be present in the output file</span>
-<span class="n">io_svc</span><span class="o">.</span><span class="n">outputCommands</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;drop MCParticles&quot;</span><span class="p">]</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">io_svc</span><span class="o">.</span><span class="n">Output</span> <span class="o">=</span> <span class="s2">"output_k4test_exampledata_transformer.root"</span>
+<span class="c1"># The collections that we don't drop will also be present in the output file</span>
+<span class="n">io_svc</span><span class="o">.</span><span class="n">outputCommands</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"drop MCParticles"</span><span class="p">]</span>
 </pre></div>
 </div>
 <p>we can select which collections we keep in the output file. By default all the collections created during the job will be saved. Check the
@@ -322,9 +322,9 @@ for the rest of the algorithms.</p>
 documentation</a>
 to learn more about <code class="docutils literal notranslate"><span class="pre">IOSvc</span></code>.</p>
 <p>Our algorithm will look like this:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">transformer</span> <span class="o">=</span> <span class="n">ExampleFunctionalTransformer</span><span class="p">(</span><span class="s2">&quot;ExampleFunctionalTransformer&quot;</span><span class="p">,</span>
-                                           <span class="n">InputCollection</span><span class="o">=</span><span class="s2">&quot;MCParticles&quot;</span><span class="p">,</span>
-                                           <span class="n">OutputCollection</span><span class="o">=</span><span class="s2">&quot;NewMCParticles&quot;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">transformer</span> <span class="o">=</span> <span class="n">ExampleFunctionalTransformer</span><span class="p">(</span><span class="s2">"ExampleFunctionalTransformer"</span><span class="p">,</span>
+                                           <span class="n">InputCollection</span><span class="o">=</span><span class="s2">"MCParticles"</span><span class="p">,</span>
+                                           <span class="n">OutputCollection</span><span class="o">=</span><span class="s2">"NewMCParticles"</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>If we have defined <code class="docutils literal notranslate"><span class="pre">Gaudi::Property</span></code>s for our algorithm it is also possible to
@@ -333,7 +333,7 @@ the collections, if they are provided, they are set when creating the python
 object with our algorithm.</p>
 <p>Finally we define what to run:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ApplicationMgr</span><span class="p">(</span><span class="n">TopAlg</span><span class="o">=</span><span class="p">[</span><span class="n">transformer</span><span class="p">],</span>
-               <span class="n">EvtSel</span><span class="o">=</span><span class="s2">&quot;NONE&quot;</span><span class="p">,</span>
+               <span class="n">EvtSel</span><span class="o">=</span><span class="s2">"NONE"</span><span class="p">,</span>
                <span class="n">EvtMax</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
                <span class="n">ExtSvc</span><span class="o">=</span><span class="p">[],</span>
                <span class="n">OutputLevel</span><span class="o">=</span><span class="n">INFO</span><span class="p">,</span>
@@ -391,15 +391,15 @@ and running with multiple threads can cause different results. Even worse than
 that, it’s very possible that there are not any errors or crashes but the
 results are simply wrong from having several threads changing a member at the
 same time, for example.</p>
+</section>
+</section>
 <hr class="footnotes docutils" />
 <aside class="footnote-list brackets">
-<aside class="footnote brackets" id="id2" role="note">
+<aside class="footnote brackets" id="id2" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
 <p>It’s possible to find algorithms written based on GaudiAlg which is going to be removed from future versions of Gaudi. GaudiAlg was substituted by Gaudi::Algorithm, although the recommended way is to use Gaudi::Functional.</p>
 </aside>
 </aside>
-</section>
-</section>
 
 
            </div>

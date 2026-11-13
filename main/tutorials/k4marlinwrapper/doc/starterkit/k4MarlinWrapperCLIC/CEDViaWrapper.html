@@ -1,29 +1,29 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="../../../../../">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Running an Event Display with EDM4hep or LCIO input &mdash; Key4hep  documentation</title>
-      <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../../../../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../../../../../_static/copybutton.css" type="text/css" />
-      <link rel="stylesheet" href="../../../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css" type="text/css" />
-      <link rel="stylesheet" href="../../../../../_static/overview.css" type="text/css" />
-    <link rel="shortcut icon" href="../../../../../_static/favicon.png"/>
-  <!--[if lt IE 9]>
-    <script src="../../../../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/sphinx-design.min.css?v=6a604523" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/overview.css?v=3b42e9a5" />
+
   
-        <script src="../../../../../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../../../../_static/documentation_options.js?v=5929fcd5"></script>
-        <script src="../../../../../_static/doctools.js?v=888ff710"></script>
-        <script src="../../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
-        <script src="../../../../../_static/clipboard.min.js?v=a7894cd8"></script>
-        <script src="../../../../../_static/copybutton.js?v=f281be69"></script>
-        <script src="../../../../../_static/design-tabs.js?v=36754332"></script>
-        <script defer="defer" src="../../../../../_static/overview.js?v=96af7809"></script>
+    <link rel="shortcut icon" href="../../../../../_static/favicon.png"/>
+      <script src="../../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../../../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../../../_static/copybutton.js?v=f281be69"></script>
+      <script data-sd-tabs-storage-prefix="sphinx-design-tab-id-" src="../../../../../_static/design-tabs.js?v=fcb327ea"></script>
+      <script defer="defer" src="../../../../../_static/overview.js?v=96af7809"></script>
     <script src="../../../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../../search.html" />
@@ -191,8 +191,8 @@ k4run<span class="w"> </span><span class="nv">$K4MARLINWRAPPER</span>/examples/e
 <p>The main work is done by the <code class="docutils literal notranslate"><span class="pre">DDCEDViewer</span></code>, which we use via the <code class="docutils literal notranslate"><span class="pre">MarlinProcessorWrapper</span></code>. It is the following part of example <code class="docutils literal notranslate"><span class="pre">event_display.py</span></code>.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">Configurables</span><span class="w"> </span><span class="kn">import</span> <span class="n">MarlinProcessorWrapper</span>
 
-<span class="n">MyCEDViewer</span> <span class="o">=</span> <span class="n">MarlinProcessorWrapper</span><span class="p">(</span><span class="s2">&quot;MyCEDViewer&quot;</span><span class="p">)</span>
-<span class="n">MyCEDViewer</span><span class="o">.</span><span class="n">ProcessorType</span> <span class="o">=</span> <span class="s2">&quot;DDCEDViewer&quot;</span>
+<span class="n">MyCEDViewer</span> <span class="o">=</span> <span class="n">MarlinProcessorWrapper</span><span class="p">(</span><span class="s2">"MyCEDViewer"</span><span class="p">)</span>
+<span class="n">MyCEDViewer</span><span class="o">.</span><span class="n">ProcessorType</span> <span class="o">=</span> <span class="s2">"DDCEDViewer"</span>
 <span class="n">MyCEDViewer</span><span class="o">.</span><span class="n">Parameters</span> <span class="o">=</span> <span class="p">{</span>
                           <span class="c1"># ... lots of CEDViewer configuration ...</span>
                           <span class="p">}</span>
@@ -201,7 +201,7 @@ k4run<span class="w"> </span><span class="nv">$K4MARLINWRAPPER</span>/examples/e
 <p>Some of the more commonly used parameters have self explanatory names.</p>
 </section>
 <section id="troubleshooting-using-other-detectors">
-<h2>Troubleshooting / Using other detectors<a class="headerlink" href="#troubleshooting-using-other-detectors" title="Link to this heading"></a></h2>
+<span id="troubleshooting--using-other-detectors"></span><h2>Troubleshooting / Using other detectors<a class="headerlink" href="#troubleshooting-using-other-detectors" title="Link to this heading"></a></h2>
 <p>When running this for a detector different than CLD, CLIC or ILD (or a derivative of one of them) you might not see anything in the event display.</p>
 <p>If you are not seeing the detector make sure that it has the proper visualisation attributes, e.g. by comparing it to the compact file used above.
 If you are not seeing any hits, tracks etc. from your event, make sure to add their collection names to the <code class="docutils literal notranslate"><span class="pre">DrawInLayer</span></code> list in the <code class="docutils literal notranslate"><span class="pre">DDCEDViewer</span></code> parameters.</p>

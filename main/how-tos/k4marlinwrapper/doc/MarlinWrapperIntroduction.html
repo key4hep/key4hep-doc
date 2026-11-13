@@ -1,29 +1,29 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="../../../">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Wrapping Marlin processors in Gaudi &mdash; Key4hep  documentation</title>
-      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../../../_static/copybutton.css" type="text/css" />
-      <link rel="stylesheet" href="../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css" type="text/css" />
-      <link rel="stylesheet" href="../../../_static/overview.css" type="text/css" />
-    <link rel="shortcut icon" href="../../../_static/favicon.png"/>
-  <!--[if lt IE 9]>
-    <script src="../../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=6a604523" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/overview.css?v=3b42e9a5" />
+
   
-        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
-        <script src="../../../_static/doctools.js?v=888ff710"></script>
-        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
-        <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
-        <script src="../../../_static/copybutton.js?v=f281be69"></script>
-        <script src="../../../_static/design-tabs.js?v=36754332"></script>
-        <script defer="defer" src="../../../_static/overview.js?v=96af7809"></script>
+    <link rel="shortcut icon" href="../../../_static/favicon.png"/>
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+      <script data-sd-tabs-storage-prefix="sphinx-design-tab-id-" src="../../../_static/design-tabs.js?v=fcb327ea"></script>
+      <script defer="defer" src="../../../_static/overview.js?v=96af7809"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
@@ -62,7 +62,7 @@
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="../../README.html">Key4hep How-Tos and Instructions</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../../key4hep-tutorials/edm4hep_analysis/edm4hep_api_intro.html">EDM4hep - The common event data model</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../key4hep-tutorials/edm4hep_analysis/edm4hep_api_intro.html#podio-the-technical-infrastructure-on-which-things-run">podio - The technical infrastructure on which things run</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../key4hep-tutorials/edm4hep_analysis/edm4hep_api_intro.html#podio-introduction">podio - The technical infrastructure on which things run</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../k4fwcore/doc/PodioInputOutput.html">Reading and writing EDM4hep files in Gaudi</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../k4fwcore/doc/k4run-args.html">Adding custom arguments to <code class="docutils literal notranslate"><span class="pre">k4run</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../k4fwcore/doc/k4run-args.html#interactive-python-prompt">Interactive python prompt</a></li>
@@ -193,15 +193,15 @@ parameter of the Marlin processor needs its own entry in this dictionary and
 all parameter values have to be strings as the parsing is done internally.</p></li>
 </ul>
 <p>As a very brief example; The following snippet of a Marlin XML steering file</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="nt">&lt;processor</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;StatMonitorAlg&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;StatusMonitor&quot;</span><span class="nt">&gt;</span>
-<span class="w">    </span><span class="nt">&lt;parameter</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;HowOften&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;int&quot;</span><span class="nt">&gt;</span>1<span class="nt">&lt;/parameter&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="nt">&lt;processor</span><span class="w"> </span><span class="na">name=</span><span class="s">"StatMonitorAlg"</span><span class="w"> </span><span class="na">type=</span><span class="s">"StatusMonitor"</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;parameter</span><span class="w"> </span><span class="na">name=</span><span class="s">"HowOften"</span><span class="w"> </span><span class="na">type=</span><span class="s">"int"</span><span class="nt">&gt;</span>1<span class="nt">&lt;/parameter&gt;</span>
 <span class="w">  </span><span class="nt">&lt;/processor&gt;</span>
 </pre></div>
 </div>
 <p>could be converted to the following snippet of a Gaudi options file</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">StatMonitorAlg</span> <span class="o">=</span> <span class="n">MarlinProcessorWrapper</span><span class="p">(</span><span class="s2">&quot;StatMonitorAlg&quot;</span><span class="p">)</span>
-<span class="n">StatMonitorAlg</span><span class="o">.</span><span class="n">ProcessorType</span> <span class="o">=</span> <span class="s2">&quot;StatusMonitor&quot;</span>
-<span class="n">StatMonitorAlg</span><span class="o">.</span><span class="n">Parameters</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;HowOften&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;1&quot;</span><span class="p">]}</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">StatMonitorAlg</span> <span class="o">=</span> <span class="n">MarlinProcessorWrapper</span><span class="p">(</span><span class="s2">"StatMonitorAlg"</span><span class="p">)</span>
+<span class="n">StatMonitorAlg</span><span class="o">.</span><span class="n">ProcessorType</span> <span class="o">=</span> <span class="s2">"StatusMonitor"</span>
+<span class="n">StatMonitorAlg</span><span class="o">.</span><span class="n">Parameters</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"HowOften"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"1"</span><span class="p">]}</span>
 </pre></div>
 </div>
 <p><strong>Note that wrapped Marlin processors still expect their inputs in LCIO
@@ -217,18 +217,18 @@ way as normal Gaudi algorithms, i.e. in a minimal standalone form</p>
 <span class="kn">from</span><span class="w"> </span><span class="nn">Configurables</span><span class="w"> </span><span class="kn">import</span> <span class="n">LcioEvent</span>
 
 <span class="n">read</span> <span class="o">=</span> <span class="n">LcioEvent</span><span class="p">()</span>
-<span class="n">read</span><span class="o">.</span><span class="n">Files</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;inputfile1.slcio&quot;</span><span class="p">,</span> <span class="s2">&quot;inputfile2.slcio&quot;</span><span class="p">]</span>
+<span class="n">read</span><span class="o">.</span><span class="n">Files</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"inputfile1.slcio"</span><span class="p">,</span> <span class="s2">"inputfile2.slcio"</span><span class="p">]</span>
 </pre></div>
 </div>
 <p>For writing LCIO events from Gaudi, simply use a <code class="docutils literal notranslate"><span class="pre">MarlinProcessorWrapper</span></code> to
 wrap a <code class="docutils literal notranslate"><span class="pre">LCIOOutputProcessor</span></code>, e.g.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">Configurables</span><span class="w"> </span><span class="kn">import</span> <span class="n">MarlinProcessorWrapper</span>
 
-<span class="n">Output_DST</span> <span class="o">=</span> <span class="n">MarlinProcessorWrapper</span><span class="p">(</span><span class="s2">&quot;Output_DST&quot;</span><span class="p">)</span>
-<span class="n">Output_DST</span><span class="o">.</span><span class="n">ProcessorType</span> <span class="o">=</span> <span class="s2">&quot;LCIOOutputProcessor&quot;</span>
+<span class="n">Output_DST</span> <span class="o">=</span> <span class="n">MarlinProcessorWrapper</span><span class="p">(</span><span class="s2">"Output_DST"</span><span class="p">)</span>
+<span class="n">Output_DST</span><span class="o">.</span><span class="n">ProcessorType</span> <span class="o">=</span> <span class="s2">"LCIOOutputProcessor"</span>
 <span class="n">Output_DST</span><span class="o">.</span><span class="n">Parameters</span> <span class="o">=</span> <span class="p">{</span>
-                         <span class="s2">&quot;DropCollectionNames&quot;</span><span class="p">:</span> <span class="p">[],</span>
-                         <span class="s2">&quot;DropCollectionTypes&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;MCParticle&quot;</span><span class="p">,</span> <span class="s2">&quot;LCRelation&quot;</span><span class="p">,</span> <span class="s2">&quot;SimCalorimeterHit&quot;</span><span class="p">],</span>
+                         <span class="s2">"DropCollectionNames"</span><span class="p">:</span> <span class="p">[],</span>
+                         <span class="s2">"DropCollectionTypes"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"MCParticle"</span><span class="p">,</span> <span class="s2">"LCRelation"</span><span class="p">,</span> <span class="s2">"SimCalorimeterHit"</span><span class="p">],</span>
                          <span class="p">}</span>
 </pre></div>
 </div>
@@ -296,10 +296,10 @@ and/or <code class="docutils literal notranslate"><span class="pre">EDM4hep2Lcio
 </ul>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">Configurables</span><span class="w"> </span><span class="kn">import</span> <span class="n">EDM4hep2LcioTool</span><span class="p">,</span> <span class="n">Lcio2EDM4hepTool</span>
 
-<span class="n">edm4hep2LcioConv</span> <span class="o">=</span> <span class="n">EDM4hep2LcioTool</span><span class="p">(</span><span class="s2">&quot;EDM4hep2Lcio&quot;</span><span class="p">)</span>
-<span class="n">lcio2edm4hepConv</span> <span class="o">=</span> <span class="n">Lcio2EDM4hepTool</span><span class="p">(</span><span class="s2">&quot;Lcio2EDM4hep&quot;</span><span class="p">)</span>
+<span class="n">edm4hep2LcioConv</span> <span class="o">=</span> <span class="n">EDM4hep2LcioTool</span><span class="p">(</span><span class="s2">"EDM4hep2Lcio"</span><span class="p">)</span>
+<span class="n">lcio2edm4hepConv</span> <span class="o">=</span> <span class="n">Lcio2EDM4hepTool</span><span class="p">(</span><span class="s2">"Lcio2EDM4hep"</span><span class="p">)</span>
 
-<span class="n">wrappedProcAlg</span> <span class="o">=</span> <span class="n">MarlinProcessorWrapper</span><span class="p">(</span><span class="s2">&quot;ProcessorToWrap&quot;</span><span class="p">)</span>
+<span class="n">wrappedProcAlg</span> <span class="o">=</span> <span class="n">MarlinProcessorWrapper</span><span class="p">(</span><span class="s2">"ProcessorToWrap"</span><span class="p">)</span>
 <span class="n">wrappedProcAlg</span><span class="o">.</span><span class="n">Lcio2EDM4hepTool</span> <span class="o">=</span> <span class="n">lcio2edm4hepConv</span>
 <span class="n">wrappedProcAlg</span><span class="o">.</span><span class="n">EDM4hep2LcioTool</span> <span class="o">=</span> <span class="n">edm4hep2LcioConv</span>
 </pre></div>
@@ -328,16 +328,16 @@ collections, but rather would like to select a subset to convert.</p></li>
 </ul>
 <p>As an example, if you only want to convert the <code class="docutils literal notranslate"><span class="pre">MCParticles</span></code> collection, you
 would configure the tool like this</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">edm4hep2LcioConv</span> <span class="o">=</span> <span class="n">EDM4hep2LcioTool</span><span class="p">(</span><span class="s2">&quot;EDM4hep2Lcio&quot;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">edm4hep2LcioConv</span> <span class="o">=</span> <span class="n">EDM4hep2LcioTool</span><span class="p">(</span><span class="s2">"EDM4hep2Lcio"</span><span class="p">)</span>
 <span class="n">edm4hep2LcioConv</span><span class="o">.</span><span class="n">convertAll</span> <span class="o">=</span> <span class="kc">False</span>
-<span class="n">edm4hep2LcioConv</span><span class="o">.</span><span class="n">collNameMapping</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;MCParticles&quot;</span><span class="p">:</span> <span class="s2">&quot;MCParticles&quot;</span><span class="p">}</span>
+<span class="n">edm4hep2LcioConv</span><span class="o">.</span><span class="n">collNameMapping</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"MCParticles"</span><span class="p">:</span> <span class="s2">"MCParticles"</span><span class="p">}</span>
 </pre></div>
 </div>
 <p>On the other hand if you want to convert all collections, but rename the
 <code class="docutils literal notranslate"><span class="pre">MCParticle</span></code> (LCIO) input collection to the <code class="docutils literal notranslate"><span class="pre">MCParticles</span></code> (EDM4hep) output
 collection in the process, you would configure the tool like so</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">lcio2edm4hepConv</span> <span class="o">=</span> <span class="n">Lcio2EDM4hepTool</span><span class="p">(</span><span class="s2">&quot;Lcio2EDM4hep&quot;</span><span class="p">)</span>
-<span class="n">lcio2edm4hepConv</span><span class="o">.</span><span class="n">collNameMapping</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;MCParticle&quot;</span><span class="p">:</span> <span class="s2">&quot;MCParticles&quot;</span><span class="p">}</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">lcio2edm4hepConv</span> <span class="o">=</span> <span class="n">Lcio2EDM4hepTool</span><span class="p">(</span><span class="s2">"Lcio2EDM4hep"</span><span class="p">)</span>
+<span class="n">lcio2edm4hepConv</span><span class="o">.</span><span class="n">collNameMapping</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"MCParticle"</span><span class="p">:</span> <span class="s2">"MCParticles"</span><span class="p">}</span>
 </pre></div>
 </div>
 <div class="admonition note">
@@ -364,7 +364,7 @@ formats. The basic setup looks like this:</p>
 <span class="kn">from</span><span class="w"> </span><span class="nn">k4MarlinWrapper.io_helpers</span><span class="w"> </span><span class="kn">import</span> <span class="n">IOHandlerHelper</span>
 
 <span class="n">alg_list</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="n">evt_svc</span> <span class="o">=</span> <span class="n">EventDataSvc</span><span class="p">(</span><span class="s2">&quot;EventDataSvc&quot;</span><span class="p">)</span>
+<span class="n">evt_svc</span> <span class="o">=</span> <span class="n">EventDataSvc</span><span class="p">(</span><span class="s2">"EventDataSvc"</span><span class="p">)</span>
 <span class="n">svc_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">evt_svc</span><span class="p">]</span>
 <span class="n">io_svc</span> <span class="o">=</span> <span class="n">IOSvc</span><span class="p">()</span>
 
@@ -379,17 +379,17 @@ in the <code class="docutils literal notranslate"><span class="pre">alg_list</sp
 (<code class="docutils literal notranslate"><span class="pre">MarlinProcessorWrapper</span></code> or native Gaudi algorithms) as usual to the
 <code class="docutils literal notranslate"><span class="pre">alg_list</span></code>.</p>
 <p>For adding EDm4hep output simply do</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">io_handler</span><span class="o">.</span><span class="n">add_edm4hep_writer</span><span class="p">(</span><span class="s2">&quot;output.edm4hep.root&quot;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">io_handler</span><span class="o">.</span><span class="n">add_edm4hep_writer</span><span class="p">(</span><span class="s2">"output.edm4hep.root"</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>which will create an output file <code class="docutils literal notranslate"><span class="pre">output.edm4hep.root</span></code> and use the <code class="docutils literal notranslate"><span class="pre">[&quot;keep</span> <span class="pre">*&quot;]</span></code>
 as <code class="docutils literal notranslate"><span class="pre">IOSvc.outputCommands</span></code>. The latter can be changed by passing a second
 argument.</p>
 <p>For adding LCIO output you need to</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">lcio_writer</span> <span class="o">=</span> <span class="n">io_handler</span><span class="o">.</span><span class="n">add_lcio_writer</span><span class="p">(</span><span class="s2">&quot;LCIOWriter&quot;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">lcio_writer</span> <span class="o">=</span> <span class="n">io_handler</span><span class="o">.</span><span class="n">add_lcio_writer</span><span class="p">(</span><span class="s2">"LCIOWriter"</span><span class="p">)</span>
 <span class="n">lcio_writer</span><span class="o">.</span><span class="n">Parameters</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;LCIOOutputFile&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;output.slcio&quot;</span><span class="p">],</span>
-    <span class="s2">&quot;LCIOWriteMode&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;WRITE_NEW&quot;</span><span class="p">]</span>
+    <span class="s2">"LCIOOutputFile"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"output.slcio"</span><span class="p">],</span>
+    <span class="s2">"LCIOWriteMode"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"WRITE_NEW"</span><span class="p">]</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -401,7 +401,7 @@ added to the chain of algorithms to execute.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">io_handler</span><span class="o">.</span><span class="n">finalize_converters</span><span class="p">()</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">k4FWCore</span><span class="w"> </span><span class="kn">import</span> <span class="n">ApplicationMgr</span>
-<span class="n">ApplicationMgr</span><span class="p">(</span><span class="n">TopAlg</span><span class="o">=</span><span class="n">alg_list</span><span class="p">,</span> <span class="n">EvtSel</span><span class="o">=</span><span class="s2">&quot;NONE&quot;</span><span class="p">,</span> <span class="n">ExtSvc</span><span class="o">=</span><span class="p">[</span><span class="n">evt_svc</span><span class="p">])</span>
+<span class="n">ApplicationMgr</span><span class="p">(</span><span class="n">TopAlg</span><span class="o">=</span><span class="n">alg_list</span><span class="p">,</span> <span class="n">EvtSel</span><span class="o">=</span><span class="s2">"NONE"</span><span class="p">,</span> <span class="n">ExtSvc</span><span class="o">=</span><span class="p">[</span><span class="n">evt_svc</span><span class="p">])</span>
 </pre></div>
 </div>
 </section>
