@@ -51,7 +51,7 @@ jobs:
           gh search repos --owner=ilcsoft --archived=false --visibility=public --json name,url --limit 100 > ilcsoft_repositories.json
           gh search repos --owner=FCALSW --archived=false --visibility=public --json name,url --limit 10 > fcalsw_repositories.json
           gh search repos --owner=LCFIPlus --archived=false --visibility=public --json name,url --limit 10 > lcfiplus_repositories.json
-      - uses: cvmfs-contrib/github-action-cvmfs@72f2a8d366043978d6aebee154bc9ed321c2f2a8 # v5.6
+      - uses: cvmfs-contrib/github-action-cvmfs@d705955b32075b4b0178f3a0160b6fe527483cf8 # v5.7
       - uses: aidasoft/run-lcg-view@b4da52e1c5ccb70a60ad4e7216de0a90664d5849 # v6.0.2
         with:
           container: ubuntu2404
